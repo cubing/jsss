@@ -136,7 +136,7 @@ scramblers["clock"] = (function() {
     };
   }
 
-  var randomSource = Math;
+  var randomSource = undefined;
 
   // If we have a better (P)RNG:
   var setRandomSource = function(src) {
@@ -144,7 +144,10 @@ scramblers["clock"] = (function() {
   }
 
 
-  var initializeFull = function(continuation) {
+  var initializeFull = function(continuation, iniRandomSource) {
+  
+    setRandomSource(iniRandomSource);
+    
     if (continuation) {
       setTimeout(continuation, 0);
     }

@@ -489,8 +489,11 @@ scramblers["333fm"] = scramblers["333ft"] = scramblers["333bf"] = scramblers["33
 
   var initialized = false;
 
-  function init_cube(continuation, statusCallback)
+  function init_cube(continuation, iniRandomSource, statusCallback)
   {
+  
+    setRandomSource(iniRandomSource);
+    
     if (!initialized) {
       var i;
 
@@ -635,7 +638,7 @@ scramblers["333fm"] = scramblers["333ft"] = scramblers["333bf"] = scramblers["33
   /* Methods added by Lucas. */
 
 
-  var randomSource = Math;
+  var randomSource = undefined;
 
   // If we have a better (P)RNG:
   var setRandomSource = function(src) {

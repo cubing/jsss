@@ -512,7 +512,7 @@ scramblers["pyram"] = (function() {
 
   /* Methods added by Lucas. */
 
-  var randomSource = Math;
+  var randomSource = undefined;
 
   // If we have a better (P)RNG:
   var setRandomSource = function(src) {
@@ -529,7 +529,10 @@ scramblers["pyram"] = (function() {
     };
   };
 
-  var initializeFull = function(continuation) {
+  var initializeFull = function(continuation, iniRandomSource) {
+  
+    setRandomSource(iniRandomSource);
+    
     parse();
 
     if (continuation) {

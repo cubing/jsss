@@ -442,7 +442,7 @@ function scramble_NNN(size, seqlen, mult) {
      * Some helper functions.
      */
 
-    var randomSource = Math;
+    var randomSource = undefined;
 
     // If we have a better (P)RNG:
     var setRandomSource = function(src) {
@@ -469,7 +469,9 @@ function scramble_NNN(size, seqlen, mult) {
       }
     };
 
-    var initializeFull = function(continuation) {
+    var initializeFull = function(continuation, iniRandomSource) {
+  
+    setRandomSource(iniRandomSource);
 
       initializeDrawing();
 

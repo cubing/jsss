@@ -236,7 +236,9 @@ scramblers["sq1"] = (function() {
    * If doneCallback is provided then this function will interrupt itself using timeouts.
    * This allows it to call statusCallback and doneCallback, in order to provide status update in a non-blocking UI.
    */
-  var square1SolverInitialize = function(doneCallback, statusCallback) {
+  var square1SolverInitialize = function(doneCallback, iniRandomSource, statusCallback) {
+  
+    setRandomSource(iniRandomSource);
 
     if (square1Solver_initialized) {
       if (doneCallback) {
@@ -821,7 +823,7 @@ scramblers["sq1"] = (function() {
    * Some helper functions.
    */
 
-  var square1SolverRandomSource = Math;
+  var square1SolverRandomSource = undefined;
 
   // If we have a better (P)RNG:
   var setRandomSource = function(src) {
