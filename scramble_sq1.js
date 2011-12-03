@@ -258,7 +258,7 @@ scramblers["sq1"] = (function() {
       initializationCurrentTime = new Date().getTime();
       outString = "" + statusI + ". " + statusString + " [" + (initializationCurrentTime - initializationLastTime) + "ms split, " + (initializationCurrentTime - initializationStartTime) + "ms total]";
       initializationLastTime = initializationCurrentTime;
-      console.log(outString);
+      //console.log(outString);
       if (statusCallback != null) {
         statusCallback(outString);
       }

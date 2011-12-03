@@ -302,30 +302,56 @@ scramblers["333fm"] = scramblers["333ft"] = scramblers["333bf"] = scramblers["33
     }
   }
 
-  function init_trans_tables(continuation, statusCallback)
+  function init_trans_tables(continuation, safeStatusCallback)
   {
-    if (!continuation) {
-      init_trans(0, eo_trans, 2048, set_eo_coord,  get_eo_coord );
-      init_trans(0, co_trans, 2187, set_co_coord,  get_co_coord );
-      init_trans(0, ud1_trans, 495, set_ud1_coord, get_ud1_coord);
+      var iniSteps = [
+      function(){
+        init_trans(0, eo_trans, 2048, set_eo_coord,  get_eo_coord );
+        safeStatusCallback("3x3x3 transition table initialization: Step 1 of 6.");
+      },
+      function(){
+        init_trans(0, co_trans, 2187, set_co_coord,  get_co_coord );
+        safeStatusCallback("3x3x3 transition table initialization: Step 2 of 6.");
+      },
+      function(){
+        init_trans(0, ud1_trans, 495, set_ud1_coord, get_ud1_coord);
+        safeStatusCallback("3x3x3 transition table initialization: Step 3 of 6.");
+      },
+      function(){
+        init_trans2(1, ep_trans, 40320, set_ep_coord,  get_ep_coord, ep);
+        safeStatusCallback("3x3x3 transition table initialization: Step 4 of 6.");
+      },
+      function(){
+        init_trans2(1, cp_trans, 40320, set_cp_coord,  get_cp_coord, cp);
+        safeStatusCallback("3x3x3 transition table initialization: Step 5 of 6.");
+      },
+      function(){
+        init_trans(1, ud2_trans,   24, set_ud2_coord, get_ud2_coord);
+        safeStatusCallback("3x3x3 transition table initialization: Step 6 of 6.");
+      }
+    ];
 
-      init_trans2(1, ep_trans, 40320, set_ep_coord,  get_ep_coord, ep);
-      init_trans2(1, cp_trans, 40320, set_cp_coord,  get_cp_coord, cp);
-      init_trans(1, ud2_trans,   24, set_ud2_coord, get_ud2_coord);
+    if (!continuation) {
+      for (i in iniSteps) {
+        iniSteps[i]();
+      }
     }
     else {
-      var ini1, ini2, ini3, ini4, ini5, ini6;
+      var ini = new Array(iniSteps.length);
 
-      ini1 = function() {statusCallback("Prune table initialization: Step 1 of 6."); init_trans(0, eo_trans, 2048, set_eo_coord,  get_eo_coord ); setTimeout(ini2, 0);};
-      ini2 = function() {statusCallback("Prune table initialization: Step 2 of 6."); init_trans(0, co_trans, 2187, set_co_coord,  get_co_coord ); setTimeout(ini3, 0);};
-      ini3 = function() {statusCallback("Prune table initialization: Step 3 of 6."); init_trans(0, ud1_trans, 495, set_ud1_coord, get_ud1_coord); setTimeout(ini4, 0);};
+      for (var i = iniSteps.length-1; i >= 0; i++) {
+        var next;
+        if (i == iniSteps.length-1) {
+          next = continuation;
+        }
+        else {
+          next = iniSteps[i+1];
+        }
+        ini[i] = function() {iniSteps[i](); setTimeout(continuation, 0);};
+      }
 
-      ini4 = function() {statusCallback("Prune table initialization: Step 4 of 6."); init_trans2(1, ep_trans, 40320, set_ep_coord,  get_ep_coord, ep); setTimeout(ini5, 0);};
-      ini5 = function() {statusCallback("Prune table initialization: Step 5 of 6."); init_trans2(1, cp_trans, 40320, set_cp_coord,  get_cp_coord, cp); setTimeout(ini6, 0);};
-      ini6 = function() {statusCallback("Prune table initialization: Step 6 of 6."); init_trans(1, ud2_trans,   24, set_ud2_coord, get_ud2_coord); setTimeout(continuation, 0);};
-
-      statusCallback("Initializing 3x3x3 transition tables.");
-      setTimeout(ini1); 
+      safeStatusCallback("Initializing 3x3x3 transition tables.");
+      setTimeout(ini[0]); 
     }
   }
 
@@ -361,30 +387,56 @@ scramblers["333fm"] = scramblers["333ft"] = scramblers["333bf"] = scramblers["33
     init_prune(group, 0, prune_table, tran_table, mdepth - 1, 0, 18);
   }
 
-  function init_prune_tables(continuation, statusCallback)
+  function init_prune_tables(continuation, safeStatusCallback)
   {
-    if (!continuation) {
-      init_prune2(0, eo_prune,  eo_trans,  8);
-      init_prune2(0, co_prune,  co_trans,  7);
-      init_prune2(0, ud1_prune, ud1_trans, 6);
+    var iniSteps = [
+      function(){
+        init_prune2(0, eo_prune,  eo_trans,  8);
+        safeStatusCallback("3x3x3 prune table initialization: Step 1 of 6.");
+      },
+      function(){
+        init_prune2(0, co_prune,  co_trans,  7);
+        safeStatusCallback("3x3x3 prune table initialization: Step 2 of 6.");
+      },
+      function(){
+        init_prune2(0, ud1_prune, ud1_trans, 6);
+        safeStatusCallback("3x3x3 prune table initialization: Step 3 of 6.");
+      },
+      function(){
+        init_prune2(1, ep_prune,  ep_trans,  9);
+        safeStatusCallback("3x3x3 prune table initialization: Step 4 of 6.");
+      },
+      function(){
+        init_prune2(1, cp_prune,  cp_trans, 14);
+        safeStatusCallback("3x3x3 prune table initialization: Step 5 of 6.");
+      },
+      function(){
+        init_prune2(1, ud2_prune, ud2_trans, 5);
+        safeStatusCallback("3x3x3 prune table initialization: Step 6 of 6.");
+      }
+    ];
 
-      init_prune2(1, ep_prune,  ep_trans,  9);
-      init_prune2(1, cp_prune,  cp_trans, 14);
-      init_prune2(1, ud2_prune, ud2_trans, 5);
+    if (!continuation) {
+      for (i in iniSteps) {
+        iniSteps[i]();
+      }
     }
     else {
-      var ini1, ini2, ini3, ini4, ini5, ini6;
+      var ini = new Array(iniSteps.length);
 
-      ini1 = function() {statusCallback("Prune table initialization: Step 1 of 6."); init_prune2(0, eo_prune,  eo_trans,  8); setTimeout(ini2, 0);};
-      ini2 = function() {statusCallback("Prune table initialization: Step 2 of 6."); init_prune2(0, co_prune,  co_trans,  7); setTimeout(ini3, 0);};
-      ini3 = function() {statusCallback("Prune table initialization: Step 3 of 6."); init_prune2(0, ud1_prune, ud1_trans, 6); setTimeout(ini4, 0);};
-
-      ini4 = function() {statusCallback("Prune table initialization: Step 4 of 6."); init_prune2(1, ep_prune,  ep_trans,  9); setTimeout(ini5, 0);};
-      ini5 = function() {statusCallback("Prune table initialization: Step 5 of 6."); init_prune2(1, cp_prune,  cp_trans, 14); setTimeout(ini6, 0);};
-      ini6 = function() {statusCallback("Prune table initialization: Step 6 of 6."); init_prune2(1, ud2_prune, ud2_trans, 5); setTimeout(continuation, 0);};
-
-      statusCallback("Initializing 3x3x3 prune tables.");
-      setTimeout(ini1); 
+      for (var i = iniSteps.length-1; i >= 0; i++) {
+        var next;
+        if (i == iniSteps.length-1) {
+          next = continuation;
+        }
+        else {
+          next = iniSteps[i+1];
+        }
+        ini[i] = function() {iniSteps[i](); setTimeout(continuation, 0);};
+      }
+      
+      safeStatusCallback("Initializing 3x3x3 prune tables.");
+      setTimeout(ini[0]); 
     }
   }
 
@@ -491,6 +543,10 @@ scramblers["333fm"] = scramblers["333ft"] = scramblers["333bf"] = scramblers["33
 
   function init_cube(continuation, iniRandomSource, statusCallback)
   {
+      var safeStatusCallback = statusCallback;
+      if (!safeStatusCallback) {
+        safeStatusCallback = function(){};
+      }
   
     setRandomSource(iniRandomSource);
     
@@ -500,17 +556,13 @@ scramblers["333fm"] = scramblers["333ft"] = scramblers["333bf"] = scramblers["33
       ep_coord = cp_coord = ud2_coord = 0;
 
       if (!continuation) {
-        init_trans_tables();
+        init_trans_tables(null, safeStatusCallback);
 
-        init_prune_tables();
+        init_prune_tables(null, safeStatusCallback);
         
         initialized = true;
       }
       else {
-        var safeStatusCallback = statusCallback;
-        if (!safeStatusCallback) {
-          safeStatusCallback = function(){};
-        }
         var ini3 = function() {
           initialized = true;
           safeStatusCallback("Done initializing 3x3x3.");
