@@ -9932,6 +9932,7 @@ function drawSquare(r, cx, cy, w, fillColor) {
   var ini = function(callback, iniRandomSource) {
     if (!initialized) {
       search = new Search_0;
+      init_0();
       setRandomSource(iniRandomSource);
       initialized = true;
     }
@@ -9940,7 +9941,7 @@ function drawSquare(r, cx, cy, w, fillColor) {
 
   var getRandomScramble = function() {
     
-theRandomCube = randomCube_0();
+    theRandomCube = randomCube_0();
 
     var posit = randomCube_0();
     var solution = $solution(search, posit);
