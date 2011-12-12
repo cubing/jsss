@@ -7955,6 +7955,9 @@ function $clinit_Random(){
 }
 
 function $nextInt(this$static, n){
+
+  return Math.floor(randomSource.random() * n);
+
   var bits, val;
   if (n > 0) {
     if ((n & -n) == n) {
