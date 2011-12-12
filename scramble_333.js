@@ -8035,7 +8035,7 @@ function $clinit_CoordCube(){
 function initCParity(){
   var i;
   for (i = 0; i < 2768; ++i) {
-    CParity[i >>> 3] = (CParity[i >>> 3] | get8Parity(($clinit_CubieCube() , CPermS2R)[i]) << (i & 7)) << 24 >> 24;
+    CParity[i >>> 3] = (CParity[i >>> 3] | get8Parity(($clinit_CubieCube() , CPermS2R)[i]) << (i & 7));
   }
 }
 
@@ -8090,7 +8090,7 @@ function initMCEPermPrun(){
     for (j = 1; j < 16; ++j) {
       EdgeMult(CubeSym[SymInv[j]], c, temp_0);
       EdgeMult(temp_0, CubeSym[j], d);
-      binarySearch(EPermS2R, get8Perm(d.ep)) != 65535 && (SymState[i] = (SymState[i] | 1 << j) & 65535);
+      binarySearch(EPermS2R, get8Perm(d.ep)) != 65535 && (SymState[i] = (SymState[i] | 1 << j));
     }
   }
   for (i = 0; i < 66432; ++i) {
@@ -8123,7 +8123,7 @@ function initMCEPermPrun(){
               sym = SymState[edgex];
               if (sym != 0) {
                 for (j = 1; j < 16; ++j) {
-                  sym = sym >> 1 & 65535;
+                  sym = sym >> 1;
                   if ((sym & 1) == 1) {
                     idxx = edgex * 24 + MPermConj[midx][j];
                     if (MEPermPrun[idxx] == -1) {
@@ -8152,13 +8152,13 @@ function initMCEPermPrun(){
     ++depth;
     for (i = 0; i < 66432; ++i) {
       if (MCPermPrun[i] == select) {
-        mid = i % 24 << 24 >> 24;
-        corn = ~~(i / 24) & 65535;
+        mid = i % 24;
+        corn = ~~(i / 24);
         for (m_0 = 0; m_0 < 10; ++m_0) {
           cornx = CPermMove[corn][($clinit_Util() , ud2std)[m_0]];
-          symx = (cornx & 15) << 24 >> 24;
+          symx = (cornx & 15);
           midx = MPermConj[MPermMove[mid][m_0]][symx];
-          cornx = cornx >>> 4 & 65535;
+          cornx = cornx >>> 4;
           idx = cornx * 24 + midx;
           if (MCPermPrun[idx] == check) {
             ++done;
@@ -8171,7 +8171,7 @@ function initMCEPermPrun(){
               sym = SymState[cornx];
               if (sym != 0) {
                 for (j = 1; j < 16; ++j) {
-                  sym = sym >> 1 & 65535;
+                  sym = sym >> 1;
                   if ((sym & 1) == 1) {
                     idxx = cornx * 24 + MPermConj[midx][j ^ ($clinit_CubieCube() , e2c)[j]];
                     if (MCPermPrun[idxx] == -1) {
@@ -8249,7 +8249,7 @@ function initTwistFlipSlicePrun(){
     for (j = 0; j < 8; ++j) {
       CornMultSym(CubeSym[SymInv[j << 1]], c, temp_0);
       CornMultSym(temp_0, CubeSym[j << 1], d);
-      binarySearch(TwistS2R, $getTwist(d)) != 65535 && (SymState[i] = (SymState[i] | 1 << j) << 24 >> 24);
+      binarySearch(TwistS2R, $getTwist(d)) != 65535 && (SymState[i] = (SymState[i] | 1 << j));
     }
   }
   SymStateF = initDim(_3B_classLit, makeCastMap([Q$byte_$1, Q$Serializable]), -1, 336, 1);
@@ -8258,7 +8258,7 @@ function initTwistFlipSlicePrun(){
     for (j = 0; j < 8; ++j) {
       EdgeMult(CubeSym[SymInv[j << 1]], c, temp_0);
       EdgeMult(temp_0, CubeSym[j << 1], d);
-      binarySearch(FlipS2R, $getFlip(d)) != 65535 && (SymStateF[i] = (SymStateF[i] | 1 << j) << 24 >> 24);
+      binarySearch(FlipS2R, $getFlip(d)) != 65535 && (SymStateF[i] = (SymStateF[i] | 1 << j));
     }
   }
   for (i = 0; i < 870912; ++i) {
@@ -8300,7 +8300,7 @@ function initTwistFlipSlicePrun(){
             sym = SymState[twistx];
             symF = SymStateF[flipx];
             if (sym != 1 || symF != 1) {
-              for (j = 0; j < 8; ++j , symF = symF >> 1 << 24 >> 24) {
+              for (j = 0; j < 8; ++j , symF = symF >> 1) {
                 if ((symF & 1) == 1) {
                   fsymxx = Sym8MultInv[fsymx][j];
                   for (k = 0; k < 8; ++k) {
@@ -8352,7 +8352,7 @@ function initTwistFlipSlicePrun(){
               sym = SymState[twistx];
               if (sym != 1) {
                 for (j = 1; j < 8; ++j) {
-                  sym = sym >> 1 << 24 >> 24;
+                  sym = sym >> 1;
                   if ((sym & 1) == 1) {
                     idxx = twistx * 495 + UDSliceConj[slicex][j];
                     if (UDSliceTwistPrun[idxx] == -1) {
@@ -8400,7 +8400,7 @@ function initTwistFlipSlicePrun(){
               sym = SymStateF[flipx];
               if (sym != 1) {
                 for (j = 1; j < 8; ++j) {
-                  sym = sym >> 1 << 24 >> 24;
+                  sym = sym >> 1;
                   if ((sym & 1) == 1) {
                     idxx = flipx * 495 + UDSliceConj[slicex][j];
                     if (UDSliceFlipPrun[idxx] == -1) {
@@ -8437,7 +8437,7 @@ function initUDSliceConj(){
   d = new CubieCube_0;
   for (i = 0; i < 495; ++i) {
     $setUDSlice(c, i);
-    for (j = 0; j < 16; j = j + 2 & 65535) {
+    for (j = 0; j < 16; j = j + 2) {
       EdgeConjugate(c, ($clinit_CubieCube() , SymInv)[j], d);
       UDSliceConj[i][j >>> 1] = $getUDSlice(d);
     }
@@ -8506,14 +8506,14 @@ function $getCPermSym(this$static){
   var idx, k;
   if (EPermR2S != null) {
     idx = EPermR2S[get8Perm(this$static.cp)];
-    idx = (idx ^ e2c[idx & 15]) & 65535;
+    idx = (idx ^ e2c[idx & 15]);
     return idx;
   }
   for (k = 0; k < 16; ++k) {
     CornConjugate(this$static, SymInv[k], this$static.temps);
     idx = binarySearch(CPermS2R, get8Perm(this$static.temps.cp));
     if (idx != 65535) {
-      return (idx << 4 | k) & 65535;
+      return (idx << 4 | k);
     }
   }
   return 0;
@@ -8529,11 +8529,11 @@ function $getDRtoDL(this$static){
     if (4 <= this$static.ep[i] && this$static.ep[i] <= 6) {
       idxA = idxA + ($clinit_Util() , Cnk)[i][r--];
       t = 1 << this$static.ep[i];
-      idxB = idxB + bitCount(mask & t - 1) * fact[2 - r] & 65535;
-      mask = (mask | t) & 65535;
+      idxB = idxB + bitCount(mask & t - 1) * fact[2 - r];
+      mask = (mask | t);
     }
   }
-  return idxA * 6 + idxB & 65535;
+  return idxA * 6 + idxB;
 }
 
 function $getEPermSym(this$static){
@@ -8545,7 +8545,7 @@ function $getEPermSym(this$static){
     EdgeConjugate(this$static, SymInv[k], this$static.temps);
     idx = binarySearch(EPermS2R, get8Perm(this$static.temps.ep));
     if (idx != 65535) {
-      return (idx << 4 | k) & 65535;
+      return (idx << 4 | k);
     }
   }
   return 0;
@@ -8567,7 +8567,7 @@ function $getFlip(this$static){
   var i, idx;
   idx = 0;
   for (i = 0; i < 11; ++i) {
-    idx = (idx | this$static.eo[i] << i) & 65535;
+    idx = (idx | this$static.eo[i] << i);
   }
   return idx;
 }
@@ -8577,11 +8577,11 @@ function $getFlipSym(this$static){
   if (FlipR2S != null) {
     return FlipR2S[$getFlip(this$static)];
   }
-  for (k = 0; k < 16; k = k + 2 & 65535) {
+  for (k = 0; k < 16; k = k + 2) {
     EdgeConjugate(this$static, SymInv[k], this$static.temps);
     idx = binarySearch(FlipS2R, $getFlip(this$static.temps));
     if (idx != 65535) {
-      return (idx << 3 | k >>> 1) & 65535;
+      return (idx << 3 | k >>> 1);
     }
   }
   return 0;
@@ -8596,7 +8596,7 @@ function $getMPerm(this$static){
     idx += bitCount(m_0 & t - 1) * ($clinit_Util() , fact)[11 - i];
     m_0 |= t;
   }
-  return idx << 24 >> 24;
+  return idx;
 }
 
 function $getMid3(this$static){
@@ -8609,19 +8609,19 @@ function $getMid3(this$static){
     if (this$static.ep[i] >= 9) {
       idxA = idxA + ($clinit_Util() , Cnk)[i][r--];
       t = 1 << this$static.ep[i];
-      idxB = idxB + bitCount(mask & t - 1) * fact[2 - r] & 65535;
-      mask = (mask | t) & 65535;
+      idxB = idxB + bitCount(mask & t - 1) * fact[2 - r];
+      mask = (mask | t);
     }
   }
-  return idxA * 6 + idxB & 65535;
+  return idxA * 6 + idxB;
 }
 
 function $getTwist(this$static){
   var i, idx;
   idx = 0;
   for (i = 0; i < 7; ++i) {
-    idx = idx * 3 & 65535;
-    idx = idx + this$static.co[i] & 65535;
+    idx = idx * 3;
+    idx = idx + this$static.co[i];
   }
   return idx;
 }
@@ -8631,12 +8631,12 @@ function $getTwistSym(this$static){
   if (TwistR2S != null) {
     return TwistR2S[$getTwist(this$static)];
   }
-  for (k = 0; k < 16; k = k + 2 & 65535) {
+  for (k = 0; k < 16; k = k + 2) {
     CornConjugate(this$static, SymInv[k], this$static.temps);
     idx = $getTwist(this$static.temps);
     idx = binarySearch(TwistS2R, idx);
     if (idx != 65535) {
-      return (idx << 3 | k >>> 1) & 65535;
+      return (idx << 3 | k >>> 1);
     }
   }
   return 0;
@@ -8662,11 +8662,11 @@ function $getURtoUL(this$static){
     if (this$static.ep[i] <= 2) {
       idxA = idxA + ($clinit_Util() , Cnk)[i][r--];
       t = 1 << this$static.ep[i];
-      idxB = idxB + bitCount(mask & t - 1) * fact[2 - r] & 65535;
-      mask = (mask | t) & 65535;
+      idxB = idxB + bitCount(mask & t - 1) * fact[2 - r];
+      mask = (mask | t);
     }
   }
-  return idxA * 6 + idxB & 65535;
+  return idxA * 6 + idxB;
 }
 
 function $invCubieCube(this$static){
@@ -8680,7 +8680,7 @@ function $invCubieCube(this$static){
   for (corn = 0; corn < 8; ++corn) {
     ori = this$static.co[this$static.temps.cp[corn]];
     this$static.temps.co[corn] = -ori;
-    this$static.temps.co[corn] < 0 && (this$static.temps.co[corn] = this$static.temps.co[corn] + 3 << 24 >> 24);
+    this$static.temps.co[corn] < 0 && (this$static.temps.co[corn] = this$static.temps.co[corn] + 3);
   }
   $copy(this$static, this$static.temps);
 }
@@ -8689,7 +8689,7 @@ function $setEdgePerm(this$static, idx){
   var i, j;
   this$static.ep[11] = 0;
   for (i = 10; i >= 0; --i) {
-    this$static.ep[i] = idx % (12 - i) << 24 >> 24;
+    this$static.ep[i] = idx % (12 - i);
     idx = ~~(idx / (12 - i));
     for (j = i + 1; j < 12; ++j) {
       this$static.ep[j] >= this$static.ep[i] && ++this$static.ep[j];
@@ -8701,8 +8701,8 @@ function $setFlip(this$static, idx){
   var i;
   this$static.eo[11] = bitOdd(idx);
   for (i = 0; i < 11; ++i) {
-    this$static.eo[i] = (idx & 1) << 24 >> 24;
-    idx = idx >>> 1 & 65535;
+    this$static.eo[i] = (idx & 1);
+    idx = idx >>> 1;
   }
 }
 
@@ -8710,8 +8710,8 @@ function $setMPerm(this$static, idx){
   var i, j;
   this$static.ep[11] = 8;
   for (i = 10; i >= 8; --i) {
-    this$static.ep[i] = idx % (12 - i) + 8 << 24 >> 24;
-    idx = ~~(idx / (12 - i)) << 24 >> 24;
+    this$static.ep[i] = idx % (12 - i) + 8;
+    idx = ~~(idx / (12 - i));
     for (j = i + 1; j < 12; ++j) {
       this$static.ep[j] >= this$static.ep[i] && ++this$static.ep[j];
     }
@@ -8721,7 +8721,7 @@ function $setMPerm(this$static, idx){
 function $setMid3(this$static, idxA){
   var edge, i, r;
   edge = ($clinit_Util() , perm3)[idxA % 6];
-  idxA = ~~(idxA / 6) & 65535;
+  idxA = ~~(idxA / 6);
   r = 3;
   for (i = 11; i >= 0; --i) {
     if (idxA >= Cnk[i][r]) {
@@ -8729,7 +8729,7 @@ function $setMid3(this$static, idxA){
       this$static.ep[i] = edge[2 - r];
     }
      else {
-      this$static.ep[i] = 8 - i + r << 24 >> 24;
+      this$static.ep[i] = 8 - i + r;
     }
   }
 }
@@ -8738,10 +8738,10 @@ function $setTwist(this$static, idx){
   var i, twst;
   twst = 0;
   for (i = 6; i >= 0; --i) {
-    twst = twst + (this$static.co[i] = idx % 3 << 24 >> 24) & 65535;
-    idx = ~~(idx / 3) & 65535;
+    twst = twst + (this$static.co[i] = idx % 3);
+    idx = ~~(idx / 3);
   }
-  this$static.co[7] = (15 - twst) % 3 << 24 >> 24;
+  this$static.co[7] = (15 - twst) % 3;
 }
 
 function $setUDSlice(this$static, idx){
@@ -8750,10 +8750,10 @@ function $setUDSlice(this$static, idx){
   for (i = 0; i < 12; ++i) {
     if (idx >= ($clinit_Util() , Cnk)[11 - i][r]) {
       idx = idx - Cnk[11 - i][r--];
-      this$static.ep[i] = 11 - r << 24 >> 24;
+      this$static.ep[i] = 11 - r;
     }
      else {
-      this$static.ep[i] = i + r - 4 << 24 >> 24;
+      this$static.ep[i] = i + r - 4;
     }
   }
 }
@@ -8763,7 +8763,7 @@ function $verify(this$static){
   sum = 0;
   edgeMask = 0;
   for (e = 0; e < 12; ++e)
-    edgeMask = (edgeMask | 1 << this$static.ep[e]) & 65535;
+    edgeMask = (edgeMask | 1 << this$static.ep[e]);
   if (edgeMask != 4095)
     return -2;
   for (i = 0; i < 12; ++i)
@@ -8772,7 +8772,7 @@ function $verify(this$static){
     return -3;
   cornMask = 0;
   for (c = 0; c < 8; ++c)
-    cornMask = (cornMask | 1 << this$static.cp[c]) & 65535;
+    cornMask = (cornMask | 1 << this$static.cp[c]);
   if (cornMask != 255)
     return -4;
   sum = 0;
@@ -8795,7 +8795,7 @@ function CornMult(a, b, prod){
   var corn;
   for (corn = 0; corn < 8; ++corn) {
     prod.cp[corn] = a.cp[b.cp[corn]];
-    prod.co[corn] = (a.co[b.cp[corn]] + b.co[corn]) % 3 << 24 >> 24;
+    prod.co[corn] = (a.co[b.cp[corn]] + b.co[corn]) % 3;
   }
 }
 
@@ -8807,9 +8807,9 @@ function CornMultSym(a, b, prod){
     oriA = a.co[b.cp[corn]];
     oriB = b.co[corn];
     ori = oriA;
-    ori = ori + (oriA < 3?oriB:3 - oriB) << 24 >> 24;
-    ori = ori % 3 << 24 >> 24;
-    oriA < 3 ^ oriB < 3 && (ori = ori + 3 << 24 >> 24);
+    ori = ori + (oriA < 3?oriB:3 - oriB);
+    ori = ori % 3;
+    oriA < 3 ^ oriB < 3 && (ori = ori + 3);
     prod.co[corn] = ori;
   }
 }
@@ -8835,10 +8835,10 @@ function CubieCube_1(cp, co, ep, eo){
 function CubieCube_2(cperm, twist, eperm, flip){
   $clinit_CubieCube();
   $$init(this);
-  set8Perm(this.cp, cperm & 65535);
-  $setTwist(this, twist & 65535);
+  set8Perm(this.cp, cperm);
+  $setTwist(this, twist);
   $setEdgePerm(this, eperm);
-  $setFlip(this, flip & 65535);
+  $setFlip(this, flip);
 }
 
 function CubieCube_3(c){
@@ -8856,7 +8856,7 @@ function EdgeMult(a, b, prod){
   var ed;
   for (ed = 0; ed < 12; ++ed) {
     prod.ep[ed] = a.ep[b.ep[ed]];
-    prod.eo[ed] = (b.eo[ed] ^ a.eo[b.ep[ed]]) << 24 >> 24;
+    prod.eo[ed] = (b.eo[ed] ^ a.eo[b.ep[ed]]);
   }
 }
 
@@ -8870,7 +8870,7 @@ function get8Perm(arr){
     idx = (8 - i) * idx + (val >> v & 7);
     val -= 286331152 << v;
   }
-  return idx & 65535;
+  return idx;
 }
 
 function initMove(){
@@ -8958,7 +8958,7 @@ function initSym(){
   }
   for (j = 0; j < 8; ++j) {
     for (s = 0; s < 8; ++s) {
-      Sym8Mult[s][j] = SymMult[s << 1][j << 1] >>> 1 << 24 >> 24;
+      Sym8Mult[s][j] = SymMult[s << 1][j << 1] >>> 1;
     }
   }
   for (j = 0; j < 18; ++j) {
@@ -8984,12 +8984,12 @@ function initSym2Raw(){
   for (i = 0; i < 2048; ++i) {
     if ((occ[i >>> 5] & 1 << (i & 31)) == 0) {
       $setFlip(c, i);
-      for (s = 0; s < 16; s = s + 2 << 24 >> 24) {
+      for (s = 0; s < 16; s = s + 2) {
         EdgeMult(CubeSym[SymInv[s]], c, temp_0);
         EdgeMult(temp_0, CubeSym[s], d);
         idx = $getFlip(d);
         occ[idx >>> 5] |= 1 << (idx & 31);
-        FlipR2S[idx] = (count << 3 | s >>> 1) & 65535;
+        FlipR2S[idx] = (count << 3 | s >>> 1);
       }
       FlipS2R[count++] = i;
     }
@@ -9000,12 +9000,12 @@ function initSym2Raw(){
   for (i = 0; i < 2187; ++i) {
     if ((occ[i >>> 5] & 1 << (i & 31)) == 0) {
       $setTwist(c, i);
-      for (s = 0; s < 16; s = s + 2 << 24 >> 24) {
+      for (s = 0; s < 16; s = s + 2) {
         CornMultSym(CubeSym[SymInv[s]], c, temp_0);
         CornMultSym(temp_0, CubeSym[s], d);
         idx = $getTwist(d);
         occ[idx >>> 5] |= 1 << (idx & 31);
-        TwistR2S[idx] = (count << 3 | s >>> 1) & 65535;
+        TwistR2S[idx] = (count << 3 | s >>> 1);
       }
       TwistS2R[count++] = i;
     }
@@ -9020,7 +9020,7 @@ function initSym2Raw(){
   for (i = 0; i < 56; ++i) {
     count = 0;
     for (j = 0; j < 56; ++j) {
-      neq(and(mask[i], shl(P1_longLit, j)), P0_longLit) && (merge[i][j] = count++ << 24 >> 24);
+      neq(and(mask[i], shl(P1_longLit, j)), P0_longLit) && (merge[i][j] = count++);
     }
   }
   count = 0;
@@ -9036,9 +9036,9 @@ function initSym2Raw(){
         occ[idx >>> 5] |= 1 << (idx & 31);
         a = $getURtoUL(d);
         b = $getDRtoDL(d);
-        m_0 = merge[~~(a / 6)][~~(b / 6)] * 4032 + a * 12 + b % 6 * 2 + get8Parity(idx) & 65535;
-        MtoEPerm[m_0] = (count << 4 | s) & 65535;
-        EPermR2S[idx] = (count << 4 | s) & 65535;
+        m_0 = merge[~~(a / 6)][~~(b / 6)] * 4032 + a * 12 + b % 6 * 2 + get8Parity(idx);
+        MtoEPerm[m_0] = (count << 4 | s);
+        EPermR2S[idx] = (count << 4 | s);
       }
       EPermS2R[count++] = i;
     }
@@ -9052,13 +9052,13 @@ function set8Perm(arr, idx){
   for (i = 0; i < 7; ++i) {
     p = ($clinit_Util() , fact)[7 - i];
     v = ~~(idx / p);
-    idx = idx - v * p & 65535;
+    idx = idx - v * p;
     v <<= 2;
-    arr[i] = (val >> v & 7) << 24 >> 24;
+    arr[i] = (val >> v & 7);
     m_0 = (1 << v) - 1;
     val = (val & m_0) + (val >> 4 & ~m_0);
   }
-  arr[7] = val << 24 >> 24;
+  arr[7] = val;
 }
 
 function CubieCube(){
@@ -9446,7 +9446,7 @@ function randomCube_0(){
   gen = new Random_0;
   do {
     eperm = $nextInt(gen, 479001600);
-    cperm = $nextInt(gen, 40320) & 65535;
+    cperm = $nextInt(gen, 40320);
   }
    while ((get8Parity(cperm) ^ get12Parity(eperm)) != 0);
   return toFaceCube(new CubieCube_2(cperm, $nextInt(gen, 2187), eperm, $nextInt(gen, 2048)));
@@ -9488,7 +9488,7 @@ function $clinit_Util(){
     Cnk[i][0] = 1;
     Cnk[i][i] = 1;
     for (j = 1; j < i; ++j) {
-      Cnk[i][j] = Cnk[i - 1][j - 1] + Cnk[i - 1][j] & 65535;
+      Cnk[i][j] = Cnk[i - 1][j - 1] + Cnk[i - 1][j];
     }
   }
   for (i = 0; i < 24; ++i) {
@@ -9513,7 +9513,7 @@ function binarySearch(arr, key){
         r = mid - 1;
       }
        else {
-        return mid & 65535;
+        return mid;
       }
     }
   }
@@ -9529,11 +9529,11 @@ function bitCount(i){
 
 function bitOdd(i){
   $clinit_Util();
-  i = (i ^ i >>> 1) & 65535;
-  i = (i ^ i >>> 2) & 65535;
-  i = (i ^ i >>> 4) & 65535;
-  i = (i ^ i >>> 8) & 65535;
-  return (i & 1) << 24 >> 24;
+  i = (i ^ i >>> 1);
+  i = (i ^ i >>> 2);
+  i = (i ^ i >>> 4);
+  i = (i ^ i >>> 8);
+  return (i & 1);
 }
 
 function get12Parity(idx){
@@ -9541,10 +9541,10 @@ function get12Parity(idx){
   var i, p;
   p = 0;
   for (i = 10; i >= 0; --i) {
-    p = p + idx % (12 - i) << 24 >> 24;
+    p = p + idx % (12 - i);
     idx = ~~(idx / (12 - i));
   }
-  p = (p & 1) << 24 >> 24;
+  p = (p & 1);
   return p;
 }
 
@@ -9552,10 +9552,10 @@ function get4Parity(idx){
   var i, p;
   p = 0;
   for (i = 2; i >= 0; --i) {
-    p = p + idx % (4 - i) << 24 >> 24;
-    idx = ~~(idx / (4 - i)) << 24 >> 24;
+    p = p + idx % (4 - i);
+    idx = ~~(idx / (4 - i));
   }
-  p = (p & 1) << 24 >> 24;
+  p = (p & 1);
   return p;
 }
 
@@ -9564,10 +9564,10 @@ function get8Parity(idx){
   var i, p;
   p = 0;
   for (i = 6; i >= 0; --i) {
-    p = p + idx % (8 - i) << 24 >> 24;
-    idx = ~~(idx / (8 - i)) & 65535;
+    p = p + idx % (8 - i);
+    idx = ~~(idx / (8 - i));
   }
-  p = (p & 1) << 24 >> 24;
+  p = (p & 1);
   return p;
 }
 
@@ -9588,7 +9588,7 @@ function toCubieCube(f){
     for (j = 0; j < 8; ++j) {
       if (col1 == cornerColor[j][1] && col2 == cornerColor[j][2]) {
         ccRet.cp[i] = j;
-        ccRet.co[i] = ori % 3 << 24 >> 24;
+        ccRet.co[i] = ori % 3;
         break;
       }
     }
