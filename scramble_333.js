@@ -9830,7 +9830,6 @@ if ($wnd.gwt333) $wnd.gwt333.onScriptLoad();
 
   // If we have a better (P)RNG:
   var setRandomSource = function(src) {
-    console.error("WARNING. The random source for this 3x3x3 scrambler cannot currently be set because it is obfuscated Javascript.");
     randomSource = src;
   }
 
