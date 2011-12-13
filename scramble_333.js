@@ -9416,31 +9416,41 @@ _.urfidx = 0;
 _.useSeparator = false;
 _.valid1 = 0;
 _.valid2 = 0;
-function init_0(){
+function init_0(safeStatusCallback){
   if (inited)
     return;
+  safeStatusCallback("[0/9] Initializing Cubie Cube...");
   $clinit_CubieCube();
   FlipR2S = initDim(_3C_classLit, makeCastMap([Q$char_$1, Q$Serializable]), -1, 2048, 1);
   TwistR2S = initDim(_3C_classLit, makeCastMap([Q$char_$1, Q$Serializable]), -1, 2187, 1);
   EPermR2S = initDim(_3C_classLit, makeCastMap([Q$char_$1, Q$Serializable]), -1, 40320, 1);
+  safeStatusCallback("[1/9] Initializing Sym2Raw...");
   initSym2Raw();
+  safeStatusCallback("[2/9] Initializing CoordCube...");
   $clinit_CoordCube();
+  safeStatusCallback("[3/9] Initializing Perm, Flip, and Twist Moves...");
   initCPermMove();
   initEPermMove();
   initFlipMove();
   initTwistMove();
+  safeStatusCallback("[4/9] Initializing UDSlice...");
   EPermR2S = null;
   FlipR2S = null;
   TwistR2S = null;
   initUDSliceMove();
   initUDSliceConj();
+  safeStatusCallback("[5/9] Initializing Mid3Move...");
   initMid3Move();
   initMid32MPerm();
   initCParity();
+  safeStatusCallback("[6/9] Initializing Perms...");
   initMPermMove();
   initMPermConj();
+  safeStatusCallback("[7/9] Initializing TwistFlipSlicePrun...");
   initTwistFlipSlicePrun();
+  safeStatusCallback("[8/9] Initializing MCEPermPrum...");
   initMCEPermPrun();
+  safeStatusCallback("[9/9] Done initializing 3x3x3...");
   inited = true;
 }
 
@@ -9931,10 +9941,15 @@ function drawSquare(r, cx, cy, w, fillColor) {
 
   var initialized = false;
 
-  var ini = function(callback, iniRandomSource) {
+  var ini = function(callback, iniRandomSource, statusCallback) {
+
+    if (typeof statusCallback !== "function") {
+      statusCallback = function() {};
+    }
+
     if (!initialized) {
       search = new Search_0;
-      init_0();
+      init_0(statusCallback);
       setRandomSource(iniRandomSource);
       initialized = true;
     }
