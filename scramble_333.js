@@ -9973,7 +9973,7 @@ function drawSquare(r, cx, cy, w, fillColor) {
 
   return {
     /* mark2 interface */
-    version: "November 22, 2011",
+    version: "December 14, 2011",
     initialize: ini,
     setRandomSource: setRandomSource,
     getRandomScramble: getRandomScramble,
