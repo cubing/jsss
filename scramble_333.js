@@ -4,8 +4,9 @@ scramble_333.js
 
 3x3x3 Solver / Scramble Generator in Javascript.
 
-Code taken from QBX by Evan Gates.
-Ported by Lucas Garron, November 23, 2011.
+The core 3x3x3 code is from a min2phase solver by Shuang Chen.
+Compiled to Javascript using GWT.
+(There may be a lot of redundant code right now, but it's still really fast.)
 
  */
 
