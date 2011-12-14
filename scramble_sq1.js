@@ -560,23 +560,38 @@ scramblers["sq1"] = (function() {
   };
 
   var square1SolverSolutionEnsureMiddleParity = function(solution, middleIsSolved) {
+
     var simplifiedSolution = square1SolverNormalizeSolution(solution);
     var location60 = -1;
+    var location06 = -1;
     var locationM0 = -1;
+    var location0N = -1;
     var locationMN = -1;
-    //console.log(square1SolverSolutionToString(solution).join(""));
+
+    //console.log(square1SolverSolutionToString(simplifiedSolution).join(""));
+
     for (i = 0; i < simplifiedSolution.length - 2; i+=3) {
       if (!((0 <= simplifiedSolution[i] < 11 || simplifiedSolution[i] == -1) && (11 <= simplifiedSolution[i+2] < 22 || simplifiedSolution[i+2] == -1) && (simplifiedSolution[i+2] == 22))) {
         console.error("Improperly simplified (see indices " + i + " to " + (i+2) + "):" + simplifiedSolution); // Sanity check.
       }
-      if (simplifiedSolution[i+1] != 0) {
-        locationMN = i;
+      var top = simplifiedSolution[i];
+      var bot = simplifiedSolution[i+1];
+
+      // We allow later mateches to override earlier ones to prefer matches in the cubic phase. This helps make for easier scrambles.
+      if (top == 5 && bot == -1) { // 5 is (6, 0)
+        location60 = i;
       }
-      else if (simplifiedSolution[i] != 6) {
+      else if (top == -1 && bot == 16) { // 16 is (0, 6)
+        location06 = i;
+      }
+      else if (bot == -1) {
         locationM0 = i;
       }
+      else if (top == -1) {
+        location0N = i;
+      }
       else {
-        location60 = i;
+        locationMN = i;
       }
     }
     if (!((0 <= simplifiedSolution[simplifiedSolution.length - 1] < 11 || simplifiedSolution[simplifiedSolution.length - 2] == -1) && (11 <= simplifiedSolution[simplifiedSolution.length - 2] < 22 || simplifiedSolution[simplifiedSolution.length - 1] == -1))) {
@@ -589,16 +604,24 @@ scramblers["sq1"] = (function() {
       return solution;
     }
 
-    var location = location60;
-    if (location == -1) {
-      location = locationM0;
+
+    if (location60 != -1) {
+      simplifiedSolution.splice(location60 + 2, 1, 5,22,5,22,5);
     }
-    if (location == -1) {
-      location = locationMN;
+    else if (location06 != -1) {
+      simplifiedSolution.splice(location06 + 2, 1, 16,22,16,22,16);
+    }
+    else if (locationM0 != -1) {
+      simplifiedSolution.splice(locationM0 + 2, 1, 5,22,5,22,5);
+    }
+    else if (location0N != -1) {
+      simplifiedSolution.splice(location0N + 2, 1, 16,22,16,22,16);
+    }
+    else {
+      simplifiedSolution.splice(locationMN + 2, 1, 5,22,5,22,5);
     }
 
-    //console.log("Reversing middle parity at location " + i + ".");
-    simplifiedSolution.splice(location+2, 1, 5,22,5,22,5);
+    //console.log([location60, location06, locationM0, location0N, locationMN]);
     simplifiedSolution = square1SolverNormalizeSolution(simplifiedSolution);
     //console.log(square1SolverSolutionToString(simplifiedSolution).join(""));
     return simplifiedSolution;
