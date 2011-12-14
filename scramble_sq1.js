@@ -1085,7 +1085,7 @@ function drawSq(stickers, middleIsSolved, shapes, parentElement, colorString) {
     var middleIsSolved = state["middleIsSolved"];
 
     var posit = [];
-    var map = [8,9,10, 11,0,1, 2,3,4, 5,6,7, 13,12,23, 22,21,20, 19,18,17, 16,15,14];
+    var map = [8,9,10, 11,0,1, 2,3,4, 5,6,7, 19,18,17, 16,15,14, 13,12,23, 22,21,20];
     for (j in map) {
       posit.push(permutation[map[j]]);
     }
