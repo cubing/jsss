@@ -1,6 +1,6 @@
 
 
-if (typeof scramblers == "undefined") {
+if (typeof scramblers === "undefined") {
   var scramblers = {};
 }
 
@@ -14,7 +14,7 @@ scramblers["clock"] = (function() {
     prtpin(Math.floor(Math.random()*2));
   }
   function prtpin(p){
-    document.write(p==0?"U":"d");
+    document.write(p===0?"U":"d");
   }
   */
   
@@ -75,13 +75,13 @@ scramblers["clock"] = (function() {
 
   	function turn_name(turn, amount) {
   		var suffix;
-  		if (amount == 0) {
+  		if (amount === 0) {
   			return "&nbsp;&nbsp;&nbsp;";
   		}
-  		else if (amount == 1) {
+  		else if (amount === 1) {
   			suffix = "</span>&nbsp;&nbsp;";
   		}
-  		else if (amount == -1) {
+  		else if (amount === -1) {
   			suffix = "'</span>&nbsp;&nbsp;";
   		}
   		else if (amount >= 0) {
@@ -121,12 +121,12 @@ scramblers["clock"] = (function() {
     /*
     for( i=0; i<9; i++){
       prt(posit[i]);
-      if( (i%3)==2 ) scramble += "\n";
+      if( (i%3)===2 ) scramble += "\n";
     }
     scramble += "Back:\n";
     for( i=0; i<9; i++){
       prt(posit[i+9]);
-      if( (i%3)==2 ) scramble += "\n";
+      if( (i%3)===2 ) scramble += "\n";
     }
     */
 
@@ -157,7 +157,7 @@ scramblers["clock"] = (function() {
   	
     var pathString = "";
     for (var i = 0; i < arrx.length; i++) {
-      pathString += ((i==0) ? "M" : "L") + arrx[i] + "," + arry[i];
+      pathString += ((i===0) ? "M" : "L") + arrx[i] + "," + arry[i];
     }
     pathString += "z";
     
@@ -196,7 +196,7 @@ scramblers["clock"] = (function() {
 
   	var pegRadius = 6;
   	var color;
-  	if (pegValue == 1) {
+  	if (pegValue === 1) {
   		color = "#FF0";
   	}
   	else {

@@ -9,7 +9,7 @@ Ported by Lucas Garron, November 23, 2011.
 
  */
 
-if (typeof scramblers == "undefined") {
+if (typeof scramblers === "undefined") {
   var scramblers = {};
 }
 
@@ -56,7 +56,7 @@ scramblers["222"] = (function() {
     var perm_sel = Array(); 
     for(var i = 0; i < 7; i++){
       var ch = Math.floor(randomSource.random() * (7 - i));
-      ch = perm_src[ch] == fixed ? (ch + 1) % (8 - i) : ch;
+      ch = perm_src[ch] === fixed ? (ch + 1) % (8 - i) : ch;
       perm_sel[i >= fixed ? i + 1 : i] = perm_src[ch];
       perm_src[ch] = perm_src[7 - i];
     }
@@ -64,8 +64,8 @@ scramblers["222"] = (function() {
     // Generate random orientation
     var total = 0;
     var ori_sel = Array();
-    var i = fixed == 0 ? 1 : 0;
-    for(; i < 7; i = i == fixed - 1 ? i + 2 : i + 1){
+    var i = fixed === 0 ? 1 : 0;
+    for(; i < 7; i = i === fixed - 1 ? i + 2 : i + 1){
       ori_sel[i] = Math.floor(randomSource.random() * 3);
       total += ori_sel[i];
     }
@@ -141,7 +141,7 @@ scramblers["222"] = (function() {
       var opp=new Array();
       for(a=0;a<6;a++){
           for(b=0;b<6;b++){
-              if(a!=b && adj[a][b]+adj[b][a]==0) { opp[a]=b; opp[b]=a; }
+              if(a!=b && adj[a][b]+adj[b][a]===0) { opp[a]=b; opp[b]=a; }
           }
       }
       //Each piece is determined by which of each pair of opposite colours it uses.
@@ -151,13 +151,13 @@ scramblers["222"] = (function() {
       for(var d=0; d<7; d++){
           var p=0;
           for(b=a;b<a+6;b+=2){
-              if(posit[piece[b]]==posit[piece[42]]) p+=4;
-              if(posit[piece[b]]==posit[piece[44]]) p+=1;
-              if(posit[piece[b]]==posit[piece[46]]) p+=2;
+              if(posit[piece[b]]===posit[piece[42]]) p+=4;
+              if(posit[piece[b]]===posit[piece[44]]) p+=1;
+              if(posit[piece[b]]===posit[piece[46]]) p+=2;
           }
           ps[d]=p;
-          if(posit[piece[a]]==posit[piece[42]] || posit[piece[a]]==opp[posit[piece[42]]]) tws[d]=0;
-          else if(posit[piece[a+2]]==posit[piece[42]] || posit[piece[a+2]]==opp[posit[piece[42]]]) tws[d]=1;
+          if(posit[piece[a]]===posit[piece[42]] || posit[piece[a]]===opp[posit[piece[42]]]) tws[d]=0;
+          else if(posit[piece[a+2]]===posit[piece[42]] || posit[piece[a+2]]===opp[posit[piece[42]]]) tws[d]=1;
           else tws[d]=2;
           a+=6;
       }
@@ -166,7 +166,7 @@ scramblers["222"] = (function() {
       for(var a=0;a<7;a++){
           var b=0;
           for(var c=0;c<7;c++){
-              if(ps[c]==a)break;
+              if(ps[c]===a)break;
               if(ps[c]>a)b++;
           }
           q=q*(7-a)+b;
@@ -189,8 +189,8 @@ scramblers["222"] = (function() {
   }
   function search(d,q,t,l,lm){
       //searches for solution, from position q|t, in l moves exactly. last move was lm, current depth=d
-      if(l==0){
-          if(q==0 && t==0){
+      if(l===0){
+          if(q===0 && t===0){
               return(true);
           }
       }else{
@@ -230,12 +230,12 @@ scramblers["222"] = (function() {
       for(var l=0;l<=6;l++){
           var n=0;
           for(var p=0;p<5040;p++){
-              if(perm[p]==l){
+              if(perm[p]===l){
                   for(var m=0;m<3;m++){
                       var q=p;
                       for(var c=0;c<3;c++){
                           var q=permmv[q][m];
-                          if(perm[q]==-1) { perm[q]=l+1; n++; }
+                          if(perm[q]===-1) { perm[q]=l+1; n++; }
                       }
                   }
               }
@@ -255,12 +255,12 @@ scramblers["222"] = (function() {
       for(var l=0;l<=5;l++){
           var n=0;
           for(var p=0;p<729;p++){
-              if(twst[p]==l){
+              if(twst[p]===l){
                   for(var m=0;m<3;m++){
                       var q=p;
                       for(var c=0;c<3;c++){
                           var q=twstmv[q][m];
-                          if(twst[q]==-1) { twst[q]=l+1; n++; }
+                          if(twst[q]===-1) { twst[q]=l+1; n++; }
                       }
                   }
               }
@@ -281,13 +281,13 @@ scramblers["222"] = (function() {
           ps[b]=7-a;
       }
       //perform move on array
-      if(m==0){
+      if(m===0){
           //U
           c=ps[0];ps[0]=ps[1];ps[1]=ps[3];ps[3]=ps[2];ps[2]=c;
-      }else if(m==1){
+      }else if(m===1){
           //R
           c=ps[0];ps[0]=ps[4];ps[4]=ps[5];ps[5]=ps[1];ps[1]=c;
-      }else if(m==2){
+      }else if(m===2){
           //F
           c=ps[0];ps[0]=ps[2];ps[2]=ps[6];ps[6]=ps[4];ps[4]=c;
       }
@@ -296,7 +296,7 @@ scramblers["222"] = (function() {
       for(a=0;a<7;a++){
           b=0;
           for(c=0;c<7;c++){
-              if(ps[c]==a)break;
+              if(ps[c]===a)break;
               if(ps[c]>a)b++;
           }
           q=q*(7-a)+b;
@@ -319,14 +319,14 @@ scramblers["222"] = (function() {
       }
       ps[6]=d;
       //perform move on array
-      if(m==0){
+      if(m===0){
           //U
           c=ps[0];ps[0]=ps[1];ps[1]=ps[3];ps[3]=ps[2];ps[2]=c;
-      }else if(m==1){
+      }else if(m===1){
           //R
           c=ps[0];ps[0]=ps[4];ps[4]=ps[5];ps[5]=ps[1];ps[1]=c;
           ps[0]+=2; ps[1]++; ps[5]+=2; ps[4]++;
-      }else if(m==2){
+      }else if(m===2){
           //F
           c=ps[0];ps[0]=ps[2];ps[2]=ps[6];ps[6]=ps[4];ps[4]=c;
           ps[2]+=2; ps[0]++; ps[4]+=2; ps[6]++;
@@ -376,12 +376,12 @@ scramblers["222"] = (function() {
       var urlterms=urlquery[1].split("&")
       for( var i=0; i<urlterms.length; i++){
         var urllr=urlterms[i].split("=");
-        if(urllr[0]=="len") {
+        if(urllr[0]==="len") {
           if(urllr[1]-0 >= 1 ) seqlen=urllr[1]-0;
-        } else if(urllr[0]=="num"){
+        } else if(urllr[0]==="num"){
           if(urllr[1]-0 >= 1 ) numcub=urllr[1]-0;
-        } else if(urllr[0]=="col") {
-          if(urllr[1].length==6) colorString = urllr[1];
+        } else if(urllr[0]==="col") {
+          if(urllr[1].length===6) colorString = urllr[1];
         }
       }
     }
@@ -391,7 +391,7 @@ scramblers["222"] = (function() {
     for(var k=0; k<6; k++){
       colors[k]=colorList.length-3; // gray
       for( var i=0; i<colorList.length; i+=3 ){
-        if( colorString.charAt(k)==colorList[i] ){
+        if( colorString.charAt(k)===colorList[i] ){
           colors[k]=i;
           break;
         }
@@ -467,13 +467,13 @@ scramblers["222"] = (function() {
 
 
   function colorGet(col){
-    if (col=="r") return ("#FF0000");
-    if (col=="o") return ("#FF8000");
-    if (col=="b") return ("#0000FF");
-    if (col=="g") return ("#00FF00");
-    if (col=="y") return ("#FFFF00");
-    if (col=="w") return ("#FFFFFF");
-    if (col=="x") return ("#000000");
+    if (col==="r") return ("#FF0000");
+    if (col==="o") return ("#FF8000");
+    if (col==="b") return ("#0000FF");
+    if (col==="g") return ("#00FF00");
+    if (col==="y") return ("#FFFF00");
+    if (col==="w") return ("#FFFFFF");
+    if (col==="x") return ("#000000");
   }
 
   function drawSquare(r, cx, cy, w, fillColor) {
@@ -483,7 +483,7 @@ scramblers["222"] = (function() {
 
     var pathString = "";
     for (var i = 0; i < arrx.length; i++) {
-      pathString += ((i==0) ? "M" : "L") + arrx[i] + "," + arry[i];
+      pathString += ((i===0) ? "M" : "L") + arrx[i] + "," + arry[i];
     }
     pathString += "z";
       
@@ -529,32 +529,32 @@ scramblers["222"] = (function() {
     // cycle the side facelets
     for(k=0; k<q; k++){
       for(i=0; i<size; i++){
-        if(f==0){
+        if(f===0){
           f1=6*s2-size*d-size+i;
           f2=2*s2-size*d-1-i;
           f3=3*s2-size*d-1-i;
           f4=5*s2-size*d-size+i;
-        }else if(f==1){
+        }else if(f===1){
           f1=3*s2+d+size*i;
           f2=3*s2+d-size*(i+1);
           f3=  s2+d-size*(i+1);
           f4=5*s2+d+size*i;
-        }else if(f==2){
+        }else if(f===2){
           f1=3*s2+d*size+i;
           f2=4*s2+size-1-d+size*i;
           f3=  d*size+size-1-i;
           f4=2*s2-1-d-size*i;
-        }else if(f==3){
+        }else if(f===3){
           f1=4*s2+d*size+size-1-i;
           f2=2*s2+d*size+i;
           f3=  s2+d*size+i;
           f4=5*s2+d*size+size-1-i;
-        }else if(f==4){
+        }else if(f===4){
           f1=6*s2-1-d-size*i;
           f2=size-1-d+size*i;
           f3=2*s2+size-1-d+size*i;
           f4=4*s2-1-d-size*i;
-        }else if(f==5){
+        }else if(f===5){
           f1=4*s2-size-d*size+i;
           f2=2*s2-size+d-size*i;
           f3=s2-1-d*size-i;
@@ -568,7 +568,7 @@ scramblers["222"] = (function() {
       }
    
       /* turn face */
-      if(d==0){
+      if(d===0){
         for(i=0; i+i<size; i++){
           for(j=0; j+j<size-1; j++){
             f1=f*s2+         i+         j*size;

@@ -10,7 +10,7 @@ U is the regular move of the U face, according to standard cube notation.
 <br>
  */
 
-if (typeof scramblers == "undefined") {
+if (typeof scramblers === "undefined") {
   var scramblers = {};
 }
 
@@ -26,11 +26,11 @@ scramblers["minx"] = (function() {
   		var urlterms=urlquery[1].split("&")
   		for( var i=0; i<urlterms.length; i++){
   			var urllr=urlterms[i].split("=");
-  			if(urllr[0]=="ll") {
+  			if(urllr[0]==="ll") {
   				if(urllr[1]-0 >= 1 ) linelen=urllr[1]-0;
-  			} else if(urllr[0]=="ln"){
+  			} else if(urllr[0]==="ln"){
   				if(urllr[1]-0 >= 1 ) linenbr=urllr[1]-0;
-  			} else if(urllr[0]=="num"){
+  			} else if(urllr[0]==="num"){
   				if(urllr[1]-0 >= 1 ) numcub=urllr[1]-0;
   			}
   		}
@@ -194,7 +194,7 @@ scramblers["minx"] = (function() {
 
 	  var pathString = "";
 	  for (var i = 0; i < arrx.length; i++) {
-	    pathString += ((i==0) ? "M" : "L") + arrx[i] + "," + arry[i];
+	    pathString += ((i===0) ? "M" : "L") + arrx[i] + "," + arry[i];
 	  }
 	  pathString += "z";
 

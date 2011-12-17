@@ -11,7 +11,7 @@ Compiled to Javascript using GWT.
  */
 
 
-if (typeof scramblers == "undefined") {
+if (typeof scramblers === "undefined") {
   var scramblers = {};
 }
 
@@ -101,7 +101,7 @@ function $update(this$static, curTime){
   if (this$static.isStarted && !finished) {
     progress = (curTime - this$static.startTime) / this$static.duration;
     $onUpdate(this$static, (1 + Math.cos(3.141592653589793 + progress * 3.141592653589793)) / 2);
-    return this$static.isRunning && this$static.runId == curRunId;
+    return this$static.isRunning && this$static.runId === curRunId;
   }
   if (!this$static.isStarted && curTime >= this$static.startTime) {
     this$static.isStarted = true;
@@ -109,7 +109,7 @@ function $update(this$static, curTime){
     this$static.offsetWidth = $getPropertyInt(this$static.curPanel.element, 'offsetWidth');
     this$static.curPanel.element.style['overflow'] = 'hidden';
     $onUpdate(this$static, (1 + Math.cos(3.141592653589793)) / 2);
-    if (!(this$static.isRunning && this$static.runId == curRunId)) {
+    if (!(this$static.isRunning && this$static.runId === curRunId)) {
       return false;
     }
   }
@@ -150,7 +150,7 @@ function $execute(this$static, timestamp){
 
 function createFromSeed(seedType, length_0){
   var array = new Array(length_0);
-  if (seedType == 3) {
+  if (seedType === 3) {
     for (var i = 0; i < length_0; ++i) {
       var value = new Object;
       value.l = value.m = value.h = 0;
@@ -180,7 +180,7 @@ function initDims(arrayClasses, castableTypeMapExprs, queryIdExprs, dimExprs, co
 function initDims_0(arrayClasses, castableTypeMapExprs, queryIdExprs, dimExprs, index, count, seedType){
   var i, isLastDim, length_0, result;
   length_0 = dimExprs[index];
-  isLastDim = index == count - 1;
+  isLastDim = index === count - 1;
   result = createFromSeed(isLastDim?seedType:0, length_0);
 //  initValues(arrayClasses[index], castableTypeMapExprs[index], queryIdExprs[index], result);
   if (!isLastDim) {
@@ -393,7 +393,7 @@ function initMCEPermPrun(){
     check = inv?depth:-1;
     ++depth;
     for (i = 0; i < 66432; ++i) {
-      if (MEPermPrun[i] == select) {
+      if (MEPermPrun[i] === select) {
         mid = i % 24;
         edge = ~~(i / 24);
         for (m_0 = 0; m_0 < 10; ++m_0) {
@@ -402,7 +402,7 @@ function initMCEPermPrun(){
           midx = MPermConj[MPermMove[mid][m_0]][symx];
           edgex >>>= 4;
           idx = edgex * 24 + midx;
-          if (MEPermPrun[idx] == check) {
+          if (MEPermPrun[idx] === check) {
             ++done;
             if (inv) {
               MEPermPrun[i] = depth;
@@ -414,9 +414,9 @@ function initMCEPermPrun(){
               if (sym != 0) {
                 for (j = 1; j < 16; ++j) {
                   sym = sym >> 1;
-                  if ((sym & 1) == 1) {
+                  if ((sym & 1) === 1) {
                     idxx = edgex * 24 + MPermConj[midx][j];
-                    if (MEPermPrun[idxx] == -1) {
+                    if (MEPermPrun[idxx] === -1) {
                       MEPermPrun[idxx] = depth;
                       ++done;
                     }
@@ -441,7 +441,7 @@ function initMCEPermPrun(){
     check = inv?depth:-1;
     ++depth;
     for (i = 0; i < 66432; ++i) {
-      if (MCPermPrun[i] == select) {
+      if (MCPermPrun[i] === select) {
         mid = i % 24;
         corn = ~~(i / 24);
         for (m_0 = 0; m_0 < 10; ++m_0) {
@@ -450,7 +450,7 @@ function initMCEPermPrun(){
           midx = MPermConj[MPermMove[mid][m_0]][symx];
           cornx = cornx >>> 4;
           idx = cornx * 24 + midx;
-          if (MCPermPrun[idx] == check) {
+          if (MCPermPrun[idx] === check) {
             ++done;
             if (inv) {
               MCPermPrun[i] = depth;
@@ -462,9 +462,9 @@ function initMCEPermPrun(){
               if (sym != 0) {
                 for (j = 1; j < 16; ++j) {
                   sym = sym >> 1;
-                  if ((sym & 1) == 1) {
+                  if ((sym & 1) === 1) {
                     idxx = cornx * 24 + MPermConj[midx][j ^ ($clinit_CubieCube() , e2c)[j]];
-                    if (MCPermPrun[idxx] == -1) {
+                    if (MCPermPrun[idxx] === -1) {
                       MCPermPrun[idxx] = depth;
                       ++done;
                     }
@@ -579,7 +579,7 @@ function initTwistFlipSlicePrun(){
         fsymx = Sym8MultInv[Sym8Mult[flipx & 7][fsym]][tsymx];
         flipx >>>= 3;
         idx = twistx * 2688 + (flipx << 3 | fsymx);
-        if (TwistFlipPrun[idx] == check) {
+        if (TwistFlipPrun[idx] === check) {
           ++done;
           if (inv) {
             TwistFlipPrun[i] = depth;
@@ -591,12 +591,12 @@ function initTwistFlipSlicePrun(){
             symF = SymStateF[flipx];
             if (sym != 1 || symF != 1) {
               for (j = 0; j < 8; ++j , symF = symF >> 1) {
-                if ((symF & 1) == 1) {
+                if ((symF & 1) === 1) {
                   fsymxx = Sym8MultInv[fsymx][j];
                   for (k = 0; k < 8; ++k) {
                     if ((sym & 1 << k) != 0) {
                       idxx = twistx * 2688 + (flipx << 3 | Sym8MultInv[fsymxx][k]);
-                      if (TwistFlipPrun[idxx] == -1) {
+                      if (TwistFlipPrun[idxx] === -1) {
                         TwistFlipPrun[idxx] = depth;
                         ++done;
                       }
@@ -622,7 +622,7 @@ function initTwistFlipSlicePrun(){
     check = inv?depth:-1;
     ++depth;
     for (i = 0; i < 160380; ++i) {
-      if (UDSliceTwistPrun[i] == select) {
+      if (UDSliceTwistPrun[i] === select) {
         slice = i % 495;
         twist = ~~(i / 495);
         for (m_0 = 0; m_0 < 18; ++m_0) {
@@ -631,7 +631,7 @@ function initTwistFlipSlicePrun(){
           slicex = UDSliceConj[UDSliceMove[slice][m_0]][symx];
           twistx >>>= 3;
           idx = twistx * 495 + slicex;
-          if (UDSliceTwistPrun[idx] == check) {
+          if (UDSliceTwistPrun[idx] === check) {
             ++done;
             if (inv) {
               UDSliceTwistPrun[i] = depth;
@@ -643,9 +643,9 @@ function initTwistFlipSlicePrun(){
               if (sym != 1) {
                 for (j = 1; j < 8; ++j) {
                   sym = sym >> 1;
-                  if ((sym & 1) == 1) {
+                  if ((sym & 1) === 1) {
                     idxx = twistx * 495 + UDSliceConj[slicex][j];
-                    if (UDSliceTwistPrun[idxx] == -1) {
+                    if (UDSliceTwistPrun[idxx] === -1) {
                       UDSliceTwistPrun[idxx] = depth;
                       ++done;
                     }
@@ -670,7 +670,7 @@ function initTwistFlipSlicePrun(){
     check = inv?depth:-1;
     ++depth;
     for (i = 0; i < 166320; ++i) {
-      if (UDSliceFlipPrun[i] == select) {
+      if (UDSliceFlipPrun[i] === select) {
         slice = i % 495;
         flip = ~~(i / 495);
         for (m_0 = 0; m_0 < 18; ++m_0) {
@@ -679,7 +679,7 @@ function initTwistFlipSlicePrun(){
           slicex = UDSliceConj[UDSliceMove[slice][m_0]][symx];
           flipx >>>= 3;
           idx = flipx * 495 + slicex;
-          if (UDSliceFlipPrun[idx] == check) {
+          if (UDSliceFlipPrun[idx] === check) {
             ++done;
             if (inv) {
               UDSliceFlipPrun[i] = depth;
@@ -691,9 +691,9 @@ function initTwistFlipSlicePrun(){
               if (sym != 1) {
                 for (j = 1; j < 8; ++j) {
                   sym = sym >> 1;
-                  if ((sym & 1) == 1) {
+                  if ((sym & 1) === 1) {
                     idxx = flipx * 495 + UDSliceConj[slicex][j];
-                    if (UDSliceFlipPrun[idxx] == -1) {
+                    if (UDSliceFlipPrun[idxx] === -1) {
                       UDSliceFlipPrun[idxx] = depth;
                       ++done;
                     }
@@ -1193,14 +1193,14 @@ function initSym(){
     temp = d;
     d = c;
     c = temp;
-    if (i % 4 == 3) {
+    if (i % 4 === 3) {
       CornMultSym(temp, lr2, d);
       EdgeMult(temp, lr2, d);
       temp = d;
       d = c;
       c = temp;
     }
-    if (i % 8 == 7) {
+    if (i % 8 === 7) {
       CornMultSym(temp, f2, d);
       EdgeMult(temp, f2, d);
       temp = d;
@@ -1211,7 +1211,7 @@ function initSym(){
   for (j = 0; j < 16; ++j) {
     for (k = 0; k < 16; ++k) {
       CornMultSym(CubeSym[j], CubeSym[k], c);
-      if (c.cp[0] == 0 && c.cp[1] == 1 && c.cp[2] == 2) {
+      if (c.cp[0] === 0 && c.cp[1] === 1 && c.cp[2] === 2) {
         SymInv[j] = k;
         break;
       }
@@ -1221,7 +1221,7 @@ function initSym(){
     for (j = 0; j < 16; ++j) {
       CornMultSym(CubeSym[i], CubeSym[j], c);
       for (k = 0; k < 16; ++k) {
-        if (CubeSym[k].cp[0] == c.cp[0] && CubeSym[k].cp[1] == c.cp[1] && CubeSym[k].cp[2] == c.cp[2]) {
+        if (CubeSym[k].cp[0] === c.cp[0] && CubeSym[k].cp[1] === c.cp[1] && CubeSym[k].cp[2] === c.cp[2]) {
           SymMult[i][j] = k;
           break;
         }
@@ -1272,7 +1272,7 @@ function initSym2Raw(){
   for (i = 0; i < 64; occ[i++] = 0)
   ;
   for (i = 0; i < 2048; ++i) {
-    if ((occ[i >>> 5] & 1 << (i & 31)) == 0) {
+    if ((occ[i >>> 5] & 1 << (i & 31)) === 0) {
       $setFlip(c, i);
       for (s = 0; s < 16; s = s + 2) {
         EdgeMult(CubeSym[SymInv[s]], c, temp_0);
@@ -1288,7 +1288,7 @@ function initSym2Raw(){
   for (i = 0; i < 69; occ[i++] = 0)
   ;
   for (i = 0; i < 2187; ++i) {
-    if ((occ[i >>> 5] & 1 << (i & 31)) == 0) {
+    if ((occ[i >>> 5] & 1 << (i & 31)) === 0) {
       $setTwist(c, i);
       for (s = 0; s < 16; s = s + 2) {
         CornMultSym(CubeSym[SymInv[s]], c, temp_0);
@@ -1317,7 +1317,7 @@ function initSym2Raw(){
   for (i = 0; i < 1260; occ[i++] = 0)
   ;
   for (i = 0; i < 40320; ++i) {
-    if ((occ[i >>> 5] & 1 << (i & 31)) == 0) {
+    if ((occ[i >>> 5] & 1 << (i & 31)) === 0) {
       set8Perm(c.ep, i);
       for (s = 0; s < 16; ++s) {
         EdgeMult(CubeSym[SymInv[s]], c, temp_0);
@@ -1457,7 +1457,7 @@ function $Solve(this$static, c){
     CornMult(c.temps, urf1, c);
     EdgeMult(urf2, c, c.temps);
     EdgeMult(c.temps, urf1, c);
-    i == 2 && $invCubieCube(c);
+    i === 2 && $invCubieCube(c);
   }
   this$static.solution = null;
   for (this$static.length1 = 0; this$static.length1 < this$static.sol; ++this$static.length1) {
@@ -1469,7 +1469,7 @@ function $Solve(this$static, c){
       this$static.e1[0] = this$static.e10[this$static.urfidx];
       this$static.e2[0] = this$static.e20[this$static.urfidx];
       if (this$static.prun[this$static.urfidx] <= this$static.length1 && $phase1(this$static, this$static.twist[this$static.urfidx], this$static.tsym[this$static.urfidx], this$static.flip[this$static.urfidx], this$static.fsym[this$static.urfidx], this$static.slice_0[this$static.urfidx], this$static.length1, 18)) {
-        return this$static.solution == null?'Error 8':this$static.solution;
+        return this$static.solution === null?'Error 8':this$static.solution;
       }
     }
   }
@@ -1509,7 +1509,7 @@ function $init2(this$static){
   if (prun >= this$static.maxlength2) {
     return false;
   }
-  lm = this$static.length1 == 0?10:std2ud[~~(this$static.move[this$static.length1 - 1] / 3) * 3 + 1];
+  lm = this$static.length1 === 0?10:std2ud[~~(this$static.move[this$static.length1 - 1] / 3) * 3 + 1];
   for (i = prun; i < this$static.maxlength2; ++i) {
     if ($phase2(this$static, edge, esym, this$static.corn[this$static.length1], this$static.csym[this$static.length1], mid, i, this$static.length1, lm)) {
       this$static.sol = this$static.length1 + i;
@@ -1550,8 +1550,8 @@ function $init2(this$static){
 
 function $phase1(this$static, twist, tsym, flip, fsym, slice, maxl, lm){
   var flipx, fsymx, m_0, slicex, tsymx, twistx;
-  if (twist == 0 && flip == 0 && slice == 0 && maxl < 5) {
-    return maxl == 0 && $init2(this$static);
+  if (twist === 0 && flip === 0 && slice === 0 && maxl < 5) {
+    return maxl === 0 && $init2(this$static);
   }
   for (m_0 = 0; m_0 < 18; ++m_0) {
     if (($clinit_Util() , ckmv)[lm][m_0]) {
@@ -1582,7 +1582,7 @@ function $phase1(this$static, twist, tsym, flip, fsym, slice, maxl, lm){
 
 function $phase2(this$static, edge, esym, corn, csym, mid, maxl, depth, lm){
   var cornx, csymx, edgex, esymx, m_0, midx;
-  if (edge == 0 && corn == 0 && mid == 0) {
+  if (edge === 0 && corn === 0 && mid === 0) {
     return true;
   }
   for (m_0 = 0; m_0 < 10; ++m_0) {
@@ -1774,7 +1774,7 @@ function $clinit_Util(){
   }
   for (i = 0; i < 18; ++i) {
     for (j = 0; j < 18; ++j) {
-      ckmv[i][j] = ~~(i / 3) == ~~(j / 3) || ~~(i / 3) % 3 == ~~(j / 3) % 3 && i >= j;
+      ckmv[i][j] = ~~(i / 3) === ~~(j / 3) || ~~(i / 3) % 3 === ~~(j / 3) % 3 && i >= j;
     }
     ckmv[18][i] = false;
   }
@@ -1881,12 +1881,12 @@ function toCubieCube(f){
     ccRet.ep[i] = 0;
   for (i = 0; i < 8; ++i) {
     for (ori = 0; ori < 3; ++ori)
-      if (f[cornerFacelet[i][ori]] == 0 || f[cornerFacelet[i][ori]] == 3)
+      if (f[cornerFacelet[i][ori]] === 0 || f[cornerFacelet[i][ori]] === 3)
         break;
     col1 = f[cornerFacelet[i][(ori + 1) % 3]];
     col2 = f[cornerFacelet[i][(ori + 2) % 3]];
     for (j = 0; j < 8; ++j) {
-      if (col1 == cornerColor[j][1] && col2 == cornerColor[j][2]) {
+      if (col1 === cornerColor[j][1] && col2 === cornerColor[j][2]) {
         ccRet.cp[i] = j;
         ccRet.co[i] = ori % 3;
         break;
@@ -1895,12 +1895,12 @@ function toCubieCube(f){
   }
   for (i = 0; i < 12; ++i) {
     for (j = 0; j < 12; ++j) {
-      if (f[edgeFacelet[i][0]] == edgeColor[j][0] && f[edgeFacelet[i][1]] == edgeColor[j][1]) {
+      if (f[edgeFacelet[i][0]] === edgeColor[j][0] && f[edgeFacelet[i][1]] === edgeColor[j][1]) {
         ccRet.ep[i] = j;
         ccRet.eo[i] = 0;
         break;
       }
-      if (f[edgeFacelet[i][0]] == edgeColor[j][1] && f[edgeFacelet[i][1]] == edgeColor[j][0]) {
+      if (f[edgeFacelet[i][0]] === edgeColor[j][1] && f[edgeFacelet[i][1]] === edgeColor[j][0]) {
         ccRet.ep[i] = j;
         ccRet.eo[i] = 1;
         break;
@@ -1994,13 +1994,13 @@ var _3I_classLit = createForArray('', '[I'), _3Z_classLit = createForArray('', '
 
 
   function colorGet(col){
-    if (col=="r") return ("#FF0000");
-    if (col=="o") return ("#FF8000");
-    if (col=="b") return ("#0000FF");
-    if (col=="g") return ("#00FF00");
-    if (col=="y") return ("#FFFF00");
-    if (col=="w") return ("#FFFFFF");
-    if (col=="x") return ("#000000");
+    if (col==="r") return ("#FF0000");
+    if (col==="o") return ("#FF8000");
+    if (col==="b") return ("#0000FF");
+    if (col==="g") return ("#00FF00");
+    if (col==="y") return ("#FFFF00");
+    if (col==="w") return ("#FFFFFF");
+    if (col==="x") return ("#000000");
   }
 
 function drawSquare(r, cx, cy, w, fillColor) {
@@ -2010,7 +2010,7 @@ function drawSquare(r, cx, cy, w, fillColor) {
 
   var pathString = "";
   for (var i = 0; i < arrx.length; i++) {
-    pathString += ((i==0) ? "M" : "L") + arrx[i] + "," + arry[i];
+    pathString += ((i===0) ? "M" : "L") + arrx[i] + "," + arry[i];
   }
   pathString += "z";
     

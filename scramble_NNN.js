@@ -71,18 +71,18 @@ function scramble_NNN(size, seqlen, mult) {
         var urlterms=urlquery[1].split("&")
         for( var i=0; i<urlterms.length; i++){
           var urllr=urlterms[i].split("=");
-          if(urllr[0]=="size") {
+          if(urllr[0]==="size") {
             if(urllr[1]-0 >= 2 ) size=urllr[1]-0;
-          } else if(urllr[0]=="len") {
+          } else if(urllr[0]==="len") {
             if(urllr[1]-0 >= 1 ) seqlen=urllr[1]-0;
-          } else if(urllr[0]=="num"){
+          } else if(urllr[0]==="num"){
             if(urllr[1]-0 >= 1 ) numcub=urllr[1]-0;
-          } else if(urllr[0]=="multi") {
-            mult=(urllr[1]=="on");
-          } else if(urllr[0]=="cubori") {
-            cubeorient=(urllr[1]=="on");
-          } else if(urllr[0]=="col") {
-            if(urllr[1].length==6) colorString = urllr[1];
+          } else if(urllr[0]==="multi") {
+            mult=(urllr[1]==="on");
+          } else if(urllr[0]==="cubori") {
+            cubeorient=(urllr[1]==="on");
+          } else if(urllr[0]==="col") {
+            if(urllr[1].length===6) colorString = urllr[1];
           }
         }
       }*/
@@ -119,7 +119,7 @@ function scramble_NNN(size, seqlen, mult) {
       for(var k=0; k<6; k++){
         colors[k]=colorList.length-3; // gray
         for( var i=0; i<colorList.length; i+=3 ){
-          if( colorString.charAt(k)==colorList[i] ){
+          if( colorString.charAt(k)===colorList[i] ){
             colors[k]=i;
             break;
           }
@@ -179,16 +179,16 @@ function scramble_NNN(size, seqlen, mult) {
               sl=Math.floor(randomSource.random()*tl);
               // choose random amount
               q=Math.floor(randomSource.random()*3);
-            }while( ax==la && axsl[sl]!=0 );    // loop until have found an unused movetype
-          }while( ax==la          // loop while move is reducible: reductions only if on same axis as previous moves
+            }while( ax===la && axsl[sl]!=0 );    // loop until have found an unused movetype
+          }while( ax===la          // loop while move is reducible: reductions only if on same axis as previous moves
               && !mult        // multislice moves have no reductions so always ok
-              && tl==size       // only even-sized cubes have reductions (odds have middle layer as reference)
+              && tl===size       // only even-sized cubes have reductions (odds have middle layer as reference)
               && (
-                2*axam[0]==tl ||  // reduction if already have half the slices move in same direction
-                2*axam[1]==tl ||
-                2*axam[2]==tl ||
+                2*axam[0]===tl ||  // reduction if already have half the slices move in same direction
+                2*axam[1]===tl ||
+                2*axam[2]===tl ||
                 (
-                  2*(axam[q]+1)==tl // reduction if move makes exactly half the slices moved in same direction and
+                  2*(axam[q]+1)===tl // reduction if move makes exactly half the slices moved in same direction and
                   &&
                   axam[0]+axam[1]+axam[2]-axam[q] > 0 // some other slice also moved
                 )
@@ -237,13 +237,13 @@ function scramble_NNN(size, seqlen, mult) {
 
 
     function colorGet(col){
-      if (col=="r") return ("#FF0000");
-      if (col=="o") return ("#FF8000");
-      if (col=="b") return ("#0000FF");
-      if (col=="g") return ("#00FF00");
-      if (col=="y") return ("#FFFF00");
-      if (col=="w") return ("#FFFFFF");
-      if (col=="x") return ("#000000");
+      if (col==="r") return ("#FF0000");
+      if (col==="o") return ("#FF8000");
+      if (col==="b") return ("#0000FF");
+      if (col==="g") return ("#00FF00");
+      if (col==="y") return ("#FFFF00");
+      if (col==="w") return ("#FFFFFF");
+      if (col==="x") return ("#000000");
     }
 
   function drawSquare(r, cx, cy, w, fillColor) {
@@ -253,7 +253,7 @@ function scramble_NNN(size, seqlen, mult) {
 
     var pathString = "";
     for (var i = 0; i < arrx.length; i++) {
-      pathString += ((i==0) ? "M" : "L") + arrx[i] + "," + arry[i];
+      pathString += ((i===0) ? "M" : "L") + arrx[i] + "," + arry[i];
     }
     pathString += "z";
       
@@ -375,32 +375,32 @@ function scramble_NNN(size, seqlen, mult) {
       // cycle the side facelets
       for(k=0; k<q; k++){
         for(i=0; i<size; i++){
-          if(f==0){
+          if(f===0){
             f1=6*s2-size*d-size+i;
             f2=2*s2-size*d-1-i;
             f3=3*s2-size*d-1-i;
             f4=5*s2-size*d-size+i;
-          }else if(f==1){
+          }else if(f===1){
             f1=3*s2+d+size*i;
             f2=3*s2+d-size*(i+1);
             f3=  s2+d-size*(i+1);
             f4=5*s2+d+size*i;
-          }else if(f==2){
+          }else if(f===2){
             f1=3*s2+d*size+i;
             f2=4*s2+size-1-d+size*i;
             f3=  d*size+size-1-i;
             f4=2*s2-1-d-size*i;
-          }else if(f==3){
+          }else if(f===3){
             f1=4*s2+d*size+size-1-i;
             f2=2*s2+d*size+i;
             f3=  s2+d*size+i;
             f4=5*s2+d*size+size-1-i;
-          }else if(f==4){
+          }else if(f===4){
             f1=6*s2-1-d-size*i;
             f2=size-1-d+size*i;
             f3=2*s2+size-1-d+size*i;
             f4=4*s2-1-d-size*i;
-          }else if(f==5){
+          }else if(f===5){
             f1=4*s2-size-d*size+i;
             f2=2*s2-size+d-size*i;
             f3=s2-1-d*size-i;
@@ -414,7 +414,7 @@ function scramble_NNN(size, seqlen, mult) {
         }
      
         /* turn face */
-        if(d==0){
+        if(d===0){
           for(i=0; i+i<size; i++){
             for(j=0; j+j<size-1; j++){
               f1=f*s2+         i+         j*size;
@@ -496,7 +496,7 @@ function scramble_NNN(size, seqlen, mult) {
   })();
 }
 
-if (typeof scramblers == "undefined") {
+if (typeof scramblers === "undefined") {
   var scramblers = {};
 }
 

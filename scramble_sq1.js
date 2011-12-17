@@ -13,7 +13,7 @@ TODO:
 
 */
 
-if (typeof scramblers == "undefined") {
+if (typeof scramblers === "undefined") {
   var scramblers = {};
 }
 
@@ -44,7 +44,7 @@ scramblers["sq1"] = (function() {
   var IndexMappingPermutationToIndex = function(permutation) {
     var i, index, j;
     index = 0;
-    if (permutation.length == 0) {
+    if (permutation.length === 0) {
       return index;
     }
     for(i = 0; i < permutation.length - 1; i++) {
@@ -55,7 +55,7 @@ scramblers["sq1"] = (function() {
         }
       }
     }
-    if (index == 46436297) {
+    if (index === 46436297) {
       iiii = 4;
     }
     return index;
@@ -313,7 +313,7 @@ scramblers["sq1"] = (function() {
             square1Solver_shapes.push(state);
           }
           for(i = 0; i < square1Solver_moves1.length; i++) {
-            if (!(i == 22 && !stateIsTwistable(state))) {
+            if (!(i === 22 && !stateIsTwistable(state))) {
               next = stateMultiply(state, square1Solver_moves1[i]);
               distanceTable = null;
               if (isEvenPermutation(stateGetPiecesPermutation(next))) {
@@ -330,7 +330,7 @@ scramblers["sq1"] = (function() {
         }
         fringe = newFringe;
         depth++;
-        if (depth == 10 || depth == 12 || depth == 15) {
+        if (depth === 10 || depth === 12 || depth === 15) {
           logStatus("Shape Table Depth: " + depth + "/20");
         }
       }
@@ -438,7 +438,7 @@ scramblers["sq1"] = (function() {
         nVisited = 0;
         for(i = 0; i < square1Solver_N_CORNERS_PERMUTATIONS; i++) {
           for(j = 0; j < square1Solver_N_EDGES_COMBINATIONS; j++) {
-            if (square1Solver_cornersDistance[i][j] == depth) {
+            if (square1Solver_cornersDistance[i][j] === depth) {
               for(k = 0; k < square1Solver_moves2.length; k++) {
                 nextCornerPermutation = square1Solver_cornersPermutationMove[i][k];
                 nextEdgeCombination = square1Solver_edgesCombinationMove[j][k];
@@ -473,7 +473,7 @@ scramblers["sq1"] = (function() {
         nVisited = 0;
         for(i = 0; i < square1Solver_N_EDGES_PERMUTATIONS; i++) {
           for(j = 0; j < square1Solver_N_CORNERS_COMBINATIONS; j++) {
-            if (square1Solver_edgesDistance[i][j] == depth) {
+            if (square1Solver_edgesDistance[i][j] === depth) {
               for(k = 0; k < square1Solver_moves2.length; k++) {
                 nextEdgesPermutation = square1Solver_edgesPermutationMove[i][k];
                 nextCornersCombination = square1Solver_cornersCombinationMove[j][k];
@@ -505,19 +505,19 @@ scramblers["sq1"] = (function() {
   };
 
   var topIndexToAmount = function(index) {
-    return (index == -1) ? 0 : index +1;
+    return (index === -1) ? 0 : index +1;
   }
 
   var bottomIndexToAmount = function(index) {
-    return (index == -1) ? 0 : index - 10;
+    return (index === -1) ? 0 : index - 10;
   }
 
   var topAmountToIndex = function(amount) {
-    return (amount == 0) ? -1 : amount - 1;
+    return (amount === 0) ? -1 : amount - 1;
   }
 
   var bottomAmountToIndex = function(amount) {
-    return (amount == 0) ? -1 : amount + 10;
+    return (amount === 0) ? -1 : amount + 10;
   }
 
   /*
@@ -540,7 +540,7 @@ scramblers["sq1"] = (function() {
         bottom += (moveIndex - 11) + 1;
         bottom %= 12;
       } else {
-        if (solution[i-1] == 22) {
+        if (solution[i-1] === 22) {
           newSolution.pop();
           bottom = bottomIndexToAmount(newSolution.pop());
           top = topIndexToAmount(newSolution.pop());
@@ -571,35 +571,35 @@ scramblers["sq1"] = (function() {
     //console.log(square1SolverSolutionToString(simplifiedSolution).join(""));
 
     for (i = 0; i < simplifiedSolution.length - 2; i+=3) {
-      if (!((0 <= simplifiedSolution[i] < 11 || simplifiedSolution[i] == -1) && (11 <= simplifiedSolution[i+2] < 22 || simplifiedSolution[i+2] == -1) && (simplifiedSolution[i+2] == 22))) {
+      if (!((0 <= simplifiedSolution[i] < 11 || simplifiedSolution[i] === -1) && (11 <= simplifiedSolution[i+2] < 22 || simplifiedSolution[i+2] === -1) && (simplifiedSolution[i+2] === 22))) {
         console.error("Improperly simplified (see indices " + i + " to " + (i+2) + "):" + simplifiedSolution); // Sanity check.
       }
       var top = simplifiedSolution[i];
       var bot = simplifiedSolution[i+1];
 
       // We allow later mateches to override earlier ones to prefer matches in the cubic phase. This helps make for easier scrambles.
-      if (top == 5 && bot == -1) { // 5 is (6, 0)
+      if (top === 5 && bot === -1) { // 5 is (6, 0)
         location60 = i;
       }
-      else if (top == -1 && bot == 16) { // 16 is (0, 6)
+      else if (top === -1 && bot === 16) { // 16 is (0, 6)
         location06 = i;
       }
-      else if (bot == -1) {
+      else if (bot === -1) {
         locationM0 = i;
       }
-      else if (top == -1) {
+      else if (top === -1) {
         location0N = i;
       }
       else {
         locationMN = i;
       }
     }
-    if (!((0 <= simplifiedSolution[simplifiedSolution.length - 1] < 11 || simplifiedSolution[simplifiedSolution.length - 2] == -1) && (11 <= simplifiedSolution[simplifiedSolution.length - 2] < 22 || simplifiedSolution[simplifiedSolution.length - 1] == -1))) {
+    if (!((0 <= simplifiedSolution[simplifiedSolution.length - 1] < 11 || simplifiedSolution[simplifiedSolution.length - 2] === -1) && (11 <= simplifiedSolution[simplifiedSolution.length - 2] < 22 || simplifiedSolution[simplifiedSolution.length - 1] === -1))) {
       console.error("Improperly simplified (see indices " + (simplifiedSolution.length-2) + " to " + (simplifiedSolution.length-1) + "):" + solution); // Sanity check.
     }
 
     // After sanity checks:
-    if (((simplifiedSolution.length - 2)/3 % 2 == 0) == middleIsSolved) {
+    if (((simplifiedSolution.length - 2)/3 % 2 === 0) === middleIsSolved) {
       //console.log("Middle parity is correct.");
       return solution;
     }
@@ -634,7 +634,7 @@ scramblers["sq1"] = (function() {
     bottom = 0;
     for (i = 0; i < solution.length; i++) {
       moveIndex = solution[i];
-      if (moveIndex == -1){
+      if (moveIndex === -1){
         // Nothing.
       }
       if (moveIndex < 11) {
@@ -741,8 +741,8 @@ scramblers["sq1"] = (function() {
 
   var square1SolverSearch = function(state, stateIsEvenPermutation, depth, solution1, solution2) {
     var distance, i, m, next, sequence2, _i, _len;
-    if (depth == 0) {
-      if (stateIsEvenPermutation && (stateGetShapeIndex(state) == stateGetShapeIndex(identityState))) {
+    if (depth === 0) {
+      if (stateIsEvenPermutation && (stateGetShapeIndex(state) === stateGetShapeIndex(identityState))) {
         sequence2 = square1SolverSolution2(stateToCubeState(state), 17);
         if (sequence2 !== null) {
           for (_i = 0, _len = sequence2.length; _i < _len; _i++) {
@@ -762,7 +762,7 @@ scramblers["sq1"] = (function() {
     }
     if (distance <= depth) {
       for(i = 0; i < square1Solver_moves1.length; i++) {
-        if (!(i == 22 && !stateIsTwistable(state))) {
+        if (!(i === 22 && !stateIsTwistable(state))) {
           next = stateMultiply(state, square1Solver_moves1[i]);
           solution1.push(i);
           if (square1SolverSearch(next, isEvenPermutation(stateGetPiecesPermutation(next)), depth - 1, solution1, solution2)) {
@@ -803,12 +803,12 @@ scramblers["sq1"] = (function() {
     //var input = "Search 2 ini: " + cornersPermutation + ", " + cornersCombination + ", " + edgesPermutation + ", " + edgesCombination + ", " + depth + ", " + solution.toString();
 
     var i;
-    if (depth == 0) {
-      return (cornersPermutation == 0) && (edgesPermutation == 0);
+    if (depth === 0) {
+      return (cornersPermutation === 0) && (edgesPermutation === 0);
     }
     if ((square1Solver_cornersDistance[cornersPermutation][edgesCombination] <= depth) && (square1Solver_edgesDistance[edgesPermutation][cornersCombination] <= depth)) {
       for(i = 0; i < square1Solver_moves2.length; i++) {
-        if (!((solution.length - depth - 1 >= 0) && (Math.floor(solution[solution.length - depth - 1] / 3) == Math.floor(i / 3)))) {
+        if (!((solution.length - depth - 1 >= 0) && (Math.floor(solution[solution.length - depth - 1] / 3) === Math.floor(i / 3)))) {
           solution[solution.length - depth] = i;
           if (square1SolverSearch2(square1Solver_cornersPermutationMove[cornersPermutation][i], square1Solver_cornersCombinationMove[cornersCombination][i], square1Solver_edgesPermutationMove[edgesPermutation][i], square1Solver_edgesCombinationMove[edgesCombination][i], depth - 1, solution)) {
             //console.log("Search 2 subfinal: " + input);
@@ -838,7 +838,7 @@ scramblers["sq1"] = (function() {
         permutation[i] = 8 + edgesPermutation[shape[i] - 8];
       }
     }
-    middleIsSolved = (randomIntBelow(2) == 1) ? true : false;
+    middleIsSolved = (randomIntBelow(2) === 1) ? true : false;
     return {"permutation": permutation, "middleIsSolved": middleIsSolved};
   };
 
@@ -867,7 +867,7 @@ scramblers["sq1"] = (function() {
         }
       }
     }
-    return nInversions % 2 == 0;
+    return nInversions % 2 === 0;
   };
 
   var square1SolverGetRandomScramble = function() {
@@ -886,20 +886,20 @@ scramblers["sq1"] = (function() {
 
 
   function colorGet(col){
-    if (col=="r") return ("#FF0000");
-    if (col=="o") return ("#FF8000");
-    if (col=="b") return ("#0000FF");
-    if (col=="g") return ("#00FF00");
-    if (col=="y") return ("#FFFF00");
-    if (col=="w") return ("#FFFFFF");
-    if (col=="x") return ("#000000");
+    if (col==="r") return ("#FF0000");
+    if (col==="o") return ("#FF8000");
+    if (col==="b") return ("#0000FF");
+    if (col==="g") return ("#00FF00");
+    if (col==="y") return ("#FFFF00");
+    if (col==="w") return ("#FFFFFF");
+    if (col==="x") return ("#000000");
   }
 
 function drawPolygon(r, fillColor, arrx, arry) {
 
   var pathString = "";
   for (var i = 0; i < arrx.length; i++) {
-    pathString += ((i==0) ? "M" : "L") + arrx[i] + "," + arry[i];
+    pathString += ((i===0) ? "M" : "L") + arrx[i] + "," + arry[i];
   }
   pathString += "z";
 
@@ -980,8 +980,8 @@ function drawSq(stickers, middleIsSolved, shapes, parentElement, colorString) {
     var sc = 0;
     for(var foo=0; sc<12; foo++){
       if (shapes.length<=foo) sc = 12;
-      if (shapes.charAt(foo)=="x") sc++;
-      if (shapes.charAt(foo)=="c"){
+      if (shapes.charAt(foo)==="x") sc++;
+      if (shapes.charAt(foo)==="c"){
         arrx=[cx, cx+cos1(sc), cx+cos1(sc+1)*z, cx+cos1(sc+2)];
         arry=[cy, cy-sin1(sc), cy-sin1(sc+1)*z, cy-sin1(sc+2)];
         drawPolygon(r, stickers.charAt(foo), arrx, arry)
@@ -996,7 +996,7 @@ function drawSq(stickers, middleIsSolved, shapes, parentElement, colorString) {
    
         sc +=2;
       }
-      if (shapes.charAt(foo)=="e"){
+      if (shapes.charAt(foo)==="e"){
         arrx=[cx, cx+cos1(sc), cx+cos1(sc+1)];
         arry=[cy, cy-sin1(sc), cy-sin1(sc+1)];
         drawPolygon(r, stickers.charAt(foo), arrx, arry)
@@ -1053,8 +1053,8 @@ function drawSq(stickers, middleIsSolved, shapes, parentElement, colorString) {
     var sc = 0;
     for(sc=0; sc<12; foo++){
       if (shapes.length<=foo) sc = 12;
-      if (shapes.charAt(foo)=="x") sc++;
-      if (shapes.charAt(foo)=="c"){
+      if (shapes.charAt(foo)==="x") sc++;
+      if (shapes.charAt(foo)==="c"){
         arrx=[cx, cx+cos2(sc), cx+cos2(sc+1)*z, cx+cos2(sc+2)];
         arry=[cy, cy-sin2(sc), cy-sin2(sc+1)*z, cy-sin2(sc+2)];
         drawPolygon(r, stickers.charAt(foo), arrx, arry)
@@ -1070,7 +1070,7 @@ function drawSq(stickers, middleIsSolved, shapes, parentElement, colorString) {
         sc +=2;
    
       }
-      if (shapes.charAt(foo)=="e"){
+      if (shapes.charAt(foo)==="e"){
         arrx=[cx, cx+cos2(sc), cx+cos2(sc+1)];
         arry=[cy, cy-sin2(sc), cy-sin2(sc+1)];
         drawPolygon(r, stickers.charAt(foo), arrx, arry)
@@ -1090,7 +1090,7 @@ function drawSq(stickers, middleIsSolved, shapes, parentElement, colorString) {
     var j=0;
     for (var i=0; i<arr.length; i++)
     {
-      if(i==0 || arr[i]!=arr[i-1])
+      if(i===0 || arr[i]!=arr[i-1])
       out[j++] = arr[i];
     }
     return out;
