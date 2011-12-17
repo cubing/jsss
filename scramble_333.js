@@ -159,7 +159,7 @@ function initMCEPermPrun(callback){
         }
       }
     }
-    callback(done);
+    callback("MEPermPrun: " + (Math.floor(done * 100 / 66432)) +"% (" + done + "/66432)");
   }
   for (i = 0; i < 66432; ++i) {
     MCPermPrun[i] = -1;
@@ -208,7 +208,7 @@ function initMCEPermPrun(callback){
         }
       }
     }
-    callback(done);
+    callback("MCPermPrun: " + (Math.floor(done * 100 / 66432)) +"% (" + done + "/66432)");
   }
 }
 
@@ -344,7 +344,7 @@ function initTwistFlipSlicePrun(callback){
         }
       }
     }
-    callback(done);
+    callback("TwistFlipPrun: " + (Math.floor(done * 100 / 870912)) +"% (" + done + "/870912)");
   }
   for (i = 0; i < 160380; ++i) {
     UDSliceTwistPrun[i] = -1;
@@ -393,7 +393,7 @@ function initTwistFlipSlicePrun(callback){
         }
       }
     }
-    callback(done);
+    callback("UDSliceTwistPrun: " + (Math.floor(done * 100 / 160380)) +"% (" + done + "/160380)");
   }
   for (i = 0; i < 166320; ++i) {
     UDSliceFlipPrun[i] = -1;
@@ -442,7 +442,7 @@ function initTwistFlipSlicePrun(callback){
         }
       }
     }
-    callback(done);
+    callback("UDSliceFlipPrun: " + (Math.floor(done * 100 / 166320)) +"% (" + done + "/166320)");
   }
 }
 
