@@ -19,313 +19,43 @@ scramblers["333fm"] = scramblers["333ft"] = scramblers["333bf"] = scramblers["33
 
 
 
-var $gwt_version = "2.4.0";
-var $wnd = {};
-var $doc = {};
-var $moduleName, $moduleBase;
-var $strongName = '91CC0579ED54A0710896425AE0387146';
-var $stats = $wnd.__gwtStatsEvent ? function(a) {return $wnd.__gwtStatsEvent(a);} : null,
-$sessionId = $wnd.__gwtStatsSessionId ? $wnd.__gwtStatsSessionId : null;
-$stats && $stats({moduleName:'gwt333',sessionId:$sessionId,subSystem:'startup',evtGroup:'moduleStartup',millis:(new Date()).getTime(),type:'moduleEvalStart'});
-
-
-
-var _, P0_longLit = {l:0, m:0, h:0}, P1_longLit = {l:1, m:0, h:0}, P186a0_longLit = {l:100000, m:0, h:0}, Q$Object = 0, Q$String = 1, Q$boolean_$1 = 2, Q$byte_$1 = 3, Q$char_$1 = 4, Q$AnimationScheduler$AnimationHandle = 5, Q$AnimationSchedulerImplTimer$AnimationHandleImpl = 6, Q$AnimationSchedulerImplTimer$AnimationHandleImpl_$1 = 7, Q$JavaScriptException = 8, Q$Style$Display = 9, Q$Style$HasCssName = 10, Q$Style$Overflow = 11, Q$Style$Unit = 12, Q$ClickHandler = 13, Q$DomEvent$Type = 14, Q$KeyUpHandler = 15, Q$MouseDownHandler = 16, Q$MouseMoveHandler = 17, Q$MouseOutHandler = 18, Q$MouseOverHandler = 19, Q$MouseUpHandler = 20, Q$CloseHandler = 21, Q$HasAttachHandlers = 22, Q$ResizeHandler = 23, Q$ValueChangeHandler = 24, Q$EventHandler = 25, Q$HasHandlers = 26, Q$RequestException = 27, Q$HasDirection$Direction = 28, Q$LongLibBase$LongEmul = 29, Q$Command = 30, Q$Event$NativePreviewHandler = 31, Q$EventListener = 32, Q$Timer = 33, Q$SerializationException = 34, Q$RequestCallbackAdapter$ResponseReader = 35, Q$DialogBox$MouseHandler = 36, Q$HasVisibility = 37, Q$IsWidget = 38, Q$RootPanel = 39, Q$UIObject = 40, Q$ValueBoxBase$TextAlignment = 41, Q$Widget = 42, Q$SimpleEventBus$Command = 43, Q$UmbrellaException = 44, Q$Serializable = 45, Q$CharSequence = 46, Q$Comparable = 47, Q$Enum = 48, Q$Exception = 49, Q$Integer = 50, Q$Number = 51, Q$RuntimeException = 52, Q$StackTraceElement = 53, Q$Throwable = 54, Q$Throwable_$1 = 55, Q$List = 56, Q$Map = 57, Q$Map$Entry = 58, Q$Set = 59, Q$CubieCube = 60;
-function makeCastMap(a){
-  var result = {};
-  for (var i = 0, c = a.length; i < c; ++i) {
-    result[a[i]] = 1;
-  }
-  return result;
-}
-
 function nullMethod(){
 }
 
-function Object_0(){
-}
-
-_ = Object_0.prototype = {};
-_.equals$ = function equals(other){
-  return this === other;
-}
-;
-_.getClass$ = function getClass_0(){
-  return Ljava_lang_Object_2_classLit;
-}
-;
-_.hashCode$ = function hashCode_0(){
-  return getHashCode(this);
-}
-;
-_.toString$ = function toString_0(){
-  return this.getClass$().typeName + '@' + toPowerOfTwoString(this.hashCode$());
-}
-;
-_.toString = function(){
-  return this.toString$();
-}
-;
-_.typeMarker$ = nullMethod;
-_.castableTypeMap$ = {};
-function $cancel(this$static){
-  if (!this$static.isRunning) {
-    return;
-  }
-  this$static.wasStarted = this$static.isStarted;
-  this$static.element = null;
-  this$static.isRunning = false;
-  this$static.isStarted = false;
-  if (this$static.requestHandle) {
-    this$static.requestHandle.cancel();
-    this$static.requestHandle = null;
-  }
-  this$static.wasStarted && $onComplete(this$static);
-}
-
-function $run(this$static, startTime){
-  $cancel(this$static);
-  this$static.isRunning = true;
-  this$static.isStarted = false;
-  this$static.duration = 200;
-  this$static.startTime = startTime;
-  this$static.element = null;
-  ++this$static.runId;
-  $execute(this$static.callback, currentTimeMillis());
-}
-
-function $update(this$static, curTime){
-  var curRunId, finished, progress;
-  curRunId = this$static.runId;
-  finished = curTime >= this$static.startTime + this$static.duration;
-  if (this$static.isStarted && !finished) {
-    progress = (curTime - this$static.startTime) / this$static.duration;
-    $onUpdate(this$static, (1 + Math.cos(3.141592653589793 + progress * 3.141592653589793)) / 2);
-    return this$static.isRunning && this$static.runId === curRunId;
-  }
-  if (!this$static.isStarted && curTime >= this$static.startTime) {
-    this$static.isStarted = true;
-    this$static.offsetHeight = $getPropertyInt(this$static.curPanel.element, 'offsetHeight');
-    this$static.offsetWidth = $getPropertyInt(this$static.curPanel.element, 'offsetWidth');
-    this$static.curPanel.element.style['overflow'] = 'hidden';
-    $onUpdate(this$static, (1 + Math.cos(3.141592653589793)) / 2);
-    if (!(this$static.isRunning && this$static.runId === curRunId)) {
-      return false;
-    }
-  }
-  if (finished) {
-    this$static.isRunning = false;
-    this$static.isStarted = false;
-    $onComplete(this$static);
-    return false;
-  }
-  return true;
-}
-
-function Animation_0(scheduler){
-  this.callback = new Animation$1_0(this);
-  this.scheduler = scheduler;
-}
-
-function Animation(){
-}
-
-_ = Animation.prototype = new Object_0;
-_.getClass$ = function getClass_1(){
-  return Lcom_google_gwt_animation_client_Animation_2_classLit;
-}
-;
-_.duration = -1;
-_.element = null;
-_.isRunning = false;
-_.isStarted = false;
-_.requestHandle = null;
-_.runId = -1;
-_.scheduler = null;
-_.startTime = -1;
-_.wasStarted = false;
-function $execute(this$static, timestamp){
-  $update(this$static.this$0, timestamp)?(this$static.this$0.requestHandle = this$static.this$0.scheduler.requestAnimationFrame(this$static.this$0.callback, this$static.this$0.element)):(this$static.this$0.requestHandle = null);
-}
-
-function createFromSeed(seedType, length_0){
-  var array = new Array(length_0);
-  if (seedType === 3) {
-    for (var i = 0; i < length_0; ++i) {
-      var value = new Object;
-      value.l = value.m = value.h = 0;
-      array[i] = value;
-    }
-  }
-   else if (seedType > 0) {
-    var value = [null, 0, false][seedType];
-    for (var i = 0; i < length_0; ++i) {
-      array[i] = value;
-    }
-  }
-  return array;
-}
-
-function initDim(arrayClass, castableTypeMap, queryId, length_0, seedType){
-  var result;
-  result = createFromSeed(seedType, length_0);
-  //initValues(arrayClass, castableTypeMap, queryId, result); // This seems to make Firefox fail. It appears to be unnecessary for Mark 2 functionality.
+function createArray(length1, length2){
+  var result, i;
+  result = Array(length1);
+  for (i=0; i<length1; result[i++]=Array(length2));
   return result;
 }
-
-function initDims(arrayClasses, castableTypeMapExprs, queryIdExprs, dimExprs, count, seedType){
-  return initDims_0(arrayClasses, castableTypeMapExprs, queryIdExprs, dimExprs, 0, count, seedType);
-}
-
-function initDims_0(arrayClasses, castableTypeMapExprs, queryIdExprs, dimExprs, index, count, seedType){
-  var i, isLastDim, length_0, result;
-  length_0 = dimExprs[index];
-  isLastDim = index === count - 1;
-  result = createFromSeed(isLastDim?seedType:0, length_0);
-//  initValues(arrayClasses[index], castableTypeMapExprs[index], queryIdExprs[index], result);
-  if (!isLastDim) {
-    ++index;
-    for (i = 0; i < length_0; ++i) {
-      result[i] = initDims_0(arrayClasses, castableTypeMapExprs, queryIdExprs, dimExprs, index, count, seedType);
-    }
-  }
-  return result;
-}
-
-function create0(l_0, m_0, h_0){
-  return _ = new LongLibBase$LongEmul_0 , _.l = l_0 , _.m = m_0 , _.h = h_0 , _;
-}
-function and(a, b){
-  return create0(a.l & b.l, a.m & b.m, a.h & b.h);
-}
-
-function neq(a, b){
-  return a.l != b.l || a.m != b.m || a.h != b.h;
-}
-
-function or(a, b){
-  return create0(a.l | b.l, a.m | b.m, a.h | b.h);
-}
-
-function shl(a, n){
-  var res0, res1, res2;
-  n &= 63;
-  if (n < 22) {
-    res0 = a.l << n;
-    res1 = a.m << n | a.l >> 22 - n;
-    res2 = a.h << n | a.m >> 22 - n;
-  }
-   else if (n < 44) {
-    res0 = 0;
-    res1 = a.l << n - 22;
-    res2 = a.m << n - 22 | a.l >> 44 - n;
-  }
-   else {
-    res0 = 0;
-    res1 = 0;
-    res2 = a.l << n - 44;
-  }
-  return create0(res0 & 4194303, res1 & 4194303, res2 & 1048575);
-}
-
-var boxedValues = null;
-function $clinit_LongLib$Const(){
-  $clinit_LongLib$Const = nullMethod;
-  MAX_VALUE = create0(4194303, 4194303, 524287);
-  MIN_VALUE = create0(0, 0, 524288);
-  fromInt(1);
-  fromInt(2);
-  ZERO = fromInt(0);
-}
-
-var MAX_VALUE, MIN_VALUE, ZERO;
-function LongLibBase$LongEmul_0(){
-}
-
-function LongLibBase$LongEmul(){
-}
-
-_ = LongLibBase$LongEmul_0.prototype = LongLibBase$LongEmul.prototype = new Object_0;
-
-function Class_0(){
-}
-
-function createForArray(packageName, className){
-  var clazz;
-  clazz = new Class_0;
-  clazz.typeName = packageName + className;
-  clazz.modifiers = 4;
-  return clazz;
-}
-
-function createForClass(packageName, className){
-  var clazz;
-  clazz = new Class_0;
-  clazz.typeName = packageName + className;
-  return clazz;
-}
-
-function createForEnum(packageName, className, enumConstantsFunc){
-  var clazz;
-  clazz = new Class_0;
-  clazz.typeName = packageName + className;
-  clazz.modifiers = enumConstantsFunc?8:0;
-  return clazz;
-}
-
-function Class(){
-}
-
-_ = Class_0.prototype = Class.prototype = new Object_0;
-_.getClass$ = function getClass_181(){
-  return Ljava_lang_Class_2_classLit;
-}
-;
-_.toString$ = function toString_8(){
-  return ((this.modifiers & 2) != 0?'interface ':(this.modifiers & 1) != 0?'':'class ') + this.typeName;
-}
-;
-_.modifiers = 0;
-_.typeName = null;
-function ClassCastException_0(){
-  $fillInStackTrace();
-}
-
-function ClassCastException(){
-}
-
-//_ = ClassCastException_0.prototype = ClassCastException.prototype = new RuntimeException;
-_.getClass$ = function getClass_182(){
-  return Ljava_lang_ClassCastException_2_classLit;
-}
-;
-_.castableTypeMap$ = makeCastMap([Q$Serializable, Q$Exception, Q$RuntimeException, Q$Throwable]);
-
 
 function $clinit_CoordCube(){
   $clinit_CoordCube = nullMethod;
-  UDSliceMove = initDims([_3_3C_classLit, _3C_classLit], [makeCastMap([Q$Serializable]), makeCastMap([Q$char_$1, Q$Serializable])], [Q$char_$1, -1], [495, 18], 2, 1);
-  TwistMove = initDims([_3_3C_classLit, _3C_classLit], [makeCastMap([Q$Serializable]), makeCastMap([Q$char_$1, Q$Serializable])], [Q$char_$1, -1], [324, 18], 2, 1);
-  FlipMove = initDims([_3_3C_classLit, _3C_classLit], [makeCastMap([Q$Serializable]), makeCastMap([Q$char_$1, Q$Serializable])], [Q$char_$1, -1], [336, 18], 2, 1);
-  UDSliceConj = initDims([_3_3C_classLit, _3C_classLit], [makeCastMap([Q$Serializable]), makeCastMap([Q$char_$1, Q$Serializable])], [Q$char_$1, -1], [495, 8], 2, 1);
-  UDSliceTwistPrun = initDim(_3B_classLit, makeCastMap([Q$byte_$1, Q$Serializable]), -1, 160380, 1);
-  UDSliceFlipPrun = initDim(_3B_classLit, makeCastMap([Q$byte_$1, Q$Serializable]), -1, 166320, 1);
-  TwistFlipPrun = initDim(_3B_classLit, makeCastMap([Q$byte_$1, Q$Serializable]), -1, 870912, 1);
-  Mid3Move = initDims([_3_3C_classLit, _3C_classLit], [makeCastMap([Q$Serializable]), makeCastMap([Q$char_$1, Q$Serializable])], [Q$char_$1, -1], [1320, 18], 2, 1);
-  Mid32MPerm = initDim(_3B_classLit, makeCastMap([Q$byte_$1, Q$Serializable]), -1, 24, 1);
-  CParity = initDim(_3B_classLit, makeCastMap([Q$byte_$1, Q$Serializable]), -1, 346, 1);
-  CPermMove = initDims([_3_3C_classLit, _3C_classLit], [makeCastMap([Q$Serializable]), makeCastMap([Q$char_$1, Q$Serializable])], [Q$char_$1, -1], [2768, 18], 2, 1);
-  EPermMove = initDims([_3_3C_classLit, _3C_classLit], [makeCastMap([Q$Serializable]), makeCastMap([Q$char_$1, Q$Serializable])], [Q$char_$1, -1], [2768, 10], 2, 1);
-  MPermMove = initDims([_3_3B_classLit, _3B_classLit], [makeCastMap([Q$Serializable]), makeCastMap([Q$byte_$1, Q$Serializable])], [Q$byte_$1, -1], [24, 10], 2, 1);
-  MPermConj = initDims([_3_3B_classLit, _3B_classLit], [makeCastMap([Q$Serializable]), makeCastMap([Q$byte_$1, Q$Serializable])], [Q$byte_$1, -1], [24, 16], 2, 1);
-  MCPermPrun = initDim(_3B_classLit, makeCastMap([Q$byte_$1, Q$Serializable]), -1, 66432, 1);
-  MEPermPrun = initDim(_3B_classLit, makeCastMap([Q$byte_$1, Q$Serializable]), -1, 66432, 1);
+  UDSliceMove = createArray(495, 18);
+  TwistMove = createArray(324, 18);
+  FlipMove = createArray(336, 18);
+  UDSliceConj = createArray(495, 8);
+  UDSliceTwistPrun = Array(160380);
+  UDSliceFlipPrun = Array(166320);
+  TwistFlipPrun = Array(870912);
+  Mid3Move = createArray(1320, 18);
+  Mid32MPerm = Array(24);
+  CParity = Array(346);
+  CPermMove = createArray(2768, 18);
+  EPermMove = createArray(2768, 10);
+  MPermMove = createArray(24, 10);
+  MPermConj = createArray(24, 16);
+  MCPermPrun = Array(66432);
+  MEPermPrun = Array(66432);
 }
 
 function initCParity(){
   var i;
+  for (i=0; i<346; ++i) {
+    CParity[i] = 0;
+  }
   for (i = 0; i < 2768; ++i) {
-    CParity[i >>> 3] = (CParity[i >>> 3] | get8Parity(($clinit_CubieCube() , CPermS2R)[i]) << (i & 7));
+    CParity[i >>> 3] = (CParity[i >>> 3] | get8Parity((CPermS2R)[i]) << (i & 7));
   }
 }
 
@@ -334,7 +64,7 @@ function initCPermMove(){
   c = new CubieCube_0;
   d = new CubieCube_0;
   for (i = 0; i < 2768; ++i) {
-    set8Perm(c.cp, ($clinit_CubieCube() , CPermS2R)[i]);
+    set8Perm(c.cp, (CPermS2R)[i]);
     for (j = 0; j < 18; ++j) {
       CornMult(c, moveCube[j], d);
       CPermMove[i][j] = $getCPermSym(d);
@@ -347,9 +77,9 @@ function initEPermMove(){
   c = new CubieCube_0;
   d = new CubieCube_0;
   for (i = 0; i < 2768; ++i) {
-    set8Perm(c.ep, ($clinit_CubieCube() , EPermS2R)[i]);
+    set8Perm(c.ep, (EPermS2R)[i]);
     for (j = 0; j < 10; ++j) {
-      EdgeMult(c, moveCube[($clinit_Util() , ud2std)[j]], d);
+      EdgeMult(c, moveCube[ud2std[j]], d);
       EPermMove[i][j] = $getEPermSym(d);
     }
   }
@@ -360,7 +90,7 @@ function initFlipMove(){
   c = new CubieCube_0;
   d = new CubieCube_0;
   for (i = 0; i < 336; ++i) {
-    $setFlip(c, ($clinit_CubieCube() , FlipS2R)[i]);
+    $setFlip(c, (FlipS2R)[i]);
     for (j = 0; j < 18; ++j) {
       EdgeMult(c, moveCube[j], d);
       FlipMove[i][j] = $getFlipSym(d);
@@ -368,15 +98,16 @@ function initFlipMove(){
   }
 }
 
-function initMCEPermPrun(){
+function initMCEPermPrun(callback){
   var SymState, c, check, corn, cornx, d, depth, done, edge, edgex, i, idx, idxx, inv, j, m_0, mid, midx, select, sym, symx;
   c = new CubieCube_0;
   d = new CubieCube_0;
   depth = 0;
   done = 1;
-  SymState = initDim(_3C_classLit, makeCastMap([Q$char_$1, Q$Serializable]), -1, 2768, 1);
+  SymState = Array(2768);
   for (i = 0; i < 2768; ++i) {
-    set8Perm(c.ep, ($clinit_CubieCube() , EPermS2R)[i]);
+    SymState[i] = 0;
+    set8Perm(c.ep, (EPermS2R)[i]);
     for (j = 1; j < 16; ++j) {
       EdgeMult(CubeSym[SymInv[j]], c, temp_0);
       EdgeMult(temp_0, CubeSym[j], d);
@@ -428,6 +159,7 @@ function initMCEPermPrun(){
         }
       }
     }
+    callback(done);
   }
   for (i = 0; i < 66432; ++i) {
     MCPermPrun[i] = -1;
@@ -445,7 +177,7 @@ function initMCEPermPrun(){
         mid = i % 24;
         corn = ~~(i / 24);
         for (m_0 = 0; m_0 < 10; ++m_0) {
-          cornx = CPermMove[corn][($clinit_Util() , ud2std)[m_0]];
+          cornx = CPermMove[corn][ud2std[m_0]];
           symx = (cornx & 15);
           midx = MPermConj[MPermMove[mid][m_0]][symx];
           cornx = cornx >>> 4;
@@ -463,7 +195,7 @@ function initMCEPermPrun(){
                 for (j = 1; j < 16; ++j) {
                   sym = sym >> 1;
                   if ((sym & 1) === 1) {
-                    idxx = cornx * 24 + MPermConj[midx][j ^ ($clinit_CubieCube() , e2c)[j]];
+                    idxx = cornx * 24 + MPermConj[midx][j ^ (e2c)[j]];
                     if (MCPermPrun[idxx] === -1) {
                       MCPermPrun[idxx] = depth;
                       ++done;
@@ -476,6 +208,7 @@ function initMCEPermPrun(){
         }
       }
     }
+    callback(done);
   }
 }
 
@@ -486,7 +219,7 @@ function initMPermConj(){
   for (i = 0; i < 24; ++i) {
     $setMPerm(c, i);
     for (j = 0; j < 16; ++j) {
-      EdgeConjugate(c, ($clinit_CubieCube() , SymInv)[j], d);
+      EdgeConjugate(c, SymInv[j], d);
       MPermConj[i][j] = $getMPerm(d);
     }
   }
@@ -499,7 +232,7 @@ function initMPermMove(){
   for (i = 0; i < 24; ++i) {
     $setMPerm(c, i);
     for (j = 0; j < 10; ++j) {
-      EdgeMult(c, ($clinit_CubieCube() , moveCube)[($clinit_Util() , ud2std)[j]], d);
+      EdgeMult(c, moveCube[ud2std[j]], d);
       MPermMove[i][j] = $getMPerm(d);
     }
   }
@@ -521,7 +254,7 @@ function initMid3Move(){
   for (i = 0; i < 1320; ++i) {
     $setMid3(c, i);
     for (j = 0; j < 18; ++j) {
-      EdgeMult(c, ($clinit_CubieCube() , moveCube)[j], d);
+      EdgeMult(c, moveCube[j], d);
       Mid3Move[i][j] = $getMid3(d);
     }
   }
@@ -529,26 +262,28 @@ function initMid3Move(){
 
 
 
-function initTwistFlipSlicePrun(){
+function initTwistFlipSlicePrun(callback){
   var SymState, SymStateF, c, check, d, depth, done, flip, flipx, fsym, fsymx, fsymxx, i, idx, idxx, inv, j, k, m_0, select, slice, slicex, sym, symF, symx, tsymx, twist, twistx;
-  SymState = initDim(_3B_classLit, makeCastMap([Q$byte_$1, Q$Serializable]), -1, 324, 1);
+  SymState = Array(324);
   c = new CubieCube_0;
   d = new CubieCube_0;
   for (i = 0; i < 324; ++i) {
-    $setTwist(c, ($clinit_CubieCube() , TwistS2R)[i]);
+    SymState[i] = 0;
+    $setTwist(c, TwistS2R[i]);
     for (j = 0; j < 8; ++j) {
       CornMultSym(CubeSym[SymInv[j << 1]], c, temp_0);
       CornMultSym(temp_0, CubeSym[j << 1], d);
-      binarySearch(TwistS2R, $getTwist(d)) != 65535 && (SymState[i] = (SymState[i] | 1 << j));
+      binarySearch(TwistS2R, $getTwist(d)) != 65535 && (SymState[i] = SymState[i] | (1 << j));
     }
   }
-  SymStateF = initDim(_3B_classLit, makeCastMap([Q$byte_$1, Q$Serializable]), -1, 336, 1);
+  SymStateF = Array(336);
   for (i = 0; i < 336; ++i) {
-    $setFlip(c, ($clinit_CubieCube() , FlipS2R)[i]);
+    SymStateF[i] = 0;
+    $setFlip(c, (FlipS2R)[i]);
     for (j = 0; j < 8; ++j) {
       EdgeMult(CubeSym[SymInv[j << 1]], c, temp_0);
       EdgeMult(temp_0, CubeSym[j << 1], d);
-      binarySearch(FlipS2R, $getFlip(d)) != 65535 && (SymStateF[i] = (SymStateF[i] | 1 << j));
+      binarySearch(FlipS2R, $getFlip(d)) != 65535 && (SymStateF[i] = SymStateF[i] | (1 << j));
     }
   }
   for (i = 0; i < 870912; ++i) {
@@ -575,7 +310,7 @@ function initTwistFlipSlicePrun(){
         twistx = TwistMove[twist][m_0];
         tsymx = twistx & 7;
         twistx >>>= 3;
-        flipx = FlipMove[flip][($clinit_CubieCube() , Sym8Move)[fsym][m_0]];
+        flipx = FlipMove[flip][Sym8Move[fsym][m_0]];
         fsymx = Sym8MultInv[Sym8Mult[flipx & 7][fsym]][tsymx];
         flipx >>>= 3;
         idx = twistx * 2688 + (flipx << 3 | fsymx);
@@ -609,6 +344,7 @@ function initTwistFlipSlicePrun(){
         }
       }
     }
+    callback(done);
   }
   for (i = 0; i < 160380; ++i) {
     UDSliceTwistPrun[i] = -1;
@@ -657,6 +393,7 @@ function initTwistFlipSlicePrun(){
         }
       }
     }
+    callback(done);
   }
   for (i = 0; i < 166320; ++i) {
     UDSliceFlipPrun[i] = -1;
@@ -705,6 +442,7 @@ function initTwistFlipSlicePrun(){
         }
       }
     }
+    callback(done);
   }
 }
 
@@ -713,7 +451,7 @@ function initTwistMove(){
   c = new CubieCube_0;
   d = new CubieCube_0;
   for (i = 0; i < 324; ++i) {
-    $setTwist(c, ($clinit_CubieCube() , TwistS2R)[i]);
+    $setTwist(c, TwistS2R[i]);
     for (j = 0; j < 18; ++j) {
       CornMult(c, moveCube[j], d);
       TwistMove[i][j] = $getTwistSym(d);
@@ -728,7 +466,7 @@ function initUDSliceConj(){
   for (i = 0; i < 495; ++i) {
     $setUDSlice(c, i);
     for (j = 0; j < 16; j = j + 2) {
-      EdgeConjugate(c, ($clinit_CubieCube() , SymInv)[j], d);
+      EdgeConjugate(c, (SymInv)[j], d);
       UDSliceConj[i][j >>> 1] = $getUDSlice(d);
     }
   }
@@ -741,7 +479,7 @@ function initUDSliceMove(){
   for (i = 0; i < 495; ++i) {
     $setUDSlice(c, i);
     for (j = 0; j < 18; ++j) {
-      EdgeMult(c, ($clinit_CubieCube() , moveCube)[j], d);
+      EdgeMult(c, moveCube[j], d);
       UDSliceMove[i][j] = $getUDSlice(d);
     }
   }
@@ -751,20 +489,20 @@ var CParity, CPermMove, EPermMove, FlipMove, MCPermPrun, MEPermPrun, MPermConj, 
 function $clinit_CubieCube(){
   $clinit_CubieCube = nullMethod;
   temp_0 = new CubieCube_0;
-  CubeSym = initDim(_3Lnet_cubing_mark2_client_CubieCube_2_classLit, makeCastMap([Q$Serializable]), Q$CubieCube, 16, 0);
-  SymInv = initDim(_3B_classLit, makeCastMap([Q$byte_$1, Q$Serializable]), -1, 16, 1);
-  SymMult = initDims([_3_3B_classLit, _3B_classLit], [makeCastMap([Q$Serializable]), makeCastMap([Q$byte_$1, Q$Serializable])], [Q$byte_$1, -1], [16, 16], 2, 1);
-  SymMove = initDims([_3_3B_classLit, _3B_classLit], [makeCastMap([Q$Serializable]), makeCastMap([Q$byte_$1, Q$Serializable])], [Q$byte_$1, -1], [16, 18], 2, 1);
-  Sym8Mult = initDims([_3_3B_classLit, _3B_classLit], [makeCastMap([Q$Serializable]), makeCastMap([Q$byte_$1, Q$Serializable])], [Q$byte_$1, -1], [8, 8], 2, 1);
-  Sym8Move = initDims([_3_3B_classLit, _3B_classLit], [makeCastMap([Q$Serializable]), makeCastMap([Q$byte_$1, Q$Serializable])], [Q$byte_$1, -1], [8, 18], 2, 1);
-  Sym8MultInv = initDims([_3_3B_classLit, _3B_classLit], [makeCastMap([Q$Serializable]), makeCastMap([Q$byte_$1, Q$Serializable])], [Q$byte_$1, -1], [8, 8], 2, 1);
-  SymMoveUD = initDims([_3_3B_classLit, _3B_classLit], [makeCastMap([Q$Serializable]), makeCastMap([Q$byte_$1, Q$Serializable])], [Q$byte_$1, -1], [16, 10], 2, 1);
-  FlipS2R = initDim(_3C_classLit, makeCastMap([Q$char_$1, Q$Serializable]), -1, 336, 1);
-  TwistS2R = initDim(_3C_classLit, makeCastMap([Q$char_$1, Q$Serializable]), -1, 324, 1);
-  CPermS2R = initDim(_3C_classLit, makeCastMap([Q$char_$1, Q$Serializable]), -1, 2768, 1);
+  CubeSym = Array(16);
+  SymInv = Array(16);
+  SymMult = createArray(16, 16);
+  SymMove = createArray(16, 18);
+  Sym8Mult = createArray(8, 8);
+  Sym8Move = createArray(8, 18);
+  Sym8MultInv = createArray(8, 8);
+  SymMoveUD = createArray(16, 10);
+  FlipS2R = Array(336);
+  TwistS2R = Array(324);
+  CPermS2R = Array(2768);
   EPermS2R = CPermS2R;
-  MtoEPerm = initDim(_3C_classLit, makeCastMap([Q$char_$1, Q$Serializable]), -1, 40320, 1);
-  merge = initDims([_3_3B_classLit, _3B_classLit], [makeCastMap([Q$Serializable]), makeCastMap([Q$byte_$1, Q$Serializable])], [Q$byte_$1, -1], [56, 56], 2, 1);
+  MtoEPerm = Array(40320);
+  merge = createArray(56, 56);
   e2c = [0, 0, 0, 0, 1, 3, 1, 3, 1, 3, 1, 3, 0, 0, 0, 0];
   urf1 = new CubieCube_2(2531, 1373, 67026819, 1877);
   urf2 = new CubieCube_2(2089, 1906, 322752913, 255);
@@ -773,35 +511,35 @@ function $clinit_CubieCube(){
   initSym();
 }
 
-function $$init(this$static){
-  this$static.cp = [0, 1, 2, 3, 4, 5, 6, 7];
-  this$static.co = [0, 0, 0, 0, 0, 0, 0, 0];
-  this$static.ep = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-  this$static.eo = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+function $$init(obj){
+  obj.cp = [0, 1, 2, 3, 4, 5, 6, 7];
+  obj.co = [0, 0, 0, 0, 0, 0, 0, 0];
+  obj.ep = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+  obj.eo = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 }
 
-function $copy(this$static, c){
+function $copy(obj, c){
   var i;
   for (i = 0; i < 8; ++i) {
-    this$static.cp[i] = c.cp[i];
-    this$static.co[i] = c.co[i];
+    obj.cp[i] = c.cp[i];
+    obj.co[i] = c.co[i];
   }
   for (i = 0; i < 12; ++i) {
-    this$static.ep[i] = c.ep[i];
-    this$static.eo[i] = c.eo[i];
+    obj.ep[i] = c.ep[i];
+    obj.eo[i] = c.eo[i];
   }
 }
 
-function $getCPermSym(this$static){
+function $getCPermSym(obj){
   var idx, k;
   if (EPermR2S != null) {
-    idx = EPermR2S[get8Perm(this$static.cp)];
+    idx = EPermR2S[get8Perm(obj.cp)];
     idx = (idx ^ e2c[idx & 15]);
     return idx;
   }
   for (k = 0; k < 16; ++k) {
-    CornConjugate(this$static, SymInv[k], this$static.temps);
-    idx = binarySearch(CPermS2R, get8Perm(this$static.temps.cp));
+    CornConjugate(obj, SymInv[k], obj.temps);
+    idx = binarySearch(CPermS2R, get8Perm(obj.temps.cp));
     if (idx != 65535) {
       return (idx << 4 | k);
     }
@@ -809,16 +547,16 @@ function $getCPermSym(this$static){
   return 0;
 }
 
-function $getDRtoDL(this$static){
+function $getDRtoDL(obj){
   var i, idxA, idxB, mask, r, t;
   idxA = 0;
   idxB = 0;
   mask = 0;
   r = 3;
   for (i = 11; i >= 0; --i) {
-    if (4 <= this$static.ep[i] && this$static.ep[i] <= 6) {
-      idxA = idxA + ($clinit_Util() , Cnk)[i][r--];
-      t = 1 << this$static.ep[i];
+    if (4 <= obj.ep[i] && obj.ep[i] <= 6) {
+      idxA = idxA + (Cnk)[i][r--];
+      t = 1 << obj.ep[i];
       idxB = idxB + bitCount(mask & t - 1) * fact[2 - r];
       mask = (mask | t);
     }
@@ -826,14 +564,14 @@ function $getDRtoDL(this$static){
   return idxA * 6 + idxB;
 }
 
-function $getEPermSym(this$static){
+function $getEPermSym(obj){
   var idx, k;
   if (EPermR2S != null) {
-    return EPermR2S[get8Perm(this$static.ep)];
+    return EPermR2S[get8Perm(obj.ep)];
   }
   for (k = 0; k < 16; ++k) {
-    EdgeConjugate(this$static, SymInv[k], this$static.temps);
-    idx = binarySearch(EPermS2R, get8Perm(this$static.temps.ep));
+    EdgeConjugate(obj, SymInv[k], obj.temps);
+    idx = binarySearch(EPermS2R, get8Perm(obj.temps.ep));
     if (idx != 65535) {
       return (idx << 4 | k);
     }
@@ -841,35 +579,35 @@ function $getEPermSym(this$static){
   return 0;
 }
 
-function $getEdgePerm(this$static){
+function $getEdgePerm(obj){
   var i, idx, m_0, t;
-  m_0 = 1 << this$static.ep[11];
+  m_0 = 1 << obj.ep[11];
   idx = 0;
   for (i = 10; i >= 0; --i) {
-    t = 1 << this$static.ep[i];
-    idx += bitCount(m_0 & t - 1) * ($clinit_Util() , fact)[11 - i];
+    t = 1 << obj.ep[i];
+    idx += bitCount(m_0 & t - 1) * (fact)[11 - i];
     m_0 |= t;
   }
   return idx;
 }
 
-function $getFlip(this$static){
+function $getFlip(obj){
   var i, idx;
   idx = 0;
   for (i = 0; i < 11; ++i) {
-    idx = (idx | this$static.eo[i] << i);
+    idx = (idx | obj.eo[i] << i);
   }
   return idx;
 }
 
-function $getFlipSym(this$static){
+function $getFlipSym(obj){
   var idx, k;
   if (FlipR2S != null) {
-    return FlipR2S[$getFlip(this$static)];
+    return FlipR2S[$getFlip(obj)];
   }
   for (k = 0; k < 16; k = k + 2) {
-    EdgeConjugate(this$static, SymInv[k], this$static.temps);
-    idx = binarySearch(FlipS2R, $getFlip(this$static.temps));
+    EdgeConjugate(obj, SymInv[k], obj.temps);
+    idx = binarySearch(FlipS2R, $getFlip(obj.temps));
     if (idx != 65535) {
       return (idx << 3 | k >>> 1);
     }
@@ -877,28 +615,28 @@ function $getFlipSym(this$static){
   return 0;
 }
 
-function $getMPerm(this$static){
+function $getMPerm(obj){
   var i, idx, m_0, t;
-  m_0 = 1 << this$static.ep[11];
+  m_0 = 1 << obj.ep[11];
   idx = 0;
   for (i = 10; i >= 8; --i) {
-    t = 1 << this$static.ep[i];
-    idx += bitCount(m_0 & t - 1) * ($clinit_Util() , fact)[11 - i];
+    t = 1 << obj.ep[i];
+    idx += bitCount(m_0 & t - 1) * (fact)[11 - i];
     m_0 |= t;
   }
   return idx;
 }
 
-function $getMid3(this$static){
+function $getMid3(obj){
   var i, idxA, idxB, mask, r, t;
   idxA = 0;
   idxB = 0;
   mask = 0;
   r = 3;
   for (i = 11; i >= 0; --i) {
-    if (this$static.ep[i] >= 9) {
-      idxA = idxA + ($clinit_Util() , Cnk)[i][r--];
-      t = 1 << this$static.ep[i];
+    if (obj.ep[i] >= 9) {
+      idxA = idxA + (Cnk)[i][r--];
+      t = 1 << obj.ep[i];
       idxB = idxB + bitCount(mask & t - 1) * fact[2 - r];
       mask = (mask | t);
     }
@@ -906,24 +644,24 @@ function $getMid3(this$static){
   return idxA * 6 + idxB;
 }
 
-function $getTwist(this$static){
+function $getTwist(obj){
   var i, idx;
   idx = 0;
   for (i = 0; i < 7; ++i) {
     idx = idx * 3;
-    idx = idx + this$static.co[i];
+    idx = idx + obj.co[i];
   }
   return idx;
 }
 
-function $getTwistSym(this$static){
+function $getTwistSym(obj){
   var idx, k;
   if (TwistR2S != null) {
-    return TwistR2S[$getTwist(this$static)];
+    return TwistR2S[$getTwist(obj)];
   }
   for (k = 0; k < 16; k = k + 2) {
-    CornConjugate(this$static, SymInv[k], this$static.temps);
-    idx = $getTwist(this$static.temps);
+    CornConjugate(obj, SymInv[k], obj.temps);
+    idx = $getTwist(obj.temps);
     idx = binarySearch(TwistS2R, idx);
     if (idx != 65535) {
       return (idx << 3 | k >>> 1);
@@ -932,26 +670,26 @@ function $getTwistSym(this$static){
   return 0;
 }
 
-function $getUDSlice(this$static){
+function $getUDSlice(obj){
   var i, idx, r;
   idx = 0;
   r = 4;
   for (i = 0; i < 12; ++i) {
-    this$static.ep[i] >= 8 && (idx = idx + ($clinit_Util() , Cnk)[11 - i][r--]);
+    obj.ep[i] >= 8 && (idx = idx + (Cnk)[11 - i][r--]);
   }
   return idx;
 }
 
-function $getURtoUL(this$static){
+function $getURtoUL(obj){
   var i, idxA, idxB, mask, r, t;
   idxA = 0;
   idxB = 0;
   mask = 0;
   r = 3;
   for (i = 11; i >= 0; --i) {
-    if (this$static.ep[i] <= 2) {
-      idxA = idxA + ($clinit_Util() , Cnk)[i][r--];
-      t = 1 << this$static.ep[i];
+    if (obj.ep[i] <= 2) {
+      idxA = idxA + (Cnk)[i][r--];
+      t = 1 << obj.ep[i];
       idxB = idxB + bitCount(mask & t - 1) * fact[2 - r];
       mask = (mask | t);
     }
@@ -959,118 +697,118 @@ function $getURtoUL(this$static){
   return idxA * 6 + idxB;
 }
 
-function $invCubieCube(this$static){
+function $invCubieCube(obj){
   var corn, edge, ori;
   for (edge = 0; edge < 12; ++edge)
-    this$static.temps.ep[this$static.ep[edge]] = edge;
+    obj.temps.ep[obj.ep[edge]] = edge;
   for (edge = 0; edge < 12; ++edge)
-    this$static.temps.eo[edge] = this$static.eo[this$static.temps.ep[edge]];
+    obj.temps.eo[edge] = obj.eo[obj.temps.ep[edge]];
   for (corn = 0; corn < 8; ++corn)
-    this$static.temps.cp[this$static.cp[corn]] = corn;
+    obj.temps.cp[obj.cp[corn]] = corn;
   for (corn = 0; corn < 8; ++corn) {
-    ori = this$static.co[this$static.temps.cp[corn]];
-    this$static.temps.co[corn] = -ori;
-    this$static.temps.co[corn] < 0 && (this$static.temps.co[corn] = this$static.temps.co[corn] + 3);
+    ori = obj.co[obj.temps.cp[corn]];
+    obj.temps.co[corn] = -ori;
+    obj.temps.co[corn] < 0 && (obj.temps.co[corn] = obj.temps.co[corn] + 3);
   }
-  $copy(this$static, this$static.temps);
+  $copy(obj, obj.temps);
 }
 
-function $setEdgePerm(this$static, idx){
+function $setEdgePerm(obj, idx){
   var i, j;
-  this$static.ep[11] = 0;
+  obj.ep[11] = 0;
   for (i = 10; i >= 0; --i) {
-    this$static.ep[i] = idx % (12 - i);
+    obj.ep[i] = idx % (12 - i);
     idx = ~~(idx / (12 - i));
     for (j = i + 1; j < 12; ++j) {
-      this$static.ep[j] >= this$static.ep[i] && ++this$static.ep[j];
+      obj.ep[j] >= obj.ep[i] && ++obj.ep[j];
     }
   }
 }
 
-function $setFlip(this$static, idx){
+function $setFlip(obj, idx){
   var i;
-  this$static.eo[11] = bitOdd(idx);
+  obj.eo[11] = bitOdd(idx);
   for (i = 0; i < 11; ++i) {
-    this$static.eo[i] = (idx & 1);
+    obj.eo[i] = (idx & 1);
     idx = idx >>> 1;
   }
 }
 
-function $setMPerm(this$static, idx){
+function $setMPerm(obj, idx){
   var i, j;
-  this$static.ep[11] = 8;
+  obj.ep[11] = 8;
   for (i = 10; i >= 8; --i) {
-    this$static.ep[i] = idx % (12 - i) + 8;
+    obj.ep[i] = idx % (12 - i) + 8;
     idx = ~~(idx / (12 - i));
     for (j = i + 1; j < 12; ++j) {
-      this$static.ep[j] >= this$static.ep[i] && ++this$static.ep[j];
+      obj.ep[j] >= obj.ep[i] && ++obj.ep[j];
     }
   }
 }
 
-function $setMid3(this$static, idxA){
+function $setMid3(obj, idxA){
   var edge, i, r;
-  edge = ($clinit_Util() , perm3)[idxA % 6];
+  edge = (perm3)[idxA % 6];
   idxA = ~~(idxA / 6);
   r = 3;
   for (i = 11; i >= 0; --i) {
     if (idxA >= Cnk[i][r]) {
       idxA = idxA - Cnk[i][r--];
-      this$static.ep[i] = edge[2 - r];
+      obj.ep[i] = edge[2 - r];
     }
      else {
-      this$static.ep[i] = 8 - i + r;
+      obj.ep[i] = 8 - i + r;
     }
   }
 }
 
-function $setTwist(this$static, idx){
+function $setTwist(obj, idx){
   var i, twst;
   twst = 0;
   for (i = 6; i >= 0; --i) {
-    twst = twst + (this$static.co[i] = idx % 3);
+    twst = twst + (obj.co[i] = idx % 3);
     idx = ~~(idx / 3);
   }
-  this$static.co[7] = (15 - twst) % 3;
+  obj.co[7] = (15 - twst) % 3;
 }
 
-function $setUDSlice(this$static, idx){
+function $setUDSlice(obj, idx){
   var i, r;
   r = 4;
   for (i = 0; i < 12; ++i) {
-    if (idx >= ($clinit_Util() , Cnk)[11 - i][r]) {
+    if (idx >= (Cnk)[11 - i][r]) {
       idx = idx - Cnk[11 - i][r--];
-      this$static.ep[i] = 11 - r;
+      obj.ep[i] = 11 - r;
     }
      else {
-      this$static.ep[i] = i + r - 4;
+      obj.ep[i] = i + r - 4;
     }
   }
 }
 
-function $verify(this$static){
+function $verify(obj){
   var c, cornMask, e, edgeMask, i, sum;
   sum = 0;
   edgeMask = 0;
   for (e = 0; e < 12; ++e)
-    edgeMask = (edgeMask | 1 << this$static.ep[e]);
+    edgeMask = (edgeMask | 1 << obj.ep[e]);
   if (edgeMask != 4095)
     return -2;
   for (i = 0; i < 12; ++i)
-    sum = sum ^ this$static.eo[i];
+    sum = sum ^ obj.eo[i];
   if (sum % 2 != 0)
     return -3;
   cornMask = 0;
   for (c = 0; c < 8; ++c)
-    cornMask = (cornMask | 1 << this$static.cp[c]);
+    cornMask = (cornMask | 1 << obj.cp[c]);
   if (cornMask != 255)
     return -4;
   sum = 0;
   for (i = 0; i < 8; ++i)
-    sum = sum + this$static.co[i];
+    sum = sum + obj.co[i];
   if (sum % 3 != 0)
     return -5;
-  if ((get12Parity($getEdgePerm(this$static)) ^ get8Parity(get8Perm(this$static.cp))) != 0)
+  if ((get12Parity($getEdgePerm(obj)) ^ get8Parity(get8Perm(obj.cp))) != 0)
     return -6;
   return 0;
 }
@@ -1081,7 +819,6 @@ function CornConjugate(a, idx, b){
 }
 
 function CornMult(a, b, prod){
-  $clinit_CubieCube();
   var corn;
   for (corn = 0; corn < 8; ++corn) {
     prod.cp[corn] = a.cp[b.cp[corn]];
@@ -1090,7 +827,6 @@ function CornMult(a, b, prod){
 }
 
 function CornMultSym(a, b, prod){
-  $clinit_CubieCube();
   var corn, ori, oriA, oriB;
   for (corn = 0; corn < 8; ++corn) {
     prod.cp[corn] = a.cp[b.cp[corn]];
@@ -1105,7 +841,6 @@ function CornMultSym(a, b, prod){
 }
 
 function CubieCube_0(){
-  $clinit_CubieCube();
   $$init(this);
 }
 
@@ -1123,7 +858,6 @@ function CubieCube_1(cp, co, ep, eo){
 }
 
 function CubieCube_2(cperm, twist, eperm, flip){
-  $clinit_CubieCube();
   $$init(this);
   set8Perm(this.cp, cperm);
   $setTwist(this, twist);
@@ -1136,13 +870,11 @@ function CubieCube_3(c){
 }
 
 function EdgeConjugate(a, idx, b){
-  $clinit_CubieCube();
   EdgeMult(CubeSym[SymInv[idx]], a, temp_0);
   EdgeMult(temp_0, CubeSym[idx], b);
 }
 
 function EdgeMult(a, b, prod){
-  $clinit_CubieCube();
   var ed;
   for (ed = 0; ed < 12; ++ed) {
     prod.ep[ed] = a.ep[b.ep[ed]];
@@ -1151,7 +883,6 @@ function EdgeMult(a, b, prod){
 }
 
 function get8Perm(arr){
-  $clinit_CubieCube();
   var i, idx, v, val;
   idx = 0;
   val = 1985229328;
@@ -1165,7 +896,7 @@ function get8Perm(arr){
 
 function initMove(){
   var m_0, mc, p;
-  mc = initDim(_3Lnet_cubing_mark2_client_CubieCube_2_classLit, makeCastMap([Q$Serializable]), Q$CubieCube, 18, 0);
+  mc = Array(18);
   moveCube = [new CubieCube_2(15120, 0, 119750400, 0), new CubieCube_2(21021, 1494, 323403417, 0), new CubieCube_2(8064, 1236, 29441808, 802), new CubieCube_2(9, 0, 5880, 0), new CubieCube_2(1230, 412, 2949660, 0), new CubieCube_2(224, 137, 328552, 1160)];
   for (m_0 = 0; m_0 < 6; ++m_0) {
     mc[m_0 * 3] = moveCube[m_0];
@@ -1243,7 +974,7 @@ function initSym(){
   }
   for (j = 0; j < 10; ++j) {
     for (s = 0; s < 16; ++s) {
-      SymMoveUD[s][j] = ($clinit_Util() , std2ud)[SymMove[s][ud2std[j]]];
+      SymMoveUD[s][j] = (std2ud)[SymMove[s][ud2std[j]]];
     }
   }
   for (j = 0; j < 8; ++j) {
@@ -1267,7 +998,7 @@ function initSym2Raw(){
   var a, b, c, count, d, i, idx, j, m_0, mask, occ, s;
   c = new CubieCube_0;
   d = new CubieCube_0;
-  occ = initDim(_3I_classLit, makeCastMap([Q$Serializable]), -1, 1260, 1);
+  occ = Array(1260);
   count = 0;
   for (i = 0; i < 64; occ[i++] = 0)
   ;
@@ -1300,17 +1031,23 @@ function initSym2Raw(){
       TwistS2R[count++] = i;
     }
   }
-  mask = initDim(_3J_classLit, makeCastMap([Q$Serializable]), -1, 56, 3);
+
+  mask = Array(2);
+  mask[0] = Array(56);
+  mask[1] = Array(56);
+  for (i=0; i<56; ++i) {
+    mask[0][i] = mask[1][i] = 0;
+  }
   for (i = 0; i < 40320; ++i) {
     set8Perm(c.ep, i);
     a = ~~($getURtoUL(c) / 6);
     b = ~~($getDRtoDL(c) / 6);
-    mask[a] = or(mask[a], shl(P1_longLit, b));
+    mask[b>>5][a] |= 1 << (b & 0x1f);
   }
   for (i = 0; i < 56; ++i) {
     count = 0;
     for (j = 0; j < 56; ++j) {
-      neq(and(mask[i], shl(P1_longLit, j)), P0_longLit) && (merge[i][j] = count++);
+      ((mask[j>>5][i] & (1 << (j & 0x1f))) != 0) && (merge[i][j] = count++);
     }
   }
   count = 0;
@@ -1336,11 +1073,10 @@ function initSym2Raw(){
 }
 
 function set8Perm(arr, idx){
-  $clinit_CubieCube();
   var i, m_0, p, v, val;
   val = 1985229328;
   for (i = 0; i < 7; ++i) {
-    p = ($clinit_Util() , fact)[7 - i];
+    p = (fact)[7 - i];
     v = ~~(idx / p);
     idx = idx - v * p;
     v <<= 2;
@@ -1354,212 +1090,130 @@ function set8Perm(arr, idx){
 function CubieCube(){
 }
 
-_ = CubieCube_3.prototype = CubieCube_2.prototype = CubieCube_0.prototype = CubieCube.prototype = new Object_0;
-_.getClass$ = function getClass_216(){
-  return Lnet_cubing_mark2_client_CubieCube_2_classLit;
-}
-;
-_.castableTypeMap$ = makeCastMap([Q$CubieCube]);
+_ = CubieCube_3.prototype = CubieCube_2.prototype = CubieCube_0.prototype = CubieCube.prototype;
 _.temps = null;
 var CPermS2R, CubeSym, EPermR2S = null, EPermS2R, FlipR2S = null, FlipS2R, MtoEPerm, Sym8Move, Sym8Mult, Sym8MultInv, SymInv, SymMove, SymMoveUD, SymMult, TwistR2S = null, TwistS2R, e2c, merge, moveCube = null, temp_0, urf1, urf2, urfMove;
-function $clinit_GreetingService_Proxy(){
-  $clinit_GreetingService_Proxy = nullMethod;
-  SERIALIZER = new GreetingService_TypeSerializer_0;
-}
-
-function $createStreamWriter(this$static){
-  var toReturn, clientSerializationStreamWriter;
-  toReturn = (clientSerializationStreamWriter = new ClientSerializationStreamWriter_0(this$static.moduleBaseURL, this$static.serializationPolicyName) , $clearImpl(clientSerializationStreamWriter.objectMap) , $clearImpl(clientSerializationStreamWriter.stringMap) , $clear(clientSerializationStreamWriter.stringTable) , clientSerializationStreamWriter.encodeBuffer = new StringBuffer_0 , $writeString(clientSerializationStreamWriter, clientSerializationStreamWriter.moduleBaseURL) , $writeString(clientSerializationStreamWriter, clientSerializationStreamWriter.serializationPolicyStrongName) , clientSerializationStreamWriter);
-  return toReturn;
-}
-
-function $greetServer(this$static, input, callback){
-  var $e0, helper, streamWriter;
-  helper = new RemoteServiceProxy$ServiceHelper_0(this$static);
-  try {
-    streamWriter = (!!$stats && $stats_0($timeStat(helper.statsContext, helper.fullServiceName, 'begin')) , helper.streamWriter = $createStreamWriter(helper.this$0) , helper.this$0.rpcToken != null && $writeObject(helper.streamWriter, helper.this$0) , $writeString(helper.streamWriter, 'net.cubing.mark2.client.GreetingService') , $writeString(helper.streamWriter, helper.methodName) , $writeInt(helper.streamWriter, 1) , helper.streamWriter);
-    $writeInt(streamWriter, $addString(streamWriter, 'java.lang.String/2004016611'));
-    $writeInt(streamWriter, $addString(streamWriter, input));
-    $finish_0(helper, callback, $clinit_RequestCallbackAdapter$ResponseReader());
-  }
-   catch ($e0) {
-    $e0 = caught_0($e0);
-    if (instanceOf($e0, Q$SerializationException)) {
-      $onFailure(callback);
-    }
-     else 
-      throw $e0;
-  }
-}
-
-function GreetingService_Proxy_0(){
-  $clinit_GreetingService_Proxy();
-  RemoteServiceProxy_0.call(this, $moduleBase, SERIALIZER);
-}
-
-function GreetingService_Proxy(){
-}
-
-//_ = GreetingService_Proxy_0.prototype = GreetingService_Proxy.prototype = new RemoteServiceProxy;
-_.getClass$ = function getClass_217(){
-  return Lnet_cubing_mark2_client_GreetingService_1Proxy_2_classLit;
-}
-;
-var SERIALIZER;
-function $clinit_GreetingService_TypeSerializer(){
-  var result, result_0;
-  $clinit_GreetingService_TypeSerializer = nullMethod;
-  methodMapNative_0 = (result = {} , result['com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException/3936916533'] = [instantiate, deserialize, serialize] , result['com.google.gwt.user.client.rpc.RpcTokenException/2345075298'] = [instantiate_0, deserialize_0] , result['com.google.gwt.user.client.rpc.XsrfToken/4254043109'] = [undefined, undefined, serialize_0] , result['java.lang.IllegalArgumentException/1755012560'] = [instantiate_1, deserialize_1] , result['java.lang.NumberFormatException/3305228476'] = [instantiate_2, deserialize_2] , result['java.lang.String/2004016611'] = [instantiate_3, deserialize_3, serialize_1] , result);
-  result_0 = [];
-  result_0[getHashCode(Lcom_google_gwt_user_client_rpc_IncompatibleRemoteServiceException_2_classLit)] = 'com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException/3936916533';
-  result_0[getHashCode(Lcom_google_gwt_user_client_rpc_RpcTokenException_2_classLit)] = 'com.google.gwt.user.client.rpc.RpcTokenException/2345075298';
-  result_0[getHashCode(Lcom_google_gwt_user_client_rpc_XsrfToken_2_classLit)] = 'com.google.gwt.user.client.rpc.XsrfToken/4254043109';
-  result_0[getHashCode(Ljava_lang_IllegalArgumentException_2_classLit)] = 'java.lang.IllegalArgumentException/1755012560';
-  result_0[getHashCode(Ljava_lang_NumberFormatException_2_classLit)] = 'java.lang.NumberFormatException/3305228476';
-  result_0[getHashCode(Ljava_lang_String_2_classLit)] = 'java.lang.String/2004016611';
-}
-
-function GreetingService_TypeSerializer_0(){
-  $clinit_GreetingService_TypeSerializer();
-  SerializerBase_0.call(this, methodMapNative_0);
-}
-
-function GreetingService_TypeSerializer(){
-}
-
-//_ = GreetingService_TypeSerializer_0.prototype = GreetingService_TypeSerializer.prototype = new SerializerBase;
-_.getClass$ = function getClass_218(){
-  return Lnet_cubing_mark2_client_GreetingService_1TypeSerializer_2_classLit;
-}
-;
-var methodMapNative_0 = null;
 
 
-function $Solve(this$static, c){
+function $Solve(obj, c){
   var i;
   c.temps = new CubieCube_0;
   for (i = 0; i < 6; ++i) {
-    this$static.twist[i] = $getTwistSym(c);
-    this$static.tsym[i] = this$static.twist[i] & 7;
-    this$static.twist[i] >>>= 3;
-    this$static.flip[i] = $getFlipSym(c);
-    this$static.fsym[i] = this$static.flip[i] & 7;
-    this$static.flip[i] >>>= 3;
-    this$static.slice_0[i] = $getUDSlice(c);
-    this$static.corn0[i] = $getCPermSym(c);
-    this$static.csym0[i] = this$static.corn0[i] & 15;
-    this$static.corn0[i] >>>= 4;
-    this$static.mid30[i] = $getMid3(c);
-    this$static.e10[i] = $getURtoUL(c);
-    this$static.e20[i] = $getDRtoDL(c);
-    this$static.prun[i] = Math.max(Math.max(($clinit_CoordCube() , UDSliceTwistPrun)[this$static.twist[i] * 495 + UDSliceConj[this$static.slice_0[i]][this$static.tsym[i]]], UDSliceFlipPrun[this$static.flip[i] * 495 + UDSliceConj[this$static.slice_0[i]][this$static.fsym[i]]]), TwistFlipPrun[this$static.twist[i] * 2688 + (this$static.flip[i] << 3 | ($clinit_CubieCube() , Sym8MultInv)[this$static.fsym[i]][this$static.tsym[i]])]);
+    obj.twist[i] = $getTwistSym(c);
+    obj.tsym[i] = obj.twist[i] & 7;
+    obj.twist[i] >>>= 3;
+    obj.flip[i] = $getFlipSym(c);
+    obj.fsym[i] = obj.flip[i] & 7;
+    obj.flip[i] >>>= 3;
+    obj.slice_0[i] = $getUDSlice(c);
+    obj.corn0[i] = $getCPermSym(c);
+    obj.csym0[i] = obj.corn0[i] & 15;
+    obj.corn0[i] >>>= 4;
+    obj.mid30[i] = $getMid3(c);
+    obj.e10[i] = $getURtoUL(c);
+    obj.e20[i] = $getDRtoDL(c);
+    obj.prun[i] = Math.max(Math.max((UDSliceTwistPrun)[obj.twist[i] * 495 + UDSliceConj[obj.slice_0[i]][obj.tsym[i]]], UDSliceFlipPrun[obj.flip[i] * 495 + UDSliceConj[obj.slice_0[i]][obj.fsym[i]]]), TwistFlipPrun[obj.twist[i] * 2688 + (obj.flip[i] << 3 | (Sym8MultInv)[obj.fsym[i]][obj.tsym[i]])]);
     CornMult(urf2, c, c.temps);
     CornMult(c.temps, urf1, c);
     EdgeMult(urf2, c, c.temps);
     EdgeMult(c.temps, urf1, c);
     i === 2 && $invCubieCube(c);
   }
-  this$static.solution = null;
-  for (this$static.length1 = 0; this$static.length1 < this$static.sol; ++this$static.length1) {
-    this$static.maxlength2 = Math.min(~~(this$static.sol / 2) + 1, this$static.sol - this$static.length1);
-    for (this$static.urfidx = 0; this$static.urfidx < 6; ++this$static.urfidx) {
-      this$static.corn[0] = this$static.corn0[this$static.urfidx];
-      this$static.csym[0] = this$static.csym0[this$static.urfidx];
-      this$static.mid3[0] = this$static.mid30[this$static.urfidx];
-      this$static.e1[0] = this$static.e10[this$static.urfidx];
-      this$static.e2[0] = this$static.e20[this$static.urfidx];
-      if (this$static.prun[this$static.urfidx] <= this$static.length1 && $phase1(this$static, this$static.twist[this$static.urfidx], this$static.tsym[this$static.urfidx], this$static.flip[this$static.urfidx], this$static.fsym[this$static.urfidx], this$static.slice_0[this$static.urfidx], this$static.length1, 18)) {
-        return this$static.solution === null?'Error 8':this$static.solution;
+  obj.solution = null;
+  for (obj.length1 = 0; obj.length1 < obj.sol; ++obj.length1) {
+    obj.maxlength2 = Math.min(~~(obj.sol / 2) + 1, obj.sol - obj.length1);
+    for (obj.urfidx = 0; obj.urfidx < 6; ++obj.urfidx) {
+      obj.corn[0] = obj.corn0[obj.urfidx];
+      obj.csym[0] = obj.csym0[obj.urfidx];
+      obj.mid3[0] = obj.mid30[obj.urfidx];
+      obj.e1[0] = obj.e10[obj.urfidx];
+      obj.e2[0] = obj.e20[obj.urfidx];
+      if (obj.prun[obj.urfidx] <= obj.length1 && $phase1(obj, obj.twist[obj.urfidx], obj.tsym[obj.urfidx], obj.flip[obj.urfidx], obj.fsym[obj.urfidx], obj.slice_0[obj.urfidx], obj.length1, 18)) {
+        return obj.solution === null?'Error 8':obj.solution;
       }
     }
   }
   return 'Error 7';
 }
 
-function $init2(this$static){
+function $init2(obj){
   var cornx, edge, esym, ex, i, lm, m_0, mid, prun, s, sb, urf;
-//  if (gt(fromDouble(currentTimeMillis0()), this$static.timeOut)) {
-//    return true;
-//  }
-  this$static.valid2 = Math.min(this$static.valid2, this$static.valid1);
-  for (i = this$static.valid1; i < this$static.length1; ++i) {
-    m_0 = this$static.move[i];
-    this$static.corn[i + 1] = ($clinit_CoordCube() , CPermMove)[this$static.corn[i]][($clinit_CubieCube() , SymMove)[this$static.csym[i]][m_0]];
-    this$static.csym[i + 1] = SymMult[this$static.corn[i + 1] & 15][this$static.csym[i]];
-    this$static.corn[i + 1] >>>= 4;
-    this$static.mid3[i + 1] = Mid3Move[this$static.mid3[i]][m_0];
+  obj.valid2 = Math.min(obj.valid2, obj.valid1);
+  for (i = obj.valid1; i < obj.length1; ++i) {
+    m_0 = obj.move[i];
+    obj.corn[i + 1] = (CPermMove)[obj.corn[i]][(SymMove)[obj.csym[i]][m_0]];
+    obj.csym[i + 1] = SymMult[obj.corn[i + 1] & 15][obj.csym[i]];
+    obj.corn[i + 1] >>>= 4;
+    obj.mid3[i + 1] = Mid3Move[obj.mid3[i]][m_0];
   }
-  this$static.valid1 = this$static.length1;
-  mid = ($clinit_CoordCube() , Mid32MPerm)[this$static.mid3[this$static.length1] % 24];
-  prun = MCPermPrun[this$static.corn[this$static.length1] * 24 + MPermConj[mid][this$static.csym[this$static.length1]]];
-  if (prun >= this$static.maxlength2) {
+  obj.valid1 = obj.length1;
+  mid = (Mid32MPerm)[obj.mid3[obj.length1] % 24];
+  prun = MCPermPrun[obj.corn[obj.length1] * 24 + MPermConj[mid][obj.csym[obj.length1]]];
+  if (prun >= obj.maxlength2) {
     return false;
   }
-  for (i = this$static.valid2; i < this$static.length1; ++i) {
-    this$static.e1[i + 1] = Mid3Move[this$static.e1[i]][this$static.move[i]];
-    this$static.e2[i + 1] = Mid3Move[this$static.e2[i]][this$static.move[i]];
+  for (i = obj.valid2; i < obj.length1; ++i) {
+    obj.e1[i + 1] = Mid3Move[obj.e1[i]][obj.move[i]];
+    obj.e2[i + 1] = Mid3Move[obj.e2[i]][obj.move[i]];
   }
-  this$static.valid2 = this$static.length1;
-  cornx = this$static.corn[this$static.length1];
-  ex = ($clinit_CubieCube() , merge)[~~(this$static.e1[this$static.length1] / 6)][~~(this$static.e2[this$static.length1] / 6)] * 4032 + this$static.e1[this$static.length1] * 12 + this$static.e2[this$static.length1] % 6 * 2 + (CParity[cornx >>> 3] >>> (cornx & 7) & 1 ^ ($clinit_Util() , parity4)[mid]);
+  obj.valid2 = obj.length1;
+  cornx = obj.corn[obj.length1];
+  ex = (merge)[~~(obj.e1[obj.length1] / 6)][~~(obj.e2[obj.length1] / 6)] * 4032 + obj.e1[obj.length1] * 12 + obj.e2[obj.length1] % 6 * 2 + (CParity[cornx >>> 3] >>> (cornx & 7) & 1 ^ (parity4)[mid]);
   edge = MtoEPerm[ex];
   esym = edge & 15;
   edge >>>= 4;
   prun = Math.max(MEPermPrun[edge * 24 + MPermConj[mid][esym]], prun);
-  if (prun >= this$static.maxlength2) {
+  if (prun >= obj.maxlength2) {
     return false;
   }
-  lm = this$static.length1 === 0?10:std2ud[~~(this$static.move[this$static.length1 - 1] / 3) * 3 + 1];
-  for (i = prun; i < this$static.maxlength2; ++i) {
-    if ($phase2(this$static, edge, esym, this$static.corn[this$static.length1], this$static.csym[this$static.length1], mid, i, this$static.length1, lm)) {
-      this$static.sol = this$static.length1 + i;
+  lm = obj.length1 === 0?10:std2ud[~~(obj.move[obj.length1 - 1] / 3) * 3 + 1];
+  for (i = prun; i < obj.maxlength2; ++i) {
+    if ($phase2(obj, edge, esym, obj.corn[obj.length1], obj.csym[obj.length1], mid, i, obj.length1, lm)) {
+      obj.sol = obj.length1 + i;
       sb = "";
-      urf = this$static.urfidx;
-      this$static.inverse && (urf = (urf + 3) % 6);
+      urf = obj.urfidx;
+      (urf = (urf + 3) % 6);
       if (urf < 3) {
-        for (s = 0; s < this$static.length1; ++s) {
-          sb += move2str[urfMove[urf][this$static.move[s]]];
+        for (s = 0; s < obj.length1; ++s) {
+          sb += move2str[urfMove[urf][obj.move[s]]];
           sb += ' ';
         }
-        this$static.useSeparator && (sb.impl.string += '.' , sb);
-        for (s = this$static.length1; s < this$static.sol; ++s) {
-          sb += move2str[urfMove[urf][this$static.move[s]]];
+        obj.useSeparator && (sb.impl.string += '.' , sb);
+        for (s = obj.length1; s < obj.sol; ++s) {
+          sb += move2str[urfMove[urf][obj.move[s]]];
           sb += ' ';
         }
       }
        else {
-        for (s = this$static.sol - 1; s >= this$static.length1; --s) {
-          sb += move2str[urfMove[urf][this$static.move[s]]];
+        for (s = obj.sol - 1; s >= obj.length1; --s) {
+          sb += move2str[urfMove[urf][obj.move[s]]];
           sb += ' ';
         }
-        this$static.useSeparator && (sb += '.' , sb);
-        for (s = this$static.length1 - 1; s >= 0; --s) {
-          sb += move2str[urfMove[urf][this$static.move[s]]];
+        obj.useSeparator && (sb += '.' , sb);
+        for (s = obj.length1 - 1; s >= 0; --s) {
+          sb += move2str[urfMove[urf][obj.move[s]]];
           sb += ' ';
         }
       }
-//      sb.impl.string += '(';
-//      $append_1(sb, this$static.sol);
-//      sb.impl.string += 'f)';
-      this$static.solution = sb;
+      obj.solution = sb;
       return true;
     }
   }
   return false;
 }
 
-function $phase1(this$static, twist, tsym, flip, fsym, slice, maxl, lm){
+function $phase1(obj, twist, tsym, flip, fsym, slice, maxl, lm){
   var flipx, fsymx, m_0, slicex, tsymx, twistx;
   if (twist === 0 && flip === 0 && slice === 0 && maxl < 5) {
-    return maxl === 0 && $init2(this$static);
+    return maxl === 0 && $init2(obj);
   }
   for (m_0 = 0; m_0 < 18; ++m_0) {
-    if (($clinit_Util() , ckmv)[lm][m_0]) {
+    if ((ckmv)[lm][m_0]) {
       m_0 += 2;
       continue;
     }
-    slicex = ($clinit_CoordCube() , UDSliceMove)[slice][m_0];
-    twistx = TwistMove[twist][($clinit_CubieCube() , Sym8Move)[tsym][m_0]];
+    slicex = (UDSliceMove)[slice][m_0];
+    twistx = TwistMove[twist][Sym8Move[tsym][m_0]];
     tsymx = Sym8Mult[twistx & 7][tsym];
     twistx >>>= 3;
     if (UDSliceTwistPrun[twistx * 495 + UDSliceConj[slicex][tsymx]] >= maxl) {
@@ -1571,26 +1225,26 @@ function $phase1(this$static, twist, tsym, flip, fsym, slice, maxl, lm){
     if (TwistFlipPrun[twistx * 2688 + (flipx << 3 | Sym8MultInv[fsymx][tsymx])] >= maxl || UDSliceFlipPrun[flipx * 495 + UDSliceConj[slicex][fsymx]] >= maxl) {
       continue;
     }
-    this$static.move[this$static.length1 - maxl] = m_0;
-    this$static.valid1 = Math.min(this$static.valid1, this$static.length1 - maxl);
-    if ($phase1(this$static, twistx, tsymx, flipx, fsymx, slicex, maxl - 1, m_0)) {
+    obj.move[obj.length1 - maxl] = m_0;
+    obj.valid1 = Math.min(obj.valid1, obj.length1 - maxl);
+    if ($phase1(obj, twistx, tsymx, flipx, fsymx, slicex, maxl - 1, m_0)) {
       return true;
     }
   }
   return false;
 }
 
-function $phase2(this$static, edge, esym, corn, csym, mid, maxl, depth, lm){
+function $phase2(obj, edge, esym, corn, csym, mid, maxl, depth, lm){
   var cornx, csymx, edgex, esymx, m_0, midx;
   if (edge === 0 && corn === 0 && mid === 0) {
     return true;
   }
   for (m_0 = 0; m_0 < 10; ++m_0) {
-    if (($clinit_Util() , ckmv2)[lm][m_0]) {
+    if ((ckmv2)[lm][m_0]) {
       continue;
     }
-    midx = ($clinit_CoordCube() , MPermMove)[mid][m_0];
-    edgex = EPermMove[edge][($clinit_CubieCube() , SymMoveUD)[esym][m_0]];
+    midx = (MPermMove)[mid][m_0];
+    edgex = EPermMove[edge][(SymMoveUD)[esym][m_0]];
     esymx = SymMult[edgex & 15][esym];
     edgex >>>= 4;
     if (MEPermPrun[edgex * 24 + MPermConj[midx][esymx]] >= maxl) {
@@ -1602,115 +1256,87 @@ function $phase2(this$static, edge, esym, corn, csym, mid, maxl, depth, lm){
     if (MCPermPrun[cornx * 24 + MPermConj[midx][csymx]] >= maxl) {
       continue;
     }
-    this$static.move[depth] = ud2std[m_0];
-    if ($phase2(this$static, edgex, esymx, cornx, csymx, midx, maxl - 1, depth + 1, m_0)) {
+    obj.move[depth] = ud2std[m_0];
+    if ($phase2(obj, edgex, esymx, cornx, csymx, midx, maxl - 1, depth + 1, m_0)) {
       return true;
     }
   }
   return false;
 }
 
-function $solution(this$static, facelets){
+function $solution(obj, facelets){
   var $e0, cc, i, s;
   init_0();
-  for (i = 0; i < 6; this$static.count[i++] = 0)
-  ;
-  try {
     for (i = 0; i < 54; ++i) {
       switch (facelets.charCodeAt(i)) {
         case 85:
-          this$static.f[i] = 0;
+          obj.f[i] = 0;
           break;
         case 82:
-          this$static.f[i] = 1;
+          obj.f[i] = 1;
           break;
         case 70:
-          this$static.f[i] = 2;
+          obj.f[i] = 2;
           break;
         case 68:
-          this$static.f[i] = 3;
+          obj.f[i] = 3;
           break;
         case 76:
-          this$static.f[i] = 4;
+          obj.f[i] = 4;
           break;
         case 66:
-          this$static.f[i] = 5;
+          obj.f[i] = 5;
           break;
         default:return 'Error 1';
       }
-      ++this$static.count[this$static.f[i]];
     }
-  }
-   catch ($e0) {
-    $e0 = caught_0($e0);
-    if (instanceOf($e0, Q$Exception)) {
-      return 'Error 1';
-    }
-     else 
-      throw $e0;
-  }
-  for (i = 0; i < 6; ++i)
-    if (this$static.count[i] != 9) {
-      return 'Error 1';
-    }
-  cc = toCubieCube(this$static.f);
-//  if ((s = $verify(cc)) != 0)
-//    return 'Error ' + (s < 0?-s:s);
-  this$static.useSeparator = false;
-  this$static.inverse = true;
-//  this$static.timeOut = add_0(fromDouble(currentTimeMillis0()), P186a0_longLit);
-  this$static.sol = 22;
-  return $Solve(this$static, cc);
-}
-
-function Search_0(){
-  this.move = initDim(_3I_classLit, makeCastMap([Q$Serializable]), -1, 31, 1);
-  this.corn = initDim(_3I_classLit, makeCastMap([Q$Serializable]), -1, 20, 1);
-  this.csym = initDim(_3I_classLit, makeCastMap([Q$Serializable]), -1, 20, 1);
-  this.mid3 = initDim(_3I_classLit, makeCastMap([Q$Serializable]), -1, 20, 1);
-  this.e1 = initDim(_3I_classLit, makeCastMap([Q$Serializable]), -1, 20, 1);
-  this.e2 = initDim(_3I_classLit, makeCastMap([Q$Serializable]), -1, 20, 1);
-  this.twist = initDim(_3I_classLit, makeCastMap([Q$Serializable]), -1, 6, 1);
-  this.tsym = initDim(_3I_classLit, makeCastMap([Q$Serializable]), -1, 6, 1);
-  this.flip = initDim(_3I_classLit, makeCastMap([Q$Serializable]), -1, 6, 1);
-  this.fsym = initDim(_3I_classLit, makeCastMap([Q$Serializable]), -1, 6, 1);
-  this.slice_0 = initDim(_3I_classLit, makeCastMap([Q$Serializable]), -1, 6, 1);
-  this.corn0 = initDim(_3I_classLit, makeCastMap([Q$Serializable]), -1, 6, 1);
-  this.csym0 = initDim(_3I_classLit, makeCastMap([Q$Serializable]), -1, 6, 1);
-  this.mid30 = initDim(_3I_classLit, makeCastMap([Q$Serializable]), -1, 6, 1);
-  this.e10 = initDim(_3I_classLit, makeCastMap([Q$Serializable]), -1, 6, 1);
-  this.e20 = initDim(_3I_classLit, makeCastMap([Q$Serializable]), -1, 6, 1);
-  this.prun = initDim(_3I_classLit, makeCastMap([Q$Serializable]), -1, 6, 1);
-  this.count = initDim(_3I_classLit, makeCastMap([Q$Serializable]), -1, 6, 1);
-  this.f = initDim(_3B_classLit, makeCastMap([Q$byte_$1, Q$Serializable]), -1, 54, 1);
+  cc = toCubieCube(obj.f);
+  obj.sol = 22;
+  return $Solve(obj, cc);
 }
 
 function Search(){
+  this.move = Array(31);
+  this.corn = Array(20);
+  this.csym = Array(20);
+  this.mid3 = Array(20);
+  this.e1 = Array(20);
+  this.e2 = Array(20);
+  this.twist = Array(6);
+  this.tsym = Array(6);
+  this.flip = Array(6);
+  this.fsym = Array(6);
+  this.slice_0 = Array(6);
+  this.corn0 = Array(6);
+  this.csym0 = Array(6);
+  this.mid30 = Array(6);
+  this.e10 = Array(6);
+  this.e20 = Array(6);
+  this.prun = Array(6);
+  this.count = Array(6);
+  this.f = Array(54);
 }
 
-_ = Search_0.prototype = Search.prototype = new Object_0;
-_.getClass$ = function getClass_219(){
-  return Lnet_cubing_mark2_client_Search_2_classLit;
-}
-;
+_ = Search.prototype;
 _.inverse = false;
 _.length1 = 0;
 _.maxlength2 = 0;
 _.sol = 999;
 _.solution = null;
-//_.timeOut = P0_longLit;
 _.urfidx = 0;
 _.useSeparator = false;
 _.valid1 = 0;
 _.valid2 = 0;
+
 function init_0(safeStatusCallback){
   if (inited)
     return;
+  $clinit_Util();
   safeStatusCallback("[0/9] Initializing Cubie Cube...");
   $clinit_CubieCube();
-  FlipR2S = initDim(_3C_classLit, makeCastMap([Q$char_$1, Q$Serializable]), -1, 2048, 1);
-  TwistR2S = initDim(_3C_classLit, makeCastMap([Q$char_$1, Q$Serializable]), -1, 2187, 1);
-  EPermR2S = initDim(_3C_classLit, makeCastMap([Q$char_$1, Q$Serializable]), -1, 40320, 1);
+  FlipR2S = Array(2048);
+  TwistR2S = Array(2187);
+  EPermR2S = Array(40320);
   safeStatusCallback("[1/9] Initializing Sym2Raw...");
   initSym2Raw();
   safeStatusCallback("[2/9] Initializing CoordCube...");
@@ -1734,19 +1360,18 @@ function init_0(safeStatusCallback){
   initMPermMove();
   initMPermConj();
   safeStatusCallback("[7/9] Initializing TwistFlipSlicePrun...");
-  initTwistFlipSlicePrun();
+  initTwistFlipSlicePrun(safeStatusCallback);
   safeStatusCallback("[8/9] Initializing MCEPermPrum...");
-  initMCEPermPrun();
+  initMCEPermPrun(safeStatusCallback);
   safeStatusCallback("[9/9] Done initializing 3x3x3...");
   inited = true;
 }
 
 function randomCube_0(){
-  var cperm, eperm, gen;
-//  gen = new Random_0;
+  var cperm, eperm;
   do {
-    eperm = Math.floor(randomSource.random() * 479001600);//$nextInt(gen, 479001600);
-    cperm = Math.floor(randomSource.random() * 40320);//$nextInt(gen, 40320);
+    eperm = Math.floor(randomSource.random() * 479001600);
+    cperm = Math.floor(randomSource.random() * 40320);
   }
    while ((get8Parity(cperm) ^ get12Parity(eperm)) != 0);
   return toFaceCube(new CubieCube_2(cperm, Math.floor(randomSource.random() * 2187), eperm, Math.floor(randomSource.random() * 2048)));
@@ -1760,14 +1385,14 @@ function $clinit_Util(){
   edgeFacelet = [[5, 10], [7, 19], [3, 37], [1, 46], [32, 16], [28, 25], [30, 43], [34, 52], [23, 12], [21, 41], [50, 39], [48, 14]];
   cornerColor = [[0, 1, 2], [0, 2, 4], [0, 4, 5], [0, 5, 1], [3, 2, 1], [3, 4, 2], [3, 5, 4], [3, 1, 5]];
   edgeColor = [[0, 1], [0, 2], [0, 4], [0, 5], [3, 1], [3, 2], [3, 4], [3, 5], [2, 1], [2, 4], [5, 4], [5, 1]];
-  Cnk = initDims([_3_3C_classLit, _3C_classLit], [makeCastMap([Q$Serializable]), makeCastMap([Q$char_$1, Q$Serializable])], [Q$char_$1, -1], [12, 12], 2, 1);
+  Cnk = createArray(12, 12);
   fact = [1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800, 39916800, 479001600];
   move2str = ['U ', 'U2', "U'", 'R ', 'R2', "R'", 'F ', 'F2', "F'", 'D ', 'D2', "D'", 'L ', 'L2', "L'", 'B ', 'B2', "B'"];
   ud2std = [0, 1, 2, 4, 7, 9, 10, 11, 13, 16];
-  std2ud = initDim(_3B_classLit, makeCastMap([Q$byte_$1, Q$Serializable]), -1, 18, 1);
-  ckmv = initDims([_3_3Z_classLit, _3Z_classLit], [makeCastMap([Q$Serializable]), makeCastMap([Q$boolean_$1, Q$Serializable])], [Q$boolean_$1, -1], [19, 18], 2, 2);
-  ckmv2 = initDims([_3_3Z_classLit, _3Z_classLit], [makeCastMap([Q$Serializable]), makeCastMap([Q$boolean_$1, Q$Serializable])], [Q$boolean_$1, -1], [11, 10], 2, 2);
-  parity4 = initDim(_3B_classLit, makeCastMap([Q$byte_$1, Q$Serializable]), -1, 24, 1);
+  std2ud = Array(18);
+  ckmv = createArray(19, 18);
+  ckmv2 = createArray(11, 10);
+  parity4 = Array(24);
   perm3 = [[11, 10, 9], [10, 11, 9], [11, 9, 10], [9, 11, 10], [10, 9, 11], [9, 10, 11]];
   for (i = 0; i < 10; ++i) {
     std2ud[ud2std[i]] = i;
@@ -1784,6 +1409,9 @@ function $clinit_Util(){
     }
     ckmv2[10][i] = false;
   }
+  for (i=0; i<12; ++i)
+    for (j=0; j<12; ++j)
+      Cnk[i][j] = 0;
   for (i = 0; i < 12; ++i) {
     Cnk[i][0] = 1;
     Cnk[i][i] = 1;
@@ -1797,7 +1425,6 @@ function $clinit_Util(){
 }
 
 function binarySearch(arr, key){
-  $clinit_Util();
   var l_0, length_0, mid, r, val;
   length_0 = arr.length;
   if (key <= arr[length_0 - 1]) {
@@ -1821,14 +1448,12 @@ function binarySearch(arr, key){
 }
 
 function bitCount(i){
-  $clinit_Util();
   i = i - (i >>> 1 & 1431655765);
   i = (i & 858993459) + (i >>> 2 & 858993459);
   return i + (i >>> 8) + (i >>> 4) & 15;
 }
 
 function bitOdd(i){
-  $clinit_Util();
   i = (i ^ i >>> 1);
   i = (i ^ i >>> 2);
   i = (i ^ i >>> 4);
@@ -1837,7 +1462,6 @@ function bitOdd(i){
 }
 
 function get12Parity(idx){
-  $clinit_Util();
   var i, p;
   p = 0;
   for (i = 10; i >= 0; --i) {
@@ -1860,7 +1484,6 @@ function get4Parity(idx){
 }
 
 function get8Parity(idx){
-  $clinit_Util();
   var i, p;
   p = 0;
   for (i = 6; i >= 0; --i) {
@@ -1872,7 +1495,6 @@ function get8Parity(idx){
 }
 
 function toCubieCube(f){
-  $clinit_Util();
   var ccRet, col1, col2, i, j, ori;
   ccRet = new CubieCube_0;
   for (i = 0; i < 8; ++i)
@@ -1911,9 +1533,8 @@ function toCubieCube(f){
 }
 
 function toFaceCube(cc){
-  $clinit_Util();
   var c, e, f, i, j, n, ori, ts;
-  f = initDim(_3C_classLit, makeCastMap([Q$char_$1, Q$Serializable]), -1, 54, 1);
+  f = Array(54);
   ts = [85, 82, 70, 68, 76, 66];
   for (i = 0; i < 54; ++i) {
     f[i] = ts[~~(i / 9)];
@@ -1935,8 +1556,9 @@ function toFaceCube(cc){
 
 var Cnk, ckmv, ckmv2, cornerColor, cornerFacelet, edgeColor, edgeFacelet, fact, move2str, parity4, perm3, std2ud, ud2std;
 
-var _3I_classLit = createForArray('', '[I'), _3Z_classLit = createForArray('', '[Z'), _3C_classLit = createForArray('', '[C'), _3J_classLit = createForArray('', '[J'), Ljava_lang_NumberFormatException_2_classLit = createForClass('java.lang.', 'NumberFormatException'), _3B_classLit = createForArray('', '[B'),  Ljava_util_Random_2_classLit = createForClass('java.util.', 'Random'), _3_3C_classLit = createForArray('', '[[C'), _3_3B_classLit = createForArray('', '[[B'), _3Lnet_cubing_mark2_client_CubieCube_2_classLit = createForArray('[Lnet.cubing.mark2.client.', 'CubieCube;'), _3_3Z_classLit = createForArray('', '[[Z');
-//if ($wnd.gwt333) $wnd.gwt333.onScriptLoad();
+
+
+
 
 
   /* Methods added by Lucas. */
@@ -2013,7 +1635,7 @@ function drawSquare(r, cx, cy, w, fillColor) {
     pathString += ((i===0) ? "M" : "L") + arrx[i] + "," + arry[i];
   }
   pathString += "z";
-    
+
   r.path(pathString).attr({fill: colorGet(fillColor), stroke: "#000"})
 }
 
@@ -2042,7 +1664,7 @@ function drawSquare(r, cx, cy, w, fillColor) {
         }
       }
     }
-        
+
   };
 
   var initialized = false;
@@ -2054,7 +1676,7 @@ function drawSquare(r, cx, cy, w, fillColor) {
     }
 
     if (!initialized) {
-      search = new Search_0;
+      search = new Search;
       init_0(statusCallback);
       setRandomSource(iniRandomSource);
       initialized = true;
@@ -2063,7 +1685,7 @@ function drawSquare(r, cx, cy, w, fillColor) {
   };
 
   var getRandomScramble = function() {
-    
+
     theRandomCube = randomCube_0();
 
     var posit = randomCube_0();
