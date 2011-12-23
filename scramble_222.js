@@ -418,21 +418,26 @@ scramblers["222"] = (function() {
       }
     }
   }
+
+  var initialized = false;
    
   // generate sequence of scambles
   function initialize(){
 
-    // build lookup table
-    flat2posit=new Array(12*size*size);
-    for(i=0; i<flat2posit.length; i++) flat2posit[i]=-1;
-    for(i=0; i<size; i++){
-      for(j=0; j<size; j++){
-        flat2posit[4*size*(3*size-i-1)+  size+j  ]=        i *size+j; //D
-        flat2posit[4*size*(  size+i  )+  size-j-1]=(  size+i)*size+j; //L
-        flat2posit[4*size*(  size+i  )+4*size-j-1]=(2*size+i)*size+j; //B
-        flat2posit[4*size*(       i  )+  size+j  ]=(3*size+i)*size+j; //U
-        flat2posit[4*size*(  size+i  )+2*size+j  ]=(4*size+i)*size+j; //R
-        flat2posit[4*size*(  size+i  )+  size+j  ]=(5*size+i)*size+j; //F
+    if (!initialized) {
+
+      // build lookup table
+      flat2posit=new Array(12*size*size);
+      for(i=0; i<flat2posit.length; i++) flat2posit[i]=-1;
+      for(i=0; i<size; i++){
+        for(j=0; j<size; j++){
+          flat2posit[4*size*(3*size-i-1)+  size+j  ]=        i *size+j; //D
+          flat2posit[4*size*(  size+i  )+  size-j-1]=(  size+i)*size+j; //L
+          flat2posit[4*size*(  size+i  )+4*size-j-1]=(2*size+i)*size+j; //B
+          flat2posit[4*size*(       i  )+  size+j  ]=(3*size+i)*size+j; //U
+          flat2posit[4*size*(  size+i  )+2*size+j  ]=(4*size+i)*size+j; //R
+          flat2posit[4*size*(  size+i  )+  size+j  ]=(5*size+i)*size+j; //F
+        }
       }
     }
    
@@ -476,26 +481,39 @@ scramblers["222"] = (function() {
     if (col==="x") return ("#000000");
   }
 
-  function drawSquare(r, cx, cy, w, fillColor) {
+  var scalePoint = function(w, h, ptIn) {
+    
+    var defaultWidth = border*2+width*4*cubeSize;
+    var defaultHeight = border*2+width*3*cubeSize;
+
+    var scale = Math.min(w/defaultWidth, h/defaultHeight);
+
+    var x = ptIn[0]*scale + (w - (defaultWidth * scale))/2;
+    var y = ptIn[1]*scale + (h - (defaultHeight * scale))/2;
+
+    return [x, y];
+  }
+
+  function drawSquare(r, canvasWidth, canvasHeight, cx, cy, w, fillColor) {
 
     var arrx = [cx - w, cx - w, cx + w, cx + w];
     var arry = [cy - w, cy + w, cy + w, cy - w];
 
     var pathString = "";
     for (var i = 0; i < arrx.length; i++) {
-      pathString += ((i===0) ? "M" : "L") + arrx[i] + "," + arry[i];
+      var scaledPoint = scalePoint(canvasWidth, canvasHeight, [arrx[i], arry[i]]);
+      pathString += ((i===0) ? "M" : "L") + scaledPoint[0] + "," + scaledPoint[1];
     }
     pathString += "z";
       
     r.path(pathString).attr({fill: colorGet(fillColor), stroke: "#000"})
   }
 
-  var drawScramble = function(parentElement, state) {
+  var drawScramble = function(parentElement, state, w, h) {
 
     var colorString = "wrgoby"; // UFRLBD
 
-    var r = Raphael(parentElement, border*2+width*4*cubeSize, border*2+width*3*cubeSize);
-    parentElement.width = border*2+width*4*cubeSize;
+    var r = Raphael(parentElement, w, h);
 
     var s="",i,f,d=0,q;
     ori = 0;
@@ -509,7 +527,7 @@ scramblers["222"] = (function() {
         }else{
           var c = colorPerm[ori][state[flat2posit[d]]];
           var col = colorList[colors[c]+0];
-          drawSquare(r, border + width /2 + f*width, border + width /2 + i*width, width/2, col);
+          drawSquare(r, w, h, border + width /2 + f*width, border + width /2 + i*width, width/2, col);
           //s+="<td style='background-color:"+colorList[colors[c]+2]+"'><img src='scrbg/"+colorList[colors[c]+1]+"' width=10 border=1 height=10><\/td>";
         }
         d++;

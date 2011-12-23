@@ -565,7 +565,21 @@ scramblers["pyram"] = (function() {
     if (col=="x") return ("#000000");
   }
 
-  function drawTriangle(r, cx, cy, w, h, direction, fillColor) {
+  var scalePoint = function(w, h, ptIn) {
+
+    var defaultWidth = border*2+width*9;
+    var defaultHeight = border*2+width*5.3;
+    
+
+    var scale = Math.min(w/defaultWidth, h/defaultHeight);
+
+    var x = ptIn[0]*scale + (w - (defaultWidth * scale))/2;
+    var y = ptIn[1]*scale + (h - (defaultHeight * scale))/2;
+
+    return [x, y];
+  }
+
+  function drawTriangle(r, canvasWidth, canvasHeight, cx, cy, w, h, direction, fillColor) {
 
     var dM = 1; // Direction Multiplier
     if (direction == 2) {
@@ -577,17 +591,17 @@ scramblers["pyram"] = (function() {
 
     var pathString = "";
     for (var i = 0; i < arrx.length; i++) {
-      pathString += ((i==0) ? "M" : "L") + arrx[i] + "," + arry[i];
+      var scaledPoint = scalePoint(canvasWidth, canvasHeight, [arrx[i], arry[i]]);
+      pathString += ((i===0) ? "M" : "L") + scaledPoint[0] + "," + scaledPoint[1];
     }
     pathString += "z";
       
     r.path(pathString).attr({fill: colorGet(fillColor), stroke: "#000"})
   }
 
-  var drawScramble = function(parentElement, state) {
+  var drawScramble = function(parentElement, state, w, h) {
 
-    var r = Raphael(parentElement, border*2+width*9, border*2+width*5.3);
-    parentElement.width = border*2+width*9;
+    var r = Raphael(parentElement, w, h);
 
     for(var y = 0; y < 7; y++) {
       for(var x = 0; x < 13; x++) {
@@ -598,7 +612,7 @@ scramblers["pyram"] = (function() {
           if (y > 3) {
             yy -= width/2;
           }
-          drawTriangle(r, xx, yy, width/2*2/Math.sqrt(3), width/2, layout[y * 13 + x], colorString[col]);
+          drawTriangle(r, w, h, xx, yy, width/2*2/Math.sqrt(3), width/2, layout[y * 13 + x], colorString[col]);
         }
       }
     }

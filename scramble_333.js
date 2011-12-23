@@ -1625,21 +1625,35 @@ var Cnk, ckmv, ckmv2, cornerColor, cornerFacelet, edgeColor, edgeFacelet, fact, 
     if (col==="x") return ("#000000");
   }
 
-function drawSquare(r, cx, cy, w, fillColor) {
+  var scalePoint = function(w, h, ptIn) {
 
-  var arrx = [cx - w, cx - w, cx + w, cx + w];
-  var arry = [cy - w, cy + w, cy + w, cy - w];
+    var defaultWidth = border*2+width*12;
+    var defaultHeight = border*2+width*9;
+    
+    var scale = Math.min(w/defaultWidth, h/defaultHeight);
 
-  var pathString = "";
-  for (var i = 0; i < arrx.length; i++) {
-    pathString += ((i===0) ? "M" : "L") + arrx[i] + "," + arry[i];
+    var x = ptIn[0]*scale + (w - (defaultWidth * scale))/2;
+    var y = ptIn[1]*scale + (h - (defaultHeight * scale))/2;
+
+    return [x, y];
   }
-  pathString += "z";
 
-  r.path(pathString).attr({fill: colorGet(fillColor), stroke: "#000"})
-}
+  function drawSquare(r, wi, h, cx, cy, w, fillColor) {
 
-  var drawScramble = function(parentElement, state) {
+    var arrx = [cx - w, cx - w, cx + w, cx + w];
+    var arry = [cy - w, cy + w, cy + w, cy - w];
+
+    var pathString = "";
+    for (var i = 0; i < arrx.length; i++) {
+      var scaledPoint = scalePoint(wi, h, [arrx[i], arry[i]]);
+      pathString += ((i===0) ? "M" : "L") + scaledPoint[0] + "," + scaledPoint[1];
+    }
+    pathString += "z";
+
+    r.path(pathString).attr({fill: colorGet(fillColor), stroke: "#000"})
+  }
+
+  var drawScramble = function(parentElement, state, w, h) {
 
     var colorString = "wrgoby"; // UFRLBD
     var colorScheme = {
@@ -1651,8 +1665,7 @@ function drawSquare(r, cx, cy, w, fillColor) {
       "D": colorString[5],
     };
 
-    var r = Raphael(parentElement, border*2+width*12, border*2+width*9);
-    parentElement.width = border*2+width*12;
+    var r = Raphael(parentElement, w, h);
 
     var stateWithCenters = state + " URFLBD";
 
@@ -1660,7 +1673,7 @@ function drawSquare(r, cx, cy, w, fillColor) {
       for (var j = 0; j < 3; j++) {
         for (var k = 0; k < 3; k++) {
           var face = stateWithCenters[drawingStickerMap[i][j][k]];
-          drawSquare(r, drawingCenters[i][0] + (k-1)*width, drawingCenters[i][1] + (j-1)*width, width/2, colorScheme[face]);
+          drawSquare(r, w, h, drawingCenters[i][0] + (k-1)*width, drawingCenters[i][1] + (j-1)*width, width/2, colorScheme[face]);
         }
       }
     }

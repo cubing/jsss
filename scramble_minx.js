@@ -139,24 +139,10 @@ scramblers["minx"] = (function() {
   var edgeFrac = (1+Math.sqrt(5))/4;
   var centerFrac = 0.5;
 
-  // Change this if the SVG element is too large.
-  var scale = 0.6;
-
-  var majorR = 36*scale;
-  var minorR = majorR * edgeFrac
-
-  var pentR = minorR*2;
-
   Math.TAU = Math.PI * 2;
 
   var s18 = function(i) {return Math.sin(Math.TAU*i/20);};
   var c18 = function(i) {return Math.cos(Math.TAU*i/20);};
-
-  var cx1 = 92*scale;
-  var cy1 = 80*scale;
-
-  var cx2 = cx1 + c18(1)*3*pentR;
-  var cy2 = cy1 + s18(1)*1*pentR;
 
   var colors = [
   	"#FFF",
@@ -175,21 +161,6 @@ scramblers["minx"] = (function() {
 
   ];
 
-  var trans = [
-  	[0, cx1, cy1, 0, 0],
-  	[36, cx1, cy1, 1, 1],
-  	[36+72*1, cx1, cy1, 1, 5],
-  	[36+72*2, cx1, cy1, 1, 9],
-  	[36+72*3, cx1, cy1, 1, 13],
-  	[36+72*4, cx1, cy1, 1, 17],
-  	[0, cx2, cy2, 1, 7],
-  	[-72*1, cx2, cy2, 1, 3],
-  	[-72*2, cx2, cy2, 1, 19],
-  	[-72*3, cx2, cy2, 1, 15],
-  	[-72*4, cx2, cy2, 1, 11],
-  	[36+72*2, cx2, cy2, 0, 0]
-  ];
-
 	function drawPolygon(r, fillColor, arrx, arry) {
 
 	  var pathString = "";
@@ -201,10 +172,48 @@ scramblers["minx"] = (function() {
 	  return r.path(pathString).attr({fill: fillColor, stroke: "#000"});
 	}
 
-  var drawScramble = function(parentElement, state) {
+  var drawScramble = function(parentElement, state, w, h) {
 
-    var r = Raphael(parentElement, 350*scale, 180*scale);
-    parentElement.width = 350*scale;
+
+
+    var defaultWidth = 350;
+    var defaultHeight = 180;
+
+    var scale = Math.min(w/defaultWidth, h/defaultHeight);
+
+    var dx = (w - (defaultWidth * scale))/2;
+    var dy = (h - (defaultHeight * scale))/2;
+
+
+    // Change this if the SVG element is too large.
+    
+    var majorR = 36*scale;
+    var minorR = majorR * edgeFrac
+
+    var pentR = minorR*2;
+
+    var cx1 = 92*scale + dx;
+    var cy1 = 80*scale + dy;
+
+    var cx2 = cx1 + c18(1)*3*pentR;
+    var cy2 = cy1 + s18(1)*1*pentR;
+
+    var trans = [
+      [0, cx1, cy1, 0, 0],
+      [36, cx1, cy1, 1, 1],
+      [36+72*1, cx1, cy1, 1, 5],
+      [36+72*2, cx1, cy1, 1, 9],
+      [36+72*3, cx1, cy1, 1, 13],
+      [36+72*4, cx1, cy1, 1, 17],
+      [0, cx2, cy2, 1, 7],
+      [-72*1, cx2, cy2, 1, 3],
+      [-72*2, cx2, cy2, 1, 19],
+      [-72*3, cx2, cy2, 1, 15],
+      [-72*4, cx2, cy2, 1, 11],
+      [36+72*2, cx2, cy2, 0, 0]
+    ];
+
+    var r = Raphael(parentElement, w, h);
 
     //console.log(state);
 

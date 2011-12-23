@@ -895,11 +895,25 @@ scramblers["sq1"] = (function() {
     if (col==="x") return ("#000000");
   }
 
-function drawPolygon(r, fillColor, arrx, arry) {
+var scalePoint = function(w, h, ptIn) {
+  
+  var defaultWidth = 200;
+  var defaultHeight = 110;
+
+  var scale = Math.min(w/defaultWidth, h/defaultHeight);
+
+  var x = ptIn[0]*scale + (w - (defaultWidth * scale))/2;
+  var y = ptIn[1]*scale + (h - (defaultHeight * scale))/2;
+
+  return [x, y];
+}
+
+function drawPolygon(r, fillColor, w, h, arrx, arry) {
 
   var pathString = "";
   for (var i = 0; i < arrx.length; i++) {
-    pathString += ((i===0) ? "M" : "L") + arrx[i] + "," + arry[i];
+    var scaledPoint = scalePoint(w, h, [arrx[i], arry[i]]);
+    pathString += ((i===0) ? "M" : "L") + scaledPoint[0] + "," + scaledPoint[1];
   }
   pathString += "z";
 
@@ -907,11 +921,10 @@ function drawPolygon(r, fillColor, arrx, arry) {
 }
  
  
-function drawSq(stickers, middleIsSolved, shapes, parentElement, colorString) {
+function drawSq(stickers, middleIsSolved, shapes, parentElement, width, height, colorString) {
 
     var z = 1.366 // sqrt(2) / sqrt(1^2 + tan(15 degrees)^2)
-    var r = Raphael(parentElement, 200, 110);
-    parentElement.width = 200;
+    var r = Raphael(parentElement, width, height);
 
     var arrx, arry;
    
@@ -944,35 +957,35 @@ function drawSq(stickers, middleIsSolved, shapes, parentElement, colorString) {
     if (middleIsSolved) {
       arrx=[cx+cos1(1)*w*z, cx+cos1(4)*w*z, cx+cos1(7)*w*z, cx+cos1(10)*w*z];
       arry=[cy-sin1(1)*w*z, cy-sin1(4)*w*z, cy-sin1(7)*w*z, cy-sin1(10)*w*z];
-      drawPolygon(r, "x", arrx, arry);
+      drawPolygon(r, "x", width, height, arrx, arry);
       
       cy += 10;
       arrx=[cx+cos1(0)*w, cx+cos1(0)*w, cx+cos1(1)*w*z, cx+cos1(1)*w*z];
       arry=[cy-sin1(1)*w*z, cy-sin1(1)*z, cy-sin1(1)*z, cy-sin1(1)*w*z, cy-sin1(1)*w*z];
-      drawPolygon(r, colorString[5], arrx, arry)
+      drawPolygon(r, colorString[5], width, height, arrx, arry)
 
       arrx=[cx+cos1(0)*w, cx+cos1(0)*w, cx+cos1(10)*w*z, cx+cos1(10)*w*z];
       arry=[cy-sin1(1)*w*z, cy-sin1(1)*z, cy-sin1(1)*z, cy-sin1(1)*w*z, cy-sin1(1)*w*z];
-      drawPolygon(r, colorString[5], arrx, arry)
+      drawPolygon(r, colorString[5], width, height, arrx, arry)
       cy -= 10;
     }
     else {
       arrx=[cx+cos1(1)*w*z, cx+cos1(4)*w*z, cx+cos1(6)*w, cx+cos1(9)*w*z, cx+cos1(11)*w*z, cx+cos1(0)*w];
       arry=[cy-sin1(1)*w*z, cy-sin1(4)*w*z, cy-sin1(6)*w, cy+sin1(9)*w*z, cy-sin1(11)*w*z, cy-sin1(0)*w];
-      drawPolygon(r, "x", arrx, arry);
+      drawPolygon(r, "x", width, height, arrx, arry);
 
       arrx=[cx+cos1(9)*w*z, cx+cos1(11)*w*z, cx+cos1(11)*w*z, cx+cos1(9)*w*z];
       arry=[cy+sin1(9)*w*z-h, cy-sin1(11)*w*z-h, cy-sin1(11)*w*z, cy+sin1(9)*w*z];
-      drawPolygon(r, colorString[4], arrx, arry);
+      drawPolygon(r, colorString[4], width, height, arrx, arry);
 
       cy += 10;
       arrx=[cx+cos1(0)*w, cx+cos1(0)*w, cx+cos1(1)*w*z, cx+cos1(1)*w*z];
       arry=[cy-sin1(1)*w*z, cy-sin1(1)*z, cy-sin1(1)*z, cy-sin1(1)*w*z];
-      drawPolygon(r, colorString[5], arrx, arry)
+      drawPolygon(r, colorString[5], width, height, arrx, arry)
 
       arrx=[cx+cos1(0)*w, cx+cos1(0)*w, cx+cos1(11)*w*z, cx+cos1(11)*w*z];
       arry=[cy-sin1(1)*w*z, cy-sin1(1)*z, cy-sin1(11)*w*z + h, cy-sin1(11)*w*z];
-      drawPolygon(r, colorString[2], arrx, arry)
+      drawPolygon(r, colorString[2], width, height, arrx, arry)
       cy -= 10;
     }
      
@@ -984,26 +997,26 @@ function drawSq(stickers, middleIsSolved, shapes, parentElement, colorString) {
       if (shapes.charAt(foo)==="c"){
         arrx=[cx, cx+cos1(sc), cx+cos1(sc+1)*z, cx+cos1(sc+2)];
         arry=[cy, cy-sin1(sc), cy-sin1(sc+1)*z, cy-sin1(sc+2)];
-        drawPolygon(r, stickers.charAt(foo), arrx, arry)
+        drawPolygon(r, stickers.charAt(foo), width, height, arrx, arry)
     
         arrx=[cx+cos1(sc), cx+cos1(sc+1)*z, cx+cos1(sc+1)*w*z, cx+cos1(sc)*w];
         arry=[cy-sin1(sc), cy-sin1(sc+1)*z, cy-sin1(sc+1)*w*z, cy-sin1(sc)*w];
-        drawPolygon(r, stickers.charAt(16+sc), arrx, arry)
+        drawPolygon(r, stickers.charAt(16+sc), width, height, arrx, arry)
       
         arrx=[cx+cos1(sc+2), cx+cos1(sc+1)*z, cx+cos1(sc+1)*w*z, cx+cos1(sc+2)*w];
         arry=[cy-sin1(sc+2), cy-sin1(sc+1)*z, cy-sin1(sc+1)*w*z, cy-sin1(sc+2)*w];
-        drawPolygon(r, stickers.charAt(17+sc), arrx, arry)
+        drawPolygon(r, stickers.charAt(17+sc), width, height, arrx, arry)
    
         sc +=2;
       }
       if (shapes.charAt(foo)==="e"){
         arrx=[cx, cx+cos1(sc), cx+cos1(sc+1)];
         arry=[cy, cy-sin1(sc), cy-sin1(sc+1)];
-        drawPolygon(r, stickers.charAt(foo), arrx, arry)
+        drawPolygon(r, stickers.charAt(foo), width, height, arrx, arry)
     
         arrx=[cx+cos1(sc), cx+cos1(sc+1), cx+cos1(sc+1)*w, cx+cos1(sc)*w];
         arry=[cy-sin1(sc), cy-sin1(sc+1), cy-sin1(sc+1)*w, cy-sin1(sc)*w];
-        drawPolygon(r, stickers.charAt(16+sc), arrx, arry)
+        drawPolygon(r, stickers.charAt(16+sc), width, height, arrx, arry)
     
         sc +=1;
       }
@@ -1018,35 +1031,35 @@ function drawSq(stickers, middleIsSolved, shapes, parentElement, colorString) {
     if (middleIsSolved) {
       arrx=[cx+cos1(1)*w*z, cx+cos1(4)*w*z, cx+cos1(7)*w*z, cx+cos1(10)*w*z];
       arry=[cy+sin1(1)*w*z, cy+sin1(4)*w*z, cy+sin1(7)*w*z, cy+sin1(10)*w*z];
-      drawPolygon(r, "x", arrx, arry);
+      drawPolygon(r, "x", width, height, arrx, arry);
       
       cy -= 10;
       arrx=[cx+cos1(0)*w, cx+cos1(0)*w, cx+cos1(1)*w*z, cx+cos1(1)*w*z];
       arry=[cy+sin1(1)*w*z, cy+sin1(1)*z, cy+sin1(1)*z, cy+sin1(1)*w*z, cy+sin1(1)*w*z];
-      drawPolygon(r, colorString[5], arrx, arry)
+      drawPolygon(r, colorString[5], width, height, arrx, arry)
 
       arrx=[cx+cos1(0)*w, cx+cos1(0)*w, cx+cos1(10)*w*z, cx+cos1(10)*w*z];
       arry=[cy+sin1(1)*w*z, cy+sin1(1)*z, cy+sin1(1)*z, cy+sin1(1)*w*z, cy+sin1(1)*w*z];
-      drawPolygon(r, colorString[5], arrx, arry)
+      drawPolygon(r, colorString[5], width, height, arrx, arry)
       cy += 10;
     }
     else {
       arrx=[cx+cos1(1)*w*z, cx+cos1(4)*w*z, cx+cos1(6)*w, cx+cos1(9)*w*z, cx+cos1(11)*w*z, cx+cos1(0)*w];
       arry=[cy+sin1(1)*w*z, cy+sin1(4)*w*z, cy+sin1(6)*w, cy-sin1(9)*w*z, cy+sin1(11)*w*z, cy+sin1(0)*w];
-      drawPolygon(r, "x", arrx, arry);
+      drawPolygon(r, "x", width, height, arrx, arry);
 
       arrx=[cx+cos1(9)*w*z, cx+cos1(11)*w*z, cx+cos1(11)*w*z, cx+cos1(9)*w*z];
       arry=[cy-sin1(9)*w*z+h, cy+sin1(11)*w*z+h, cy+sin1(11)*w*z, cy-sin1(9)*w*z];
-      drawPolygon(r, colorString[4], arrx, arry);
+      drawPolygon(r, colorString[4], width, height, arrx, arry);
 
       cy -= 10;
       arrx=[cx+cos1(0)*w, cx+cos1(0)*w, cx+cos1(1)*w*z, cx+cos1(1)*w*z];
       arry=[cy+sin1(1)*w*z, cy+sin1(1)*z, cy+sin1(1)*z, cy+sin1(1)*w*z];
-      drawPolygon(r, colorString[5], arrx, arry)
+      drawPolygon(r, colorString[5], width, height, arrx, arry)
 
       arrx=[cx+cos1(0)*w, cx+cos1(0)*w, cx+cos1(11)*w*z, cx+cos1(11)*w*z];
       arry=[cy+sin1(1)*w*z, cy+sin1(1)*z, cy+sin1(11)*w*z - h, cy+sin1(11)*w*z];
-      drawPolygon(r, colorString[2], arrx, arry)
+      drawPolygon(r, colorString[2], width, height, arrx, arry)
       cy += 10;
     }
 
@@ -1057,15 +1070,15 @@ function drawSq(stickers, middleIsSolved, shapes, parentElement, colorString) {
       if (shapes.charAt(foo)==="c"){
         arrx=[cx, cx+cos2(sc), cx+cos2(sc+1)*z, cx+cos2(sc+2)];
         arry=[cy, cy-sin2(sc), cy-sin2(sc+1)*z, cy-sin2(sc+2)];
-        drawPolygon(r, stickers.charAt(foo), arrx, arry)
+        drawPolygon(r, stickers.charAt(foo), width, height, arrx, arry)
    
         arrx=[cx+cos2(sc), cx+cos2(sc+1)*z, cx+cos2(sc+1)*w*z, cx+cos2(sc)*w];
         arry=[cy-sin2(sc), cy-sin2(sc+1)*z, cy-sin2(sc+1)*w*z, cy-sin2(sc)*w];
-        drawPolygon(r, stickers.charAt(28+sc), arrx, arry)
+        drawPolygon(r, stickers.charAt(28+sc), width, height, arrx, arry)
     
         arrx=[cx+cos2(sc+2), cx+cos2(sc+1)*z, cx+cos2(sc+1)*w*z, cx+cos2(sc+2)*w];
         arry=[cy-sin2(sc+2), cy-sin2(sc+1)*z, cy-sin2(sc+1)*w*z, cy-sin2(sc+2)*w];
-        drawPolygon(r, stickers.charAt(29+sc), arrx, arry)
+        drawPolygon(r, stickers.charAt(29+sc), width, height, arrx, arry)
 
         sc +=2;
    
@@ -1073,11 +1086,11 @@ function drawSq(stickers, middleIsSolved, shapes, parentElement, colorString) {
       if (shapes.charAt(foo)==="e"){
         arrx=[cx, cx+cos2(sc), cx+cos2(sc+1)];
         arry=[cy, cy-sin2(sc), cy-sin2(sc+1)];
-        drawPolygon(r, stickers.charAt(foo), arrx, arry)
+        drawPolygon(r, stickers.charAt(foo), width, height, arrx, arry)
     
         arrx=[cx+cos2(sc), cx+cos2(sc+1), cx+cos2(sc+1)*w, cx+cos2(sc)*w];
         arry=[cy-sin2(sc), cy-sin2(sc+1), cy-sin2(sc+1)*w, cy-sin2(sc)*w];
-        drawPolygon(r, stickers.charAt(28+sc), arrx, arry)
+        drawPolygon(r, stickers.charAt(28+sc), width, height, arrx, arry)
    
         sc +=1;
       }
@@ -1096,7 +1109,7 @@ function drawSq(stickers, middleIsSolved, shapes, parentElement, colorString) {
     return out;
   }
 
-  var drawScramble = function(parentElement, state) {
+  var drawScramble = function(parentElement, state, w, h) {
 
     var colorString = "yobwrg";  //In dlburf order.
       
@@ -1141,7 +1154,7 @@ function drawSq(stickers, middleIsSolved, shapes, parentElement, colorString) {
       .replace(/4/g,colorString[4])
       .replace(/5/g,colorString[5])
     );
-    drawSq(stickers, middleIsSolved, a, parentElement, colorString);
+    drawSq(stickers, middleIsSolved, a, parentElement, w, h, colorString);
 
   }
 
