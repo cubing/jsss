@@ -621,7 +621,7 @@ scramblers["pyram"] = (function() {
 
   return {
     /* mark2 interface */
-    version: "November 24, 2011",
+    version: "December 23, 2011",
     initialize: initializeFull,
     setRandomSource: setRandomSource,
     getRandomScramble: getRandomScramble,

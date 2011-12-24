@@ -1165,7 +1165,7 @@ function drawSq(stickers, middleIsSolved, shapes, parentElement, width, height, 
   return {
 
     /* mark2 interface */
-    version: "November 14, 2011",
+    version: "December 23, 2011",
     initialize: square1SolverInitialize,
     setRandomSource: setRandomSource,
     getRandomScramble: square1SolverGetRandomScramble,

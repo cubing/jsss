@@ -1713,7 +1713,7 @@ var Cnk, ckmv, ckmv2, cornerColor, cornerFacelet, edgeColor, edgeFacelet, fact, 
 
   return {
     /* mark2 interface */
-    version: "November 22, 2011",
+    version: "December 23, 2011",
     initialize: ini,
     setRandomSource: setRandomSource,
     getRandomScramble: getRandomScramble,

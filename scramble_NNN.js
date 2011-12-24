@@ -497,7 +497,7 @@ function scramble_NNN(size, seqlen, mult) {
 
     /* mark2 interface */
     return {
-      version: "November 24, 2011",
+      version: "December 23, 2011",
       initialize: initializeFull,
       initializeDrawing: initializeDrawing,
       setRandomSource: setRandomSource,
