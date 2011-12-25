@@ -1604,14 +1604,15 @@ var Cnk, ckmv, ckmv2, cornerColor, cornerFacelet, edgeColor, edgeFacelet, fact, 
 
   var border = 2;
   var width = 12;
+  var gap = 4;
   //URFLBD
   var drawingCenters = [
-    [border + width/2*9 ,  border + width/2*3 ],
-    [border + width/2*15,  border + width/2*9 ],
-    [border + width/2*9 ,  border + width/2*9 ],
-    [border + width/2*3 ,  border + width/2*9 ],
-    [border + width/2*21,  border + width/2*9 ],
-    [border + width/2*9 ,  border + width/2*15],
+    [border + width/2*9  + gap*1,  border + width/2*3         ],
+    [border + width/2*15 + gap*2,  border + width/2*9  + gap*1],
+    [border + width/2*9  + gap*1,  border + width/2*9  + gap*1],
+    [border + width/2*3  + gap*0,  border + width/2*9  + gap*1],
+    [border + width/2*21 + gap*3,  border + width/2*9  + gap*1],
+    [border + width/2*9  + gap*1,  border + width/2*15 + gap*2],
   ];
 
 
@@ -1627,8 +1628,8 @@ var Cnk, ckmv, ckmv2, cornerColor, cornerFacelet, edgeColor, edgeFacelet, fact, 
 
   var scalePoint = function(w, h, ptIn) {
 
-    var defaultWidth = border*2+width*12;
-    var defaultHeight = border*2+width*9;
+    var defaultWidth = border*2+width*12+gap*3;
+    var defaultHeight = border*2+width*9+gap*2;
     
     var scale = Math.min(w/defaultWidth, h/defaultHeight);
 
@@ -1713,7 +1714,7 @@ var Cnk, ckmv, ckmv2, cornerColor, cornerFacelet, edgeColor, edgeFacelet, fact, 
 
   return {
     /* mark2 interface */
-    version: "December 23, 2011",
+    version: "December 24, 2011",
     initialize: ini,
     setRandomSource: setRandomSource,
     getRandomScramble: getRandomScramble,

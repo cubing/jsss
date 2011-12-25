@@ -225,16 +225,7 @@ function scramble_NNN(size, seqlen, mult) {
 
     var border = 2;
     var width = 40/cubeSize;
-    //URFLBD
-    var drawingCenters = [
-      [border + width/2*1*cubeSize, border + width/2*1*cubeSize ],
-      [border + width/2*5*cubeSize, border + width/2*3*cubeSize ],
-      [border + width/2*3*cubeSize, border + width/2*3*cubeSize ],
-      [border + width/2*1*cubeSize, border + width/2*3*cubeSize ],
-      [border + width/2*7*cubeSize, border + width/2*3*cubeSize ],
-      [border + width/2*3*cubeSize, border + width/2*5*cubeSize],
-    ];
-
+    var gap = 4;
 
     function colorGet(col){
       if (col==="r") return ("#FF0000");
@@ -248,8 +239,8 @@ function scramble_NNN(size, seqlen, mult) {
 
     var scalePoint = function(w, h, ptIn) {
       
-      var defaultWidth = border*2+width*4*cubeSize;
-      var defaultHeight = border*2+width*3*cubeSize;
+      var defaultWidth = border*2+width*4*cubeSize+gap*3;
+      var defaultHeight = border*2+width*3*cubeSize+gap*2;
 
       var scale = Math.min(w/defaultWidth, h/defaultHeight);
 
@@ -292,7 +283,7 @@ function scramble_NNN(size, seqlen, mult) {
           }else{
             var c = colorPerm[ori][state[flat2posit[d]]];
             var col = colorList[colors[c]+0];
-            drawSquare(r, w, h, border + width /2 + f*width, border + width /2 + i*width, width/2, col);
+            drawSquare(r, w, h, border + width /2 + f*width + gap*Math.floor(f/cubeSize), border + width /2 + i*width + gap*Math.floor(i/cubeSize), width/2, col);
             //s+="<td style='background-color:"+colorList[colors[c]+2]+"'><img src='scrbg/"+colorList[colors[c]+1]+"' width=10 border=1 height=10><\/td>";
           }
           d++;
