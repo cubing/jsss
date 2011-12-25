@@ -1,9 +1,33 @@
-<!-- This file is a minimal page to show how easily the scramble plugins from Mark 2 can be used on any website. -->
-<title>Scramble Usage Example</title>
-<script src="scramble_222.js"></script>
-<script>
-	scramblers["222"].initialize(null, Math);
-	for (var i=1; i <= 5; i++) {
-		document.write("" + i + ". " + scramblers["222"].getRandomScramble().scramble + "<br>");
-	}
-</script>
+<!-- This file is an example to show how easily the scramble plugins from Mark 2 can be used on any website. -->
+<html>
+<head>
+	<title>Scramble Usage Example</title>
+
+	<!-- Raphael.js is used for drawing the scrambles. You can leave it out if you don't use the drawing code. -->
+	<script src="../raphael-min.js"></script>
+
+	<!-- Include the files for the puzzles you want. -->
+	<script src="scramble_222.js"></script>
+</head>
+<body>
+	<script>
+
+		// Tell the scrambler to initialize its tables.
+		scramblers["222"].initialize(null, Math);
+
+		for (var i=1; i <= 5; i++) {
+
+			// Generate a random scramble
+			var randomScramble = scramblers["222"].getRandomScramble();
+
+			// Print it
+			document.write("" + i + ". " + randomScramble.scramble + "<br>");
+
+			// Create an element and draw the scramble in it.
+			var newDiv = document.createElement("div");
+			scramblers["222"].drawScramble(newDiv, randomScramble.state, 100, 80);
+			document.body.appendChild(newDiv);
+		}
+	</script>
+</body>
+</html>
