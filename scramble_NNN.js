@@ -275,6 +275,8 @@ if (typeof scramblers === "undefined") {
 
       var drawScramble = function(parentElement, state, w, h) {
 
+        initializeDrawing();
+
         var colorString = "wrgoby"; // UFRLBD
 
         var r = Raphael(parentElement, w, h);
@@ -473,9 +475,16 @@ if (typeof scramblers === "undefined") {
         };
       };
 
+      var drawingInitialized = false;
+
       var initializeDrawing = function(continuation) {
 
-        parse();
+        if (!drawingInitialized) {
+
+          parse();
+
+          drawingInitialized = true;
+        }
 
         if (continuation) {
           setTimeout(continuation, 0);
@@ -498,7 +507,6 @@ if (typeof scramblers === "undefined") {
       return {
         version: "December 23, 2011",
         initialize: initializeFull,
-        initializeDrawing: initializeDrawing,
         setRandomSource: setRandomSource,
         getRandomScramble: getRandomScramble,
         drawScramble: drawScramble,
