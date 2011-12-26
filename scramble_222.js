@@ -503,6 +503,8 @@ scramblers["222"] = (function() {
 
   var drawScramble = function(parentElement, state, w, h) {
 
+    initializeDrawing();
+
     var colorString = "wrgoby"; // UFRLBD
 
     var r = Raphael(parentElement, w, h);
@@ -623,11 +625,18 @@ scramblers["222"] = (function() {
     };
   };
 
+  var drawingInitialized = false;
+
   var initializeDrawing = function(continuation) {
 
-    calcperm();
-    parse();
-    initialize();
+    if (!drawingInitialized) {
+
+      calcperm();
+      parse();
+      initialize();
+
+      drawingInitialized = true;
+    }
 
     if (continuation) {
       setTimeout(continuation, 0);
@@ -648,9 +657,8 @@ scramblers["222"] = (function() {
 
   /* mark2 interface */
   return {
-    version: "December 23, 2011",
+    version: "December 25, 2011",
     initialize: initializeFull,
-    initializeDrawing: initializeDrawing,
     setRandomSource: setRandomSource,
     getRandomScramble: getRandomScramble,
     drawScramble: drawScramble,
