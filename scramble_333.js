@@ -15,7 +15,7 @@ if (typeof scramblers === "undefined") {
   var scramblers = {};
 }
 
-scramblers["333fm"] = scramblers["333ft"] = scramblers["333bf"] = scramblers["333oh"] = scramblers["333"] = (function() {
+scramblers["333"] = (function() {
 
 
 
@@ -1734,3 +1734,9 @@ var Cnk, ckmv, ckmv2, cornerColor, cornerFacelet, edgeColor, edgeFacelet, fact, 
   };
 
 })();
+
+scramblers["333fm"] = scramblers["333"];
+scramblers["333ft"] = scramblers["333"];
+scramblers["333bf"] = scramblers["333"];
+scramblers["333oh"] = scramblers["333"];
+scramblers["333mbf"] = scramblers["333"];
