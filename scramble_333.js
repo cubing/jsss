@@ -159,7 +159,9 @@ function initMCEPermPrun(callback){
         }
       }
     }
-    callback("MEPermPrun: " + (Math.floor(done * 100 / 66432)) +"% (" + done + "/66432)");
+    if ((done / 66432.) > 0.01) {
+      callback("MEPermPrun: " + (Math.floor(done * 100 / 66432)) +"% (" + done + "/66432)");
+    }
   }
   for (i = 0; i < 66432; ++i) {
     MCPermPrun[i] = -1;
@@ -208,7 +210,9 @@ function initMCEPermPrun(callback){
         }
       }
     }
-    callback("MCPermPrun: " + (Math.floor(done * 100 / 66432)) +"% (" + done + "/66432)");
+    if ((done / 66432.) > 0.01) {
+      callback("MCPermPrun: " + (Math.floor(done * 100 / 66432)) +"% (" + done + "/66432)");
+    }
   }
 }
 
@@ -344,7 +348,9 @@ function initTwistFlipSlicePrun(callback){
         }
       }
     }
-    callback("TwistFlipPrun: " + (Math.floor(done * 100 / 870912)) +"% (" + done + "/870912)");
+    if ((done / 870912.) > 0.01) {
+      callback("TwistFlipPrun: " + (Math.floor(done * 100 / 870912)) +"% (" + done + "/870912)");
+    }
   }
   for (i = 0; i < 160380; ++i) {
     UDSliceTwistPrun[i] = -1;
@@ -393,7 +399,9 @@ function initTwistFlipSlicePrun(callback){
         }
       }
     }
-    callback("UDSliceTwistPrun: " + (Math.floor(done * 100 / 160380)) +"% (" + done + "/160380)");
+    if ((done / 160380.) > 0.01) {
+      callback("UDSliceTwistPrun: " + (Math.floor(done * 100 / 160380)) +"% (" + done + "/160380)");
+    }
   }
   for (i = 0; i < 166320; ++i) {
     UDSliceFlipPrun[i] = -1;
@@ -442,7 +450,9 @@ function initTwistFlipSlicePrun(callback){
         }
       }
     }
-    callback("UDSliceFlipPrun: " + (Math.floor(done * 100 / 166320)) +"% (" + done + "/166320)");
+    if ((done / 166320.) > 0.01) {
+      callback("UDSliceFlipPrun: " + (Math.floor(done * 100 / 166320)) +"% (" + done + "/166320)");
+    }
   }
 }
 
