@@ -1174,7 +1174,7 @@ function drawSq(stickers, middleIsSolved, shapes, parentElement, width, height, 
     /* Other methods */
     getRandomPosition: square1SolverGetRandomPosition,
     solve: square1SolverSolve,
-    senerate: square1SolverGenerate,
+    generate: square1SolverGenerate,
   };
 
 })();
