@@ -117,7 +117,45 @@ scramblers["clock"] = (function() {
     turns("<_U><_U>", "<.U><_U>", ""  , turn_name("U", seq[12]), "", "&nbsp;&nbsp;&nbsp;"   );
     turns("<.d><.d>", "<.d><_d>", ""  , turn_name("d", seq[13]), "", "&nbsp;&nbsp;&nbsp;"   );
     turns(p[pegs[0]] + p[pegs[1]], p[pegs[2]] + p[pegs[3]], ""  , ""   , "", "");
+
+    var scrambleString = "";
+
+    var turnToString = function(turn, amount) {
+      var suffix;
+      if (amount === 0) {
+        return "";
+      }
+      else if (amount === 1) {
+        suffix = "";
+      }
+      else if (amount === -1) {
+        suffix = "'";
+      }
+      else if (amount >= 0) {
+        suffix = "" + amount + "";
+      }
+      else {
+        suffix = "" + (-amount) + "'";
+      }
+      return " " + turn + suffix;
+    }
     
+    var addToScrambleString = function(pegs, UAmount, dAmount) {
+      scrambleString += "(" + pegs + "," + turnToString("U", UAmount) + turnToString("d", dAmount) +") ";
+    }
+
+    addToScrambleString("UUdd", seq[0], seq[4]);
+    addToScrambleString("dUdU", seq[1], seq[5]);
+    addToScrambleString("ddUU", seq[2], seq[6]);
+    addToScrambleString("UdUd", seq[3], seq[7]);
+    addToScrambleString("dUUU", seq[8], 0);
+    addToScrambleString("UdUU", seq[9], 0);
+    addToScrambleString("UUUd", seq[10], 0);
+    addToScrambleString("UUdU", seq[11], 0);
+    addToScrambleString("UUUU", seq[12], 0);
+    addToScrambleString("dddd", seq[13], 0);
+    addToScrambleString(p[pegs[0]] + p[pegs[1]] + p[pegs[2]] + p[pegs[3]], 0, 0);
+
     /*
     for( i=0; i<9; i++){
       prt(posit[i]);
@@ -132,7 +170,7 @@ scramblers["clock"] = (function() {
 
     return {
       state: {dials: posit, pegs: pegs},
-      scramble: scramble
+      scramble: scrambleString
     };
   }
 
