@@ -525,7 +525,7 @@ scramblers["pyram"] = (function() {
 
     return {
       state: colmap,
-      scramble: scramblestring[0]
+      scramble_string: scramblestring[0]
     };
   };
 

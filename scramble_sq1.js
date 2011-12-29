@@ -876,7 +876,7 @@ scramblers["sq1"] = (function() {
 
     return {
       state: randomState,
-      scramble: scrambleString
+      scramble_string: scrambleString
     };
   }
 

@@ -1717,7 +1717,7 @@ var Cnk, ckmv, ckmv2, cornerColor, cornerFacelet, edgeColor, edgeFacelet, fact, 
 
     return {
       state: posit,
-      scramble: solution
+      scramble_string: solution
     };
   }
 

@@ -471,7 +471,7 @@ if (typeof scramblers === "undefined") {
 
         return {
           state: posit,
-          scramble: scramblestring(0)
+          scramble_string: scramblestring(0)
         };
       };
 

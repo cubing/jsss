@@ -40,7 +40,7 @@ Each `scramblers[eventID]` object supports the following methods:
 - `setRandomSource(src)`
   - Update the random source.
 - `getRandomScramble()`
-  - Get a random scramble. This returns an object `{scramble: string, state: object}`. Note that `initialize(...)` needs to have been called earlier.
+  - Get a random scramble. This returns an object `{scramble_string: string, state: object}`. Note that `initialize(...)` needs to have been called earlier.
   - The `scramble` string is a string represenation of the scrambling moves to be done.
   - The `state` object is an object whose structure depends on the scrambler implementation. It is useful for drawing.
 - `drawScramble(parentElement, state, width, height)`

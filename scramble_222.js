@@ -621,7 +621,7 @@ scramblers["222"] = (function() {
 
     return {
       state: posit,
-      scramble: solution
+      scramble_string: solution
     };
   };
 

@@ -111,7 +111,7 @@ scramblers["minx"] = (function() {
 
     return {
       state: state,
-      scramble: s
+      scramble_string: s
     };
   }
   

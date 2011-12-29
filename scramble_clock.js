@@ -170,7 +170,7 @@ scramblers["clock"] = (function() {
 
     return {
       state: {dials: posit, pegs: pegs},
-      scramble: scrambleString
+      scramble_string: scrambleString
     };
   }
 
