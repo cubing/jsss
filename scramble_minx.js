@@ -260,7 +260,7 @@ scramblers["minx"] = (function() {
   
   return {
     /* mark2 interface */
-    version: "December 23, 2011",
+    version: "December 29, 2011",
     initialize: initializeFull,
     setRandomSource: setRandomSource,
     getRandomScramble: getRandomScramble,

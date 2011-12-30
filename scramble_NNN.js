@@ -505,7 +505,7 @@ if (typeof scramblers === "undefined") {
 
       /* mark2 interface */
       return {
-        version: "December 23, 2011",
+        version: "December 29, 2011",
         initialize: initializeFull,
         setRandomSource: setRandomSource,
         getRandomScramble: getRandomScramble,

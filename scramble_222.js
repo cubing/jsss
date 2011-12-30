@@ -657,7 +657,7 @@ scramblers["222"] = (function() {
 
   /* mark2 interface */
   return {
-    version: "December 25, 2011",
+    version: "December 29, 2011",
     initialize: initializeFull,
     setRandomSource: setRandomSource,
     getRandomScramble: getRandomScramble,
