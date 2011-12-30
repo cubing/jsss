@@ -141,7 +141,7 @@ scramblers["clock"] = (function() {
     }
     
     var addToScrambleString = function(pegs, UAmount, dAmount) {
-      scrambleString += "(" + pegs + "," + turnToString("U", UAmount) + turnToString("d", dAmount) +") ";
+      scrambleString += "[" + pegs + "]" + turnToString("U", UAmount) + turnToString("d", dAmount) +" ";
     }
 
     addToScrambleString("UUdd", seq[0], seq[4]);
@@ -153,7 +153,7 @@ scramblers["clock"] = (function() {
     addToScrambleString("UUUd", seq[10], 0);
     addToScrambleString("UUdU", seq[11], 0);
     addToScrambleString("UUUU", seq[12], 0);
-    addToScrambleString("dddd", seq[13], 0);
+    addToScrambleString("dddd", 0, seq[13]);
     addToScrambleString(p[pegs[0]] + p[pegs[1]] + p[pegs[2]] + p[pegs[3]], 0, 0);
 
     /*
