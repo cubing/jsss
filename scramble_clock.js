@@ -337,7 +337,7 @@ scramblers["clock"] = (function() {
 
   return {
     /* mark2 interface */
-    version: "December 29, 2011",
+    version: "December 30, 2011",
     initialize: initializeFull,
     setRandomSource: setRandomSource,
     getRandomScramble: getRandomScramble,
