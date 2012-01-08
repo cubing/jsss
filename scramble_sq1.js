@@ -1122,7 +1122,7 @@ function drawSq(stickers, middleIsSolved, shapes, parentElement, width, height, 
 
     var posit = [];
     var map = [8,9,10, 11,0,1, 2,3,4, 5,6,7, 19,18,17, 16,15,14, 13,12,23, 22,21,20];
-    for (j in map) {
+    for (var j = 0; j < map.length; j++) {
       posit.push(permutation[map[j]]);
     }
         
@@ -1165,7 +1165,7 @@ function drawSq(stickers, middleIsSolved, shapes, parentElement, width, height, 
   return {
 
     /* mark2 interface */
-    version: "December 29, 2011",
+    version: "January 07, 2012",
     initialize: square1SolverInitialize,
     setRandomSource: setRandomSource,
     getRandomScramble: square1SolverGetRandomScramble,
