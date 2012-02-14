@@ -9,6 +9,7 @@ Ported by Lucas Garron, November 23, 2011.
 
  */
 
+"use strict";
 if (typeof scramblers === "undefined") {
   var scramblers = {};
 }
@@ -114,7 +115,7 @@ scramblers["222"] = (function() {
       tot=new Array(0,0,0,0,0,0,0);
       for(var e=0;e<24;e++) tot[posit[e]]++;
   }
-  mov2fc=new Array()
+  var mov2fc=new Array()
   mov2fc[0]=new Array(0, 2, 3, 1, 23,19,10,6 ,22,18,11,7 ); //D
   mov2fc[1]=new Array(4, 6, 7, 5, 12,20,2, 10,14,22,0, 8 ); //L
   mov2fc[2]=new Array(8, 10,11,9, 12,7, 1, 17,13,5, 0, 19); //B
@@ -135,7 +136,7 @@ scramblers["222"] = (function() {
           q--;
       }
   }
-  sol=new Array();
+  var sol=new Array();
   function solve(){
       calcadj();
       var opp=new Array();
@@ -210,10 +211,10 @@ scramblers["222"] = (function() {
       }
       return(false);
   }
-  perm=new Array();
-  twst=new Array();
-  permmv=new Array()
-  twstmv=new Array();
+  var perm=new Array();
+  var twst=new Array();
+  var permmv=new Array()
+  var twstmv=new Array();
   function calcperm(){
       //calculate solving arrays
       //first permutation
@@ -425,7 +426,7 @@ scramblers["222"] = (function() {
   function initialize(){
 
     if (!initialized) {
-
+      var i, j;
       // build lookup table
       flat2posit=new Array(12*size*size);
       for(i=0; i<flat2posit.length; i++) flat2posit[i]=-1;
@@ -510,7 +511,7 @@ scramblers["222"] = (function() {
     var r = Raphael(parentElement, w, h);
 
     var s="",i,f,d=0,q;
-    ori = 0;
+    var ori = 0;
     d=0;
     s="<table border=0 cellpadding=0 cellspacing=0>";
     for(i=0;i<3*size;i++){

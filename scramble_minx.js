@@ -9,7 +9,7 @@ R means all layers right from the L face together in one move.
 U is the regular move of the U face, according to standard cube notation.
 <br>
  */
-
+"use strict";
 if (typeof scramblers === "undefined") {
   var scramblers = {};
 }
@@ -48,7 +48,7 @@ scramblers["minx"] = (function() {
 
    function applyMove(state, movePerm) {
    	 var stateNew = [];
-  	 for (i = 0; i < 11*12; i++) {
+  	 for (var i = 0; i < 11*12; i++) {
   		stateNew[i] = state[movePerm[i]];
   	 }
   	 return stateNew;
@@ -56,8 +56,8 @@ scramblers["minx"] = (function() {
   
   function getRandomScramble(){
 
-
-	seq =new Array();
+	var i;
+	var seq =new Array();
 	for(i=0; i<linenbr*linelen; i++){
 		seq[i]=Math.floor(randomSource.random()*2);
 	}

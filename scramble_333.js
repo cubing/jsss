@@ -10,7 +10,7 @@ Compiled to Javascript using GWT.
 
  */
 
-
+"use strict";
 if (typeof scramblers === "undefined") {
   var scramblers = {};
 }
@@ -18,7 +18,7 @@ if (typeof scramblers === "undefined") {
 scramblers["333"] = (function() {
 
 
-
+var _;
 function nullMethod(){
 }
 
@@ -1692,6 +1692,7 @@ var Cnk, ckmv, ckmv2, cornerColor, cornerFacelet, edgeColor, edgeFacelet, fact, 
   };
 
   var initialized = false;
+  var search;
 
   var ini = function(callback, iniRandomSource, statusCallback) {
 
@@ -1709,8 +1710,6 @@ var Cnk, ckmv, ckmv2, cornerColor, cornerFacelet, edgeColor, edgeFacelet, fact, 
   };
 
   var getRandomScramble = function() {
-
-    theRandomCube = randomCube_0();
 
     var posit = randomCube_0();
     var solution = $solution(search, posit);

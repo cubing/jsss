@@ -9,7 +9,7 @@ Ported by Lucas Garron, November 24, 2011.
 
  */
 
-
+"use strict";
 if (typeof scramblers === "undefined") {
   var scramblers = {};
 }
@@ -96,6 +96,7 @@ if (typeof scramblers === "undefined") {
         }*/
 
         // build lookup table
+        var i, j;
         flat2posit=new Array(12*size*size);
         for(i=0; i<flat2posit.length; i++) flat2posit[i]=-1;
         for(i=0; i<size; i++){
@@ -166,7 +167,7 @@ if (typeof scramblers === "undefined") {
         var la; // last axis moved
        
         // for each cube scramble
-        for( n=0; n<numcub; n++){
+        for( var n=0; n<numcub; n++){
           // initialise this scramble
           la=-1;
           seq[n]=new Array(); // moves generated so far
@@ -282,7 +283,7 @@ if (typeof scramblers === "undefined") {
         var r = Raphael(parentElement, w, h);
 
         var s="",i,f,d=0,q;
-        ori = 0;
+        var ori = 0;
         d=0;
         s="<table border=0 cellpadding=0 cellspacing=0>";
         for(i=0;i<3*size;i++){

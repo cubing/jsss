@@ -1,5 +1,5 @@
 
-
+"use strict";
 if (typeof scramblers === "undefined") {
   var scramblers = {};
 }
@@ -223,6 +223,7 @@ scramblers["clock"] = (function() {
   }
 
   Math.TAU = Math.PI * 2;
+  var arrx, arry;
 
   function drawClockFace(r, w, h, cx, cy, face_fill, hour) {
 
@@ -284,8 +285,8 @@ scramblers["clock"] = (function() {
 
       drawCircle(r, w, h, cx, cy, clock_radius, fill, stroke, stroke_width);
 
-  		for (x = cx - face_background_dist; x <= cx + face_background_dist; x += face_background_dist) {
-  			for (y = cy - face_background_dist; y <= cy + face_background_dist; y += face_background_dist) {
+  		for (var x = cx - face_background_dist; x <= cx + face_background_dist; x += face_background_dist) {
+  			for (var y = cy - face_background_dist; y <= cy + face_background_dist; y += face_background_dist) {
           drawCircle(r, w, h, x, y, face_background_radius, fill, stroke, stroke_width);
   			}
   		}
@@ -298,8 +299,8 @@ scramblers["clock"] = (function() {
     drawSideBackground(cx, cy, "#36F", "none");
 
     var i = 0;
-  	for (y = cy - face_dist; y <= cy + face_dist; y += face_dist) {
-  		for (x = cx - face_dist; x <= cx + face_dist; x += face_dist) {
+  	for (var y = cy - face_dist; y <= cy + face_dist; y += face_dist) {
+  		for (var x = cx - face_dist; x <= cx + face_dist; x += face_dist) {
   			drawClockFace(r, w, h, x, y, "#8AF", state.dials[i]);
   			//console.log(state.dials[i]);
   			i++;
