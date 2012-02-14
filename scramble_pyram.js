@@ -92,7 +92,6 @@ scramblers["pyram"] = (function() {
    
    for( n = 0; n < numcub; n++){
     initbrd();
-    calcperm();
     dosolve();
    
     scramblestring[n]="";
@@ -534,6 +533,7 @@ scramblers["pyram"] = (function() {
     setRandomSource(iniRandomSource);
     
     parse();
+    calcperm();
 
     if (continuation) {
       setTimeout(continuation, 0);
