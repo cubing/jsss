@@ -144,17 +144,17 @@ scramblers["clock"] = (function() {
       scrambleString += "[" + pegs + "]" + turnToString("U", UAmount) + turnToString("d", dAmount) +" ";
     }
 
-    addToScrambleString("UUdd", seq[0], seq[4]);
-    addToScrambleString("dUdU", seq[1], seq[5]);
-    addToScrambleString("ddUU", seq[2], seq[6]);
-    addToScrambleString("UdUd", seq[3], seq[7]);
-    addToScrambleString("dUUU", seq[8], 0);
-    addToScrambleString("UdUU", seq[9], 0);
-    addToScrambleString("UUUd", seq[10], 0);
-    addToScrambleString("UUdU", seq[11], 0);
-    addToScrambleString("UUUU", seq[12], 0);
-    addToScrambleString("dddd", 0, seq[13]);
-    addToScrambleString(p[pegs[0]] + p[pegs[1]] + p[pegs[2]] + p[pegs[3]], 0, 0);
+    addToScrambleString("UU/dd", seq[0], seq[4]);
+    addToScrambleString("dU/dU", seq[1], seq[5]);
+    addToScrambleString("dd/UU", seq[2], seq[6]);
+    addToScrambleString("Ud/Ud", seq[3], seq[7]);
+    addToScrambleString("dU/UU", seq[8], 0);
+    addToScrambleString("Ud/UU", seq[9], 0);
+    addToScrambleString("UU/Ud", seq[10], 0);
+    addToScrambleString("UU/dU", seq[11], 0);
+    addToScrambleString("UU/UU", seq[12], 0);
+    addToScrambleString("dd/dd", 0, seq[13]);
+    addToScrambleString(p[pegs[0]] + p[pegs[1]] + "/" + p[pegs[2]] + p[pegs[3]], 0, 0);
 
     /*
     for( i=0; i<9; i++){
