@@ -126,38 +126,56 @@ function FullCube_pieceAt(obj, idx){
   return ~~((ret & 15) << 24) >> 24;
 }
 
+function FullCube_setPiece(obj, idx, value) {
+  if (idx < 6) {
+		obj.ul &= ~(0xf << ((5-idx) << 2));
+		obj.ul |= value << ((5-idx) << 2);
+	} else if (idx < 12) {
+		obj.ur &= ~(0xf << ((11-idx) << 2));
+		obj.ur |= value << ((11-idx) << 2);
+	} else if (idx < 18) {
+		obj.dl &= ~(0xf << ((17-idx) << 2));
+		obj.dl |= value << ((17-idx) << 2);
+	} else {
+		obj.dr &= ~(0xf << ((23-idx) << 2));
+		obj.dr |= value << ((23-idx) << 2);
+	}	
+}
+
+
 function FullCube_FullCube__Ljava_lang_String_2V(){
   this.arr = []; 
   this.prm = []; 
 }
 
 function FullCube_randomCube(){
-  var f, i, shape;
-  f = new FullCube_FullCube__Ljava_lang_String_2V;
-  shape = 2074;
-  for (i = 0; i < 1000; ++i) {
-    switch (~~(square1SolverRandomSource.random() * 3)) {
-      case 0:
-        shape =  Shape_TopMove[shape];
-        FullCube_doMove(f, shape & 15);
-        shape >>= 4;
-        break;
-      case 1:
-        shape =  Shape_TwistMove[shape];
-        FullCube_doMove(f, 0);
-        break;
-      case 2:
-        shape =  Shape_BottomMove[shape];
-        FullCube_doMove(f, -(shape & 15));
-        shape >>= 4;
-    }
-  }
-  if (FullCube_getShapeIdx(f) != shape) {
-    return null;
-  }
-  // console.log(FullCube_getShapeIdx(f));
-  return f;
+	var f, i, shape, edge, corner, n_edge, n_corner, rnd, m;
+	f = new FullCube_FullCube__Ljava_lang_String_2V;
+	shape = Shape_ShapeIdx[~~(Math.random() * 3678)];
+	corner = 0x01234567 << 1 | 0x11111111;
+	edge = 0x01234567 << 1;
+	n_corner = n_edge = 8;
+	for (i=0; i<24; i++) {
+		if (((shape >> i) & 1) == 0) {//edge
+			rnd = ~~(Math.random() * n_edge) << 2;
+			FullCube_setPiece(f, 23-i, (edge >> rnd) & 0xf);
+			m = (1 << rnd) - 1;
+			edge = (edge & m) + ((edge >> 4) & ~m);
+			--n_edge;
+		} else {//corner
+			rnd = ~~(Math.random() * n_corner) << 2;
+			FullCube_setPiece(f, 23-i, (corner >> rnd) & 0xf);
+			FullCube_setPiece(f, 22-i, (corner >> rnd) & 0xf);
+			m = (1 << rnd) - 1;
+			corner = (corner & m) + ((corner >> 4) & ~m);
+			--n_corner;
+			++i;								
+		}
+	}
+	f.ml = ~~(Math.random() * 2);
+	return f;
 }
+
 
 function FullCube(){
 }
