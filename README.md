@@ -8,7 +8,7 @@ Say you want 2x2x2 scrambles in your project.
 
 1. Include `scramble_222.js` in your project.
 2. `scramblers["222"].initialize(null, Math) // Call this once.`
-3. `scramblers["222"].getRandomScramble().scramble // Get a scramble string.`
+3. `scramblers["222"].getRandomScramble().scramble_string // Get a scramble string.`
 
 See [example.htm](./example.htm) for a slightly more thorough example with images.
 
@@ -30,7 +30,7 @@ As of December 2011, the supported events are:
 
 Each `scramblers[eventID]` object supports the following methods:
 
-- `version`: 
+- `version`:
   - A string like "December 25, 2011" that reports the last significant modification date of the scrambler.
 - `initialize(callback, randomSource, statusCallback)`
   - This method must be called before generating or drawing any scrambles.
@@ -41,7 +41,7 @@ Each `scramblers[eventID]` object supports the following methods:
   - Update the random source.
 - `getRandomScramble()`
   - Get a random scramble. This returns an object `{scramble_string: string, state: object}`. Note that `initialize(...)` needs to have been called earlier.
-  - The `scramble` string is a string represenation of the scrambling moves to be done.
+  - The `scramble_string` is a string represenation of the scrambling moves to be done.
   - The `state` object is an object whose structure depends on the scrambler implementation. It is useful for drawing.
 - `drawScramble(parentElement, state, width, height)`
   - The source for the Raphael.js library must be included before this method can be called.
