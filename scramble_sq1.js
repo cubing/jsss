@@ -151,19 +151,19 @@ function FullCube_FullCube__Ljava_lang_String_2V(){
 function FullCube_randomCube(){
 	var f, i, shape, edge, corner, n_edge, n_corner, rnd, m;
 	f = new FullCube_FullCube__Ljava_lang_String_2V;
-	shape = Shape_ShapeIdx[~~(Math.random() * 3678)];
+	shape = Shape_ShapeIdx[~~(square1SolverRandomSource.random() * 3678)];
 	corner = 0x01234567 << 1 | 0x11111111;
 	edge = 0x01234567 << 1;
 	n_corner = n_edge = 8;
 	for (i=0; i<24; i++) {
 		if (((shape >> i) & 1) == 0) {//edge
-			rnd = ~~(Math.random() * n_edge) << 2;
+			rnd = ~~(square1SolverRandomSource.random() * n_edge) << 2;
 			FullCube_setPiece(f, 23-i, (edge >> rnd) & 0xf);
 			m = (1 << rnd) - 1;
 			edge = (edge & m) + ((edge >> 4) & ~m);
 			--n_edge;
 		} else {//corner
-			rnd = ~~(Math.random() * n_corner) << 2;
+			rnd = ~~(square1SolverRandomSource.random() * n_corner) << 2;
 			FullCube_setPiece(f, 23-i, (corner >> rnd) & 0xf);
 			FullCube_setPiece(f, 22-i, (corner >> rnd) & 0xf);
 			m = (1 << rnd) - 1;
@@ -172,7 +172,8 @@ function FullCube_randomCube(){
 			++i;								
 		}
 	}
-	f.ml = ~~(Math.random() * 2);
+	f.ml = ~~(square1SolverRandomSource.random() * 2);
+//	console.log(f);
 	return f;
 }
 
@@ -1009,7 +1010,7 @@ function drawSq(stickers, middleIsSolved, shapes, parentElement, width, height, 
   }
 
   var drawScramble = function(parentElement, sq1State, w, h) {
-
+//	console.log(sq1State);
     var state = sq1State["arr"];
 
     var colorString = "yobwrg";  //In dlburf order.
@@ -1018,18 +1019,21 @@ function drawSq(stickers, middleIsSolved, shapes, parentElement, width, height, 
     var scrambleString;
     var tb, ty, col, eido;
 
-    var permutation = state["permutation"];
-    var middleIsSolved = state["middleIsSolved"];
+    var middleIsSolved = sq1State.ml == 0;
 
     var posit = [];
-    var map = [8,9,10, 11,0,1, 2,3,4, 5,6,7, 19,18,17, 16,15,14, 13,12,23, 22,21,20];
+    
+    var map = [5,4,3,2,1,0,11,10,9,8,7,6,17,16,15,14,13,12,23,22,21,20,19,18];
+//    FullCube_doMove(sq1State, 1);
+//    FullCube_doMove(sq1State, 0);
     for (var j = 0; j < map.length; j++) {
-      posit.push(permutation[map[j]]);
+      posit.push(FullCube_pieceAt(sq1State, map[j]));
     }
+//    console.log(posit);
         
-    var tb = ["3","3","3","3","0","0","0","0","3","3","3","3","0","0","0","0"];
-    ty = ["c","c","c","c","c","c","c","c","e","e","e","e","e","e","e","e"];
-    col = ["12","24","45","51","21","42","54","15","2","4","5","1","2","4","5","1"];
+    var tb = ["3","3","3","3","3","3","3","3","0","0","0","0","0","0","0","0"];
+    ty = ["e","c","e","c","e","c","e","c","e","c","e","c","e","c","e","c"];
+    col = ["2","12","1","51","5","45","4","24", "4","42","5","54","1","15","2","21"];
  
     var top_side=remove_duplicates(posit.slice(0,12));
     var bot_side=remove_duplicates(posit.slice(18,24).concat(posit.slice(12,18)));
