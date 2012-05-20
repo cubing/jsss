@@ -4,12 +4,8 @@ scramble_sq1.js
 
 Square-1 Solver / Scramble Generator in Javascript.
 
-Ported from PPT, written Walter Souza: https://bitbucket.org/walter/puzzle-timer/src/7049018bbdc7/src/com/puzzletimer/solvers/Square1Solver.java
-Ported by Lucas Garron, November 16, 2011.
-
-TODO:
-- Try to ini using pregenerated JSON.
-- Try to optimize arrays (byte arrays?).
+Code by by Shuang Chen.
+Compiled to Javascript using GWT.
 
 */
 
