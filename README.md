@@ -34,7 +34,7 @@ Each `scramblers[eventID]` object supports the following methods:
   - A string like "December 25, 2011" that reports the last significant modification date of the scrambler.
 - `initialize(callback, randomSource, statusCallback)`
   - This method must be called before generating or drawing any scrambles.
-  - `callback`: Some scramblers are not instant to initialize (e.g. `333` takes about a second, `sq1` about 5 seconds). If a bunch of these are called in a row, the browser will not have a chance to be responsive. In order to support continuation-passing, you can provide a method to be called whent he initialization is done. You can also pass in `null` and the initialization will simply return control to the caller when it is done.
+  - `callback`: Some scramblers are not instant to initialize (e.g. `333` takes about a second, `sq1` about 5 seconds). If a bunch of these are called in a row, the browser will not have a chance to be responsive. In order to support continuation-passing, you can provide a method to be called when the initialization is done. You can also pass in `null` and the initialization will simply return control to the caller when it is done.
   - `randomSource`: This must be an object that support a `randomSource.random()` method for generating random floats. This may be `Math`, but *`Math` is not used as a default and you must provide an argument*.
   - `statusCallback`: Some scramblers take a while to initialize. If you'd like to have it report back to you on progress, provide a `statusCallback` method that takes a string.
 - `setRandomSource(src)`
@@ -45,7 +45,7 @@ Each `scramblers[eventID]` object supports the following methods:
   - The `state` object is an object whose structure depends on the scrambler implementation. It is useful for drawing.
 - `drawScramble(parentElement, state, width, height)`
   - The source for the Raphael.js library must be included before this method can be called.
-  - `parentElement` is an HTML element. This method will append a new SVG element to he `parentElement` and draw the scramble in it.
+  - `parentElement` is an HTML element. This method will append a new SVG element to the `parentElement` and draw the scramble in it.
   - `state` is a valid puzzle state, as returned by `getRandomScramble()`
   - `width` and `height` are the width and height of the desired SVG canvas to be drawn, in pixels.
 
