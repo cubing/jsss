@@ -1,6 +1,6 @@
 {
   "name": "scramble",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Javascript Rubik's Cube Scramble Generator ",
   "main": "scramble.js",
   "dependencies": {
