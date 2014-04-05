@@ -5,10 +5,13 @@
 # Cli
 ```bash
 npm install -g scrambo
-scrambo -h
+scrambo
 ```
 
 # Node.js
+```bash
+npm install scrambo
+```
 ```javascript
 var Scramble = require('scrambo');
 
