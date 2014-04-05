@@ -1,3 +1,6 @@
+# Scrambo
+![scrambo](logo.svg)
+
 # Mark 2 Scrambler Suite
 
 This directory contains several scramblers used for Mark 2 that can be used in any Javascript project.
