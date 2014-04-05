@@ -1,5 +1,5 @@
 # Scrambo
-![scrambo](logo.svg)
+![scrambo](http://rawgithub.com/nickcolley/scrambo/master/logo.svg)
 
 # Mark 2 Scrambler Suite
 
