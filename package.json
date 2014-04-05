@@ -1,14 +1,14 @@
 {
   "name": "scrambo",
   "version": "0.0.3",
-  "description": "Twisty Puzzle Scramble Generator",
-  "main": "scrambo.js",
+  "description": "Javascript Rubik's Cube Scramble Generator ",
+  "main": "./lib/scrambo.js",
   "dependencies": {
     "commander": "~2.2.0"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "node test.js"
+    "test": "node test/test.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,6 @@
     "url": "https://github.com/nickcolley/scrambo/issues"
   },
   "bin": {
-    "scrambo": "./cli.js"
+    "scrambo": "./lib/cli.js"
   }
 }
