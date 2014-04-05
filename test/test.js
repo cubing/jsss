@@ -1,7 +1,7 @@
 //TODO use Mocha, Jasmine or sumin
 
 var Assert = require('assert');
-var Scramble = require('./scrambo.js');
+var Scramble = require('../lib/scrambo.js');
 
 var test = new Scramble();
 test.type('333');
