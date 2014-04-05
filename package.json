@@ -1,6 +1,6 @@
 {
   "name": "scramble",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Javascript Rubik's Cube Scramble Generator ",
   "main": "scramble.js",
   "dependencies": {
@@ -25,5 +25,7 @@
   "bugs": {
     "url": "https://github.com/nickcolley/scramble/issues"
   },
-  "homepage": "https://github.com/nickcolley/scramble"
+  "bin": {
+    "scramble": "./cli.js"
+  },
 }
