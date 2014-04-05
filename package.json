@@ -1,7 +1,7 @@
 {
   "name": "scrambo",
   "version": "0.0.3",
-  "description": "Javascript Rubik's Cube Scramble Generator ",
+  "description": "Twisty Puzzle Scramble Generator",
   "main": "scrambo.js",
   "dependencies": {
     "commander": "~2.2.0"
