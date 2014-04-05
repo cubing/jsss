@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var Scramble = require('./scramble.js');
+var Scrambo = require('scrambo');
 var cli = require('commander');
 
 cli
@@ -8,5 +8,5 @@ cli
   .option('-t, --type [string]', 'set the scramble type', '333')
   .parse(process.argv);
 
-var test = new Scramble(cli.type);
+var test = new Scrambo(cli.type);
 console.log(test.get());

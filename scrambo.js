@@ -5,7 +5,7 @@ var scramblers = require('./scramble_333.js');
  * @constructor
  * @param {string} t scramble type
  */
-var Scramble = function(t) {
+var Scrambo = function(t) {
 	this.t = t || '333';
 	this.s = {};
 	this.setRandomSource(Math);
@@ -18,7 +18,7 @@ var Scramble = function(t) {
  * @param {string} type scramble type
  * @returns {string} set type
  */
-Scramble.prototype.type = function(type) {
+Scrambo.prototype.type = function(type) {
 	if (!arguments.length) return this.t;
 	this.t = type;
 	scramblers[this.t].initialize(null, this.s);
@@ -30,7 +30,7 @@ Scramble.prototype.type = function(type) {
  * @param {number} num number of scrambles
  * @returns {string} generated scramble
  */
-Scramble.prototype.get = function(num) {
+Scrambo.prototype.get = function(num) {
 	var stack = '';
 	if (!arguments.length) return scramblers[this.t].getRandomScramble().scramble_string;
 	for(i = 0; i < num; i++) {
@@ -43,8 +43,8 @@ Scramble.prototype.get = function(num) {
  * Sets the random source
  * @param {src} random source
  */
-Scramble.prototype.setRandomSource = function(src) {
+Scrambo.prototype.setRandomSource = function(src) {
 	this.s = src;
 };
 
-module.exports = Scramble;
+module.exports = Scrambo;

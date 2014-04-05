@@ -1,8 +1,8 @@
 {
-  "name": "scramble",
+  "name": "scrambo",
   "version": "0.0.3",
   "description": "Javascript Rubik's Cube Scramble Generator ",
-  "main": "scramble.js",
+  "main": "scrambo.js",
   "dependencies": {
     "commander": "~2.2.0"
   },
@@ -12,10 +12,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/nickcolley/scramble.git"
+    "url": "git://github.com/nickcolley/scrambo.git"
   },
   "keywords": [
     "scramble",
+    "scrambo",
     "cube",
     "rubik",
     "jsss"
@@ -23,9 +24,9 @@
   "author": "Nick Colley <nickcolley7@gmail.com> (https://twitter.com/nickcolley)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nickcolley/scramble/issues"
+    "url": "https://github.com/nickcolley/scrambo/issues"
   },
   "bin": {
-    "scramble": "./cli.js"
+    "scrambo": "./cli.js"
   }
 }
