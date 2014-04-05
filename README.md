@@ -2,7 +2,7 @@
 ![scrambo](http://rawgithub.com/nickcolley/scrambo/master/logo.svg)
 
 
-### Cli
+## Cli
 ```bash
 npm install -g scrambo
 scrambo
