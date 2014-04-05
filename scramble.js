@@ -1,10 +1,12 @@
+var scramblers = require('./scramble_333.js');
+
 /**
  * A scramble generator
  * @constructor
  * @param {string} t scramble type
  */
 var Scramble = function(t) {
-	this.t = '333';
+	this.t = t || '333';
 	this.s = {};
 	this.setRandomSource(Math);
 	this.type(this.t);
@@ -44,3 +46,5 @@ Scramble.prototype.get = function(num) {
 Scramble.prototype.setRandomSource = function(src) {
 	this.s = src;
 };
+
+module.exports = Scramble;

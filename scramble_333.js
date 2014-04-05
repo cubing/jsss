@@ -1739,3 +1739,5 @@ scramblers["333ft"] = scramblers["333"];
 scramblers["333bf"] = scramblers["333"];
 scramblers["333oh"] = scramblers["333"];
 scramblers["333mbf"] = scramblers["333"];
+
+module.exports = scramblers;
