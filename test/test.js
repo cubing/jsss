@@ -1,11 +1,36 @@
-//TODO use Mocha, Jasmine or sumin
-
 var Assert = require('assert');
-var Scramble = require('../lib/scrambo.js');
+var Scrambo = require('../lib/scrambo.js');
 
-var test = new Scramble();
+// Constructor
+var test = new Scrambo();
+Assert.equal(test.type(), '333', 'Default type should be 333');
+
+// Type
+var test = new Scrambo();
 test.type('333');
 Assert.equal(test.type(), '333', 'Type should be set to 333');
+var test = new Scrambo();
+test.type('444');
+Assert.equal(test.type(), '444', 'Type should be set to 444');
+var test = new Scrambo();
+test.type('555');
+Assert.equal(test.type(), '555', 'Type should be set to 555');
 
-var test = new Scramble();
-Assert.equal(test.type(), '333', 'Default type should be 333');
+// Chaining
+var test = new Scrambo().get(1);
+var test = new Scrambo().seed(10).get(2);
+var test = new Scrambo().type('444').get(2);
+var test = new Scrambo().seed(1).type('444').get();
+var test = new Scrambo().type('444').seed(1).get(1);
+
+// Seeding
+var test = new Scrambo();
+var seeded_scramble = test.seed(1).get();
+for (var i = 100; i >= 0; i--) {
+	Assert.equal(seeded_scramble, test.seed(1).get(), 'Seeded scrambles should return the same [' + i + ']');
+}
+var test = new Scrambo();
+var seeded_scramble = test.seed(50).type('444').get();
+for (var i = 100; i >= 0; i--) {
+	Assert.equal(seeded_scramble, test.seed(50).type('444').get(), 'Complex seeded scrambles should return the same [' + i + ']');
+}
