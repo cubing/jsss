@@ -1,6 +1,6 @@
 {
   "name": "scrambo",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Javascript Rubik's Cube Scramble Generator ",
   "main": "./lib/scrambo.js",
   "dependencies": {
