@@ -26,12 +26,12 @@ var test = new Scrambo().type('444').seed(1).get(1);
 // Seeding
 var test = new Scrambo();
 var seeded_scramble = test.seed(1).get();
-for (var i = 100; i >= 0; i--) {
+for (var i = 1; i <= 100; i++) {
 	Assert.equal(seeded_scramble, test.seed(1).get(), 'Seeded scrambles should return the same [' + i + ']');
 }
 var test = new Scrambo();
 var seeded_scramble = test.seed(50).type('444').get();
-for (var i = 100; i >= 0; i--) {
+for (var i = 1; i <= 100; i++) {
 	Assert.equal(seeded_scramble, test.seed(50).type('444').get(), 'Complex seeded scrambles should return the same [' + i + ']');
 }
 
