@@ -6,9 +6,12 @@
   "dependencies": {
     "commander": "~2.2.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "browserify": "^3.38.1"
+  },
   "scripts": {
-    "test": "node test/test.js"
+    "test": "node test/test.js",
+    "build": "browserify lib/scrambo.js --standalone Scrambo --outfile scrambo.js"
   },
   "repository": {
     "type": "git",
