@@ -1,0 +1,9 @@
+<script src="../scrambo.js"></script>
+<script>
+	var threebythree = new Scrambo();
+	document.write(threebythree.get() + '<br>');
+
+	var seeded = new Scrambo('444');
+	seeded.seed(1);
+	document.write('Always the same: ' + seeded.get() + '<br>');
+</script>
