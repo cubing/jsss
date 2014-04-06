@@ -1,7 +1,6 @@
 # Scrambo
 ![scrambo](http://rawgithub.com/nickcolley/scrambo/master/scrambo.svg)
 
-
 ## Cli
 ```bash
 npm install -g scrambo
