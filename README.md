@@ -1,6 +1,17 @@
 # Scrambo - Puzzle Scramble Generator
 ![scrambo](http://rawgithub.com/nickcolley/scrambo/master/scrambo.svg)
 
+## Usage
+```javascript
+// Generate a new 4x4 scramble with the seed of 1
+var seeded_scramble = new Scrambo().type('444').seed(1).get();
+console.log(seeded_scramble);
+
+// Generate 5 scrambles (defaults to 3x3)
+var multiple_scrambles = new Scrambo().get(5);
+console.log(multiple_scrambles);
+```
+
 ## Cli
 ```bash
 npm install -g scrambo
