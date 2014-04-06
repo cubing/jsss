@@ -1,5 +1,5 @@
 # Scrambo
-![scrambo](http://rawgithub.com/nickcolley/scrambo/master/logo.svg)
+![scrambo](http://rawgithub.com/nickcolley/scrambo/master/scrambo.svg)
 
 
 ## Cli
