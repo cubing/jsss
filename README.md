@@ -1,5 +1,5 @@
 # Scrambo
-
+![scrambo](https://rawgithub.com/nickcolley/scrambo/master/logo.svg)
 
 ## Cli
 ```bash
