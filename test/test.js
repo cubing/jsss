@@ -62,3 +62,33 @@ test.get();
 var test = new Scrambo().type('sq1');
 test.get();
 var test = new Scrambo().type('sq1').get();
+
+// Length
+
+// Default
+
+var test = new Scrambo().get();
+Assert.equal(test.split(' ').length, 20, 'scramble should equal 20');
+
+var test = new Scrambo().length(5).get();
+Assert.equal(test.split(' ').length, 5, 'scramble should equal 5');
+
+var test = new Scrambo().length(1).get();
+Assert.equal(test.split(' ').length, 1, 'scramble should equal 1');
+
+var test = new Scrambo().length(10).get();
+Assert.equal(test.split(' ').length, 10, 'scramble should equal 10');
+
+// 555
+
+var test = new Scrambo().type('555').get();
+Assert.equal(test.split(' ').length, 20, 'scramble should equal 20');
+
+var test = new Scrambo().length(5).type('555').get();
+Assert.equal(test.split(' ').length, 5, 'scramble should equal 5');
+
+var test = new Scrambo().length(1).type('555').get();
+Assert.equal(test.split(' ').length, 1, 'scramble should equal 1');
+
+var test = new Scrambo().length(10).type('555').get();
+Assert.equal(test.split(' ').length, 10, 'scramble should equal 10');

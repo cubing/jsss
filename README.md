@@ -45,6 +45,7 @@ console.log(threebythree.get(5)); // Returns 5 scrambles
 .get(num); // Returns a number of scrambles, defaults to 1.
 .type(str); // Sets the scramble type, defaults to 333.
 .seed(num); // Repeatable scrambles.
+.length(num); // Set scramble length, currently only for NNN, minx scrambles.
 ```
 
 ## Current status
