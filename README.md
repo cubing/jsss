@@ -1,4 +1,4 @@
-# Scrambo - Twisty Puzzle Scramble Generator
+# Scrambo - Puzzle Scramble Generator
 ![scrambo](http://rawgithub.com/nickcolley/scrambo/master/scrambo.svg)
 
 ## Cli
