@@ -7,11 +7,12 @@
     "commander": "~2.2.0"
   },
   "devDependencies": {
-    "browserify": "^3.38.1"
+    "browserify": "^3.38.1",
+    "uglify-js": "^2.4.13"
   },
   "scripts": {
     "test": "node test/test.js",
-    "build": "browserify lib/scrambo.js --standalone Scrambo --outfile scrambo.js"
+    "build": "browserify lib/scrambo.js --standalone Scrambo | uglifyjs > scrambo.js"
   },
   "repository": {
     "type": "git",
