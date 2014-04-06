@@ -34,3 +34,31 @@ var seeded_scramble = test.seed(50).type('444').get();
 for (var i = 100; i >= 0; i--) {
 	Assert.equal(seeded_scramble, test.seed(50).type('444').get(), 'Complex seeded scrambles should return the same [' + i + ']');
 }
+
+// Minx
+var test = new Scrambo('minx');
+test.get();
+var test = new Scrambo().type('minx');
+test.get();
+var test = new Scrambo().type('minx').get();
+
+// Pyram
+var test = new Scrambo('pyram');
+test.get();
+var test = new Scrambo().type('pyram');
+test.get();
+var test = new Scrambo().type('pyram').get();
+
+// Clock
+var test = new Scrambo('clock');
+test.get();
+var test = new Scrambo().type('clock');
+test.get();
+var test = new Scrambo().type('clock').get();
+
+// SQ1
+var test = new Scrambo('sq1');
+test.get();
+var test = new Scrambo().type('sq1');
+test.get();
+var test = new Scrambo().type('sq1').get();
