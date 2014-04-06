@@ -19,7 +19,6 @@ console.log(threebythree.get(5)); // Returns 5 scrambles
 ```
 
 ## Browser
-```Not impliemented yet.```
 ```html
 <script src="scrambo.js"></script>
 
@@ -36,7 +35,7 @@ console.log(threebythree.get(5)); // Returns 5 scrambles
 ```
 
 ## Current status
-Currently only works with [3x3](https://github.com/nickcolley/scrambo/issues/6), and there's no [browser](https://github.com/nickcolley/scrambo/issues/1) build yet.  
+Alpha, but works!
 
 ## Credits
 This is a fork of [jsss](https://github.com/cubing/jsss)
