@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/nickcolley/scrambo.svg?branch=master)](https://travis-ci.org/nickcolley/scrambo)
 # Scrambo - Puzzle Scramble Generator
 ![scrambo](http://rawgithub.com/nickcolley/scrambo/master/scrambo.svg)
 
