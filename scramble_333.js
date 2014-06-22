@@ -1643,8 +1643,8 @@ var Cnk, ckmv, ckmv2, cornerColor, cornerFacelet, edgeColor, edgeFacelet, fact, 
     
     var scale = Math.min(w/defaultWidth, h/defaultHeight);
 
-    var x = ptIn[0]*scale + (w - (defaultWidth * scale))/2;
-    var y = ptIn[1]*scale + (h - (defaultHeight * scale))/2;
+    var x = Math.floor(ptIn[0]*scale + (w - (defaultWidth * scale))/2) + 0.5;
+    var y = Math.floor(ptIn[1]*scale + (h - (defaultHeight * scale))/2) + 0.5;
 
     return [x, y];
   }
