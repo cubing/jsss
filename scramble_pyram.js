@@ -6,6 +6,10 @@
 "use strict";
 if (typeof scramblers == "undefined") {
   var scramblers = {};
+  scramblers.lib = {
+    // https://github.com/lgarron/randomInt.js
+    randomInt: function(){function n(){var n="WARNING: randomInt is falling back to Math.random for random number generation.";console.warn?console.warn(n):console.log(n),e=!0}function o(n){if("number"!=typeof n||0>n||Math.floor(n)!==n)throw new Error("randomInt.below() not called with a positive integer value.");if(n>9007199254740992)throw new Error("Called randomInt.below() with max == "+n+", which is larger than Javascript can handle with integer precision.")}function r(n){o(n);var e=a(),i=Math.floor(t/n)*n;return i>e?e%n:r(n)}var a,t=9007199254740992,e=!1,i=window.crypto||window.msCrypto||window.cryptoUint32;if(i)a=function(){var n=2097152,o=new Uint32Array(2);return i.getRandomValues(o),o[0]*n+(o[1]>>21)};else{var l="ERROR: randomInt could not find a suitable crypto.getRandomValues() function.";console.error?console.error(l):console.log(l),a=function(){if(e)return Math.floor(Math.random()*t);throw new Error("randomInt cannot get random values.")}}return{below:r,enableInsecureMathRandomFallback:n}}()
+  }
 }
 
 scramblers["pyram"] = (function() {
@@ -102,7 +106,7 @@ scramblers["pyram"] = (function() {
     }
     var tips=["l","r","b","u"];
     for (i=0;i<4;i++) {
-     var j = Math.floor(randomSource.random() * 3);
+     var j = scramblers.lib.randomInt.below(3);
      if (j < 2) {
       scramblestring[n] += tips[i] + ["","'"][j] + " ";
       picmove(4+i,1+j,n);
@@ -163,7 +167,7 @@ scramblers["pyram"] = (function() {
       var parity = 0;
       pcperm = [0,1,2,3,4,5];
       for (var i=0;i<4;i++) {
-       var other = i + Math.floor((6-i) * randomSource.random());
+       var other = i + scramblers.lib.randomInt.below(6-i);
        var temp = pcperm[i];
        pcperm[i] = pcperm[other];
        pcperm[other] = temp;
@@ -177,12 +181,12 @@ scramblers["pyram"] = (function() {
       parity=0;
       pcori = [];
       for (var i=0;i<5;i++) {
-       pcori[i] = Math.floor(2 * randomSource.random());
+       pcori[i] = scramblers.lib.randomInt.below(2);
        parity += pcori[i];
       }
       pcori[5] = parity % 2;
       for (var i=6;i<10;i++) {
-       pcori[i] = Math.floor(3 * randomSource.random());
+       pcori[i] = scramblers.lib.randomInt.below(3);
       }
    
       for(a=0;a<6;a++){
@@ -511,14 +515,6 @@ scramblers["pyram"] = (function() {
 
   /* Methods added by Lucas. */
 
-  var randomSource = undefined;
-
-  // If we have a better (P)RNG:
-  var setRandomSource = function(src) {
-    randomSource = src;
-  }
-
-
   var getRandomScramble = function() {
     scramble();
 
@@ -528,9 +524,8 @@ scramblers["pyram"] = (function() {
     };
   };
 
-  var initializeFull = function(continuation, iniRandomSource) {
-  
-    setRandomSource(iniRandomSource);
+  var initializeFull = function(continuation, _) {
+
     
     parse();
     calcperm();
@@ -621,9 +616,9 @@ scramblers["pyram"] = (function() {
 
   return {
     /* mark2 interface */
-    version: "December 29, 2011",
+    version: "July 05, 2015",
     initialize: initializeFull,
-    setRandomSource: setRandomSource,
+    setRandomSource: function() {console.log("setRandomSource is deprecated. It has no effect anymore.")},
     getRandomScramble: getRandomScramble,
     drawScramble: drawScramble,
 

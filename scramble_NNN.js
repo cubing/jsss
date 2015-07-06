@@ -12,6 +12,10 @@ Ported by Lucas Garron, November 24, 2011.
 "use strict";
 if (typeof scramblers === "undefined") {
   var scramblers = {};
+  scramblers.lib = {
+    // https://github.com/lgarron/randomInt.js
+    randomInt: function(){function n(){var n="WARNING: randomInt is falling back to Math.random for random number generation.";console.warn?console.warn(n):console.log(n),e=!0}function o(n){if("number"!=typeof n||0>n||Math.floor(n)!==n)throw new Error("randomInt.below() not called with a positive integer value.");if(n>9007199254740992)throw new Error("Called randomInt.below() with max == "+n+", which is larger than Javascript can handle with integer precision.")}function r(n){o(n);var e=a(),i=Math.floor(t/n)*n;return i>e?e%n:r(n)}var a,t=9007199254740992,e=!1,i=window.crypto||window.msCrypto||window.cryptoUint32;if(i)a=function(){var n=2097152,o=new Uint32Array(2);return i.getRandomValues(o),o[0]*n+(o[1]>>21)};else{var l="ERROR: randomInt could not find a suitable crypto.getRandomValues() function.";console.error?console.error(l):console.log(l),a=function(){if(e)return Math.floor(Math.random()*t);throw new Error("randomInt cannot get random values.")}}return{below:r,enableInsecureMathRandomFallback:n}}()
+  }
 }
 
 // We use an anonymous wrapper (and call it immediately) in order to avoid leaving the generator hanging around in the top-level scope.
@@ -183,11 +187,11 @@ if (typeof scramblers === "undefined") {
             do{
               do{
                 // choose a random axis
-                ax=Math.floor(randomSource.random()*3);
+                ax=scramblers.lib.randomInt.below(3);
                 // choose a random move type on that axis
-                sl=Math.floor(randomSource.random()*tl);
+                sl=scramblers.lib.randomInt.below(tl);
                 // choose random amount
-                q=Math.floor(randomSource.random()*3);
+                q=scramblers.lib.randomInt.below(3);
               }while( ax===la && axsl[sl]!=0 );    // loop until have found an unused movetype
             }while( ax===la          // loop while move is reducible: reductions only if on same axis as previous moves
                 && !mult        // multislice moves have no reductions so always ok
@@ -225,7 +229,7 @@ if (typeof scramblers === "undefined") {
           appendmoves( seq[n], axsl, tl, la );
        
           // do a random cube orientation if necessary
-          seq[n][seq[n].length]= cubeorient ? Math.floor(randomSource.random()*24) : 0;
+          seq[n][seq[n].length]= cubeorient ? scramblers.lib.randomInt.below(24) : 0;
         }
        
       }
@@ -458,13 +462,6 @@ if (typeof scramblers === "undefined") {
        * Some helper functions.
        */
 
-      var randomSource = undefined;
-
-      // If we have a better (P)RNG:
-      var setRandomSource = function(src) {
-        randomSource = src;
-      };
-
 
       var getRandomScramble = function() {
         scramble();
@@ -492,9 +489,7 @@ if (typeof scramblers === "undefined") {
         }
       };
 
-      var initializeFull = function(continuation, iniRandomSource) {
-    
-      setRandomSource(iniRandomSource);
+      var initializeFull = function(continuation, _) {
 
         initializeDrawing();
 
@@ -506,10 +501,9 @@ if (typeof scramblers === "undefined") {
 
       /* mark2 interface */
       return {
-        version: "December 29, 2011",
+        version: "July 05, 2015",
         initialize: initializeFull,
-        setRandomSource: setRandomSource,
-        getRandomScramble: getRandomScramble,
+        setRandomSource: function() {console.log("setRandomSource is deprecated. It has no effect anymore.")},        getRandomScramble: getRandomScramble,
         drawScramble: drawScramble,
 
         /* Other methods */

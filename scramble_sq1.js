@@ -11,6 +11,10 @@ Compiled to Javascript using GWT.
 
 if (typeof scramblers === "undefined") {
   var scramblers = {};
+  scramblers.lib = {
+    // https://github.com/lgarron/randomInt.js
+    randomInt: function(){function n(){var n="WARNING: randomInt is falling back to Math.random for random number generation.";console.warn?console.warn(n):console.log(n),e=!0}function o(n){if("number"!=typeof n||0>n||Math.floor(n)!==n)throw new Error("randomInt.below() not called with a positive integer value.");if(n>9007199254740992)throw new Error("Called randomInt.below() with max == "+n+", which is larger than Javascript can handle with integer precision.")}function r(n){o(n);var e=a(),i=Math.floor(t/n)*n;return i>e?e%n:r(n)}var a,t=9007199254740992,e=!1,i=window.crypto||window.msCrypto||window.cryptoUint32;if(i)a=function(){var n=2097152,o=new Uint32Array(2);return i.getRandomValues(o),o[0]*n+(o[1]>>21)};else{var l="ERROR: randomInt could not find a suitable crypto.getRandomValues() function.";console.error?console.error(l):console.log(l),a=function(){if(e)return Math.floor(Math.random()*t);throw new Error("randomInt cannot get random values.")}}return{below:r,enableInsecureMathRandomFallback:n}}()
+  }
 }
 
 scramblers["sq1"] = (function() {
@@ -147,19 +151,19 @@ function FullCube_FullCube__Ljava_lang_String_2V(){
 function FullCube_randomCube(){
 	var f, i, shape, edge, corner, n_edge, n_corner, rnd, m;
 	f = new FullCube_FullCube__Ljava_lang_String_2V;
-	shape = Shape_ShapeIdx[~~(square1SolverRandomSource.random() * 3678)];
+	shape = Shape_ShapeIdx[~~(scramblers.lib.randomInt.below(3678))];
 	corner = 0x01234567 << 1 | 0x11111111;
 	edge = 0x01234567 << 1;
 	n_corner = n_edge = 8;
 	for (i=0; i<24; i++) {
 		if (((shape >> i) & 1) == 0) {//edge
-			rnd = ~~(square1SolverRandomSource.random() * n_edge) << 2;
+			rnd = ~~(scramblers.lib.randomInt.below(n_edge)) << 2;
 			FullCube_setPiece(f, 23-i, (edge >> rnd) & 0xf);
 			m = (1 << rnd) - 1;
 			edge = (edge & m) + ((edge >> 4) & ~m);
 			--n_edge;
 		} else {//corner
-			rnd = ~~(square1SolverRandomSource.random() * n_corner) << 2;
+			rnd = ~~(scramblers.lib.randomInt.below(n_corner)) << 2;
 			FullCube_setPiece(f, 23-i, (corner >> rnd) & 0xf);
 			FullCube_setPiece(f, 22-i, (corner >> rnd) & 0xf);
 			m = (1 << rnd) - 1;
@@ -168,7 +172,7 @@ function FullCube_randomCube(){
 			++i;								
 		}
 	}
-	f.ml = ~~(square1SolverRandomSource.random() * 2);
+	f.ml = ~~(scramblers.lib.randomInt.below(2));
 //	console.log(f);
 	return f;
 }
@@ -728,10 +732,7 @@ function binarySearch(sortedArray, key){
 
   var square1Solver_initialized = false;
 
-  var square1SolverInitialize= function(doneCallback, iniRandomSource, statusCallback) {
-
-    setRandomSource(iniRandomSource);
-    
+  var square1SolverInitialize= function(doneCallback, _, statusCallback) {
     if (!square1Solver_initialized) {
       Shape_$clinit();
       Square_$clinit();
@@ -747,12 +748,6 @@ function binarySearch(sortedArray, key){
     }
   }
 
-  var square1SolverRandomSource = undefined;
-
-  // If we have a better (P)RNG:
-  var setRandomSource = function(src) {
-    square1SolverRandomSource = src;
-  }
 
   var square1SolverGetRandomPosition = function() {
     if (!square1Solver_initialized) {
@@ -1066,9 +1061,9 @@ function drawSq(stickers, middleIsSolved, shapes, parentElement, width, height, 
   return {
 
     /* mark2 interface */
-    version: "May 17, 2012",
+    version: "July 05, 2015",
     initialize: square1SolverInitialize,
-    setRandomSource: setRandomSource,
+    setRandomSource: function() {console.log("setRandomSource is deprecated. It has no effect anymore.")},
     getRandomScramble: square1SolverGetRandomScramble,
     drawScramble: drawScramble,
 

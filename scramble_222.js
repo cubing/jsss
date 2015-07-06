@@ -12,6 +12,10 @@ Ported by Lucas Garron, November 23, 2011.
 "use strict";
 if (typeof scramblers === "undefined") {
   var scramblers = {};
+  scramblers.lib = {
+    // https://github.com/lgarron/randomInt.js
+    randomInt: function(){function n(){var n="WARNING: randomInt is falling back to Math.random for random number generation.";console.warn?console.warn(n):console.log(n),e=!0}function o(n){if("number"!=typeof n||0>n||Math.floor(n)!==n)throw new Error("randomInt.below() not called with a positive integer value.");if(n>9007199254740992)throw new Error("Called randomInt.below() with max == "+n+", which is larger than Javascript can handle with integer precision.")}function r(n){o(n);var e=a(),i=Math.floor(t/n)*n;return i>e?e%n:r(n)}var a,t=9007199254740992,e=!1,i=window.crypto||window.msCrypto||window.cryptoUint32;if(i)a=function(){var n=2097152,o=new Uint32Array(2);return i.getRandomValues(o),o[0]*n+(o[1]>>21)};else{var l="ERROR: randomInt could not find a suitable crypto.getRandomValues() function.";console.error?console.error(l):console.log(l),a=function(){if(e)return Math.floor(Math.random()*t);throw new Error("randomInt cannot get random values.")}}return{below:r,enableInsecureMathRandomFallback:n}}()
+  }
 }
 
 scramblers["222"] = (function() {
@@ -42,7 +46,7 @@ scramblers["222"] = (function() {
   function mix(){
       initbrd();
       for(var i=0;i<500;i++){
-          var f=Math.floor(randomSource.random()*3+3) + 16*Math.floor(randomSource.random()*3);
+          var f=Math.floor(scramblers.lib.randomInt.below(3)+3) + 16*Math.floor(randomSource.random()*3);
           domove(f);
       }
   }
@@ -56,7 +60,7 @@ scramblers["222"] = (function() {
     var perm_src = [0, 1, 2, 3, 4, 5, 6, 7];
     var perm_sel = Array(); 
     for(var i = 0; i < 7; i++){
-      var ch = Math.floor(randomSource.random() * (7 - i));
+      var ch = scramblers.lib.randomInt.below(7 - i);
       ch = perm_src[ch] === fixed ? (ch + 1) % (8 - i) : ch;
       perm_sel[i >= fixed ? i + 1 : i] = perm_src[ch];
       perm_src[ch] = perm_src[7 - i];
@@ -67,7 +71,7 @@ scramblers["222"] = (function() {
     var ori_sel = Array();
     var i = fixed === 0 ? 1 : 0;
     for(; i < 7; i = i === fixed - 1 ? i + 2 : i + 1){
-      ori_sel[i] = Math.floor(randomSource.random() * 3);
+      ori_sel[i] = scramblers.lib.randomInt.below(3);
       total += ori_sel[i];
     }
     if(i <= 7) ori_sel[i] = (3 - (total % 3)) % 3;
@@ -608,14 +612,6 @@ scramblers["222"] = (function() {
    * Some helper functions.
    */
 
-  var randomSource = undefined;
-
-  // If we have a better (P)RNG:
-  var setRandomSource = function(src) {
-    randomSource = src;
-  };
-
-
   var getRandomScramble = function() {
     mix2();
     var solution = solve();
@@ -644,10 +640,8 @@ scramblers["222"] = (function() {
     }
   };
 
-  var initializeFull = function(continuation, iniRandomSource) {
+  var initializeFull = function(continuation, _) {
   
-    setRandomSource(iniRandomSource);
-    
     initializeDrawing();
 
     if (continuation) {
@@ -658,9 +652,9 @@ scramblers["222"] = (function() {
 
   /* mark2 interface */
   return {
-    version: "December 29, 2011",
+    version: "July 05, 2015",
     initialize: initializeFull,
-    setRandomSource: setRandomSource,
+    setRandomSource: function() {console.log("setRandomSource is deprecated. Iat hs no effect anymore.")},
     getRandomScramble: getRandomScramble,
     drawScramble: drawScramble,
 
