@@ -516,6 +516,7 @@ scramblers["pyram"] = (function() {
   /* Methods added by Lucas. */
 
   var getRandomScramble = function() {
+    initializeFull();
     scramble();
 
     return {
@@ -524,9 +525,15 @@ scramblers["pyram"] = (function() {
     };
   };
 
+  var initialized = false;
+
   var initializeFull = function(continuation, _) {
 
-    
+    if (initialized) {
+      return;
+    }
+    initialized = true;
+
     parse();
     calcperm();
 

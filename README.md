@@ -7,8 +7,9 @@ This directory contains several scramblers used for Mark 2 that can be used in a
 Say you want 2x2x2 scrambles in your project.
 
 1. Include `scramble_222.js` in your project.
-2. `scramblers["222"].initialize() // Call this once.`
-3. `scramblers["222"].getRandomScramble().scramble_string // Get a scramble string.`
+2. `scramblers["222"].getRandomScramble().scramble_string // Get a scramble string.`
+
+(If you want to initialize before generating any scrambles, call `scramblers["222"].initialize()` before step 2. However, `getRandomScramble()` will also initialize for you if needed.)
 
 See [example.htm](./example.htm) for a slightly more thorough example with images.
 
@@ -32,13 +33,11 @@ Each `scramblers[eventID]` object supports the following methods:
 
 - `version`:
   - A string like "December 25, 2011" that reports the last significant modification date of the scrambler.
-- `initialize(callback, randomSource, statusCallback)`
+- `initialize(callback, null, statusCallback)`
   - This method must be called before generating or drawing any scrambles.
   - `callback`: Some scramblers are not instant to initialize (e.g. `333` takes about a second, `sq1` about 5 seconds). If a bunch of these are called in a row, the browser will not have a chance to be responsive. In order to support continuation-passing, you can provide a method to be called when the initialization is done. You can also pass in `null` and the initialization will simply return control to the caller when it is done.
-  - `randomSource`: This must be an object that support a `randomSource.random()` method for generating random floats. This may be `Math`, but *`Math` is not used as a default and you must provide an argument*.
+  - `null`: Deprecated argument (randomSource). Pass `null` if you need to pass `statusCallback`.
   - `statusCallback`: Some scramblers take a while to initialize. If you'd like to have it report back to you on progress, provide a `statusCallback` method that takes a string.
-- `setRandomSource(src)`
-  - Update the random source.
 - `getRandomScramble()`
   - Get a random scramble. This returns an object `{scramble_string: string, state: object}`. Note that `initialize(...)` needs to have been called earlier.
   - The `scramble_string` is a string represenation of the scrambling moves to be done.

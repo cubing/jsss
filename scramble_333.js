@@ -1705,6 +1705,8 @@ var Cnk, ckmv, ckmv2, cornerColor, cornerFacelet, edgeColor, edgeFacelet, fact, 
 
   var getRandomScramble = function() {
 
+    ini();
+
     var posit = randomCube_0();
     var solution = $solution(search, posit);
 

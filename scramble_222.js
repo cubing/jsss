@@ -613,6 +613,8 @@ scramblers["222"] = (function() {
    */
 
   var getRandomScramble = function() {
+    initializeFull();
+
     mix2();
     var solution = solve();
 
