@@ -4,12 +4,15 @@ This directory contains several scramblers used for Mark 2 that can be used in a
 
 ## Example Usage
 
-Say you want 2x2x2 scrambles in your project.
+Say you want 2x2x2 scrambles in your project. Include the 2x2x2 scrambler:
 
-1. Include `scramble_222.js` in your project.
-2. `scramblers["222"].getRandomScramble().scramble_string // Get a scramble string.`
+    <script src="scramble_222.js"></script>
 
-(If you want to initialize before generating any scrambles, call `scramblers["222"].initialize()` before step 2. However, `getRandomScramble()` will also initialize for you if needed.)
+Then call:
+
+	    scramblers["222"].getRandomScramble().scramble_string
+
+(If you want to initialize before generating any scrambles, call `scramblers["222"].initialize()` before `getRandomScramble()`. However, `getRandomScramble()` will also initialize for you if needed.)
 
 See [example.htm](./example.htm) for a slightly more thorough example with images.
 
