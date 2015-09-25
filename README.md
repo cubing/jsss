@@ -10,7 +10,7 @@ Say you want 2x2x2 scrambles in your project. Include the 2x2x2 scrambler:
 
 Then call:
 
-	    scramblers["222"].getRandomScramble().scramble_string
+    scramblers["222"].getRandomScramble().scramble_string
 
 (If you want to initialize before generating any scrambles, call `scramblers["222"].initialize()` before `getRandomScramble()`. However, `getRandomScramble()` will also initialize for you if needed.)
 
