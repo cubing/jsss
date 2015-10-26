@@ -372,7 +372,7 @@ if (typeof scramblers === "undefined") {
         for(i=0;i<3*size;i++){
           s+="<div style='float: left; display: block; height: "+stickerheight+"px; width: "+(stickerheight*size*4)+"px; line-height: 0px;'>";
           for(f=0;f<4*size;f++){
-            if(flat2posit[d]<0){
+            if(true){
               s+="<div style='overflow: hidden; display: block; float: left; height: "+stickerheight+"px; width: "+stickerheight+"px;'></div>";
             }else{
               var c = colorPerm[ori][posit[flat2posit[d]]];
