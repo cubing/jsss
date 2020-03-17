@@ -1,0 +1,24 @@
+{
+  "name": "@cubing/jsss",
+  "version": "2.0.0-beta",
+  "description": "Javascript Solver/Scrambler Suite",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cubing/jsss.git"
+  },
+  "keywords": [
+    "cubing",
+    "scrambles",
+    "jsss"
+  ],
+  "author": "Lucas Garron <code@garron.net>",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/cubing/jsss/issues"
+  },
+  "homepage": "https://github.com/cubing/jsss#readme"
+}
