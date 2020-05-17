@@ -24,6 +24,7 @@
   "homepage": "https://github.com/cubing/jsss#readme",
   "dependencies": {
     "cubing": "^0.10.2",
+    "min2phase": "0.0.1",
     "random-uint-below": "^0.5.0"
   },
   "devDependencies": {
