@@ -1,5 +1,3 @@
-import "babel-polyfill"
-
 import { wrap } from "comlink";
 import { ScrambleWorker, ScrambleWorkerConstructor } from "./scramble-worker";
 import { Sequence, algToString } from "cubing/alg";

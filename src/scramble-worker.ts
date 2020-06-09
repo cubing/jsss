@@ -1,6 +1,5 @@
 import { expose } from "comlink";
 import { Sequence } from "cubing/alg";
-import "regenerator-runtime/runtime";
 import { random333Scramble } from "./3x3x3";
 import { random444Scramble } from "./4x4x4";
 

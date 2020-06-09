@@ -7,7 +7,7 @@
   "repository": "github:cubing/scrambles",
   "scripts": {
     "build": "npx parcel build --public-url ./ src/index.ts",
-    "dev": "npx parcel serve test/index.html src/index.ts",
+    "dev": "npx parcel serve src/test/index.html",
     "clean": "rm -rf dist .parcel-cache",
     "prepack": "npm run clean && npm run build"
   },
@@ -16,8 +16,7 @@
   "dependencies": {
     "comlink": "^4.3.0",
     "cubing": "^0.10.4",
-    "random-uint-below": "^0.5.0",
-    "webworker": "^0.8.4"
+    "random-uint-below": "^0.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
