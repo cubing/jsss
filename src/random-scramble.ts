@@ -4,9 +4,9 @@ import { Sequence, algToString } from "cubing/alg";
 import { getClockScrambleString } from "./clock";
 
 function newWorker(): ScrambleWorker {
-  const constructorInstance = wrap(
+  const constructorInstance = (wrap<ScrambleWorkerConstructor>(
     new Worker("./scramble-worker.ts")
-  ) as unknown as ScrambleWorkerConstructor;
+  ) as unknown) as ScrambleWorkerConstructor;
   return new constructorInstance();
 }
 
@@ -16,7 +16,7 @@ class LazyWorker {
     if (this.worker === null) {
       this.worker = newWorker();
     }
-    return this.worker
+    return this.worker;
   }
 }
 
@@ -25,7 +25,9 @@ const instance444: LazyWorker = new LazyWorker();
 
 // Balances instances.
 // Currently shards by event, but may get clever and track availability of workers in the future.
-async function getInstanceForNewScramble(eventID: string): Promise<ScrambleWorker> {
+async function getInstanceForNewScramble(
+  eventID: string
+): Promise<ScrambleWorker> {
   switch (eventID) {
     case "444":
     case "444bf":
@@ -38,7 +40,7 @@ async function getInstanceForNewScramble(eventID: string): Promise<ScrambleWorke
 
 async function randomScramble(eventID: string): Promise<Sequence> {
   const instance = await getInstanceForNewScramble(eventID);
-  return instance.randomScramble(eventID)
+  return instance.randomScramble(eventID);
 }
 
 export async function randomScrambleString(eventID: string): Promise<string> {
