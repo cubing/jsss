@@ -1,4 +1,4 @@
-import { parse, Sequence } from "cubing/alg";
+import { parse, Sequence, Unit } from "cubing/alg";
 import { KPuzzle, Puzzles, Transformation } from "cubing/kpuzzle";
 import { randomUIntBelow } from "random-uint-below";
 import { toMin2PhaseState } from "./convert";
@@ -23,4 +23,18 @@ async function solve333(s: Transformation): Promise<Sequence> {
 
 export async function random333Scramble(): Promise<Sequence> {
   return solve333(random333State());
+}
+
+const randomSuffixes = [
+  ["", "Rw", "Rw2", "Rw'", "Fw", "Fw'"],
+  ["", "Dw", "Rw2", "Dw'"],
+];
+
+export async function random333OrientedScramble(): Promise<Sequence> {
+  const unorientedScramble = await random333Scramble();
+  let moves: Unit[] = unorientedScramble.nestedUnits.slice();
+  for (const suffix of randomSuffixes) {
+    moves = moves.concat(parse(randomChoice(suffix)));
+  }
+  return new Sequence(moves);
 }
