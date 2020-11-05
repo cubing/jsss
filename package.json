@@ -6,7 +6,7 @@
   "types": "dist/scrambles.d.ts",
   "main": "dist/scrambles.js",
   "module": "dist/scrambles.module.js",
-  "worker-module": "dist/generated/scrambles.worker-module.js",
+  "worker-module": "dist/module/generated/scrambles.worker-module.js",
   "browser": "dist/scrambles.browser.js",
   "repository": "github:cubing/scrambles",
   "scripts": {

@@ -1,6 +1,6 @@
 import { wrap } from "comlink";
 import { Sequence, algToString } from "cubing/alg";
-import { getClockScrambleString } from "./clock";
+import { getClockScrambleString } from "./clock.js";
 
 function newWorker() {
   const constructorInstance = wrap(
