@@ -26,7 +26,8 @@
     "comlink": "^4.3.0",
     "cubing": "^0.10.4",
     "random-uint-below": "^0.5.0",
-    "regenerator-runtime": "^0.13.7"
+    "regenerator-runtime": "^0.13.7",
+    "web-worker": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",

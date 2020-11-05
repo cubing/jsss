@@ -11,8 +11,40 @@ export interface ScrambleWorkerConstructor {
   new (): ScrambleWorker;
 }
 
-class ScrambleWorkerImpl implements ScrambleWorker {
-  async randomScramble(eventID: string): Promise<Sequence> {
+// class ScrambleWorkerImpl implements ScrambleWorker {
+
+// }
+
+// expose(ScrambleWorkerImpl);
+
+// In worker-thread
+import { parentPort } from "worker_threads";
+import { MessageChannel } from "worker_threads";
+
+import { transferHandlers } from "comlink";
+import nodeEndpoint from "./vendor/comlink/dist/esm/node-adapter";
+
+// Override comlink's default proxy handler to use Node endpoints
+transferHandlers.set("proxy", {
+  // @ts-ignore
+  canHandle: (obj) => obj && obj[Comlink.proxyMarker],
+  // @ts-ignore
+  serialize: (obj) => {
+    const { port1, port2 } = new MessageChannel();
+    expose(obj, nodeEndpoint(port1));
+    return [port2, [port2]];
+  },
+  deserialize: (port) => {
+    port = nodeEndpoint(port);
+    // @ts-ignore
+    port.start();
+    // @ts-ignore
+    return Comlink.wrap(port);
+  },
+});
+
+const api = {
+  randomScramble: async (eventID: string): Promise<Sequence> => {
     switch (eventID) {
       case "333":
       case "333oh":
@@ -25,7 +57,7 @@ class ScrambleWorkerImpl implements ScrambleWorker {
       default:
         throw new Error(`unsupported event: ${eventID}`);
     }
-  }
-}
+  },
+};
 
-expose(ScrambleWorkerImpl);
+.expose(api, nodeEndpoint(parentPort));

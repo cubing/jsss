@@ -1,11 +1,14 @@
+import WebWorker from "web-worker";
 import { wrap } from "comlink";
 import { Sequence, algToString } from "cubing/alg";
 import { getClockScrambleString } from "./clock.js";
 
 function newWorker() {
-  const constructorInstance = wrap(
-    new Worker("../generated/scrambles.worker-module.js")
+  const url = new URL(
+    "../generated/scrambles.worker-module.js",
+    import.meta.url
   );
+  const constructorInstance = wrap(new WebWorker(url, { type: "module" }));
   return new constructorInstance();
 }
 
