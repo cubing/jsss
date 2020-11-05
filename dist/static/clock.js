@@ -1,26 +1,13 @@
 import { randomUIntBelow } from "random-uint-below";
 
+const preflipPrefixes = ["DR", "UR", "DL", "UL", "U", "R", "D", "L", "ALL"];
 
-const preflipPrefixes = [
-  "DR", "UR", "DL", "UL",
-  "U", "R", "D", "L",
-  "ALL",
-];
+const postflipPrefixes = ["DR", "UR", "DL", "UL", "ALL"];
 
-const postflipPrefixes = [
-  "DR", "UR", "DL", "UL",
-  "ALL",
-]
+const pins = ["UR", "DR", "DL", "UL"];
 
-const pins = [
-  "UR",
-  "DR",
-  "DL",
-  "UL",
-]
-
-function movesForSide(prefixes: string[]): string[] {
-  const moves: string[]  = [];
+function movesForSide(prefixes /*: string[]*/) /*: string[]*/ {
+  const moves /*: string[]*/ = [];
   for (const prefix of prefixes) {
     const amount = randomUIntBelow(12) - 5;
     if (amount === 0) {
@@ -32,7 +19,7 @@ function movesForSide(prefixes: string[]): string[] {
 }
 
 export function getClockScrambleString() {
-  let moves: string[]  = [];
+  let moves /*: string[]*/ = [];
 
   moves = moves.concat(movesForSide(preflipPrefixes));
   moves.push("y2");

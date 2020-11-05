@@ -2,13 +2,16 @@
   "name": "scrambles",
   "version": "0.1.0",
   "description": "A library to generate puzzle scrambles.",
+  "type": "module",
   "types": "dist/scrambles.d.ts",
   "main": "dist/scrambles.js",
   "module": "dist/scrambles.module.js",
+  "worker-module": "dist/generated/scrambles.worker-module.js",
   "browser": "dist/scrambles.browser.js",
   "repository": "github:cubing/scrambles",
   "scripts": {
-    "build": "npm run build-types && npm run build-main && npm run build-module && npm run build-browser",
+    "build": "npm run build-worker-module",
+    "build-worker-module": "npx parcel build --target worker-module src/scramble-worker.ts",
     "build-types": "npx parcel build --target types src/targets/types.ts",
     "build-main": "npx parcel build --target main src/targets/main.ts",
     "build-module": "npx parcel build --target module src/targets/module.ts",
@@ -44,6 +47,9 @@
       "outputFormat": "commonjs"
     },
     "module": {
+      "outputFormat": "esmodule"
+    },
+    "worker-module": {
       "outputFormat": "esmodule"
     },
     "browser": {

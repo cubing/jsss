@@ -1,4 +1,5 @@
 /.cache
 /.parcel-cache
-/dist
+/dist/*
+!/dist/static
 /node_modules

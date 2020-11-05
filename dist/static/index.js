@@ -1,17 +1,16 @@
 import { wrap } from "comlink";
-import { ScrambleWorker, ScrambleWorkerConstructor } from "./scramble-worker";
 import { Sequence, algToString } from "cubing/alg";
 import { getClockScrambleString } from "./clock";
 
-function newWorker(): ScrambleWorker {
-  const constructorInstance = (wrap<ScrambleWorkerConstructor>(
-    new Worker("./scramble-worker.ts")
-  ) as unknown) as ScrambleWorkerConstructor;
+function newWorker() {
+  const constructorInstance = wrap(
+    new Worker("../generated/scrambles.worker-module.js")
+  );
   return new constructorInstance();
 }
 
 class LazyWorker {
-  private worker: ScrambleWorker | null = null;
+  worker = null;
   getWorker() {
     if (this.worker === null) {
       this.worker = newWorker();
@@ -20,14 +19,12 @@ class LazyWorker {
   }
 }
 
-const instanceMain: LazyWorker = new LazyWorker();
-const instance444: LazyWorker = new LazyWorker();
+const instanceMain = new LazyWorker();
+const instance444 = new LazyWorker();
 
 // Balances instances.
 // Currently shards by event, but may get clever and track availability of workers in the future.
-async function getInstanceForNewScramble(
-  eventID: string
-): Promise<ScrambleWorker> {
+async function getInstanceForNewScramble(eventID) {
   switch (eventID) {
     case "444":
     case "444bf":
@@ -38,12 +35,12 @@ async function getInstanceForNewScramble(
   }
 }
 
-async function randomScramble(eventID: string): Promise<Sequence> {
+async function randomScramble(eventID) {
   const instance = await getInstanceForNewScramble(eventID);
   return instance.randomScramble(eventID);
 }
 
-export async function randomScrambleString(eventID: string): Promise<string> {
+export async function randomScrambleString(eventID) {
   switch (eventID) {
     case "clock":
       return getClockScrambleString(); // Same thread for now.
