@@ -1,14 +1,17 @@
-import WebWorker from "web-worker";
+import { Worker } from "worker_threads";
+// import WebWorker from "web-worker";
 import { wrap } from "comlink";
 import { Sequence, algToString } from "cubing/alg";
 import { getClockScrambleString } from "./clock.js";
+import { nodeEndpoint } from "./node-adapter.js";
 
 function newWorker() {
-  const url = new URL(
-    "../generated/scrambles.worker-module.js",
-    import.meta.url
+  const url = new URL("./proxy-moxie.js", import.meta.url);
+  console.log("url", url.href);
+  const constructorInstance = wrap(
+    nodeEndpoint(new Worker(url, { type: "module" }))
   );
-  const constructorInstance = wrap(new WebWorker(url, { type: "module" }));
+  console.log("instancy");
   return new constructorInstance();
 }
 
@@ -16,7 +19,11 @@ class LazyWorker {
   worker = null;
   getWorker() {
     if (this.worker === null) {
+      
+      console.log("instancingey"
+      );
       this.worker = newWorker();
+      console.log("instancified");
     }
     return this.worker;
   }
@@ -34,12 +41,17 @@ async function getInstanceForNewScramble(eventID) {
       // 4x4x4 is the only "slow" scrambler, so we put it on its own thread.
       return instance444.getWorker();
     default:
-      return instanceMain.getWorker();
+      console.log("getInstanceForNewScramble getting");
+      const worker = instanceMain.getWorker();
+      console.log("workererererer", { worker });
+      return worker;
   }
 }
 
 async function randomScramble(eventID) {
+  console.log("randomScramblelelelele");
   const instance = await getInstanceForNewScramble(eventID);
+  console.log("'stance'", { instance });
   return instance.randomScramble(eventID);
 }
 
@@ -48,5 +60,6 @@ export async function randomScrambleString(eventID) {
     case "clock":
       return getClockScrambleString(); // Same thread for now.
   }
+  console.log("randomScrambleStringolololol");
   return algToString(await randomScramble(eventID));
 }
