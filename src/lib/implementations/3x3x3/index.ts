@@ -1,9 +1,13 @@
 import { parse, Sequence, Unit } from "cubing/alg";
 import { KPuzzle, Puzzles, Transformation } from "cubing/kpuzzle";
-import { randomUIntBelow } from "random-uint-below";
+// import { randomUIntBelow } from "random-uint-below";
 import { toMin2PhaseState } from "./convert";
 import { solveState } from "./min2phase/gwt";
 import { sgs3x3x3 } from "./sgs";
+
+function randomUIntBelow(_x: number): number {
+  return 0;
+}
 
 function randomChoice<T>(arr: Array<T>): T {
   return arr[randomUIntBelow(arr.length)];
