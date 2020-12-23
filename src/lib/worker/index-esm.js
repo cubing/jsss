@@ -3,5 +3,3 @@ export {
   experimentalRandomScrambleForEvent,
   randomScrambleStringForEvent,
 } from "./index-common.ts";
-
-console.log("foo");

@@ -3,17 +3,21 @@ import { initialize444, random444Scramble } from "../implementations/4x4x4";
 
 const DEBUG_MEASURE_PERF = true;
 
+function now() {
+  return (typeof performance === "undefined" ? Date : performance).now();
+}
+
 async function measurePerf(name, f) {
   if (!DEBUG_MEASURE_PERF) {
     return f();
   }
 
-  const start = performance.now();
+  const start = now();
   const result = f();
   if (result?.then) {
     await result;
   }
-  const end = performance.now();
+  const end = now();
   console.warn(`${name}: ${Math.round(end - start)}ms`);
   return result;
 }

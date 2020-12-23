@@ -10,12 +10,11 @@
   "browser": "dist/scrambles.browser.js",
   "repository": "github:cubing/scrambles",
   "scripts": {
-    "build": "npm run build-worker-module",
-    "build-worker-module": "npx parcel build --target worker-module src/scramble-worker.ts",
-    "build-types": "npx parcel build --target types src/targets/types.ts",
-    "build-main": "npx parcel build --target main src/targets/main.ts",
-    "build-module": "npx parcel build --target module src/targets/module.ts",
-    "build-browser": "npx parcel build --target browser src/targets/browser.ts",
+    "build": "npm run build-esm",
+    "build-esm": "npx esbuild --target=es2020 --bundle --format=esm --splitting --minify --external:worker_threads --external:comlink --external:comlink/dist/esm/comlink.js --external:comlink/dist/esm/comlink.mjs  --external:comlink/dist/umd/node-adapter.js --external:cubing --external:crypto --external:cubing/alg --external:path --outdir=dist/esm src/lib/worker/index-esm.js src/lib/worker/_worker-entry.js ; cp -R src/dist-static/esm/ dist/esm/",
+    "build-types": "echo TODO",
+    "test-node-require": "node src/dist-test/require.cjs",
+    "test-node-import": "node src/dist-test/import.mjs",
     "dev": "npx parcel serve src/dev/index.html",
     "clean": "rm -rf ./.parcel-cache ./dist",
     "prepack": "npm run clean && npm run build"
@@ -58,6 +57,13 @@
     "browser": {
       "outputFormat": "esmodule",
       "includeNodeModules": true
+    }
+  },
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js",
+      "types": "./types/types/index.d.ts"
     }
   }
 }
