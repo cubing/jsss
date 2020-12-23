@@ -4,6 +4,7 @@ import { algToString, Sequence } from "cubing/alg";
 
 // TODO
 interface WorkerAPI {
+  initialize: (eventID: string) => Promise<void>;
   randomScramble: (eventID: string) => Promise<Sequence>;
 }
 
@@ -27,6 +28,47 @@ function getCachedWorkerInstance(): Promise<WorkerAPI> {
   );
 }
 
+// Pre-initialize the scrambler for the given event. (Otherwise, an event is
+// initialized the first time you ask for a scramble for that event.)
+//
+// Note that initialization is not always slow. For 4x4x4, pre-initialization
+// saves very little time (with the current implementation).
+//
+// Some typical numbers for a fast computer:
+// - 3x3x3 initialization: 200ms
+// - Each 3x3x3 scramble: 50ms
+// - 4x4x4 initialization: 25ms
+// - Each 4x4x4 scramble: 3000ms (3 seconds)
+//
+// This function intentionally uses a callback instead of a Promise, despite
+// working the same way.
+//
+// This is because callers are encouraged to call this function ahead of time
+// and *not* wait the result. It is safe to immediately call for a scramble
+// any time after starting pre-initialization, or to call for them without
+// pre-initializing. Pre-initializing essentially gives the scramble worker a
+// head start in case a scramble turns out not to be needed immediately.
+//
+// Note that events cannot be pre-initialized in parallel. Attempting to
+// pre-initialize multiple events will initialize them consecutively. Scrambles
+// for a given event cannot be computed while another event is initialized.
+// TODO: Should we shard events across workers to minimize the chance of this?
+//
+// The optional callback is for the (discouraged) use case
+// where the caller wants to know when the scrambler is initialized.
+// TODO: Is initialization cheap enough to remove this method?
+export function startPreInitializationForEvent(
+  eventID: string,
+  callback?: () => void
+): void {
+  (async () => {
+    await (await getCachedWorkerInstance()).initialize(eventID);
+    if (callback) {
+      callback();
+    }
+  })();
+}
+
 export async function experimentalRandomScrambleForEvent(
   eventID: string
 ): Promise<Sequence> {
@@ -38,74 +80,3 @@ export async function randomScrambleStringForEvent(
 ): Promise<string> {
   return algToString(await experimentalRandomScrambleForEvent(eventID));
 }
-
-// async function randomScramble(eventID: string): Promise<Sequence> {
-//   console.log("randomScramble index");
-//   switch (eventID) {
-//     case "333":
-//     case "333oh":
-//     case "333ft":
-//       return (await workerInstance).random333Scramble();
-//     case "333bf":
-//       return (await workerInstance).random333OrientedScramble();
-//     case "444":
-//       return (await workerInstance).random444Scramble();
-//     default:
-//       throw new Error(`unsupported event: ${eventID}`);
-//   }
-// }
-
-// export async function randomScrambleStringForEvent(
-//   eventID: string
-// ): Promise<string> {
-//   return algToString(await randomScramble(eventID));
-// }
-
-// import { api } from "../lib/targets/esm/index-esm.js";
-
-// // import { randomScrambleString } from "../../";
-
-// (async () => {
-//   console.group("Benchmarking!");
-//   console.log(await (await api).increment());
-//   // for (let i = 0; i < 100; i++) {
-//   //   console.time();
-//   //   console.log(await randomScrambleString("333"));
-//   //   console.timeEnd();
-//   // }
-//   console.groupEnd();
-// })();
-
-// // import { expose } from "comlink";
-// import { Sequence } from "cubing/alg";
-// import {
-//   random333Scramble,
-//   random333OrientedScramble,
-// } from "../lib/implementations/3x3x3";
-// import { random444Scramble } from "../lib/implementations/4x4x4";
-
-// export interface ScrambleWorker {
-//   randomScramble(eventID: string): Promise<Sequence>;
-// }
-
-// export interface ScrambleWorkerConstructor {
-//   new (): ScrambleWorker;
-// }
-
-// export class ScrambleWorkerImpl implements ScrambleWorker {
-//   async randomScramble(eventID: string): Promise<Sequence> {
-//     console.log("randomScramble");
-//     switch (eventID) {
-//       case "333":
-//       case "333oh":
-//       case "333ft":
-//         return random333Scramble();
-//       case "333bf":
-//         return random333OrientedScramble();
-//       case "444":
-//         return random444Scramble();
-//       default:
-//         throw new Error(`unsupported event: ${eventID}`);
-//     }
-//   }
-// }

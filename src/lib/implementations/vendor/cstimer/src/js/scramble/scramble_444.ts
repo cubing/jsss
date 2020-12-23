@@ -2978,6 +2978,10 @@ function init() {
   searcher = new Search_4();
 }
 
+export function initialize(): void {
+  init();
+}
+
 export async function random444Scramble(): Promise<Sequence> {
   init();
   const suffix = parse($randomState(searcher, await randomUIntBelowFactory()));

@@ -2877,6 +2877,9 @@ var I_classLit = createForPrimitive("int", "I"),
     "Map/Entry"
   );
 
-module.exports.solveState = function(s) {
+module.exports.initialize = function () {
+  init_0(false);
+};
+module.exports.solveState = function (s) {
   return $solution(new Search(), s);
-}
+};

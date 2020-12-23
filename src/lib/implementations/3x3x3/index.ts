@@ -8,7 +8,7 @@ import {
 } from "../vendor/cubing/esm/kpuzzle.js";
 import { randomChoiceFactory } from "../vendor/random-uint-below";
 import { toMin2PhaseState } from "./convert";
-import { solveState } from "./min2phase/gwt";
+import { solveState, initialize } from "./min2phase/gwt";
 import { sgs3x3x3 } from "./sgs";
 
 async function random333State(): Promise<Transformation> {
@@ -31,6 +31,10 @@ const randomSuffixes = [
   ["", "Rw", "Rw2", "Rw'", "Fw", "Fw'"],
   ["", "Dw", "Rw2", "Dw'"],
 ];
+
+export async function initialize333(): Promise<Sequence> {
+  initialize();
+}
 
 export async function random333OrientedScramble(): Promise<Sequence> {
   const unorientedScramble = await random333Scramble();
