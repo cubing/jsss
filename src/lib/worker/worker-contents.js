@@ -58,7 +58,6 @@ export const api = {
       case "444":
         return random444Scramble();
       default:
-        return "R U R' F2";
         throw new Error(`unsupported event: ${eventID}`);
     }
   },
