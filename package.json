@@ -21,10 +21,7 @@
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "comlink": "^4.3.0",
-    "cubing": "^0.14.0",
-    "random-uint-below": "^0.5.0",
-    "regenerator-runtime": "^0.13.7",
-    "web-worker": "^1.0.0"
+    "cubing": "^0.14.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
@@ -37,7 +34,6 @@
     "@types/node": "^13.13.5",
     "esbuild": "^0.8.26",
     "parcel": "^2.0.0-nightly.259",
-    "scramble-display": "^0.1.0",
     "typescript": "^3.8.3"
   },
   "exports": {
