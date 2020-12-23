@@ -1,6 +1,6 @@
 /** @ts-ignore */
 import { newWorkerInstance } from "./worker/_worker-wrapper.js";
-import type { Sequence } from "cubing/alg";
+import { algToString, Sequence } from "cubing/alg";
 
 // TODO
 interface WorkerAPI {
@@ -36,8 +36,7 @@ export async function experimentalRandomScrambleForEvent(
 export async function randomScrambleStringForEvent(
   eventID: string
 ): Promise<string> {
-  const alg = await import("cubing/alg");
-  return alg.algToString(await experimentalRandomScrambleForEvent(eventID));
+  return algToString(await experimentalRandomScrambleForEvent(eventID));
 }
 
 // async function randomScramble(eventID: string): Promise<Sequence> {
