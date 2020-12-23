@@ -23,8 +23,9 @@ export function setCodeType(newCodeType: "esm" | "cjs") {
 
 function getCachedWorkerInstance(): Promise<WorkerAPI> {
   // We'd use `??=`, but that's not compatible with some older node versions.
-  return (cachedWorkerInstance =
-    cachedWorkerInstance ?? (newWorkerInstance(codeType) as any));
+  return (cachedWorkerInstance = cachedWorkerInstance
+    ? cachedWorkerInstance
+    : (newWorkerInstance(codeType) as any));
 }
 
 // Pre-initialize the scrambler for the given event. (Otherwise, an event is
