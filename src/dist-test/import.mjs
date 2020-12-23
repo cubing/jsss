@@ -4,10 +4,10 @@ import {
 } from "scrambles";
 
 (async () => {
-  await startPreInitializationForEvent("333");
-  console.log(await randomScrambleStringForEvent("333"));
+  startPreInitializationForEvent("333");
+  console.log(randomScrambleStringForEvent("333"));
 
-  await startPreInitializationForEvent("444");
+  startPreInitializationForEvent("444");
   console.log(await randomScrambleStringForEvent("444"));
 
   process.exit();
