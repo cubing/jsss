@@ -1,20 +1,14 @@
-console.log("Attempting to import the entire `cubing` module.");
+const {
+  randomScrambleStringForEvent,
+  startPreInitializationForEvent,
+} = require("scrambles");
 
-const cubing = require("cubing");
-console.log(cubing);
+(async () => {
+  await startPreInitializationForEvent("333");
+  console.log(await randomScrambleStringForEvent("333"));
 
-console.log(
-  "Attempting to use `cubing/alg to invert an alg (should return R U' R').",
-);
+  await startPreInitializationForEvent("444");
+  console.log(await randomScrambleStringForEvent("444"));
 
-const alg = require("cubing/alg");
-console.log(alg.algToString(alg.invert(alg.parse("R U R'"))));
-
-console.log("Importing individual modules.");
-require("cubing/alg");
-require("cubing/bluetooth");
-require("cubing/kpuzzle");
-require("cubing/protocol");
-require("cubing/puzzle-geometry");
-require("cubing/stream");
-require("cubing/twisty");
+  process.exit();
+})();

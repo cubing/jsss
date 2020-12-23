@@ -1,7 +1,6 @@
 import {
   randomScrambleStringForEvent,
   startPreInitializationForEvent,
-  // } from "../../dist/esm/index.js";
 } from "scrambles";
 
 (async () => {
@@ -10,4 +9,6 @@ import {
 
   await startPreInitializationForEvent("444");
   console.log(await randomScrambleStringForEvent("444"));
+
+  process.exit();
 })();
