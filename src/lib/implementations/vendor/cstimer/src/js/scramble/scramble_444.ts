@@ -7,7 +7,10 @@ import {
 } from "../../../../cubing/esm/alg.js";
 import { random333Scramble as getRandomScramble333 } from "../../../../../3x3x3";
 import { circle, Cnk, set8Perm } from "../lib/mathlib";
-import { randomUIntBelowAsync } from "../../../../random-uint-below";
+import {
+  randomUIntBelowAsync,
+  randomUIntBelowFactory,
+} from "../../../../random-uint-below";
 
 function createArray(length1: number, length2?: number) {
   var result, i;
@@ -1070,11 +1073,11 @@ function CenterCube_0() {
   }
 }
 
-async function CenterCube_1() {
+function CenterCube_1(randomUIntBelow) {
   var i_0, m_0, t;
   CenterCube_0.call(this);
   for (i_0 = 0; i_0 < 23; ++i_0) {
-    t = i_0 + (await randomUIntBelowAsync(24 - i_0));
+    t = i_0 + randomUIntBelow(24 - i_0);
     if (this.ct[t] != this.ct[i_0]) {
       m_0 = this.ct[i_0];
       this.ct[i_0] = this.ct[t];
@@ -1159,12 +1162,8 @@ function CornerCube_1(cperm, twist) {
   $setTwist_0(this, twist);
 }
 
-async function CornerCube_2(r) {
-  CornerCube_1.call(
-    this,
-    await randomUIntBelowAsync(40320),
-    await randomUIntBelowAsync(2187)
-  );
+function CornerCube_2(randomUIntBelow) {
+  CornerCube_1.call(this, randomUIntBelow(40320), randomUIntBelow(2187));
 }
 
 function initMove_0() {
@@ -1900,11 +1899,11 @@ function EdgeCube_0() {
   }
 }
 
-async function EdgeCube_1(randomIntBelow) {
+function EdgeCube_1(randomUIntBelow) {
   var i_0, m_0, t;
   EdgeCube_0.call(this);
   for (i_0 = 0; i_0 < 23; ++i_0) {
-    t = i_0 + (await randomIntBelow(24 - i_0));
+    t = i_0 + randomUIntBelow(24 - i_0);
     if (t != i_0) {
       m_0 = this.ep[i_0];
       this.ep[i_0] = this.ep[t];
@@ -2035,11 +2034,11 @@ function FullCube_4(c) {
   $copy_4(this, c);
 }
 
-function FullCube_5(r) {
+function FullCube_5(randomUIntBelow) {
   $$init_3(this);
-  this.edge = new EdgeCube_1(r);
-  this.center = new CenterCube_1(r);
-  this.corner = new CornerCube_2(r);
+  this.edge = new EdgeCube_1(randomUIntBelow);
+  this.center = new CenterCube_1(randomUIntBelow);
+  this.corner = new CornerCube_2(randomUIntBelow);
 }
 
 defineSeed(
@@ -2507,9 +2506,9 @@ function $init3(this$static) {
   return this$static.arr2idx == this$static.arr2.length;
 }
 
-function $randomState(this$static, r) {
+function $randomState(this$static, randomUIntBelow) {
   init_5();
-  this$static.c = new FullCube_5(r);
+  this$static.c = new FullCube_5(randomUIntBelow);
   $doSearch(this$static);
   return this$static.solution;
 }
@@ -2981,6 +2980,6 @@ function init() {
 
 export async function random444Scramble(): Promise<Sequence> {
   init();
-  const suffix = parse($randomState(searcher, Math));
+  const suffix = parse($randomState(searcher, await randomUIntBelowFactory()));
   return experimentalConcatAlgs(await getRandomScramble333(), suffix);
 }

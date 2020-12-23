@@ -56,7 +56,7 @@ export const api = {
       // case "333bf":
       //   return algToString(random333OrientedScramble());
       case "444":
-        return algToString(random444Scramble());
+        return random444Scramble();
       default:
         return "R U R' F2";
         throw new Error(`unsupported event: ${eventID}`);

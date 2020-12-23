@@ -1,19 +1,23 @@
-export async function getRandomValuesAsync(arr: Uint32Array): Promise<void> {
+export type GetRandomValuesFunction = (arr: Uint32Array) => void;
+
+// We could use top-level await to define this more statically, but that has limited transpilation support.
+export async function getRandomValuesFactory(): Promise<GetRandomValuesFunction> {
   const hasWebCrypto =
     typeof crypto !== "undefined" &&
     typeof crypto.getRandomValues !== "undefined";
 
   if (hasWebCrypto) {
-    crypto.getRandomValues(arr);
+    return crypto.getRandomValues.bind(crypto);
   } else {
-    await (async () => {
+    // @ts-ignore
+    const nodeCrypto = await import("crypto");
+    return (arr: Uint32Array) => {
       if (!(arr instanceof Uint32Array)) {
         throw new Error(
           "The getRandomValues() shim only takes unsigned 32-bit int arrays"
         );
       }
-      // @ts-ignore
-      var bytes = (await import("crypto")).randomBytes(arr.length * 4);
+      var bytes = nodeCrypto.randomBytes(arr.length * 4);
       var uint32_list = [];
       for (var i = 0; i < arr.length; i++) {
         uint32_list.push(
@@ -24,6 +28,6 @@ export async function getRandomValuesAsync(arr: Uint32Array): Promise<void> {
         );
       }
       arr.set(uint32_list);
-    })();
+    };
   }
 }

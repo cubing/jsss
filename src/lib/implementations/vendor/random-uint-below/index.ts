@@ -1,2 +1,2 @@
-export { randomChoiceAsync } from "./random-choice";
-export { randomUIntBelowAsync as randomUIntBelow } from "./random-int";
+export { randomChoiceFactory } from "./random-choice";
+export { randomUIntBelowFactory } from "./random-int";
