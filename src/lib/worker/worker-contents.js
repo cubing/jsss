@@ -3,7 +3,7 @@ import {
   random333Scramble,
   // random333OrientedScramble,
 } from "../implementations/3x3x3";
-// import { random444Scramble } from "../implementations/4x4x4";
+import { random444Scramble } from "../implementations/4x4x4";
 
 // import type { Sequence } from "cubing/alg";
 
@@ -55,8 +55,8 @@ export const api = {
         return random333Scramble();
       // case "333bf":
       //   return algToString(random333OrientedScramble());
-      // case "444":
-      //   return algToString(random444Scramble());
+      case "444":
+        return algToString(random444Scramble());
       default:
         return "R U R' F2";
         throw new Error(`unsupported event: ${eventID}`);
