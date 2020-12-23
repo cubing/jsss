@@ -1,10 +1,10 @@
-import { randomScramble } from "../lib";
+import { experimentalRandomScrambleForEvent } from "../lib";
 
 // import { randomScrambleString } from "../../";
 
 (async () => {
   console.group("Benchmarking!");
-  console.log(await randomScramble("333"));
+  console.log(await experimentalRandomScrambleForEvent("333"));
   // for (let i = 0; i < 100; i++) {
   //   console.time();
   //   console.log(await randomScrambleString("333"));

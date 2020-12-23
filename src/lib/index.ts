@@ -1,11 +1,10 @@
 /** @ts-ignore */
 import { newWorkerInstance } from "./worker/_worker-wrapper.js";
-import { algToString } from "cubing/alg";
-// import { algToString, Sequence } from "cubing/alg";
+import type { Sequence } from "cubing/alg";
 
 // TODO
 interface WorkerAPI {
-  randomScramble: (eventID: string) => Promise<string>;
+  randomScramble: (eventID: string) => Promise<Sequence>;
 }
 
 // TODO
@@ -28,12 +27,17 @@ function getCachedWorkerInstance(): Promise<WorkerAPI> {
   );
 }
 
-export async function randomScramble(eventID: string): Promise<string> {
-  console.log(
-    "workerInstance",
-    await (await getCachedWorkerInstance()).randomScramble(eventID)
-  );
-  return "fsdfsdf";
+export async function experimentalRandomScrambleForEvent(
+  eventID: string
+): Promise<Sequence> {
+  return (await getCachedWorkerInstance()).randomScramble(eventID);
+}
+
+export async function randomScrambleStringForEvent(
+  eventID: string
+): Promise<string> {
+  const alg = await import("cubing/alg");
+  return alg.algToString(await experimentalRandomScrambleForEvent(eventID));
 }
 
 // async function randomScramble(eventID: string): Promise<Sequence> {
