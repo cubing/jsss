@@ -1,6 +1,10 @@
 // @ts-nocheck
 
-import { Sequence, parse, experimentalConcatAlgs } from "cubing/alg";
+import {
+  Sequence,
+  parse,
+  experimentalConcatAlgs,
+} from "../../../../cubing/esm/alg.js";
 import { random333Scramble as getRandomScramble333 } from "../../../../../3x3x3";
 import { circle, Cnk, rn, set8Perm } from "../lib/mathlib";
 
@@ -15,7 +19,8 @@ function createArray(length1: number, length2?: number) {
   return result;
 }
 
-var _, seedTable = {},
+var _,
+  seedTable = {},
   CM$ = {};
 var Q$Object = 0,
   Q$Serializable = 30,
@@ -29,7 +34,7 @@ var Q$Object = 0,
   Q$Object_$1 = 40;
 
 function newSeed(id) {
-  return new seedTable[id];
+  return new seedTable[id]();
 }
 
 function defineSeed(id, superSeed, castableTypeMap, ...moreArgs) {
@@ -37,7 +42,7 @@ function defineSeed(id, superSeed, castableTypeMap, ...moreArgs) {
   if (seed && !seed.___clazz$) {
     _ = seed.prototype;
   } else {
-    !seed && (seed = seedTable[id] = function () { });
+    !seed && (seed = seedTable[id] = function () {});
     _ = seed.prototype = superSeed < 0 ? {} : newSeed(superSeed);
     _.castableTypeMap$ = castableTypeMap;
   }
@@ -58,13 +63,13 @@ function makeCastMap(a) {
   return result;
 }
 
-function nullMethod() { }
+function nullMethod() {}
 
 defineSeed(1, -1, CM$);
 
 _.value = null;
 
-function Array_0() { }
+function Array_0() {}
 
 function createFrom(array, length_0) {
   var a, result;
@@ -74,7 +79,6 @@ function createFrom(array, length_0) {
   return result;
 }
 
-
 function createFromSeed(seedType, length_0) {
   var array = new Array(length_0);
   if (seedType == 3) {
@@ -82,8 +86,8 @@ function createFromSeed(seedType, length_0) {
       let value = {
         m: 0,
         l: 0,
-        h: 0
-      }
+        h: 0,
+      };
       value.l = value.m = value.h = 0;
       array[i_0] = value;
     }
@@ -113,7 +117,7 @@ function initValues(arrayClass, castableTypeMap, queryId, array) {
 }
 
 function setCheck(array, index, value) {
-  return array[index] = value;
+  return (array[index] = value);
 }
 
 defineSeed(73, 1, {}, Array_0);
@@ -122,19 +126,19 @@ _.queryId$ = 0;
 let ran$clinit_Array$ExpandoWrapper = false;
 function $clinit_Array$ExpandoWrapper() {
   if (ran$clinit_Array$ExpandoWrapper) {
-    return
+    return;
   }
   ran$clinit_Array$ExpandoWrapper = true;
   expandoNames_0 = [];
   expandoValues_0 = [];
-  initExpandos(new Array_0, expandoNames_0, expandoValues_0);
+  initExpandos(new Array_0(), expandoNames_0, expandoValues_0);
 }
 
 function initExpandos(protoType, expandoNames, expandoValues) {
   var i_0 = 0,
     value;
   for (var name_0 in protoType) {
-    if (value = protoType[name_0]) {
+    if ((value = protoType[name_0])) {
       expandoNames[i_0] = name_0;
       expandoValues[i_0] = value;
       ++i_0;
@@ -213,8 +217,7 @@ function $getsym(this$static) {
   }
   for (j = 0; j < 48; ++j) {
     cord = raw2sym_0($get_1(this$static));
-    if (cord != -1)
-      return cord * 64 + j;
+    if (cord != -1) return cord * 64 + j;
     $rot(this$static, 0);
     j % 2 == 1 && $rot(this$static, 1);
     j % 8 == 7 && $rot(this$static, 2);
@@ -347,7 +350,7 @@ function Center1_1(c, urf) {
   var i_0;
   $$init_1(this);
   for (i_0 = 0; i_0 < 24; ++i_0) {
-    this.ct[i_0] = (~~(c.ct[i_0] / 2) == urf ? 1 : 0);
+    this.ct[i_0] = ~~(c.ct[i_0] / 2) == urf ? 1 : 0;
   }
 }
 
@@ -361,8 +364,8 @@ function Center1_2(ct) {
 
 function createMoveTable() {
   var c, d, i_0, m_0;
-  c = new Center1_0;
-  d = new Center1_0;
+  c = new Center1_0();
+  d = new Center1_0();
   for (i_0 = 0; i_0 < 15582; ++i_0) {
     $set_0(d, sym2raw[i_0]);
     for (m_0 = 0; m_0 < 36; ++m_0) {
@@ -429,7 +432,7 @@ function getSolvedSym(cube) {
 
 function initSym_0() {
   var c, d, e, f, i_0, j, k_0;
-  c = new Center1_0;
+  c = new Center1_0();
   for (i_0 = 0; i_0 < 24; ++i_0) {
     c.ct[i_0] = i_0;
   }
@@ -487,19 +490,19 @@ function initSym_0() {
 
 function initSym2Raw() {
   var c, count, i_0, idx, j, occ;
-  c = new Center1_0;
+  c = new Center1_0();
   occ = createArray(22984);
   for (i_0 = 0; i_0 < 22984; i_0++) {
     occ[i_0] = 0;
   }
   count = 0;
   for (i_0 = 0; i_0 < 735471; ++i_0) {
-    if ((occ[~~i_0 >>> 5] & 1 << (i_0 & 31)) == 0) {
+    if ((occ[~~i_0 >>> 5] & (1 << (i_0 & 31))) == 0) {
       $set_0(c, i_0);
       for (j = 0; j < 48; ++j) {
         idx = $get_1(c);
         occ[~~idx >>> 5] |= 1 << (idx & 31);
-        raw2sym != null && (raw2sym[idx] = count << 6 | syminv[j]);
+        raw2sym != null && (raw2sym[idx] = (count << 6) | syminv[j]);
         $rot(c, 0);
         j % 2 == 1 && $rot(c, 1);
         j % 8 == 7 && $rot(c, 2);
@@ -518,8 +521,14 @@ function raw2sym_0(n) {
 
 defineSeed(153, 1, makeCastMap([Q$Center1]), Center1_0, Center1_1, Center1_2);
 
-var csprun, ctsmv, finish_0, raw2sym = null,
-  sym2raw, syminv, symmove, symmult;
+var csprun,
+  ctsmv,
+  finish_0,
+  raw2sym = null,
+  sym2raw,
+  syminv,
+  symmove,
+  symmult;
 
 let ran$clinit_Center2 = false;
 function $clinit_Center2() {
@@ -532,7 +541,44 @@ function $clinit_Center2() {
   rlrot = createArray(70, 16);
   ctrot = createArray(6435, 16);
   ctprun = createArray(450450);
-  pmv = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0];
+  pmv = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+  ];
 }
 
 function $getct(this$static) {
@@ -679,7 +725,7 @@ function Center2_0() {
 
 function init_3() {
   var c, ct, ctx, depth, done, i_0, idx, j, m_0, rl, rlx;
-  c = new Center2_0;
+  c = new Center2_0();
   for (i_0 = 0; i_0 < 70; ++i_0) {
     for (m_0 = 0; m_0 < 28; ++m_0) {
       $setrl(c, i_0);
@@ -849,11 +895,16 @@ function $move_1(this$static, i_0) {
 
 function $set_3(this$static, c, eXc_parity) {
   var i_0, parity;
-  parity = (c.ct[0] > c.ct[8] ? 1 : 0) ^ (c.ct[8] > c.ct[16] ? 1 : 0) ^ (c.ct[0] > c.ct[16] ? 1 : 0) ? 1 : 0;
+  parity =
+    (c.ct[0] > c.ct[8] ? 1 : 0) ^
+    (c.ct[8] > c.ct[16] ? 1 : 0) ^
+    (c.ct[0] > c.ct[16] ? 1 : 0)
+      ? 1
+      : 0;
   for (i_0 = 0; i_0 < 8; ++i_0) {
-    this$static.ud[i_0] = c.ct[i_0] & 1 ^ 1;
-    this$static.fb[i_0] = c.ct[i_0 + 8] & 1 ^ 1;
-    this$static.rl[i_0] = c.ct[i_0 + 16] & 1 ^ 1 ^ parity;
+    this$static.ud[i_0] = (c.ct[i_0] & 1) ^ 1;
+    this$static.fb[i_0] = (c.ct[i_0 + 8] & 1) ^ 1;
+    this$static.rl[i_0] = (c.ct[i_0 + 16] & 1) ^ 1 ^ parity;
   }
   this$static.parity = parity ^ eXc_parity;
 }
@@ -907,7 +958,7 @@ function init_4() {
   for (i_0 = 0; i_0 < 12; ++i_0) {
     std2rl[rl2std[i_0]] = i_0;
   }
-  c = new Center3_0;
+  c = new Center3_0();
   for (i_0 = 0; i_0 < 29400; ++i_0) {
     for (m_0 = 0; m_0 < 20; ++m_0) {
       $setct_0(c, i_0);
@@ -1049,7 +1100,7 @@ function $clinit_CornerCube() {
     [29, 26, 15],
     [27, 44, 24],
     [33, 53, 42],
-    [35, 17, 51]
+    [35, 17, 51],
   ];
   initMove_0();
 }
@@ -1068,7 +1119,7 @@ function $copy_2(this$static, c) {
 }
 
 function $move_3(this$static, idx) {
-  !this$static.temps && (this$static.temps = new CornerCube_0);
+  !this$static.temps && (this$static.temps = new CornerCube_0());
   CornMult_0(this$static, moveCube_0[idx], this$static.temps);
   $copy_2(this$static, this$static.temps);
 }
@@ -1121,13 +1172,20 @@ function initMove_0() {
   moveCube_0[15] = new CornerCube_1(224, 137);
   for (a = 0; a < 18; a += 3) {
     for (p_0 = 0; p_0 < 2; ++p_0) {
-      moveCube_0[a + p_0 + 1] = new CornerCube_0;
+      moveCube_0[a + p_0 + 1] = new CornerCube_0();
       CornMult_0(moveCube_0[a + p_0], moveCube_0[a], moveCube_0[a + p_0 + 1]);
     }
   }
 }
 
-defineSeed(157, 1, makeCastMap([Q$CornerCube]), CornerCube_0, CornerCube_1, CornerCube_2);
+defineSeed(
+  157,
+  1,
+  makeCastMap([Q$CornerCube]),
+  CornerCube_0,
+  CornerCube_1,
+  CornerCube_2
+);
 _.temps = null;
 var cornerFacelet_0, moveCube_0;
 
@@ -1137,7 +1195,22 @@ function $clinit_Edge3() {
     return;
   }
   ran$clinit_Edge3 = true;
-  prunValues = [1, 4, 16, 55, 324, 1922, 12275, 77640, 485359, 2778197, 11742425, 27492416, 31002941, 31006080];
+  prunValues = [
+    1,
+    4,
+    16,
+    55,
+    324,
+    1922,
+    12275,
+    77640,
+    485359,
+    2778197,
+    11742425,
+    27492416,
+    31002941,
+    31006080,
+  ];
   eprun = createArray(1937880);
   sym2raw_0 = createArray(1538);
   symstate = createArray(1538);
@@ -1145,7 +1218,21 @@ function $clinit_Edge3() {
   syminv_0 = [0, 1, 6, 3, 4, 5, 2, 7];
   mvrot = createArray(160, 12);
   mvroto = createArray(160, 12);
-  factX = [1, 1, 1, 3, 12, 60, 360, 2520, 20160, 181440, 1814400, 19958400, 239500800];
+  factX = [
+    1,
+    1,
+    1,
+    3,
+    12,
+    60,
+    360,
+    2520,
+    20160,
+    181440,
+    1814400,
+    19958400,
+    239500800,
+  ];
   FullEdgeMap = [0, 2, 4, 6, 1, 3, 7, 5, 8, 9, 10, 11];
 }
 
@@ -1168,10 +1255,10 @@ function $get_2(this$static, end) {
     v = this$static.edge[i_0] << 2;
     idx *= 12 - i_0;
     if (v >= 32) {
-      idx += valh >> v - 32 & 15;
-      valh -= 4368 << v - 32;
+      idx += (valh >> (v - 32)) & 15;
+      valh -= 4368 << (v - 32);
     } else {
-      idx += vall >> v & 15;
+      idx += (vall >> v) & 15;
       valh -= 4369;
       vall -= 286331152 << v;
     }
@@ -1340,11 +1427,11 @@ function $set_4(this$static, idx) {
     v <<= 2;
     if (v >= 32) {
       v = v - 32;
-      this$static.edge[i_0] = valh >> v & 15;
+      this$static.edge[i_0] = (valh >> v) & 15;
       var m = (1 << v) - 1;
       valh = (valh & m) + ((valh >> 4) & ~m);
     } else {
-      this$static.edge[i_0] = vall >> v & 15;
+      this$static.edge[i_0] = (vall >> v) & 15;
       var m = (1 << v) - 1;
       vall = (vall & m) + ((vall >>> 4) & ~m) + (valh << 28);
       valh = valh >> 4;
@@ -1432,10 +1519,34 @@ function Edge3_0() {
 }
 
 function createPrun_0() {
-  var chk, cord1, cord1x, cord2, cord2x, dep1m3, depm3, depth, e, end, f, find_0, g, i_0, i_, idx, idxx, inv, j, m_0, symState, symcord1, symcord1x, symx, val;
-  e = new Edge3_0;
-  f = new Edge3_0;
-  g = new Edge3_0;
+  var chk,
+    cord1,
+    cord1x,
+    cord2,
+    cord2x,
+    dep1m3,
+    depm3,
+    depth,
+    e,
+    end,
+    f,
+    find_0,
+    g,
+    i_0,
+    i_,
+    idx,
+    idxx,
+    inv,
+    j,
+    m_0,
+    symState,
+    symcord1,
+    symcord1x,
+    symx,
+    val;
+  e = new Edge3_0();
+  f = new Edge3_0();
+  g = new Edge3_0();
   fill_0(eprun);
   depth = 0;
   done_0 = 1;
@@ -1468,7 +1579,7 @@ function createPrun_0() {
           symcord1x = raw2sym_1[cord1x];
           symx = symcord1x & 7;
           symcord1x >>= 3;
-          cord2x = getmvrot(e.edge, m_0 << 3 | symx, 10) % 20160;
+          cord2x = getmvrot(e.edge, (m_0 << 3) | symx, 10) % 20160;
           idx = symcord1x * 20160 + cord2x;
           if (getPruning_0(eprun, idx) != chk) {
             continue;
@@ -1485,14 +1596,13 @@ function createPrun_0() {
           $set_5(f, e);
           $move_4(f, m_0);
           $rotate_0(f, symx);
-          for (j = 1;
-            (symState = ~~symState >> 1 & 65535) != 0; ++j) {
+          for (j = 1; (symState = (~~symState >> 1) & 65535) != 0; ++j) {
             if ((symState & 1) != 1) {
               continue;
             }
             $set_5(g, f);
             $rotate_0(g, j);
-            idxx = symcord1x * 20160 + $get_2(g, 10) % 20160;
+            idxx = symcord1x * 20160 + ($get_2(g, 10) % 20160);
             if (getPruning_0(eprun, idxx) == chk) {
               setPruning_0(eprun, idxx, dep1m3);
               ++done_0;
@@ -1507,7 +1617,7 @@ function createPrun_0() {
 }
 
 function getPruning_0(table, index) {
-  return table[index >> 4] >> ((index & 15) << 1) & 3;
+  return (table[index >> 4] >> ((index & 15) << 1)) & 3;
 }
 
 function getmvrot(ep, mrIdx, end) {
@@ -1521,10 +1631,10 @@ function getmvrot(ep, mrIdx, end) {
     v = movo[ep[mov[i_0]]] << 2;
     idx *= 12 - i_0;
     if (v >= 32) {
-      idx += valh >> v - 32 & 15;
-      valh -= 4368 << v - 32;
+      idx += (valh >> (v - 32)) & 15;
+      valh -= 4368 << (v - 32);
     } else {
-      idx += vall >> v & 15;
+      idx += (vall >> v) & 15;
       valh -= 4369;
       vall -= 286331152 << v;
     }
@@ -1533,8 +1643,19 @@ function getmvrot(ep, mrIdx, end) {
 }
 
 function getprun(edge) {
-  var cord1, cord1x, cord2, cord2x, depm3, depth, e, idx, m_0, symcord1, symcord1x, symx;
-  e = new Edge3_0;
+  var cord1,
+    cord1x,
+    cord2,
+    cord2x,
+    depm3,
+    depth,
+    e,
+    idx,
+    m_0,
+    symcord1,
+    symcord1x,
+    symx;
+  e = new Edge3_0();
   depth = 0;
   depm3 = getPruning_0(eprun, edge);
   if (depm3 == 3) {
@@ -1551,7 +1672,7 @@ function getprun(edge) {
       symcord1x = raw2sym_1[cord1x];
       symx = symcord1x & 7;
       symcord1x >>= 3;
-      cord2x = getmvrot(e.edge, m_0 << 3 | symx, 10) % 20160;
+      cord2x = getmvrot(e.edge, (m_0 << 3) | symx, 10) % 20160;
       idx = symcord1x * 20160 + cord2x;
       if (getPruning_0(eprun, idx) == depm3) {
         ++depth;
@@ -1569,24 +1690,24 @@ function getprun_0(edge, prun) {
   if (depm3 == 3) {
     return 10;
   }
-  return ((0x49249249 << depm3 >> prun) & 3) + prun - 1;
+  return (((0x49249249 << depm3) >> prun) & 3) + prun - 1;
   // (depm3 - prun + 16) % 3 + prun - 1;
 }
 
 function initMvrot() {
   var e, i_0, m_0, r;
-  e = new Edge3_0;
+  e = new Edge3_0();
   for (m_0 = 0; m_0 < 20; ++m_0) {
     for (r = 0; r < 8; ++r) {
       $set_4(e, 0);
       $move_4(e, m_0);
       $rotate_0(e, r);
       for (i_0 = 0; i_0 < 12; ++i_0) {
-        mvrot[m_0 << 3 | r][i_0] = e.edge[i_0];
+        mvrot[(m_0 << 3) | r][i_0] = e.edge[i_0];
       }
       $std(e);
       for (i_0 = 0; i_0 < 12; ++i_0) {
-        mvroto[m_0 << 3 | r][i_0] = e.temp[i_0];
+        mvroto[(m_0 << 3) | r][i_0] = e.temp[i_0];
       }
     }
   }
@@ -1594,20 +1715,20 @@ function initMvrot() {
 
 function initRaw2Sym() {
   var count, e, i_0, idx, j, occ;
-  e = new Edge3_0;
+  e = new Edge3_0();
   occ = createArray(1485);
   for (i_0 = 0; i_0 < 1485; i_0++) {
     occ[i_0] = 0;
   }
   count = 0;
   for (i_0 = 0; i_0 < 11880; ++i_0) {
-    if ((occ[~~i_0 >>> 3] & 1 << (i_0 & 7)) == 0) {
+    if ((occ[~~i_0 >>> 3] & (1 << (i_0 & 7))) == 0) {
       $set_4(e, i_0 * factX[8]);
       for (j = 0; j < 8; ++j) {
         idx = $get_2(e, 4);
-        idx == i_0 && (symstate[count] = (symstate[count] | 1 << j) & 65535);
-        occ[~~idx >> 3] = (occ[~~idx >> 3] | 1 << (idx & 7));
-        raw2sym_1[idx] = count << 3 | syminv_0[j];
+        idx == i_0 && (symstate[count] = (symstate[count] | (1 << j)) & 65535);
+        occ[~~idx >> 3] = occ[~~idx >> 3] | (1 << (idx & 7));
+        raw2sym_1[idx] = (count << 3) | syminv_0[j];
         $rot_1(e, 0);
         if (j % 2 == 1) {
           $rot_1(e, 1);
@@ -1626,8 +1747,17 @@ function setPruning_0(table, index, value) {
 defineSeed(158, 1, makeCastMap([Q$Edge3]), Edge3_0);
 _.isStd = true;
 _.temp = null;
-var FullEdgeMap, done_0 = 0,
-  eprun, factX, mvrot, mvroto, prunValues, raw2sym_1, sym2raw_0, syminv_0, symstate;
+var FullEdgeMap,
+  done_0 = 0,
+  eprun,
+  factX,
+  mvrot,
+  mvroto,
+  prunValues,
+  raw2sym_1,
+  sym2raw_0,
+  syminv_0,
+  symstate;
 
 let ran$clinit_EdgeCube = false;
 function $clinit_EdgeCube() {
@@ -1647,9 +1777,34 @@ function $clinit_EdgeCube() {
     [2, 5],
     [3, 5],
     [3, 4],
-    [2, 4]
+    [2, 4],
   ];
-  EdgeMap = [19, 37, 46, 10, 52, 43, 25, 16, 21, 50, 48, 23, 7, 3, 1, 5, 34, 30, 28, 32, 41, 39, 14, 12];
+  EdgeMap = [
+    19,
+    37,
+    46,
+    10,
+    52,
+    43,
+    25,
+    16,
+    21,
+    50,
+    48,
+    23,
+    7,
+    3,
+    1,
+    5,
+    34,
+    30,
+    28,
+    32,
+    41,
+    39,
+    14,
+    12,
+  ];
 }
 
 function $checkEdge(this$static) {
@@ -1795,14 +1950,20 @@ function $copy_4(this$static, c) {
 
 function $getCenter(this$static) {
   while (this$static.centerAvail < this$static.moveLength) {
-    $move_2(this$static.center, this$static.moveBuffer[this$static.centerAvail++]);
+    $move_2(
+      this$static.center,
+      this$static.moveBuffer[this$static.centerAvail++]
+    );
   }
   return this$static.center;
 }
 
 function $getCorner(this$static) {
   while (this$static.cornerAvail < this$static.moveLength) {
-    $move_3(this$static.corner, this$static.moveBuffer[this$static.cornerAvail++] % 18);
+    $move_3(
+      this$static.corner,
+      this$static.moveBuffer[this$static.cornerAvail++] % 18
+    );
   }
   return this$static.corner;
 }
@@ -1822,7 +1983,11 @@ function $getMoveString(this$static) {
     fixedMoves[idx++] = this$static.moveBuffer[i_0];
   }
   sym = this$static.sym;
-  for (i_0 = this$static.length1 + (this$static.add1 ? 2 : 0); i_0 < this$static.moveLength; ++i_0) {
+  for (
+    i_0 = this$static.length1 + (this$static.add1 ? 2 : 0);
+    i_0 < this$static.moveLength;
+    ++i_0
+  ) {
     if (symmove[sym][this$static.moveBuffer[i_0]] >= 27) {
       fixedMoves[idx++] = symmove[sym][this$static.moveBuffer[i_0]] - 9;
       rot = move2rot[symmove[sym][this$static.moveBuffer[i_0]] - 27];
@@ -1836,13 +2001,13 @@ function $getMoveString(this$static) {
   sym = finishSym;
   for (i_0 = idx - 1; i_0 >= 0; --i_0) {
     move = fixedMoves[i_0];
-    move = ~~(move / 3) * 3 + (2 - move % 3);
+    move = ~~(move / 3) * 3 + (2 - (move % 3));
     if (symmove[sym][move] >= 27) {
-      sb = sb + move2str_1[symmove[sym][move] - 9] + ' ';
+      sb = sb + move2str_1[symmove[sym][move] - 9] + " ";
       rot = move2rot[symmove[sym][move] - 27];
       sym = symmult[sym][rot];
     } else {
-      sb = sb + move2str_1[symmove[sym][move]] + ' ';
+      sb = sb + move2str_1[symmove[sym][move]] + " ";
     }
   }
   return sb;
@@ -1855,9 +2020,9 @@ function $move_6(this$static, m_0) {
 
 function FullCube_3() {
   $$init_3(this);
-  this.edge = new EdgeCube_0;
-  this.center = new CenterCube_0;
-  this.corner = new CornerCube_0;
+  this.edge = new EdgeCube_0();
+  this.center = new CenterCube_0();
+  this.corner = new CornerCube_0();
 }
 
 function FullCube_4(c) {
@@ -1872,7 +2037,14 @@ function FullCube_5(r) {
   this.corner = new CornerCube_2(r);
 }
 
-defineSeed(160, 1, makeCastMap([Q$FullCube_0, Q$Comparable]), FullCube_3, FullCube_4, FullCube_5);
+defineSeed(
+  160,
+  1,
+  makeCastMap([Q$FullCube_0, Q$Comparable]),
+  FullCube_3,
+  FullCube_4,
+  FullCube_5
+);
 _.compareTo$ = function compareTo_1(c) {
   return $compareTo_1(this, c);
 };
@@ -1899,7 +2071,7 @@ function $compare_0(c1, c2) {
   return $compare(c1, c2);
 }
 
-function FullCube$ValueComparator_0() { }
+function FullCube$ValueComparator_0() {}
 
 defineSeed(161, 1, {}, FullCube$ValueComparator_0);
 _.compare = function compare(c1, c2) {
@@ -1913,9 +2085,98 @@ function $clinit_Moves() {
   }
   ran$clinit_Moves = true;
   var i_0, j;
-  move2str_1 = ['U  ', 'U2 ', "U' ", 'R  ', 'R2 ', "R' ", 'F  ', 'F2 ', "F' ", 'D  ', 'D2 ', "D' ", 'L  ', 'L2 ', "L' ", 'B  ', 'B2 ', "B' ", 'Uw ', 'Uw2', "Uw'", 'Rw ', 'Rw2', "Rw'", 'Fw ', 'Fw2', "Fw'", 'Dw ', 'Dw2', "Dw'", 'Lw ', 'Lw2', "Lw'", 'Bw ', 'Bw2', "Bw'"];
-  move2std = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 21, 22, 23, 25, 28, 30, 31, 32, 34, 36];
-  move3std = [0, 1, 2, 4, 6, 7, 8, 9, 10, 11, 13, 15, 16, 17, 19, 22, 25, 28, 31, 34, 36];
+  move2str_1 = [
+    "U  ",
+    "U2 ",
+    "U' ",
+    "R  ",
+    "R2 ",
+    "R' ",
+    "F  ",
+    "F2 ",
+    "F' ",
+    "D  ",
+    "D2 ",
+    "D' ",
+    "L  ",
+    "L2 ",
+    "L' ",
+    "B  ",
+    "B2 ",
+    "B' ",
+    "Uw ",
+    "Uw2",
+    "Uw'",
+    "Rw ",
+    "Rw2",
+    "Rw'",
+    "Fw ",
+    "Fw2",
+    "Fw'",
+    "Dw ",
+    "Dw2",
+    "Dw'",
+    "Lw ",
+    "Lw2",
+    "Lw'",
+    "Bw ",
+    "Bw2",
+    "Bw'",
+  ];
+  move2std = [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    19,
+    21,
+    22,
+    23,
+    25,
+    28,
+    30,
+    31,
+    32,
+    34,
+    36,
+  ];
+  move3std = [
+    0,
+    1,
+    2,
+    4,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    13,
+    15,
+    16,
+    17,
+    19,
+    22,
+    25,
+    28,
+    31,
+    34,
+    36,
+  ];
   std2move = createArray(37);
   std3move = createArray(37);
   ckmv = createArray(37, 36);
@@ -1932,7 +2193,9 @@ function $clinit_Moves() {
   }
   for (i_0 = 0; i_0 < 36; ++i_0) {
     for (j = 0; j < 36; ++j) {
-      ckmv[i_0][j] = ~~(i_0 / 3) == ~~(j / 3) || ~~(i_0 / 3) % 3 == ~~(j / 3) % 3 && i_0 > j;
+      ckmv[i_0][j] =
+        ~~(i_0 / 3) == ~~(j / 3) ||
+        (~~(i_0 / 3) % 3 == ~~(j / 3) % 3 && i_0 > j);
     }
     ckmv[36][i_0] = false;
   }
@@ -1975,11 +2238,41 @@ function $clinit_Moves() {
   }
 }
 
-var ckmv, ckmv2_0, ckmv3, move2std, move2str_1, move3std, skipAxis, skipAxis2, skipAxis3, std2move, std3move;
+var ckmv,
+  ckmv2_0,
+  ckmv3,
+  move2std,
+  move2str_1,
+  move3std,
+  skipAxis,
+  skipAxis2,
+  skipAxis3,
+  std2move,
+  std3move;
 
 function $doSearch(this$static) {
-  var MAX_LENGTH2, MAX_LENGTH3, ct, edge, eparity, fb, fbprun, i_0, index, length_0, length12, length123, p1SolsArr, prun, rl, rlprun, s2ct, s2rl, solcube, ud, udprun;
-  this$static.solution = '';
+  var MAX_LENGTH2,
+    MAX_LENGTH3,
+    ct,
+    edge,
+    eparity,
+    fb,
+    fbprun,
+    i_0,
+    index,
+    length_0,
+    length12,
+    length123,
+    p1SolsArr,
+    prun,
+    rl,
+    rlprun,
+    s2ct,
+    s2rl,
+    solcube,
+    ud,
+    udprun;
+  this$static.solution = "";
   ud = $getsym(new Center1_1($getCenter(this$static.c), 0));
   fb = $getsym(new Center1_1($getCenter(this$static.c), 1));
   rl = $getsym(new Center1_1($getCenter(this$static.c), 2));
@@ -1989,15 +2282,54 @@ function $doSearch(this$static) {
   this$static.p1SolsCnt = 0;
   this$static.arr2idx = 0;
   $clear(this$static.p1sols.heap);
-  for (this$static.length1 = (udprun < fbprun ? udprun : fbprun) < rlprun ? udprun < fbprun ? udprun : fbprun : rlprun; this$static.length1 < 100; ++this$static.length1) {
-    if (rlprun <= this$static.length1 && $search1(this$static, ~~rl >>> 6, rl & 63, this$static.length1, -1, 0) || udprun <= this$static.length1 && $search1(this$static, ~~ud >>> 6, ud & 63, this$static.length1, -1, 0) || fbprun <= this$static.length1 && $search1(this$static, ~~fb >>> 6, fb & 63, this$static.length1, -1, 0)) {
+  for (
+    this$static.length1 =
+      (udprun < fbprun ? udprun : fbprun) < rlprun
+        ? udprun < fbprun
+          ? udprun
+          : fbprun
+        : rlprun;
+    this$static.length1 < 100;
+    ++this$static.length1
+  ) {
+    if (
+      (rlprun <= this$static.length1 &&
+        $search1(
+          this$static,
+          ~~rl >>> 6,
+          rl & 63,
+          this$static.length1,
+          -1,
+          0
+        )) ||
+      (udprun <= this$static.length1 &&
+        $search1(
+          this$static,
+          ~~ud >>> 6,
+          ud & 63,
+          this$static.length1,
+          -1,
+          0
+        )) ||
+      (fbprun <= this$static.length1 &&
+        $search1(this$static, ~~fb >>> 6, fb & 63, this$static.length1, -1, 0))
+    ) {
       break;
     }
   }
-  p1SolsArr = $toArray_1(this$static.p1sols, initDim(_3Lcs_threephase_FullCube_2_classLit, makeCastMap([Q$FullCube_$1, Q$Serializable, Q$Object_$1]), Q$FullCube_0, 0, 0));
+  p1SolsArr = $toArray_1(
+    this$static.p1sols,
+    initDim(
+      _3Lcs_threephase_FullCube_2_classLit,
+      makeCastMap([Q$FullCube_$1, Q$Serializable, Q$Object_$1]),
+      Q$FullCube_0,
+      0,
+      0
+    )
+  );
 
   p1SolsArr.sort(function (a, b) {
-    return a.value - b.value
+    return a.value - b.value;
   });
   MAX_LENGTH2 = 9;
   do {
@@ -2010,7 +2342,11 @@ function $doSearch(this$static) {
           continue;
         }
         $copy_4(this$static.c1, p1SolsArr[i_0]);
-        $set_2(this$static.ct2, $getCenter(this$static.c1), parity_0($getEdge(this$static.c1).ep));
+        $set_2(
+          this$static.ct2,
+          $getCenter(this$static.c1),
+          parity_0($getEdge(this$static.c1).ep)
+        );
         s2ct = $getct(this$static.ct2);
         s2rl = $getrl(this$static.ct2);
         this$static.length1 = p1SolsArr[i_0].length1;
@@ -2023,33 +2359,61 @@ function $doSearch(this$static) {
     ++MAX_LENGTH2;
   } while (length12 == 100);
   this$static.arr2.sort(function (a, b) {
-    return a.value - b.value
+    return a.value - b.value;
   });
   index = 0;
   MAX_LENGTH3 = 13;
   do {
-    OUT2: for (length123 = this$static.arr2[0].value; length123 < 100; ++length123) {
+    OUT2: for (
+      length123 = this$static.arr2[0].value;
+      length123 < 100;
+      ++length123
+    ) {
       for (i_0 = 0; i_0 < Math.min(this$static.arr2idx, 100); ++i_0) {
         if (this$static.arr2[i_0].value > length123) {
           break;
         }
-        if (length123 - this$static.arr2[i_0].length1 - this$static.arr2[i_0].length2 > MAX_LENGTH3) {
+        if (
+          length123 -
+            this$static.arr2[i_0].length1 -
+            this$static.arr2[i_0].length2 >
+          MAX_LENGTH3
+        ) {
           continue;
         }
         eparity = $set_6(this$static.e12, $getEdge(this$static.arr2[i_0]));
-        $set_3(this$static.ct3, $getCenter(this$static.arr2[i_0]), eparity ^ parity_0($getCorner(this$static.arr2[i_0]).cp));
+        $set_3(
+          this$static.ct3,
+          $getCenter(this$static.arr2[i_0]),
+          eparity ^ parity_0($getCorner(this$static.arr2[i_0]).cp)
+        );
         ct = $getct_0(this$static.ct3);
         edge = $get_2(this$static.e12, 10);
         prun = getprun($getsym_0(this$static.e12));
-        if (prun <= length123 - this$static.arr2[i_0].length1 - this$static.arr2[i_0].length2 && $search3(this$static, edge, ct, prun, length123 - this$static.arr2[i_0].length1 - this$static.arr2[i_0].length2, 20, 0)) {
+        if (
+          prun <=
+            length123 -
+              this$static.arr2[i_0].length1 -
+              this$static.arr2[i_0].length2 &&
+          $search3(
+            this$static,
+            edge,
+            ct,
+            prun,
+            length123 -
+              this$static.arr2[i_0].length1 -
+              this$static.arr2[i_0].length2,
+            20,
+            0
+          )
+        ) {
           index = i_0;
           break OUT2;
         }
       }
     }
     ++MAX_LENGTH3;
-  }
-  while (length123 == 100);
+  } while (length123 == 100);
   solcube = new FullCube_4(this$static.arr2[index]);
   this$static.length1 = solcube.length1;
   this$static.length2 = solcube.length2;
@@ -2087,7 +2451,11 @@ function $init2_0(this$static, sym) {
       this$static.add1 = false;
       sym = 0;
   }
-  $set_2(this$static.ct2, $getCenter(this$static.c1), parity_0($getEdge(this$static.c1).ep));
+  $set_2(
+    this$static.ct2,
+    $getCenter(this$static.c1),
+    parity_0($getEdge(this$static.c1).ep)
+  );
   s2ct = $getct(this$static.ct2);
   s2rl = $getrl(this$static.ct2);
   ctp = ctprun[s2ct * 70 + s2rl];
@@ -2116,12 +2484,19 @@ function $init3(this$static) {
     return false;
   }
   eparity = $set_6(this$static.e12, $getEdge(this$static.c2));
-  $set_3(this$static.ct3, $getCenter(this$static.c2), eparity ^ parity_0($getCorner(this$static.c2).cp));
+  $set_3(
+    this$static.ct3,
+    $getCenter(this$static.c2),
+    eparity ^ parity_0($getCorner(this$static.c2).cp)
+  );
   ct = $getct_0(this$static.ct3);
   $get_2(this$static.e12, 10);
   prun = getprun($getsym_0(this$static.e12));
-  !this$static.arr2[this$static.arr2idx] ? (this$static.arr2[this$static.arr2idx] = new FullCube_4(this$static.c2)) : $copy_4(this$static.arr2[this$static.arr2idx], this$static.c2);
-  this$static.arr2[this$static.arr2idx].value = this$static.length1 + this$static.length2 + Math.max(prun, prun_0[ct]);
+  !this$static.arr2[this$static.arr2idx]
+    ? (this$static.arr2[this$static.arr2idx] = new FullCube_4(this$static.c2))
+    : $copy_4(this$static.arr2[this$static.arr2idx], this$static.c2);
+  this$static.arr2[this$static.arr2idx].value =
+    this$static.length1 + this$static.length2 + Math.max(prun, prun_0[ct]);
   this$static.arr2[this$static.arr2idx].length2 = this$static.length2;
   ++this$static.arr2idx;
   return this$static.arr2idx == this$static.arr2.length;
@@ -2211,7 +2586,8 @@ function $search3(this$static, edge, ct, prun, maxl, lm, depth) {
     symcord1x = raw2sym_1[cord1x];
     symx = symcord1x & 7;
     symcord1x >>= 3;
-    cord2x = getmvrot(this$static.tempe[depth].edge, m_0 << 3 | symx, 10) % 20160;
+    cord2x =
+      getmvrot(this$static.tempe[depth].edge, (m_0 << 3) | symx, 10) % 20160;
     prunx = getprun_0(symcord1x * 20160 + cord2x, prun);
     if (prunx >= maxl) {
       prunx > maxl && m_0 < 14 && (m_0 = skipAxis3[m_0]);
@@ -2227,19 +2603,19 @@ function $search3(this$static, edge, ct, prun, maxl, lm, depth) {
 
 function Search_4() {
   var i_0;
-  this.p1sols = new PriorityQueue_0(new FullCube$ValueComparator_0);
+  this.p1sols = new PriorityQueue_0(new FullCube$ValueComparator_0());
   this.move1 = createArray(15);
   this.move2 = createArray(20);
   this.move3 = createArray(20);
-  this.c1 = new FullCube_3;
-  this.c2 = new FullCube_3;
-  this.ct2 = new Center2_0;
-  this.ct3 = new Center3_0;
-  this.e12 = new Edge3_0;
+  this.c1 = new FullCube_3();
+  this.c2 = new FullCube_3();
+  this.ct2 = new Center2_0();
+  this.ct3 = new Center3_0();
+  this.e12 = new Edge3_0();
   this.tempe = createArray(20);
   this.arr2 = createArray(100);
   for (i_0 = 0; i_0 < 20; ++i_0) {
-    this.tempe[i_0] = new Edge3_0;
+    this.tempe[i_0] = new Edge3_0();
   }
 }
 
@@ -2268,7 +2644,7 @@ _.c = null;
 _.length1 = 0;
 _.length2 = 0;
 _.p1SolsCnt = 0;
-_.solution = '';
+_.solution = "";
 var inited_2 = false;
 
 let ran$clinit_Util_0 = false;
@@ -2321,13 +2697,14 @@ function swap(arr, a, b, c, d, key) {
 
 var colorMap4to3;
 
-function Class_0() { }
+function Class_0() {}
 
 function createForArray(packageName, className, seedId, componentType) {
   var clazz;
-  clazz = new Class_0;
+  clazz = new Class_0();
   clazz.typeName = packageName + className;
-  isInstantiable(seedId != 0 ? -seedId : 0) && setClassLiteral(seedId != 0 ? -seedId : 0, clazz);
+  isInstantiable(seedId != 0 ? -seedId : 0) &&
+    setClassLiteral(seedId != 0 ? -seedId : 0, clazz);
   clazz.modifiers = 4;
   clazz.superclass = Ljava_lang_Object_2_classLit;
   clazz.componentType = componentType;
@@ -2336,7 +2713,7 @@ function createForArray(packageName, className, seedId, componentType) {
 
 function createForClass(packageName, className, seedId, superclass) {
   var clazz;
-  clazz = new Class_0;
+  clazz = new Class_0();
   clazz.typeName = packageName + className;
   isInstantiable(seedId) && setClassLiteral(seedId, clazz);
   clazz.superclass = superclass;
@@ -2350,7 +2727,7 @@ function getSeedFunction(clazz) {
 }
 
 function isInstantiable(seedId) {
-  return typeof seedId == 'number' && seedId > 0;
+  return typeof seedId == "number" && seedId > 0;
 }
 
 function setClassLiteral(seedId, clazz) {
@@ -2364,7 +2741,7 @@ function setClassLiteral(seedId, clazz) {
       if (seed) {
         proto = seed.prototype;
       } else {
-        seed = seedTable[seedId] = function () { };
+        seed = seedTable[seedId] = function () {};
         seed.___clazz$ = clazz;
         return;
       }
@@ -2384,7 +2761,13 @@ function $add(this$static, o) {
 }
 
 function $$init_6(this$static) {
-  this$static.array = initDim(_3Ljava_lang_Object_2_classLit, makeCastMap([Q$Serializable, Q$Object_$1]), Q$Object, 0, 0);
+  this$static.array = initDim(
+    _3Ljava_lang_Object_2_classLit,
+    makeCastMap([Q$Serializable, Q$Object_$1]),
+    Q$Object,
+    0,
+    0
+  );
 }
 
 function $add_0(this$static, o) {
@@ -2393,7 +2776,13 @@ function $add_0(this$static, o) {
 }
 
 function $clear(this$static) {
-  this$static.array = initDim(_3Ljava_lang_Object_2_classLit, makeCastMap([Q$Serializable, Q$Object_$1]), Q$Object, 0, 0);
+  this$static.array = initDim(
+    _3Ljava_lang_Object_2_classLit,
+    makeCastMap([Q$Serializable, Q$Object_$1]),
+    Q$Object,
+    0,
+    0
+  );
   this$static.size = 0;
 }
 
@@ -2470,7 +2859,17 @@ function $mergeHeaps(this$static, node) {
   heapSize = this$static.heap.size;
   value = $get_4(this$static.heap, node);
   while (node * 2 + 1 < heapSize) {
-    smallestChild = (leftChild = 2 * node + 1, rightChild = leftChild + 1, smallestChild_0 = leftChild, rightChild < heapSize && $compare_0($get_4(this$static.heap, rightChild), $get_4(this$static.heap, leftChild)) < 0 && (smallestChild_0 = rightChild), smallestChild_0);
+    smallestChild =
+      ((leftChild = 2 * node + 1),
+      (rightChild = leftChild + 1),
+      (smallestChild_0 = leftChild),
+      rightChild < heapSize &&
+        $compare_0(
+          $get_4(this$static.heap, rightChild),
+          $get_4(this$static.heap, leftChild)
+        ) < 0 &&
+        (smallestChild_0 = rightChild),
+      smallestChild_0);
     if ($compare_0(value, $get_4(this$static.heap, smallestChild)) < 0) {
       break;
     }
@@ -2521,7 +2920,7 @@ function $toArray_1(this$static, a) {
 }
 
 function PriorityQueue_0(cmp) {
-  this.heap = new ArrayList_1;
+  this.heap = new ArrayList_1();
   this.cmp = cmp;
 }
 
@@ -2529,10 +2928,30 @@ defineSeed(239, 1, {}, PriorityQueue_0);
 _.cmp = null;
 _.heap = null;
 
-var Ljava_lang_Object_2_classLit = createForClass('java.lang.', 'Object', 1, null),
-  _3Ljava_lang_Object_2_classLit = createForArray('[Ljava.lang.', 'Object;', 356, Ljava_lang_Object_2_classLit),
-  Lcs_threephase_FullCube_2_classLit = createForClass('cs.threephase.', 'FullCube', 160, Ljava_lang_Object_2_classLit),
-  _3Lcs_threephase_FullCube_2_classLit = createForArray('[Lcs.threephase.', 'FullCube;', 381, Lcs_threephase_FullCube_2_classLit);
+var Ljava_lang_Object_2_classLit = createForClass(
+    "java.lang.",
+    "Object",
+    1,
+    null
+  ),
+  _3Ljava_lang_Object_2_classLit = createForArray(
+    "[Ljava.lang.",
+    "Object;",
+    356,
+    Ljava_lang_Object_2_classLit
+  ),
+  Lcs_threephase_FullCube_2_classLit = createForClass(
+    "cs.threephase.",
+    "FullCube",
+    160,
+    Ljava_lang_Object_2_classLit
+  ),
+  _3Lcs_threephase_FullCube_2_classLit = createForArray(
+    "[Lcs.threephase.",
+    "FullCube;",
+    381,
+    Lcs_threephase_FullCube_2_classLit
+  );
 
 var searcher;
 

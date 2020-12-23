@@ -1,5 +1,11 @@
-import { parse, Sequence, Unit } from "cubing/alg";
-import { KPuzzle, Puzzles, Transformation } from "cubing/kpuzzle";
+// @ts-ignore
+import { parse, Sequence, Unit } from "../vendor/cubing/esm/alg.js";
+import {
+  KPuzzle,
+  Puzzles,
+  Transformation,
+  // @ts-ignore
+} from "../vendor/cubing/esm/kpuzzle.js";
 import { randomChoiceAsync } from "../vendor/random-uint-below";
 import { toMin2PhaseState } from "./convert";
 import { solveState } from "./min2phase/gwt";
