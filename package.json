@@ -16,7 +16,7 @@
     "build-main": "npx parcel build --target main src/targets/main.ts",
     "build-module": "npx parcel build --target module src/targets/module.ts",
     "build-browser": "npx parcel build --target browser src/targets/browser.ts",
-    "dev": "npx parcel serve src/targets/dev/index.html",
+    "dev": "npx parcel serve src/dev/index.html",
     "clean": "rm -rf ./.parcel-cache ./dist",
     "prepack": "npm run clean && npm run build"
   },

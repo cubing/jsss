@@ -1,5 +1,4 @@
 import { expose } from "comlink";
-import { parse, Sequence } from "cubing/alg";
 import {
   random333Scramble,
   // random333OrientedScramble,
