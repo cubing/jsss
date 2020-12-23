@@ -44,11 +44,11 @@ function getCachedWorkerInstance(): Promise<WorkerAPI> {
 // and *not* wait the result. It is safe to immediately call for a scramble
 // any time after starting pre-initialization, or to call for them without
 // pre-initializing. Pre-initializing essentially gives the scramble worker a
-// head start in case a scramble turns out not to be needed immediately.
+// head start in case a scramble doesn't get requested immediately.
 //
 // Note that events cannot be pre-initialized in parallel. Attempting to
 // pre-initialize multiple events will initialize them consecutively. Scrambles
-// for a given event cannot be computed while another event is initialized.
+// for a given event cannot be computed while another event is being initialized.
 // TODO: Should we shard events across workers to minimize the chance of this?
 //
 // The optional callback is for the (discouraged) use case
