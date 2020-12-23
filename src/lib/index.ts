@@ -1,16 +1,41 @@
 /** @ts-ignore */
 import { newWorkerInstance } from "./worker/_worker-wrapper.js";
+import { algToString } from "cubing/alg";
 // import { algToString, Sequence } from "cubing/alg";
 
 // TODO
-export const workerInstance = newWorkerInstance("esm");
+interface WorkerAPI {
+  randomScrambleStringForEvent: (eventID: string) => Promise<string>;
+}
+
+// TODO
+let codeType = "esm";
+let cachedWorkerInstance: WorkerAPI | null = null;
+
+export function setCodeType(newCodeType: "esm" | "cjs") {
+  if (cachedWorkerInstance) {
+    throw new Error(
+      "Worker has already been constructed. Cannot set code type"
+    );
+  }
+  codeType = newCodeType;
+}
+
+function getCachedWorkerInstance(): Promise<WorkerAPI> {
+  return (
+    cachedWorkerInstance ??
+    (cachedWorkerInstance ??= newWorkerInstance(codeType))
+  );
+}
 
 export async function randomScrambleStringForEvent(
   eventID: string
 ): Promise<string> {
   console.log(
     "workerInstance",
-    await (await workerInstance).randomScrambleStringForEvent(eventID)
+    await (await getCachedWorkerInstance()).randomScrambleStringForEvent(
+      eventID
+    )
   );
   return "fsdfsdf";
 }

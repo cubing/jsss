@@ -4,13 +4,13 @@ import { wrap } from "comlink";
 
 // TODO: https://github.com/andywer/threads.js
 
-export async function newWorkerInstance(code_type) {
+export async function newWorkerInstance(codeType) {
   console.log("initting");
   console.log("w", typeof Worker);
   let endpoint;
   if (typeof Worker !== "undefined") {
     console.log("browsey");
-    if (code_type === "cjs") {
+    if (codeType === "cjs") {
       endpoint = new Worker("./_worker-entry.js");
     } else {
       endpoint = new Worker("./_worker-entry.js", {
@@ -21,7 +21,7 @@ export async function newWorkerInstance(code_type) {
     console.log("nodey");
     endpoint = await (
       await import("./_worker-node-endpoint.js")
-    ).nodeWrapperEndpoint(code_type);
+    ).nodeWrapperEndpoint(codeType);
   }
 
   const api = wrap(endpoint);

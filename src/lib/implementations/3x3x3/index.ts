@@ -5,14 +5,6 @@ import { toMin2PhaseState } from "./convert";
 import { solveState } from "./min2phase/gwt";
 import { sgs3x3x3 } from "./sgs";
 
-// function randomUIntBelow(_x: number): number {
-//   return 0;
-// }
-
-// async function randomChoice<T>(arr: Array<T>): Promise<T> {
-//   return arr[await randomUIntBelow(arr.length)];
-// }
-
 async function random333State(): Promise<Transformation> {
   const kpuzzle = new KPuzzle(Puzzles["3x3x3"]);
   for (const piece of sgs3x3x3) {
@@ -38,7 +30,7 @@ export async function random333OrientedScramble(): Promise<Sequence> {
   const unorientedScramble = await random333Scramble();
   let moves: Unit[] = unorientedScramble.nestedUnits.slice();
   for (const suffix of randomSuffixes) {
-    moves = moves.concat(parse(await randomChoice(suffix)));
+    moves = moves.concat(parse(await randomChoiceAsync(suffix)));
   }
   return new Sequence(moves);
 }

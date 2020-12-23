@@ -12,6 +12,7 @@ export async function getRandomValuesAsync(arr: Uint32Array): Promise<void> {
           "The getRandomValues() shim only takes unsigned 32-bit int arrays"
         );
       }
+      // @ts-ignore
       var bytes = (await import("crypto")).randomBytes(arr.length * 4);
       var uint32_list = [];
       for (var i = 0; i < arr.length; i++) {

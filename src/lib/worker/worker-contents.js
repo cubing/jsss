@@ -44,6 +44,7 @@ import {
 
 export const api = {
   randomScrambleStringForEvent: async (eventID) => {
+    console.log("api randomScrambleStringForEvent");
     // console.log("randomScrambleString worker impl");
     // return "R D F'"; randomScramble(eventID) {
     // console.log("randomScramble worker impl");
