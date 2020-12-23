@@ -1,7 +1,7 @@
 import {
   randomScrambleStringForEvent,
   startPreInitializationForEvent,
-} from "../lib";
+} from "../lib/worker/index-common";
 
 // import { randomScrambleString } from "../../";
 

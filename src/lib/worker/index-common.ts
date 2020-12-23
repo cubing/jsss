@@ -1,5 +1,5 @@
 /** @ts-ignore */
-import { newWorkerInstance } from "./worker/_worker-wrapper.js";
+import { newWorkerInstance } from "./_worker-wrapper.js";
 import { algToString, Sequence } from "cubing/alg";
 
 // TODO
@@ -10,7 +10,7 @@ interface WorkerAPI {
 
 // TODO
 let codeType = "esm";
-let cachedWorkerInstance: WorkerAPI | null = null;
+let cachedWorkerInstance: Promise<WorkerAPI> | null = null;
 
 export function setCodeType(newCodeType: "esm" | "cjs") {
   if (cachedWorkerInstance) {
@@ -22,10 +22,7 @@ export function setCodeType(newCodeType: "esm" | "cjs") {
 }
 
 function getCachedWorkerInstance(): Promise<WorkerAPI> {
-  return (
-    cachedWorkerInstance ??
-    (cachedWorkerInstance ??= newWorkerInstance(codeType))
-  );
+  return (cachedWorkerInstance ??= newWorkerInstance(codeType) as any);
 }
 
 // Pre-initialize the scrambler for the given event. (Otherwise, an event is

@@ -2,4 +2,6 @@ export {
   startPreInitializationForEvent,
   experimentalRandomScrambleForEvent,
   randomScrambleStringForEvent,
-} from "../../worker/index.ts";
+} from "./index-common.ts";
+
+console.log("foo");
