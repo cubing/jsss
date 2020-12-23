@@ -5,7 +5,7 @@ import { algToString } from "cubing/alg";
 
 // TODO
 interface WorkerAPI {
-  randomScrambleStringForEvent: (eventID: string) => Promise<string>;
+  randomScramble: (eventID: string) => Promise<string>;
 }
 
 // TODO
@@ -28,14 +28,10 @@ function getCachedWorkerInstance(): Promise<WorkerAPI> {
   );
 }
 
-export async function randomScrambleStringForEvent(
-  eventID: string
-): Promise<string> {
+export async function randomScramble(eventID: string): Promise<string> {
   console.log(
     "workerInstance",
-    await (await getCachedWorkerInstance()).randomScrambleStringForEvent(
-      eventID
-    )
+    await (await getCachedWorkerInstance()).randomScramble(eventID)
   );
   return "fsdfsdf";
 }
