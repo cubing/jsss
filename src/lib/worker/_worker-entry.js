@@ -1,7 +1,8 @@
 import { expose } from "comlink";
 import { api } from "./worker-contents.js";
 
-if (typeof Worker !== "undefined") {
+// `typeof Worker` is "undefined" in Safari, so we use `typeof WorkerNavigator`.
+if (typeof WorkerNavigator !== "undefined") {
   (async () => {
     expose(api);
   })();
