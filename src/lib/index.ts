@@ -5,10 +5,12 @@ import { newWorkerInstance } from "./worker/_worker-wrapper.js";
 // TODO
 export const workerInstance = newWorkerInstance("esm");
 
-export async function randomScrambleStringForEvent(): Promise<string> {
+export async function randomScrambleStringForEvent(
+  eventID: string
+): Promise<string> {
   console.log(
     "workerInstance",
-    await (await workerInstance).randomScrambleStringForEvent("333")
+    await (await workerInstance).randomScrambleStringForEvent(eventID)
   );
   return "fsdfsdf";
 }
