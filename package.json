@@ -46,5 +46,13 @@
       "import": "./dist/esm/index.js",
       "types": "./types/types/index.d.ts"
     }
-  }
+  },
+  "files": [
+    "/LICENSE.md",
+    "/README.md",
+    "/package.json",
+    "/package-lock.json",
+    "/dist/**/*",
+    "/src/**/*"
+  ]
 }

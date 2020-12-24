@@ -13,3 +13,7 @@ DYNAMIC_NPM_COMMANDS = $(shell cat package.json | npx jq --raw-output ".scripts 
 .PHONY: update-Makefile
 update-Makefile:
 	sed -i "" "s/^NPM_COMMANDS = .*$$/NPM_COMMANDS = ${DYNAMIC_NPM_COMMANDS}/" Makefile
+
+.PHONY: publish
+publish:
+	npm publish
