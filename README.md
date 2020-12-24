@@ -57,5 +57,7 @@ newScramble(); // Initial scramble
 
 ## Currently supported events
 
-- `333`
-- `444`
+| Event | Supported | Scramble Filtering |
+| ----- | --------- | ------------------ |
+| `333` | ✅        | ✅                 |
+| `444` | ✅        | 🚧                 |
