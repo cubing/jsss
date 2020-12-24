@@ -1,5 +1,5 @@
-import { initialize333, random333Scramble } from "../implementations/3x3x3";
-import { initialize444, random444Scramble } from "../implementations/4x4x4";
+import { initialize333, random333Scramble } from "./implementations/3x3x3";
+import { initialize444, random444Scramble } from "./implementations/4x4x4";
 
 const DEBUG_MEASURE_PERF = true;
 
