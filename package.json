@@ -14,7 +14,7 @@
     "build-esm": "npx esbuild --target=es2020 --bundle --format=esm --splitting --minify --external:worker_threads --external:comlink --external:comlink/dist/esm/comlink.js --external:comlink/dist/esm/comlink.mjs  --external:comlink/dist/umd/node-adapter.js --external:cubing --external:crypto --external:cubing/alg --external:path --outdir=dist/esm src/lib/worker/index-esm.js src/lib/worker/_worker-entry.js ; cp -R src/dist-static/esm/* dist/esm/",
     "build-cjs": "npx esbuild --target=es2020 --bundle --format=cjs --minify --external:worker_threads --external:comlink --external:comlink/dist/esm/comlink.js --external:comlink/dist/esm/comlink.mjs  --external:comlink/dist/umd/node-adapter.js --external:cubing --external:crypto --external:cubing/alg --external:path --outdir=dist/cjs src/lib/worker/index-cjs.js src/lib/worker/_worker-entry.js ; cp -R src/dist-static/cjs/* dist/cjs/",
     "build-types": "echo TODO",
-    "vendor-cubing": "cp -R node_modules/cubing/dist/esm src/lib/implementations/vendor/cubing/esm",
+    "vendor-cubing": "rm -rf ./src/lib/implementations/vendor/cubing/esm/ && cp -R node_modules/cubing/dist/esm/ src/lib/implementations/vendor/cubing/esm/",
     "test-node-require": "node src/dist-test/require.cjs",
     "test-node-import": "node src/dist-test/import.mjs",
     "dev": "npx parcel serve src/dev/index.html",
