@@ -61,3 +61,10 @@ newScramble(); // Initial scramble
 | ----- | --------- | ------------------ |
 | `333` | ✅        | ✅                 |
 | `444` | ✅        | 🚧                 |
+
+## Acknowledgments
+
+This projects includes code from
+
+- [`min2phase`](https://github.com/cs0x7f/min2phase) by Chen Shuang (GPL licensed)
+- [`cstimer`](https://github.com/cs0x7f/cstimer) by Chen Shuang (GPL licensed)
