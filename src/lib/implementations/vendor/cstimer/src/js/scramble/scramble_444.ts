@@ -2980,6 +2980,7 @@ function init() {
 
 export function initialize(): void {
   init();
+  init_5();
 }
 
 export async function random444Scramble(): Promise<Sequence> {

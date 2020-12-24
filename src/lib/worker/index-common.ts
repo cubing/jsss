@@ -31,17 +31,13 @@ function getCachedWorkerInstance(): Promise<WorkerAPI> {
 // Pre-initialize the scrambler for the given event. (Otherwise, an event is
 // initialized the first time you ask for a scramble for that event.)
 //
-// Note that initialization is not always slow. For 4x4x4, pre-initialization
-// saves very little time (with the current implementation).
-//
 // Some typical numbers for a fast computer:
 // - 3x3x3 initialization: 200ms
 // - Each 3x3x3 scramble: 50ms
-// - 4x4x4 initialization: 25ms
-// - Each 4x4x4 scramble: 3000ms (3 seconds)
+// - 4x4x4 initialization: 2500ms
+// - Each 4x4x4 scramble: 300ms to 800ms
 //
-// This is because callers are encouraged to call this function ahead of time
-// and *not* wait the result. It is safe to immediately call for a scramble
+// It is safe to immediately call for a scramble
 // any time after starting pre-initialization, or to call for them without
 // pre-initializing. Pre-initializing essentially gives the scramble worker a
 // head start in case a scramble doesn't get requested immediately.
@@ -49,7 +45,6 @@ function getCachedWorkerInstance(): Promise<WorkerAPI> {
 // Note that events cannot be pre-initialized in parallel. Attempting to
 // pre-initialize multiple events will initialize them consecutively. Scrambles
 // for a given event cannot be computed while another event is being initialized.
-// TODO: Should we shard events across workers to minimize the chance of this?
 export function preInitializationHintForEvent(
   eventID: string
   // callback?: () => void
