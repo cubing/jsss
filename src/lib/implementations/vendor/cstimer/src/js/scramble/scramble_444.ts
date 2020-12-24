@@ -4,7 +4,7 @@ import {
   Sequence,
   parse,
   experimentalConcatAlgs,
-} from "../../../../cubing/esm/alg.js";
+} from "../../../../cubing/esm/alg/index.js";
 import { random333Scramble as getRandomScramble333 } from "../../../../../3x3x3";
 import { circle, Cnk, set8Perm } from "../lib/mathlib";
 import {

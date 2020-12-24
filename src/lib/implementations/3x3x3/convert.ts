@@ -38,12 +38,60 @@ const centerOrder = "U L F R B D".split(" ");
 // */
 
 const map: [number, number, number][] = [
-  [1, 2, 0], [0, 2, 0], [1, 1, 0], [0, 3, 0], [2, 0, 0], [0, 1, 0], [1, 3, 0], [0, 0, 0], [1, 0, 0],
-  [1, 0, 2], [0, 1, 1], [1, 1, 1], [0, 8, 1], [2, 3, 0], [0, 10, 1], [1, 4, 1], [0, 5, 1], [1, 7, 2],
-  [1, 3, 2], [0, 0, 1], [1, 0, 1], [0, 9, 0], [2, 2, 0], [0, 8, 0], [1, 5, 1], [0, 4, 1], [1, 4, 2],
-  [1, 5, 0], [0, 4, 0], [1, 4, 0], [0, 7, 0], [2, 5, 0], [0, 5, 0], [1, 6, 0], [0, 6, 0], [1, 7, 0],
-  [1, 2, 2], [0, 3, 1], [1, 3, 1], [0, 11, 1], [2, 1, 0], [0, 9, 1], [1, 6, 1], [0, 7, 1], [1, 5, 2],
-  [1, 1, 2], [0, 2, 1], [1, 2, 1], [0, 10, 0], [2, 4, 0], [0, 11, 0], [1, 7, 1], [0, 6, 1], [1, 6, 2],
+  [1, 2, 0],
+  [0, 2, 0],
+  [1, 1, 0],
+  [0, 3, 0],
+  [2, 0, 0],
+  [0, 1, 0],
+  [1, 3, 0],
+  [0, 0, 0],
+  [1, 0, 0],
+  [1, 0, 2],
+  [0, 1, 1],
+  [1, 1, 1],
+  [0, 8, 1],
+  [2, 3, 0],
+  [0, 10, 1],
+  [1, 4, 1],
+  [0, 5, 1],
+  [1, 7, 2],
+  [1, 3, 2],
+  [0, 0, 1],
+  [1, 0, 1],
+  [0, 9, 0],
+  [2, 2, 0],
+  [0, 8, 0],
+  [1, 5, 1],
+  [0, 4, 1],
+  [1, 4, 2],
+  [1, 5, 0],
+  [0, 4, 0],
+  [1, 4, 0],
+  [0, 7, 0],
+  [2, 5, 0],
+  [0, 5, 0],
+  [1, 6, 0],
+  [0, 6, 0],
+  [1, 7, 0],
+  [1, 2, 2],
+  [0, 3, 1],
+  [1, 3, 1],
+  [0, 11, 1],
+  [2, 1, 0],
+  [0, 9, 1],
+  [1, 6, 1],
+  [0, 7, 1],
+  [1, 5, 2],
+  [1, 1, 2],
+  [0, 2, 1],
+  [1, 2, 1],
+  [0, 10, 0],
+  [2, 4, 0],
+  [0, 11, 0],
+  [1, 7, 1],
+  [0, 6, 1],
+  [1, 6, 2],
 ];
 
 function rotateLeft(s: string, i: number): string {
@@ -53,23 +101,23 @@ function rotateLeft(s: string, i: number): string {
 function toReid333Struct(state: Transformation): string[][] {
   const output: string[][] = [[], []];
   for (let i = 0; i < 6; i++) {
-    if (state.CENTER.permutation[i] !== i) {
+    if (state["CENTERS"].permutation[i] !== i) {
       throw new Error("non-oriented puzzles are not supported");
     }
   }
   for (let i = 0; i < 12; i++) {
     output[0].push(
       rotateLeft(
-        reidEdgeOrder[state.EDGE.permutation[i]],
-        state.EDGE.orientation[i]
+        reidEdgeOrder[state["EDGES"].permutation[i]],
+        state["EDGES"].orientation[i]
       )
     );
   }
   for (let i = 0; i < 8; i++) {
     output[1].push(
       rotateLeft(
-        reidCornerOrder[state.CORNER.permutation[i]],
-        state.CORNER.orientation[i]
+        reidCornerOrder[state["CORNERS"].permutation[i]],
+        state["CORNERS"].orientation[i]
       )
     );
   }

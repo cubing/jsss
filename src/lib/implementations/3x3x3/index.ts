@@ -1,18 +1,16 @@
 // @ts-ignore
-import { parse, Sequence, Unit } from "../vendor/cubing/esm/alg.js";
-import {
-  KPuzzle,
-  Puzzles,
-  Transformation,
-  // @ts-ignore
-} from "../vendor/cubing/esm/kpuzzle.js";
+import { parse, Sequence, Unit } from "../vendor/cubing/esm/alg/index.js";
+// @ts-ignore
+import { KPuzzle, Transformation } from "../vendor/cubing/esm/kpuzzle/index.js";
+// @ts-ignore
+import { puzzles } from "../vendor/cubing/esm/puzzles/index.js";
 import { randomChoiceFactory } from "../vendor/random-uint-below";
 import { toMin2PhaseState } from "./convert";
-import { solveState, initialize } from "./min2phase/gwt";
+import { initialize, solveState } from "./min2phase/gwt";
 import { sgs3x3x3 } from "./sgs";
 
 async function random333State(): Promise<Transformation> {
-  const kpuzzle = new KPuzzle(Puzzles["3x3x3"]);
+  const kpuzzle = new KPuzzle(await puzzles["3x3x3"].def());
   for (const piece of sgs3x3x3) {
     kpuzzle.applyAlg(parse((await randomChoiceFactory())(piece)));
   }
