@@ -6,13 +6,18 @@ import { KPuzzle, Transformation } from "../vendor/cubing/esm/kpuzzle/index.js";
 import { puzzles } from "../vendor/cubing/esm/puzzles/index.js";
 import { randomChoiceFactory } from "../vendor/random-uint-below";
 import { toMin2PhaseState } from "./convert";
+import { passesFilter } from "./filter";
 import { initialize, solveState } from "./min2phase/gwt";
 import { sgs3x3x3 } from "./sgs";
 
 async function random333State(): Promise<Transformation> {
-  const kpuzzle = new KPuzzle(await puzzles["3x3x3"].def());
+  const def = await puzzles["3x3x3"].def();
+  const kpuzzle = new KPuzzle(def);
   for (const piece of sgs3x3x3) {
     kpuzzle.applyAlg(parse((await randomChoiceFactory())(piece)));
+  }
+  if (!passesFilter(def, kpuzzle.state)) {
+    return random333State();
   }
   return kpuzzle.state;
 }
