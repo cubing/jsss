@@ -10,7 +10,7 @@ export async function newWorkerInstance(codeType) {
     if (codeType === "cjs") {
       endpoint = new Worker("./_worker-entry.js");
     } else {
-      endpoint = new Worker("./_worker-entry.js", {
+      endpoint = new Worker(new URL("./_worker-entry.js", import.meta.url), {
         type: "module",
       });
     }
