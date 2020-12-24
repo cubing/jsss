@@ -1,9 +1,4 @@
-import {
-  _randomScrambleForEvent,
-  randomScrambleStringForEvent,
-  setCodeType,
-  _preInitializationHintForEvent,
-} from "./index-common.ts";
+import { setCodeType } from "./worker-manager";
 
 setCodeType("cjs");
 
@@ -11,4 +6,4 @@ export {
   _preInitializationHintForEvent,
   _randomScrambleForEvent,
   randomScrambleStringForEvent,
-};
+} from "./index";
