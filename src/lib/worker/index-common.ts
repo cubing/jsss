@@ -45,7 +45,7 @@ function getCachedWorkerInstance(): Promise<WorkerAPI> {
 // Note that events cannot be pre-initialized in parallel. Attempting to
 // pre-initialize multiple events will initialize them consecutively. Scrambles
 // for a given event cannot be computed while another event is being initialized.
-export function preInitializationHintForEvent(
+export function _preInitializationHintForEvent(
   eventID: string
   // callback?: () => void
 ): void {
@@ -57,7 +57,7 @@ export function preInitializationHintForEvent(
   })();
 }
 
-export async function experimentalRandomScrambleForEvent(
+export async function _randomScrambleForEvent(
   eventID: string
 ): Promise<Sequence> {
   return (await getCachedWorkerInstance()).randomScramble(eventID);
@@ -66,5 +66,5 @@ export async function experimentalRandomScrambleForEvent(
 export async function randomScrambleStringForEvent(
   eventID: string
 ): Promise<string> {
-  return algToString(await experimentalRandomScrambleForEvent(eventID));
+  return algToString(await _randomScrambleForEvent(eventID));
 }

@@ -7,18 +7,6 @@ Puzzle scrambles with the following features:
 - Automatic web workers to avoid slowing down web apps.
 - Compatibility with browsers and `node` (CommonJS or ESM/modules).
 
-## API
-
-```typescript
-// Get a random scramble.
-randomScrambleStringForEvent(eventID: string): Promise<Sequence>;
-
-// Optional: send a hint to pre-initialize a the scramble for an event.
-//
-// This function is only a hint to give the scrambler a head start. (If you don't call this, the scrambler for an event is initialized the first time you ask for a scramble.)
-preInitializationHintForEvent(eventID: string): void;
-```
-
 ## Usage
 
 Use as a Promise:
