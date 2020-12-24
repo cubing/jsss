@@ -1,15 +1,15 @@
 import {
   randomScrambleStringForEvent,
-  startPreInitializationForEvent,
+  preInitializationHintForEvent,
 } from "../lib/worker/index-common";
 
 // import { randomScrambleString } from "../../";
 
 (async () => {
-  await startPreInitializationForEvent("333");
+  await preInitializationHintForEvent("333");
   console.log(await randomScrambleStringForEvent("333"));
 
-  await startPreInitializationForEvent("444");
+  await preInitializationHintForEvent("444");
   console.log(await randomScrambleStringForEvent("444"));
   // for (let i = 0; i < 100; i++) {
   //   console.time();

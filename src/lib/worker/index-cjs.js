@@ -2,13 +2,13 @@ import {
   experimentalRandomScrambleForEvent,
   randomScrambleStringForEvent,
   setCodeType,
-  startPreInitializationForEvent,
+  preInitializationHintForEvent,
 } from "./index-common.ts";
 
 setCodeType("cjs");
 
 export {
-  startPreInitializationForEvent,
+  preInitializationHintForEvent,
   experimentalRandomScrambleForEvent,
   randomScrambleStringForEvent,
 };

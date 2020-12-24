@@ -40,9 +40,6 @@ function getCachedWorkerInstance(): Promise<WorkerAPI> {
 // - 4x4x4 initialization: 25ms
 // - Each 4x4x4 scramble: 3000ms (3 seconds)
 //
-// This function intentionally uses a callback instead of a Promise, despite
-// working the same way.
-//
 // This is because callers are encouraged to call this function ahead of time
 // and *not* wait the result. It is safe to immediately call for a scramble
 // any time after starting pre-initialization, or to call for them without
@@ -53,19 +50,15 @@ function getCachedWorkerInstance(): Promise<WorkerAPI> {
 // pre-initialize multiple events will initialize them consecutively. Scrambles
 // for a given event cannot be computed while another event is being initialized.
 // TODO: Should we shard events across workers to minimize the chance of this?
-//
-// The optional callback is for the (discouraged) use case
-// where the caller wants to know when the scrambler is initialized.
-// TODO: Is initialization cheap enough to remove this method?
-export function startPreInitializationForEvent(
-  eventID: string,
-  callback?: () => void
+export function preInitializationHintForEvent(
+  eventID: string
+  // callback?: () => void
 ): void {
   (async () => {
     await (await getCachedWorkerInstance()).initialize(eventID);
-    if (callback) {
-      callback();
-    }
+    // if (callback) {
+    //   callback();
+    // }
   })();
 }
 
