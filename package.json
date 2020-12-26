@@ -16,8 +16,10 @@
     "build-cjs": "npx esbuild --target=es2020 --bundle --format=cjs --minify --external:worker_threads --external:comlink --external:comlink/dist/esm/comlink.js --external:comlink/dist/esm/comlink.mjs  --external:comlink/dist/umd/node-adapter.js --external:cubing --external:crypto --external:cubing/alg --external:path --outdir=dist/cjs src/scrambles/index-cjs.js src/scrambles/scrambles-worker.js ; mv dist/cjs/index-cjs.js dist/cjs/scrambles.js ; cp -R src/dist-static/cjs/* dist/cjs/",
     "build-types": "npx tsc src/scrambles/index.ts --declaration --emitDeclarationOnly --outDir dist/types --target es2017 --module es2020 --moduleResolution node --lib esnext,dom --resolveJsonModule --allowJs --allowSyntheticDefaultImports # TODO: unify with tsconfig.json",
     "vendor-cubing": "rm -rf ./src/scrambles/implementations/vendor/cubing/esm/ && cp -R node_modules/cubing/dist/esm/ src/scrambles/implementations/vendor/cubing/esm/",
+    "test-node": "npm run test-node-require && npm run test-node-import && npm run test-node-bundle-global",
     "test-node-require": "node src/dist-test/require.cjs",
     "test-node-import": "node src/dist-test/import.mjs",
+    "test-node-bundle-global": "node src/dist-test/bundle-global.mjs",
     "dev": "npx parcel serve src/dev/index.html",
     "clean": "rm -rf ./.parcel-cache ./dist",
     "prepack": "npm run clean && npm run build"
