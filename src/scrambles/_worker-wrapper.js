@@ -1,6 +1,7 @@
 // import { Worker } from "worker_threads";
 // import Worker from "web-worker";
 import { wrap } from "comlink";
+import { relativeWorkerPath, esmTrampoline } from "./_trampoline.js";
 
 // TODO: https://github.com/andywer/threads.js
 
@@ -8,9 +9,9 @@ export async function newWorkerInstance(codeType) {
   let endpoint;
   if (typeof Worker !== "undefined") {
     if (codeType === "cjs") {
-      endpoint = new Worker("./scrambles-worker.js");
+      endpoint = new Worker(relativeWorkerPath());
     } else {
-      endpoint = new Worker(new URL("./scrambles-worker.js", import.meta.url), {
+      endpoint = new Worker(esmTrampoline(), {
         type: "module",
       });
     }
