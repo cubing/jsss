@@ -42,8 +42,8 @@
   },
   "exports": {
     ".": {
-      "require": "./dist/cjs/index.js",
-      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index-cjs.js",
+      "import": "./dist/esm/index-esm.js",
       "types": "./dist/types/index.d.ts"
     },
     "./scrambles-worker-entry-for-cdn-cubing-net": {
