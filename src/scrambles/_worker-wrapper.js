@@ -8,9 +8,9 @@ export async function newWorkerInstance(codeType) {
   let endpoint;
   if (typeof Worker !== "undefined") {
     if (codeType === "cjs") {
-      endpoint = new Worker("./_worker-entry.js");
+      endpoint = new Worker("./scramble-worker.js");
     } else {
-      endpoint = new Worker(new URL("./_worker-entry.js", import.meta.url), {
+      endpoint = new Worker(new URL("./scramble-worker.js", import.meta.url), {
         type: "module",
       });
     }

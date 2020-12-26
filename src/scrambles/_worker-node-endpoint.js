@@ -5,12 +5,12 @@ export async function nodeWrapperEndpoint(code_type) {
   if (code_type === "cjs") {
     nodeEndpoint = import("comlink/dist/umd/node-adapter.js");
     worker = new (await worker_threads).Worker(
-      require("path").join(__dirname, "_worker-entry.js")
+      require("path").join(__dirname, "scramble-worker.js")
     );
   } else {
     nodeEndpoint = import("comlink/dist/esm/node-adapter.mjs");
     worker = new (await worker_threads).Worker(
-      new URL("./_worker-entry.js", import.meta.url),
+      new URL("./scramble-worker.js", import.meta.url),
       {
         type: "module",
       }
