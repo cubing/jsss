@@ -11,9 +11,9 @@
   },
   "scripts": {
     "build": "npm run build-esm && npm run build-cjs && npm run build-types && npm run build-esm-bundle-global",
-    "build-esm": "npx esbuild --target=es2020 --bundle --format=esm --splitting --minify --external:worker_threads --external:comlink --external:comlink/dist/esm/comlink.js --external:comlink/dist/esm/comlink.mjs  --external:comlink/dist/umd/node-adapter.js --external:cubing --external:crypto --external:cubing/alg --external:path --outdir=dist/esm src/scrambles/index-esm.js src/scrambles/scrambles-worker.js ; cp -R src/dist-static/esm/* dist/esm/",
-    "build-esm-bundle-global": "npx esbuild --target=es2020 --bundle --format=esm --minify --external:worker_threads --external:comlink/dist/umd/node-adapter.js --external:crypto --external:path --outdir=dist/esm-bundle-global src/scrambles/index-esm-bundle-global.js src/scrambles/scrambles-worker.js",
-    "build-cjs": "npx esbuild --target=es2020 --bundle --format=cjs --minify --external:worker_threads --external:comlink --external:comlink/dist/esm/comlink.js --external:comlink/dist/esm/comlink.mjs  --external:comlink/dist/umd/node-adapter.js --external:cubing --external:crypto --external:cubing/alg --external:path --outdir=dist/cjs src/scrambles/index-cjs.js src/scrambles/scrambles-worker.js ; cp -R src/dist-static/cjs/* dist/cjs/",
+    "build-esm": "npx esbuild --target=es2020 --bundle --format=esm --splitting --minify --external:worker_threads --external:comlink --external:comlink/dist/esm/comlink.js --external:comlink/dist/esm/comlink.mjs  --external:comlink/dist/umd/node-adapter.js --external:cubing --external:crypto --external:cubing/alg --external:path --outdir=dist/esm src/scrambles/index-esm.js src/scrambles/scrambles-worker.js ; mv dist/esm/index-esm.js dist/esm/scrambles.js ; cp -R src/dist-static/esm/* dist/esm/",
+    "build-esm-bundle-global": "npx esbuild --target=es2020 --bundle --format=esm --minify --external:worker_threads --external:comlink/dist/umd/node-adapter.js --external:crypto --external:path --outdir=dist/esm-bundle-global src/scrambles/index-esm-bundle-global.js src/scrambles/scrambles-worker.js ; mv dist/esm-bundle-global/index-esm-bundle-global.js dist/esm-bundle-global/scrambles.js",
+    "build-cjs": "npx esbuild --target=es2020 --bundle --format=cjs --minify --external:worker_threads --external:comlink --external:comlink/dist/esm/comlink.js --external:comlink/dist/esm/comlink.mjs  --external:comlink/dist/umd/node-adapter.js --external:cubing --external:crypto --external:cubing/alg --external:path --outdir=dist/cjs src/scrambles/index-cjs.js src/scrambles/scrambles-worker.js ; mv dist/cjs/index-cjs.js dist/cjs/scrambles.js ; cp -R src/dist-static/cjs/* dist/cjs/",
     "build-types": "npx tsc src/scrambles/index.ts --declaration --emitDeclarationOnly --outDir dist/types --target es2017 --module es2020 --moduleResolution node --lib esnext,dom --resolveJsonModule --allowJs --allowSyntheticDefaultImports # TODO: unify with tsconfig.json",
     "vendor-cubing": "rm -rf ./src/scrambles/implementations/vendor/cubing/esm/ && cp -R node_modules/cubing/dist/esm/ src/scrambles/implementations/vendor/cubing/esm/",
     "test-node-require": "node src/dist-test/require.cjs",
@@ -43,8 +43,8 @@
   },
   "exports": {
     ".": {
-      "require": "./dist/cjs/index-cjs.js",
-      "import": "./dist/esm/index-esm.js",
+      "require": "./dist/cjs/scrambles.js",
+      "import": "./dist/esm/scrambles.js",
       "types": "./dist/types/index.d.ts"
     },
     "./scrambles-worker-entry-for-cdn-cubing-net": {
