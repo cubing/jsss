@@ -1,31 +1,14 @@
 /** @ts-ignore */
-import { newWorkerInstance } from "./_worker-wrapper.js";
 import { algToString, Sequence } from "cubing/alg";
+import { getWorker } from "../worker/strategy/outside";
+import { WorkerInsideAPI } from "../worker/strategy/types";
 
-// TODO
-interface WorkerAPI {
-  initialize: (eventID: string) => Promise<void>;
-  randomScramble: (eventID: string) => Promise<Sequence>;
-}
-
-// TODO
-let codeType = "esm";
-let cachedWorkerInstance: Promise<WorkerAPI> | null = null;
-
-export function setCodeType(newCodeType: "esm" | "cjs") {
-  if (cachedWorkerInstance) {
-    throw new Error(
-      "Worker has already been constructed. Cannot set code type"
-    );
-  }
-  codeType = newCodeType;
-}
-
-function getCachedWorkerInstance(): Promise<WorkerAPI> {
+let cachedWorkerInstance: Promise<WorkerInsideAPI> | null = null;
+function getCachedWorkerInstance(): Promise<WorkerInsideAPI> {
   // We'd use `??=`, but that's not compatible with some older node versions.
   return (cachedWorkerInstance = cachedWorkerInstance
     ? cachedWorkerInstance
-    : (newWorkerInstance(codeType) as any));
+    : getWorker());
 }
 
 // Pre-initialize the scrambler for the given event. (Otherwise, an event is

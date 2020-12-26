@@ -7,18 +7,12 @@ import { relativeWorkerPath, esmTrampoline } from "./_trampoline.js";
 
 export async function newWorkerInstance(codeType) {
   let endpoint;
-  if (typeof Worker !== "undefined") {
-    if (codeType === "cjs") {
-      endpoint = new Worker(relativeWorkerPath());
-    } else {
-      endpoint = new Worker(esmTrampoline(), {
-        type: "module",
-      });
-    }
+  if (codeType === "cjs") {
+    endpoint = new Worker(relativeWorkerPath());
   } else {
-    endpoint = await (
-      await import("./_worker-node-endpoint.js")
-    ).nodeWrapperEndpoint(codeType);
+    endpoint = new Worker(esmTrampoline(), {
+      type: "module",
+    });
   }
 
   return wrap(endpoint);
