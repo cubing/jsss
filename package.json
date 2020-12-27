@@ -29,7 +29,7 @@
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "comlink": "^4.3.0",
-    "cubing": "^0.14.1"
+    "cubing": "^0.14.2"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
