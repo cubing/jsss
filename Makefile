@@ -63,4 +63,3 @@ _build-cjs:
 		src/scrambles/entries/cjs/scrambles.ts \
 		src/scrambles/entries/cjs/scrambles-worker.js
 	cp -R src/dist-static/cjs/package.json dist/cjs/
- 
