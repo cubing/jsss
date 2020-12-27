@@ -11,5 +11,5 @@ outsideStrategy.workerInstantiator.esm = workerInstantiatorESM;
 outsideStrategy.trampoline.browser = trampolineBrowser;
 
 import * as scrambles from "../../index";
-
+export * from "../../index";
 (globalThis as any).scrambles = scrambles;
