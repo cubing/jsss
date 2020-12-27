@@ -50,8 +50,12 @@ export async function getWorker(): Promise<WorkerInsideAPI> {
     // browser
     const constructor: typeof Worker = await outsideStrategy
       .getWorkerConstructor.browser!();
-    const trampoline = outsideStrategy.trampoline.browser!; // TODO: conditiional?
-    worker = workerInstantiator(constructor, trampoline(url)) as Worker;
+    try {
+      worker = workerInstantiator(constructor, url) as Worker;
+    } catch (e) {
+      const trampoline = outsideStrategy.trampoline.browser!;
+      worker = workerInstantiator(constructor, trampoline(url)) as Worker;
+    }
   } else {
     // node
     const constructor: typeof NodeWorker = await outsideStrategy
