@@ -16,7 +16,7 @@
     "build-esm-browser-bundle-global": "make _build-esm-browser-bundle-global",
     "build-cjs": "make _build-cjs",
     "build-types": "npx tsc src/scrambles/index.ts --declaration --emitDeclarationOnly --outDir dist/types --target es2017 --module es2020 --moduleResolution node --lib esnext,dom --resolveJsonModule --allowJs --allowSyntheticDefaultImports # TODO: unify with tsconfig.json",
-    "vendor-cubing": "rm -rf ./src/scrambles/implementations/vendor/cubing/esm/ && cp -R node_modules/cubing/dist/esm/ src/scrambles/implementations/vendor/cubing/esm/",
+    "vendor-cubing": "rm -rf ./src/scrambles/implementations/vendor/cubing/esm/ && cp -R node_modules/cubing/dist/esm/ src/scrambles/implementations/vendor/cubing/esm/ && rm src/scrambles/implementations/vendor/cubing/esm/**/*.d.ts",
     "test-node": "npm run test-node-require && npm run test-node-import && npm run test-node-bundle-global",
     "test-node-require": "node src/dist-test/require.cjs",
     "test-node-import": "node src/dist-test/import.mjs",

@@ -1,7 +1,8 @@
 // @ts-nocheck
 
+import type { Sequence } from "cubing/alg";
+
 import {
-  Sequence,
   parse,
   experimentalConcatAlgs,
 } from "../../../../cubing/esm/alg/index.js";

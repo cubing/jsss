@@ -1,5 +1,6 @@
+import { Unit, Sequence } from "cubing/alg";
 // @ts-ignore
-import { parse, Sequence, Unit } from "../vendor/cubing/esm/alg/index.js";
+import { parse } from "../vendor/cubing/esm/alg/index.js";
 // @ts-ignore
 import { KPuzzle, Transformation } from "../vendor/cubing/esm/kpuzzle/index.js";
 // @ts-ignore
@@ -35,7 +36,7 @@ const randomSuffixes = [
   ["", "Dw", "Rw2", "Dw'"],
 ];
 
-export async function initialize333(): Promise<Sequence> {
+export async function initialize333(): Promise<void> {
   initialize();
 }
 
