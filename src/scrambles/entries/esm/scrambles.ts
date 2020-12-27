@@ -14,14 +14,4 @@ outsideStrategy.getWorkerConstructor.node = workerConstructorNode;
 outsideStrategy.workerInstantiator.esm = workerInstantiatorESM;
 outsideStrategy.trampoline.browser = trampolineBrowser;
 
-// import { wrap } from "comlink";
-// import { WorkerInsideAPI } from "../../worker/strategy/types";
-
-// const originalWorker = Worker;
-
-// export function getNewWorker(): WorkerInsideAPI {
-//   // const Worker = originalWorker;
-//   return wrap(new Worker("./scrambles-worker.js"));
-// }
-
 export * from "../../index";
