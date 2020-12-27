@@ -1,4 +1,4 @@
-import "../../dist/esm-bundle-global/scrambles.js";
+import "../../dist/esm-browser-bundle-global/scrambles.js";
 
 (async () => {
   globalThis.scrambles._preInitializationHintForEvent("333");

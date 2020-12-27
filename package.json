@@ -20,7 +20,7 @@
     "test-node": "npm run test-node-require && npm run test-node-import && npm run test-node-bundle-global",
     "test-node-require": "node src/dist-test/require.cjs",
     "test-node-import": "node src/dist-test/import.mjs",
-    "test-node-bundle-global": "node src/dist-test/bundle-global.mjs",
+    "test-node-browser-bundle-global": "node src/dist-test/browser-bundle-global.mjs",
     "dev": "npx parcel serve src/dev/index.html",
     "clean": "rm -rf ./.parcel-cache ./dist",
     "prepack": "npm run clean && npm run build"
@@ -48,12 +48,12 @@
   "exports": {
     ".": {
       "require": "./dist/cjs/scrambles.js",
-      "import": "./dist/esm/entries/esm/scrambles.js",
+      "import": "./dist/esm/scrambles.js",
       "types": "./dist/types/index.d.ts"
     },
     "./scrambles-worker-entry-for-cdn-cubing-net": {
       "require": "./dist/cjs/scrambles-worker.js",
-      "import": "./dist/esm/entries/esm/scrambles-worker.js"
+      "import": "./dist/esm/scrambles-worker.js"
     }
   },
   "files": [

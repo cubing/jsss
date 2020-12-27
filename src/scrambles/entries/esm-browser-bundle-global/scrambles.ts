@@ -10,4 +10,6 @@ outsideStrategy.getWorkerConstructor.browser = workerConstructorBrowser;
 outsideStrategy.workerInstantiator.esm = workerInstantiatorESM;
 outsideStrategy.trampoline.browser = trampolineBrowser;
 
-export * from "../../index";
+import * as scrambles from "../../index";
+
+(globalThis as any).scrambles = scrambles;
