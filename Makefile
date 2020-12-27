@@ -59,6 +59,7 @@ _build-esm-browser-bundle-global:
 .PHONY: _build-cjs
 _build-cjs:
 		npx esbuild --format=cjs --target=es2020 \
+		--bundle $(NODE_EXTERNALS) $(LIB_EXTERNALS) \
 		--outdir=dist/cjs \
 		src/scrambles/entries/cjs/scrambles.ts \
 		src/scrambles/entries/cjs/scrambles-worker.js
