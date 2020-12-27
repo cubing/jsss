@@ -1,10 +1,10 @@
 import { Unit, Sequence } from "cubing/alg";
 // @ts-ignore
-import { parse } from "../vendor/cubing/esm/alg/index.js";
+import { parse } from "cubing/alg";
 // @ts-ignore
-import { KPuzzle, Transformation } from "../vendor/cubing/esm/kpuzzle/index.js";
+import { KPuzzle, Transformation } from "cubing/kpuzzle";
 // @ts-ignore
-import { puzzles } from "../vendor/cubing/esm/puzzles/index.js";
+import { puzzles } from "cubing/puzzles";
 import { randomChoiceFactory } from "../vendor/random-uint-below";
 import { toMin2PhaseState } from "./convert";
 import { passesFilter } from "./filter";
@@ -15,7 +15,7 @@ async function random333State(): Promise<Transformation> {
   const def = await puzzles["3x3x3"].def();
   const kpuzzle = new KPuzzle(def);
   for (const piece of sgs3x3x3) {
-    kpuzzle.applyAlg(parse((await randomChoiceFactory())(piece)));
+    kpuzzle.applyAlg(parse(((await randomChoiceFactory()) as any)(piece)));
   }
   if (!passesFilter(def, kpuzzle.state)) {
     return random333State();
@@ -44,7 +44,7 @@ export async function random333OrientedScramble(): Promise<Sequence> {
   const unorientedScramble = await random333Scramble();
   let moves: Unit[] = unorientedScramble.nestedUnits.slice();
   for (const suffix of randomSuffixes) {
-    moves = moves.concat(parse((await randomChoiceFactory())(suffix)));
+    moves = moves.concat(parse(((await randomChoiceFactory()) as any)(suffix)));
   }
   return new Sequence(moves);
 }

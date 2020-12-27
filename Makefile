@@ -42,7 +42,7 @@ _build-esm:
 .PHONY: _build-esm-browser
 _build-esm-browser:
 		npx esbuild --format=esm --target=es2020 \
-		--bundle --splitting $(NODE_EXTERNALS) $(LIB_EXTERNALS) \
+		--bundle $(NODE_EXTERNALS) $(LIB_EXTERNALS) \
 		--outdir=dist/esm-browser \
 		src/scrambles/entries/esm-browser/scrambles.ts \
 		src/scrambles/entries/esm-browser/scrambles-worker.js
@@ -50,7 +50,7 @@ _build-esm-browser:
 .PHONY: _build-esm-browser-bundle-global
 _build-esm-browser-bundle-global:
 		npx esbuild --format=esm --target=es2020 \
-		--bundle --splitting $(NODE_EXTERNALS) \
+		--bundle $(NODE_EXTERNALS) \
 		--outdir=dist/esm-browser-bundle-global \
 		src/scrambles/entries/esm-browser-bundle-global/scrambles.ts \
 		src/scrambles/entries/esm-browser-bundle-global/scrambles-worker.js

@@ -1,5 +1,5 @@
 // @ts-ignore
-import { BareBlockMove } from "../vendor/cubing/esm/alg/index.js";
+import { BareBlockMove } from "cubing/alg";
 import {
   // @ts-ignore
   KPuzzle,
@@ -10,7 +10,7 @@ import {
   // @ts-ignore
   Transformation,
   // @ts-ignore
-} from "../vendor/cubing/esm/kpuzzle/index.js";
+} from "cubing/kpuzzle";
 
 export function isEquivalentTranformationIgnoringCENTERS(
   def: KPuzzleDefinition,
