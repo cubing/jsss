@@ -1,6 +1,6 @@
 /** @ts-ignore */
 import { algToString, Sequence } from "cubing/alg";
-import { getWorker } from "../worker/strategy/outside";
+import { getNewWorker } from "../entries/esm/scrambles";
 import { WorkerInsideAPI } from "../worker/strategy/types";
 
 let cachedWorkerInstance: Promise<WorkerInsideAPI> | null = null;
@@ -8,7 +8,7 @@ function getCachedWorkerInstance(): Promise<WorkerInsideAPI> {
   // We'd use `??=`, but that's not compatible with some older node versions.
   return (cachedWorkerInstance = cachedWorkerInstance
     ? cachedWorkerInstance
-    : getWorker());
+    : getNewWorker());
 }
 
 // Pre-initialize the scrambler for the given event. (Otherwise, an event is
