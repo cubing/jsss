@@ -50,6 +50,7 @@ _build-esm-browser:
 .PHONY: _build-esm-browser-bundle-global
 _build-esm-browser-bundle-global:
 		npx esbuild --format=esm --target=es2020 \
+		--minify \
 		--bundle $(NODE_EXTERNALS) \
 		--outdir=dist/esm-browser-bundle-global \
 		src/scrambles/entries/esm-browser-bundle-global/scrambles.ts \
