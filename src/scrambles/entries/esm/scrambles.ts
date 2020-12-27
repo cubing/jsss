@@ -1,25 +1,27 @@
-// import { getNodeAdapterESM } from "../../worker/getNodeAdapter/esm";
-// import { workerConstructorBrowser } from "../../worker/getWorkerConstructor/browser";
-// import { workerConstructorNode } from "../../worker/getWorkerConstructor/node";
-// import { outsideStrategy } from "../../worker/strategy/outside";
-// import { trampolineBrowser } from "../../worker/trampoline/browser";
-// import { workerInstantiatorESM } from "../../worker/workerInstantiator/esm";
+import { getNodeAdapterESM } from "../../worker/getNodeAdapter/esm";
+import { workerConstructorBrowser } from "../../worker/getWorkerConstructor/browser";
+import { workerConstructorNode } from "../../worker/getWorkerConstructor/node";
+import { outsideStrategy } from "../../worker/strategy/outside";
+import { trampolineBrowser } from "../../worker/trampoline/browser";
+import { workerInstantiatorESM } from "../../worker/workerInstantiator/esm";
 
-import { wrap } from "comlink";
-import { WorkerInsideAPI } from "../../worker/strategy/types";
+outsideStrategy.url.esm = new URL("./scrambles-worker.js", import.meta.url);
+outsideStrategy.getNodeAdapter.esm = getNodeAdapterESM;
 
-export function getNewWorker(): WorkerInsideAPI {
-  return wrap(new Worker("./scrambles-worker.js"));
-}
+outsideStrategy.getWorkerConstructor.browser = workerConstructorBrowser;
+outsideStrategy.getWorkerConstructor.node = workerConstructorNode;
 
-// outsideStrategy.url.esm = new URL("./scrambles-worker.js", import.meta.url);
-// outsideStrategy.getNodeAdapter.esm = getNodeAdapterESM;
+outsideStrategy.workerInstantiator.esm = workerInstantiatorESM;
+outsideStrategy.trampoline.browser = trampolineBrowser;
 
-// outsideStrategy.getWorkerConstructor.browser = workerConstructorBrowser;
-// console.log({ workerConstructorBrowser });
-// outsideStrategy.getWorkerConstructor.node = workerConstructorNode;
+// import { wrap } from "comlink";
+// import { WorkerInsideAPI } from "../../worker/strategy/types";
 
-// outsideStrategy.workerInstantiator.esm = workerInstantiatorESM;
-// outsideStrategy.trampoline.browser = trampolineBrowser;
+// const originalWorker = Worker;
+
+// export function getNewWorker(): WorkerInsideAPI {
+//   // const Worker = originalWorker;
+//   return wrap(new Worker("./scrambles-worker.js"));
+// }
 
 export * from "../../index";

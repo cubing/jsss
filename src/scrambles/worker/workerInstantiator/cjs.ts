@@ -4,5 +4,5 @@ export function workerInstantiatorCJS(
   workerConstructor: typeof Worker | typeof NodeWorker,
   urlRef: URLReference
 ): Worker | NodeWorker {
-  return new workerConstructor(urlRef.toString());
+  return new workerConstructor(urlRef as string);
 }

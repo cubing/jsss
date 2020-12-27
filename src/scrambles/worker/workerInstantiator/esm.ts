@@ -4,5 +4,5 @@ export function workerInstantiatorESM(
   workerConstructor: typeof Worker | typeof NodeWorker,
   urlRef: URLReference
 ): Worker | NodeWorker {
-  return new workerConstructor(urlRef.toString(), { type: "module" });
+  return new workerConstructor(urlRef as string, { type: "module" });
 }

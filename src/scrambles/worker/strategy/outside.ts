@@ -1,3 +1,4 @@
+import { wrap } from "comlink";
 import type {
   ModuleSystem,
   NodeWorker,
@@ -45,9 +46,8 @@ export async function getWorker(): Promise<WorkerInsideAPI> {
     outsideStrategy.workerInstantiator.esm ??
     outsideStrategy.workerInstantiator.cjs!;
   let worker: Worker;
-  if (typeof Worker) {
+  if (typeof Worker !== "undefined") {
     // browser
-    console.log(outsideStrategy.getWorkerConstructor);
     const constructor: typeof Worker = await outsideStrategy
       .getWorkerConstructor.browser!();
     const trampoline = outsideStrategy.trampoline.browser!; // TODO: conditiional?
@@ -65,5 +65,5 @@ export async function getWorker(): Promise<WorkerInsideAPI> {
     const nodeAdapter = await getNodeAdapter();
     worker = nodeAdapter(nodeWorker);
   }
-  return (worker as any) as WorkerInsideAPI;
+  return wrap(worker as any) as WorkerInsideAPI;
 }
