@@ -13,6 +13,9 @@ import {
   _preInitializationHintForEvent("333oh");
   console.log(await randomScrambleStringForEvent("333oh"));
 
+  _preInitializationHintForEvent("minx");
+  console.log(await randomScrambleStringForEvent("minx"));
+
   _preInitializationHintForEvent("444");
   console.log(await randomScrambleStringForEvent("444"));
 

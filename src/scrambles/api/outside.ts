@@ -1,6 +1,7 @@
 /** @ts-ignore */
 import { algToString, Sequence } from "cubing/alg";
 import { randomClockScrambleString } from "../implementations/clock";
+import { randomMegaminxScrambleString } from "../implementations/minx";
 import { getWorker } from "../worker/strategy/outside";
 import type { WorkerInsideAPI } from "../worker/strategy/types";
 
@@ -35,15 +36,13 @@ export function _preInitializationHintForEvent(
 ): void {
   switch (eventID) {
     case "clock":
+    case "minx":
       return;
     case "333oh":
       return _preInitializationHintForEvent("333");
   }
   (async () => {
     await (await getCachedWorkerInstance()).initialize(eventID);
-    // if (callback) {
-    //   callback();
-    // }
   })();
 }
 
@@ -61,6 +60,26 @@ export async function randomScrambleStringForEvent(
       return randomClockScrambleString();
     case "333oh":
       return randomScrambleStringForEvent("333");
+    case "minx":
+      return randomMegaminxScrambleString();
   }
   return algToString(await _randomScrambleForEvent(eventID));
 }
+
+// 333
+// 222
+// 444
+// 555
+// 666
+// 777
+// 333bf
+// 333fm
+// 333oh
+// clock
+// minx
+// pyram
+// skewb
+// sq1
+// 444bf
+// 555bf
+// 333mbf
