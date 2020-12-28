@@ -1,13 +1,12 @@
 import { expose } from "comlink";
 import { insideAPI } from "../../api/inside";
-import { getParentPortNode } from "../getParentPort/node";
 import { ModuleSystem, NodeWorker, RuntimeEnvironment } from "./types";
 
 export const insideStrategy = {
   getParentPort: {
     browser: null,
     node: null,
-  } as Record<RuntimeEnvironment, null | (() => Promise<() => MessagePort>)>,
+  } as Record<RuntimeEnvironment, null | (() => Promise<MessagePort>)>,
   getNodeAdapter: {
     esm: null,
     cjs: null,
@@ -22,7 +21,7 @@ export async function exposeAPI(): Promise<void> {
   // WorkerNavigator`.
   // @ts-ignore
   if (typeof WorkerNavigator === "undefined") {
-    const parentPort: MessagePort = await getParentPortNode();
+    const parentPort: MessagePort = await insideStrategy.getParentPort.node!();
     const getNodeAdapter = await (
       insideStrategy.getNodeAdapter.esm ?? insideStrategy.getNodeAdapter.cjs!
     )();
