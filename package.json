@@ -1,6 +1,6 @@
 {
   "name": "scrambles",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "A library to generate puzzle scrambles.",
   "type": "module",
   "main": "./dist/esm/scrambles.js",
