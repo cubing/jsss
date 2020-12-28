@@ -1,7 +1,7 @@
 /** @ts-ignore */
 import { algToString, Sequence } from "cubing/alg";
 import { getWorker } from "../worker/strategy/outside";
-import { WorkerInsideAPI } from "../worker/strategy/types";
+import type { WorkerInsideAPI } from "../worker/strategy/types";
 
 let cachedWorkerInstance: Promise<WorkerInsideAPI> | null = null;
 function getCachedWorkerInstance(): Promise<WorkerInsideAPI> {

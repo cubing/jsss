@@ -1,6 +1,6 @@
 import { expose } from "comlink";
 import { insideAPI } from "../../api/inside";
-import { ModuleSystem, NodeWorker, RuntimeEnvironment } from "./types";
+import type { ModuleSystem, NodeWorker, RuntimeEnvironment } from "./types";
 
 export const insideStrategy = {
   getParentPort: {
