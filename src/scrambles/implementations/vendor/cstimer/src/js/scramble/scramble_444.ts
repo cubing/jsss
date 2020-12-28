@@ -1,10 +1,11 @@
 // @ts-nocheck
 
+import type { Sequence } from "cubing/alg";
+
 import {
-  Sequence,
   parse,
   experimentalConcatAlgs,
-} from "../../../../cubing/esm/alg/index.js";
+} from "cubing/alg";
 import { random333Scramble as getRandomScramble333 } from "../../../../../3x3x3";
 import { circle, Cnk, set8Perm } from "../lib/mathlib";
 import {
