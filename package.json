@@ -3,7 +3,7 @@
   "version": "0.1.5",
   "description": "A library to generate puzzle scrambles.",
   "type": "module",
-  "main": "./dist/esm/entries/esm/scrambles-worker.js",
+  "main": "./dist/esm/scrambles.js",
   "types": "./dist/types/index.d.ts",
   "repository": "github:cubing/scrambles",
   "engines": {
