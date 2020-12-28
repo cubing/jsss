@@ -58,8 +58,8 @@
       "import": "./dist/esm-browser-bundle-global/scrambles.js",
       "types": "./dist/types/index.d.ts"
     },
-    "./esm-browser-worker-entry-for-cdn-cubing-net": {
-      "import": "./dist/esm-browser/scrambles-worker.js"
+    "./esm-browser-bundle-global-worker-entry-for-cdn-cubing-net": {
+      "import": "./dist/esm-browser-bundle-global/scrambles-worker.js"
     }
   },
   "files": [
