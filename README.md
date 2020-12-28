@@ -61,7 +61,7 @@ newScramble(); // Initial scramble
 | ------- | --------- | ------------------ |
 | `333`   | ✅        | ✅                 |
 | `444`   | ✅        | 🚧                 |
-| `clock` | ✅        | 🚧                 |
+| `clock` | ✅        | ✅                 |
 
 ## Acknowledgments
 
