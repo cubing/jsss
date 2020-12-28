@@ -36,6 +36,8 @@ export function _preInitializationHintForEvent(
   switch (eventID) {
     case "clock":
       return;
+    case "333oh":
+      return _preInitializationHintForEvent("333");
   }
   (async () => {
     await (await getCachedWorkerInstance()).initialize(eventID);
@@ -57,6 +59,8 @@ export async function randomScrambleStringForEvent(
   switch (eventID) {
     case "clock":
       return randomClockScrambleString();
+    case "333oh":
+      return randomScrambleStringForEvent("333");
   }
   return algToString(await _randomScrambleForEvent(eventID));
 }
