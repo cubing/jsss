@@ -7,7 +7,7 @@ import type { URLReference } from "../strategy/types";
 //
 // Only works in browers, because:
 //
-// - `node` doesn't have `Blob
+// - `node` doesn't have `Blob`.
 // - `node` doesn't like absolute import paths. It needs a direct `new URL()`
 //   object instead of a URL string to import file paths.
 export function trampolineBrowser(url: URLReference): string {
