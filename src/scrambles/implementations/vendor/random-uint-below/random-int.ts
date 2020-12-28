@@ -40,6 +40,7 @@ function validateMax(max: number): void {
   }
 }
 
+// TODO: cache generated `randomUIntBelow`?
 export async function randomUIntBelowFactory(): Promise<
   (max: number) => number
 > {

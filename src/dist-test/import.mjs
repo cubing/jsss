@@ -4,6 +4,9 @@ import {
 } from "scrambles";
 
 (async () => {
+  _preInitializationHintForEvent("clock");
+  console.log(await randomScrambleStringForEvent("clock"));
+
   _preInitializationHintForEvent("333");
   console.log(await randomScrambleStringForEvent("333"));
 

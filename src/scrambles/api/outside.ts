@@ -1,5 +1,6 @@
 /** @ts-ignore */
 import { algToString, Sequence } from "cubing/alg";
+import { randomClockScrambleString } from "../implementations/clock";
 import { getWorker } from "../worker/strategy/outside";
 import type { WorkerInsideAPI } from "../worker/strategy/types";
 
@@ -32,6 +33,10 @@ export function _preInitializationHintForEvent(
   eventID: string
   // callback?: () => void
 ): void {
+  switch (eventID) {
+    case "clock":
+      return;
+  }
   (async () => {
     await (await getCachedWorkerInstance()).initialize(eventID);
     // if (callback) {
@@ -49,5 +54,9 @@ export async function _randomScrambleForEvent(
 export async function randomScrambleStringForEvent(
   eventID: string
 ): Promise<string> {
+  switch (eventID) {
+    case "clock":
+      return randomClockScrambleString();
+  }
   return algToString(await _randomScrambleForEvent(eventID));
 }
