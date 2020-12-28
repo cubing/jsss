@@ -50,6 +50,14 @@
       "import": "./dist/esm/scrambles.js",
       "types": "./dist/types/index.d.ts"
     },
+    "./esm-browser": {
+      "import": "./dist/esm-browser/scrambles.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./esm-browser-bundle-global": {
+      "import": "./dist/esm-browser-bundle-global/scrambles.js",
+      "types": "./dist/types/index.d.ts"
+    },
     "./scrambles-entry-for-cdn-cubing-net": {
       "import": "./dist/esm/scrambles.js",
       "types": "./dist/types/index.d.ts"
