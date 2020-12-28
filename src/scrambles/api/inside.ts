@@ -45,8 +45,6 @@ export const insideAPI = {
       case "333oh":
       case "333ft":
         return measurePerf("random333Scramble", random333Scramble);
-      // case "333bf":
-      //   return algToString(random333OrientedScramble());
       case "444":
         return measurePerf("random444Scramble", random444Scramble);
       default:
