@@ -80,6 +80,11 @@ newScramble(); // Initial scramble
 | `fto`      | 🚧        | 🚧                 |
 | `kilominx` | 🚧        | 🚧                 |
 
+## Implementation
+
+See [`docs/implementation.md`](./docs/implementation.md) for information about
+how this library is implemented.
+
 ## Acknowledgments
 
 This projects includes code from
