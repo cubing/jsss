@@ -4,20 +4,24 @@ import {
 } from "scrambles";
 
 (async () => {
-  _preInitializationHintForEvent("clock");
-  console.log(await randomScrambleStringForEvent("clock"));
+  _preInitializationHintForEvent("222");
+  await randomScrambleStringForEvent("222");
+  await randomScrambleStringForEvent("222");
 
-  _preInitializationHintForEvent("333");
-  console.log(await randomScrambleStringForEvent("333"));
+  // _preInitializationHintForEvent("clock");
+  // console.log(await randomScrambleStringForEvent("clock"));
 
-  _preInitializationHintForEvent("333oh");
-  console.log(await randomScrambleStringForEvent("333oh"));
+  // _preInitializationHintForEvent("333");
+  // console.log(await randomScrambleStringForEvent("333"));
 
-  _preInitializationHintForEvent("minx");
-  console.log(await randomScrambleStringForEvent("minx"));
+  // _preInitializationHintForEvent("333oh");
+  // console.log(await randomScrambleStringForEvent("333oh"));
 
-  _preInitializationHintForEvent("444");
-  console.log(await randomScrambleStringForEvent("444"));
+  // _preInitializationHintForEvent("minx");
+  // console.log(await randomScrambleStringForEvent("minx"));
 
-  process.exit();
+  // _preInitializationHintForEvent("444");
+  // console.log(await randomScrambleStringForEvent("444"));
+
+  // process.exit();
 })();

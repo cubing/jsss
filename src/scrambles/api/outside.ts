@@ -1,5 +1,6 @@
 /** @ts-ignore */
 import { algToString, Sequence } from "cubing/alg";
+import { preInitialize222 } from "../implementations/2x2x2";
 import { randomClockScrambleString } from "../implementations/clock";
 import { randomMegaminxScrambleString } from "../implementations/minx";
 import { getWorker } from "../worker/strategy/outside";

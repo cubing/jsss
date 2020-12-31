@@ -1,7 +1,7 @@
 import {
   randomScrambleStringForEvent,
   _preInitializationHintForEvent,
-} from "../scrambles/entries/esm/scrambles";
+} from "../scrambles/entries/cjs/scrambles";
 
 // import { randomScrambleString } from "../../";
 

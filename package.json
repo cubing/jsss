@@ -47,7 +47,7 @@
   "exports": {
     ".": {
       "require": "./dist/cjs/scrambles.js",
-      "import": "./dist/esm/scrambles.js",
+      "import": "./dist/esm/entries/esm/scrambles.js",
       "types": "./dist/types/index.d.ts"
     },
     "./esm-browser": {

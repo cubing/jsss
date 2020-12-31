@@ -1,3 +1,4 @@
+import { preInitialize222, random222Scramble } from "../implementations/2x2x2";
 import { initialize333, random333Scramble } from "../implementations/3x3x3";
 import { initialize444, random444Scramble } from "../implementations/4x4x4";
 
@@ -28,6 +29,8 @@ async function measurePerf<T>(
 export const insideAPI = {
   initialize: async (eventID: string) => {
     switch (eventID) {
+      case "222":
+        return measurePerf("preInitialize222", preInitialize222);
       case "333":
       case "333oh":
       case "333ft":
@@ -41,6 +44,8 @@ export const insideAPI = {
 
   randomScramble: async (eventID: string) => {
     switch (eventID) {
+      case "222":
+        return measurePerf("random222Scramble", random222Scramble);
       case "333":
       case "333oh":
       case "333ft":
