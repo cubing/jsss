@@ -4,6 +4,9 @@ const {
 } = require("scrambles");
 
 (async () => {
+  _preInitializationHintForEvent("222");
+  console.log(await randomScrambleStringForEvent("222"));
+
   _preInitializationHintForEvent("clock");
   console.log(await randomScrambleStringForEvent("clock"));
 
@@ -19,5 +22,7 @@ const {
   _preInitializationHintForEvent("444");
   console.log(await randomScrambleStringForEvent("444"));
 
-  process.exit();
+  setTimeout(() => {
+    process.exit();
+  }, 100)
 })();
