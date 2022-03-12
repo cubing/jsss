@@ -7,7 +7,7 @@ In addition, it has significant issues, such as:
 - Blocking the entire page while generating scrambles: no scrolling, no other calculations at the same time.
 - Incorrect and unfiltered scrambles for some events.
 
-Use [`cubing.js`](https://github.com/cubing/cubing.js/) instead:
+# ✅ Use [`cubing.js`](https://js.cubing.net/cubing/scramble/) instead ✅
 
 ```html
 <script type="module">
