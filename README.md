@@ -11,7 +11,7 @@ In addition, it has significant issues, such as:
 
 ```html
 <script type="module">
-  import { randomScrambleForEvent } from "https://cdn.cubing.net/js/cubing/scramble";
+  import { randomScrambleForEvent } from "https://cdn.cubing.net/v0/js/cubing/scramble";
 
   const scramble = await randomScrambleForEvent("333");
   scramble.log();
